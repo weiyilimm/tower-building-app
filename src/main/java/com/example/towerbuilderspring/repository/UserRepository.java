@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long >{
     // Custom finder methods in addition to all the find methods provided by JPA framework.
     List<User> findByValid(boolean valid);
-    List<User> findByDescription(String description);
+    List<User> findByNameContaining(String name);
 }
 
 
