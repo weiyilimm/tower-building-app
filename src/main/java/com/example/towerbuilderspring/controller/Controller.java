@@ -54,6 +54,21 @@ public class Controller {
         }
     }
 
+//    @GetMapping("/Users/valid")
+//    public ResponseEntity<User> getAllValidUsers(){
+//        try {
+//            List<User> valid_users = userRepository.findByValid(true);
+//
+//            if (valid_users.isEmpty()){
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//            return new ResponseEntity<>(valid_users, HttpStatus.OK);
+//        }
+//        catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
     @PostMapping("/Users/")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
@@ -82,6 +97,26 @@ public class Controller {
         }
     }
 
+    @DeleteMapping("/Users/")
+    public ResponseEntity<User> deleteAllUsers(){
+        try {
+            userRepository.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     
+    @DeleteMapping("/Users/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") long id){
+        try{
+            userRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
