@@ -41,6 +41,10 @@ public class User {
         return valid;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
     public void setTowers(String towers){
         this.towers= towers;
     }
