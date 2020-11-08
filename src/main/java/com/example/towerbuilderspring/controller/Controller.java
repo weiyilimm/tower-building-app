@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -41,5 +42,46 @@ public class Controller {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/Users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") long id){
+        Optional<User> userData = userRepository.findById(id);
+
+        if (userData.isPresent()) {
+            return new ResponseEntity<>(userData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/Users/")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        try {
+            User new_user = userRepository.save(new User(user.getName(), user.getTowers(), false ));
+            return new ResponseEntity<>(new_user, HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/Users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user){
+        Optional<User> userData = userRepository.findById(id);
+
+        if (userData.isPresent()){
+            User user_to_update = userData.get();
+            user_to_update.setName(user.getName());
+            user_to_update.setTowers(user.getTowers());
+            user_to_update.setValid(user.getValid());
+
+            return new ResponseEntity<>(userRepository.save(user_to_update), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    
 
 }
