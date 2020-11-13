@@ -26,32 +26,47 @@ public class jsontest : MonoBehaviour
     private void LoadJson()
     {
         JSONNode node;
-        using (StreamReader r = new StreamReader("Assets/buildings.json"))
-        {   
+        using (StreamReader r = new StreamReader("Assets/JSON/buildings.json"))
+        {
             //read in the json
             json = r.ReadToEnd();
             Debug.Log(json);
-            
+
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
-            int colour = int.Parse(node["maths_and_physics"]["wall_colour"].Value);
-            Debug.Log("maths and physics wall colour: "+ colour + getColours(colour));
+
+            //building and part to modify
+            string building = "maths_and_physics";
+            string section = "wall_colour";
+
+            //get part to be modified
+            int colour = int.Parse(node[building][section].Value);
+            Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
 
             //modify the json node
-            node["maths_and_physics"]["wall_colour"] = "1";
-            colour = int.Parse(node["maths_and_physics"]["wall_colour"].Value);
-            Debug.Log("maths and physics wall colour: " + colour + getColours(colour));
+            node[building][section] = "1";
 
-            //write new data
-            //Debug.Log(Application.dataPath);
-
+            //get modified part
+            colour = int.Parse(node[building][section].Value);
+            Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
         }
-        File.WriteAllText(Application.dataPath + "/test.json", node.ToString());
+        //write new data
+        File.WriteAllText(Application.dataPath + "/JSON/test.json", node.ToString());
     }
 
-    public string getColours(int i)
+    public string getColours(string b, string s, int i) //building, part of the building and colour index
     {
-        string[] colours = { "red", "green", "blue", "yellow" };
-        return colours[i];
+        JSONNode node;
+        string colour = "#000000";
+        using (StreamReader r = new StreamReader("Assets/JSON/colours.json"))
+        {
+            //read in the json
+            json = r.ReadToEnd();
+            //reformat the json into dictionary style convention
+            node = JSON.Parse(json);
+            string[] colours = node[b];
+            colour = colours[i];
+        }
+        return colour;
     }
 }
