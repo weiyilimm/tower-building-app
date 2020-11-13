@@ -34,24 +34,26 @@ public class jsontest : MonoBehaviour
 
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
-
-            //building and part to modify
-            string building = "maths_and_physics";
-            string section = "wall_colour";
-
-            //get part to be modified
-            int colour = int.Parse(node[building][section].Value);
-            Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
-
-            //modify the json node
-            node[building][section] = "1";
-
-            //get modified part
-            colour = int.Parse(node[building][section].Value);
-            Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
         }
+
+        //building and part to modify
+        string building = "maths_and_physics";
+        string section = "wall_colour";
+
+        //get part to be modified
+        int colour = int.Parse(node[building][section].Value);
+        Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
+
+        //modify the json node
+        node[building][section] = 1;
+
         //write new data
-        File.WriteAllText(Application.dataPath + "/JSON/test.json", node.ToString());
+        File.WriteAllText(Application.dataPath + "/JSON/buildings.json", node.ToString());
+
+        //get modified part
+        colour = int.Parse(node[building][section].Value);
+         
+        Debug.Log("maths and physics wall colour: " + colour + getColours(building, section, colour));
     }
 
     public string getColours(string b, string s, int i) //building, part of the building and colour index
