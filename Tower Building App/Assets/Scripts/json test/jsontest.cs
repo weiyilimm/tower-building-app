@@ -26,7 +26,7 @@ public class jsontest : MonoBehaviour
     private void LoadJson()
     {
         JSONNode node;
-        using (StreamReader r = new StreamReader("Assets/test.json"))
+        using (StreamReader r = new StreamReader("Assets/buildings.json"))
         {   
             //read in the json
             json = r.ReadToEnd();
@@ -34,12 +34,13 @@ public class jsontest : MonoBehaviour
             
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
-            string colour = node["colour1"]["C"].Value;
-            Debug.Log("Colour 1 C: "+ colour);
+            int colour = int.Parse(node["maths_and_physics"]["wall_colour"].Value);
+            Debug.Log("maths and physics wall colour: "+ colour + getColours(colour));
 
             //modify the json node
-            node["colour1"]["C"] = "light green";
-            Debug.Log("Modified colour: "+ node["colour1"]["C"].Value);
+            node["maths_and_physics"]["wall_colour"] = "1";
+            colour = int.Parse(node["maths_and_physics"]["wall_colour"].Value);
+            Debug.Log("maths and physics wall colour: " + colour + getColours(colour));
 
             //write new data
             //Debug.Log(Application.dataPath);
@@ -48,21 +49,9 @@ public class jsontest : MonoBehaviour
         File.WriteAllText(Application.dataPath + "/test.json", node.ToString());
     }
 
-    /*
-    public void Load(string savedData)
+    public string getColours(int i)
     {
-        JsonUtility.FromJsonOverwrite(savedData, this);
+        string[] colours = { "red", "green", "blue", "yellow" };
+        return colours[i];
     }
-    public string SaveToString()
-    {
-        return JsonUtility.ToJson(this);
-    }
-    public static SaveCharacters CreateFromJSON(string jsonString)
-    {
-        return JsonUtility.FromJson<SaveCharacters>(jsonString);
-    }
-
-    //JSONNode node = JSON.Parse(jsonString);
-    //string score = node["Player"]["Score"].Value;
-    */
 }
