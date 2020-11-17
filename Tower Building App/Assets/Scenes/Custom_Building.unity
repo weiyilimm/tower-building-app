@@ -232,7 +232,7 @@ MonoBehaviour:
   Colour_Blue: {fileID: 1988177629}
   Colour_Yellow: {fileID: 1976197882}
   Colour_Purple: {fileID: 917617404}
-  Increase_Width: {fileID: 1417748729}
+  Decrease_Height: {fileID: 1417748729}
   Increase_Height: {fileID: 2061423586}
   Reset_Block: {fileID: 745854565}
   points: {fileID: 833735072}
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2013822, g: 0.12815951, b: 0.6037736, a: 1}
+  m_Color: {r: 0.368932, g: 0.12941174, b: 0.6039216, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1274,6 +1274,7 @@ GameObject:
   - component: {fileID: 1253823155}
   - component: {fileID: 1253823154}
   - component: {fileID: 1253823153}
+  - component: {fileID: 1253823156}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1346,6 +1347,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1253823156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253823152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ac490205cf486438a0d9ea76a78ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.25
+  target: {fileID: 62051042}
 --- !u!1 &1417748727
 GameObject:
   m_ObjectHideFlags: 0
