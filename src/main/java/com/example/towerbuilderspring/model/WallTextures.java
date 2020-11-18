@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Validated
-@Table
+@Table(name = "WallTextures")
 public class WallTextures {
 
     @Id
