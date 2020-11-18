@@ -1,8 +1,12 @@
 package com.example.towerbuilderspring.model;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Validated
 @Table(name = "Users")
 public class Users {
     @Id
@@ -12,12 +16,15 @@ public class Users {
     @Column(name = "email")
     private String email = null;    // The email address can be null
 
+    @NotNull
     @Column(name = "password")
     private String password;        // This will have to be salted
 
+    @NotNull
     @Column(name = "totalxp")
     private int totalxp = 0;        // Default Values
 
+    @NotNull
     @Column(name = "score")
     private int score = 0;
 
