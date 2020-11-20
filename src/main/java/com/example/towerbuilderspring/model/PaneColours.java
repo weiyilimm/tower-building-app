@@ -4,6 +4,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Validated
@@ -17,6 +18,9 @@ public class PaneColours {
     @NotNull
     @Column(name = "Colours", unique = true)
     private String colours;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "colours")
+    private List<UserTowers> window_colours;
 
     public PaneColours() {};
 
