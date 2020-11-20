@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Tower Building App/Assets/Scripts.meta
 guid: 43cc0c02c5e1a9c46b153457c6b75ba1
+=======
+guid: 9a764eb792bf4ae4d8075c589958595f
+>>>>>>> scenes:Tower Building App/Library/PackageCache/com.unity.textmeshpro@2.1.1/Scripts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
