@@ -4,32 +4,40 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+
 
 @Entity
 @Validated
-@Table(name = "Users")
+@Table(name = "Users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "ID")
+})
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true, nullable = false)
     private long userId;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email = null;    // The email address can be null
 
     @NotNull
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;        // This will have to be salted
 
     @NotNull
-    @Column(name = "totalxp")
+    @Column(name = "TOTALXP")
     private int totalxp = 0;        // Default Values
 
     @NotNull
-    @Column(name = "score")
+    @Column(name = "SCORE")
     private int score = 0;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<UserTowers> users;
 
-    protected Users() {};
+
+    public Users() {};
 
     public Users(String email, String password, int totalxp, int score) {
         this.email = email;

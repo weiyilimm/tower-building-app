@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Validated
@@ -19,6 +20,9 @@ public class BuildingModels {
     @NotNull
     @Column(name = "buildingName", unique = true)      // The name and model number must be unique.
     private String buildingName;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "models")
+    private List<UserTowers> models;
 
     public BuildingModels() {};
 
