@@ -18,10 +18,17 @@ public class LeaderBoardUI : MonoBehaviour
     }
 
 
+    public void changeName(string text){
+        leaderBoard.data.name = text;
+    }
 
-    public void Submit(string name, int score){
-        leaderBoard.data.name = name;
-        leaderBoard.data.score = score;
+    public void changeScore(int number){
+        leaderBoard.data.score = number;
+    }
+
+
+
+    public void Submit(){
         leaderBoard.Save();
     }
 }
