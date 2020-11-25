@@ -23,7 +23,7 @@ public class Users {
 
     @NotNull
     @Column(name = "PASSWORD")
-    private String password;        // This will have to be salted
+    private String password;
 
     @NotNull
     @Column(name = "TOTALXP")
