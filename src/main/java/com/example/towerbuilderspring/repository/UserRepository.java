@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     // Custom methods to be installed here.
 
+
 }
