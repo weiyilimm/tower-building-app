@@ -283,25 +283,30 @@ public class CameraMovePhone : MonoBehaviour
 
     void changeCamAngle(float changeInHeight){
         //getting the camera object and its scripts
-                cam = GameObject.FindGameObjectWithTag("MainCamera");
-                camScript = cam.GetComponent<CamAttatch>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        camScript = cam.GetComponent<CamAttatch>();
 
-                Vector3 rotation = camScript.transform.eulerAngles;
+        Vector3 rotation = camScript.transform.eulerAngles;
 
-                if(transform.position.y <= 5){
-                    rotation.x = 30;
-                }
+        if(transform.position.y <= 5){
+            rotation.x = 30;
+            moveSpeed = 1;
 
-                if(transform.position.y >= 10){
-                    rotation.x = 45;
-                }
+        }
 
-                //changing x by rate of change in height
-                if(transform.position.y >5 && transform.position.y <10){
-                    rotation.x += 3*(changeInHeight);
-                }
+        if(transform.position.y >= 10){
+            rotation.x = 45;
+            moveSpeed = 2;
+        }
+
+        //changing x by rate of change in height
+        if(transform.position.y >5 && transform.position.y <10){
+            rotation.x += 3*(changeInHeight);
+            moveSpeed += 2 * ((changeInHeight) / 10);
+        }
+        Debug.Log(moveSpeed);
                 
-                //updating cameras eulerAngles
-                camScript.transform.eulerAngles = rotation;
+        //updating cameras eulerAngles
+        camScript.transform.eulerAngles = rotation;
     }
 }

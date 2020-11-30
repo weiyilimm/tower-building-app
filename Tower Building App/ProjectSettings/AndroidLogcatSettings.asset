@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R58M83X21XB",
         "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 17401,
+        "processId": 14544,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -78,6 +78,36 @@
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
             "processId": 17401,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 5127,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 7471,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 8656,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 12429,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 14544,
             "exited": false
         }
     ],
