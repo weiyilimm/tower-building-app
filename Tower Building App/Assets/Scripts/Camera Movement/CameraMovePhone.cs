@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CameraMovePhone : MonoBehaviour
@@ -33,8 +34,16 @@ public class CameraMovePhone : MonoBehaviour
     
     private Vector3 rotateOrigin;
     private Vector3 rotateCurrent;
-    private float rotated;
-    private Vector3 point;
+    private float rotated = 0;
+    private Vector3 point = Vector3.zero;
+
+    //change the movement/rotation setting
+    public void setMode(bool b)
+    {
+        Debug.Log("changed to" + b);
+        mode_pan = b;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -47,6 +56,10 @@ public class CameraMovePhone : MonoBehaviour
             //if touch object just started moving, store that as the start Pos
             if(touch.phase == TouchPhase.Began){
                 startPos = touch.position;
+
+                //set point to rotate around(0.5,0.5 is center of 2d screen, last element is distance from camera (used current height for this))
+                if (! mode_pan) point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y));
+                
             }
 
             if(touch.phase == TouchPhase.Moved){
@@ -66,8 +79,8 @@ public class CameraMovePhone : MonoBehaviour
                     moved = dragOrigin - dragCurrent;
 
                     //re-organize moved to match actual spacial movements
-                    moved.z = moved.y;
-                    moved.y = 0; 
+                    float x = moved.x * (moveSpeed / 100);
+                    float z = moved.y * (moveSpeed / 100);
 
                     //check if we can pan camera box
                     //minX = -30, maxX = 30, minZ = -32, maxZ = 18;
@@ -75,12 +88,12 @@ public class CameraMovePhone : MonoBehaviour
                     
                     //if x can pan, pan on x
                     if(canPan[0] == true){
-                        transform.Translate(moved.x * (moveSpeed/100),0,0,Space.World);
+                        transform.Translate(x, 0, 0); //moved.x * (moveSpeed/100),0,0,Space.World);
                     }
 
                     //if z can pan, pan on z
                     if(canPan[1] == true){
-                        transform.Translate(0,0,moved.z * (moveSpeed/100),Space.World);
+                        transform.Translate(0, 0, z); //0,0,moved.z * (moveSpeed/100),Space.World);
                     }
                 }else{
                     //if not set,set rotateOrigin to the startPos
@@ -94,7 +107,7 @@ public class CameraMovePhone : MonoBehaviour
                     rotateCurrent = touch.position;
 
                     //store how much to move based on touch positions
-                    rotated = rotateOrigin.x - rotateCurrent.x;
+                    rotated = rotateCurrent.x - rotateOrigin.x;
 
                     //rotate
                     transform.RotateAround(point,Vector3.up,rotated/5);//replace 5 with some kind of speed variable later

@@ -510,6 +510,7 @@ MonoBehaviour:
   normalImage: {fileID: 21300000, guid: 2ac3f3a7eda018e4eb53f2003dc1d144, type: 3}
   clickedImage: {fileID: 21300000, guid: 6cf007caf1d2dbd4ca01de74e63295cf, type: 3}
   icon: {fileID: 525975717}
+  movement: {fileID: 1407329287}
 --- !u!1 &769569737
 GameObject:
   m_ObjectHideFlags: 0
