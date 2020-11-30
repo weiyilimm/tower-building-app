@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "R58M83X21XB",
         "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 6738,
-        "exited": true
+        "processId": 17401,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -25,6 +25,60 @@
             "name": "com.DefaultCompany.TowerBuildingApp",
             "processId": 6738,
             "exited": true
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 2149,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 8298,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 3600,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 6371,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 8707,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 12757,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 14625,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 16429,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 17401,
+            "exited": false
         }
     ],
     "m_Tags": {
