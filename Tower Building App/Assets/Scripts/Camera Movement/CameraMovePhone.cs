@@ -27,6 +27,15 @@ public class CameraMovePhone : MonoBehaviour
     GameObject cam;
     CamAttatch camScript;
 
+
+    //rotation variables
+    private bool mode_pan = true;
+    
+    private Vector3 rotateOrigin;
+    private Vector3 rotateCurrent;
+    private float rotated;
+    private Vector3 point;
+
     // Update is called once per frame
     void Update()
     {
@@ -41,41 +50,61 @@ public class CameraMovePhone : MonoBehaviour
             }
 
             if(touch.phase == TouchPhase.Moved){
-                //if not set,set dragOrigin to the startPos
-                if(dragOrigin == Vector3.zero){
-                    dragOrigin = startPos;
-                //else set dragOrigin to previous drag position
+                //movement for pan mode
+                if(mode_pan){
+                    //if not set,set dragOrigin to the startPos
+                    if(dragOrigin == Vector3.zero){
+                        dragOrigin = startPos;
+                    //else set dragOrigin to previous drag position
+                    }else{
+                        dragOrigin = dragCurrent;
+                    }
+                    //update current drag position
+                    dragCurrent = touch.position;
+
+                    //store how much to move based on touch positions
+                    moved = dragOrigin - dragCurrent;
+
+                    //re-organize moved to match actual spacial movements
+                    moved.z = moved.y;
+                    moved.y = 0; 
+
+                    //check if we can pan camera box
+                    //minX = -30, maxX = 30, minZ = -32, maxZ = 18;
+                    bool[] canPan = canPanWithinBounds(-30,30,-32,18);
+                    
+                    //if x can pan, pan on x
+                    if(canPan[0] == true){
+                        transform.Translate(moved.x * (moveSpeed/100),0,0,Space.World);
+                    }
+
+                    //if z can pan, pan on z
+                    if(canPan[1] == true){
+                        transform.Translate(0,0,moved.z * (moveSpeed/100),Space.World);
+                    }
                 }else{
-                    dragOrigin = dragCurrent;
-                }
-                //update current drag position
-                dragCurrent = touch.position;
+                    //if not set,set rotateOrigin to the startPos
+                    if(rotateOrigin == Vector3.zero){
+                        rotateOrigin = startPos;
+                    //else set rotateOrigin to previous drag position
+                    }else{
+                        rotateOrigin = rotateCurrent;
+                    }
+                    //update current drag position
+                    rotateCurrent = touch.position;
 
-                //store how much to move based on touch positions
-                moved = dragOrigin - dragCurrent;
+                    //store how much to move based on touch positions
+                    rotated = rotateOrigin.x - rotateCurrent.x;
 
-                //re-organize moved to match actual spacial movements
-                moved.z = moved.y;
-                moved.y = 0; 
-
-                //check if we can pan camera box
-                //minX = -30, maxX = 30, minZ = -32, maxZ = 18;
-                bool[] canPan = canPanWithinBounds(-30,30,-32,18);
-                
-                //if x can pan, pan on x
-                if(canPan[0] == true){
-                    transform.Translate(moved.x * (moveSpeed/100),0,0,Space.World);
-                }
-
-                //if z can pan, pan on z
-                if(canPan[1] == true){
-                    transform.Translate(0,0,moved.z * (moveSpeed/100),Space.World);
+                    //rotate
+                    transform.RotateAround(point,Vector3.up,rotated/5);//replace 5 with some kind of speed variable later
                 }
             }
 
             //reset startPos if user lifts their finger
             if(touch.phase == TouchPhase.Ended){
                 dragOrigin = Vector3.zero;
+                rotateOrigin = Vector3.zero;
             }
         }
         //
