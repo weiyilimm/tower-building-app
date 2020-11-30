@@ -11,6 +11,10 @@ public class ChangeClickImage : MonoBehaviour
     public Sprite clickedImage;
     public Button icon;
     private bool isRotate = true;
+
+    public CameraMovePhone movement;
+
+
     void Start()
     {
         icon = GetComponent<Button>();
@@ -21,11 +25,15 @@ public class ChangeClickImage : MonoBehaviour
         if (isRotate == true){
             icon.image.overrideSprite = clickedImage;
             isRotate = false;
+   
         }
         else{
             icon.image.overrideSprite = normalImage;
             isRotate = true;
         }
+
+        //boolean in camera movement is true if panning. this script is true if rotating
+        movement.setMode(isRotate);
     }
 
     public void Building()
