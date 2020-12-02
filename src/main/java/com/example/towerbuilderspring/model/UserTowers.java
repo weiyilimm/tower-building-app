@@ -30,14 +30,19 @@ public class UserTowers {
     @JoinColumn(name = "WindowType")
     private PaneColours colours;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "WallType")
+    private WallTextures textures;
+
     public UserTowers() {};
 
-    public UserTowers(long towerId, @NotNull String name, Users user, BuildingModels models, PaneColours colours) {
+    public UserTowers(long towerId, @NotNull String name, Users user, BuildingModels models, PaneColours colours, WallTextures textures) {
         this.towerId = towerId;
         this.name = name;
         this.user = user;
         this.models = models;
         this.colours = colours;
+        this.textures = textures;
     }
 
     public Users getUser() {
@@ -62,6 +67,14 @@ public class UserTowers {
 
     public void setColours(PaneColours colours) {
         this.colours = colours;
+    }
+
+    public WallTextures getTextures() {
+        return textures;
+    }
+
+    public void setTextures(WallTextures textures) {
+        this.textures = textures;
     }
 
     public long getTowerId() {

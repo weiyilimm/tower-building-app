@@ -4,6 +4,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Validated
@@ -18,6 +19,8 @@ public class WallTextures {
     @Column(name = "wallType", unique = true)
     private String wallType;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "textures")
+    private List<UserTowers> textures;
 
     public WallTextures() {};
 

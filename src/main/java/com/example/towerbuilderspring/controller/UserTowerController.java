@@ -1,9 +1,8 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.UserTowers;
-import com.example.towerbuilderspring.model.Users;
-import com.example.towerbuilderspring.repository.UserRepository;
-import com.example.towerbuilderspring.repository.UserTowerRepository;
+import com.example.towerbuilderspring.repository.*;
+import com.example.towerbuilderspring.service.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// This is the transaction table
 
 @RestController
 @RequestMapping("/api")
@@ -21,6 +21,8 @@ public class UserTowerController {
 
     @Autowired
     UserTowerRepository userTowerRepository;
+
+    Validator check_input;
 
 
     // User Tower Table code
@@ -42,19 +44,22 @@ public class UserTowerController {
 
 
     // When placing data in the database need to check that each value belongs in the respective table.
-    
 
-//    @PostMapping("/UserTowers/")
-//    public ResponseEntity<UserTowers> createUserTower(@RequestBody UserTowers tower) {
-//        try {
-//            UserTowers newTower = new UserTowers(tower.getTowerId(), tower.getName(), tower.getUser(), tower.getModels(), tower.getColours());
-//            userTowerRepository.save(newTower);
-//            return new ResponseEntity<>(newTower, HttpStatus.CREATED);
-//        }
-//        catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @PostMapping("/UserTowers/")
+    public ResponseEntity<UserTowers> createUserTower(@RequestBody UserTowers tower) {
+        try {
+            if (check_input.validate(tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures())) {
+                UserTowers newTower = new UserTowers(tower.getTowerId(), tower.getName(), tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures());
+                userTowerRepository.save(newTower);
+                return new ResponseEntity<>(newTower, HttpStatus.CREATED);
+            }
+            else {
+                return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
     // This code must also incoperate some backend checks first before changing data.
