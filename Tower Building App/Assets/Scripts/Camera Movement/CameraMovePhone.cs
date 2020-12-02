@@ -40,7 +40,6 @@ public class CameraMovePhone : MonoBehaviour
     //change the movement/rotation setting
     public void setMode(bool b)
     {
-        Debug.Log("changed to" + b);
         mode_pan = b;
     }
 
