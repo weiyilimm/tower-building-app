@@ -50,6 +50,10 @@ public class Users {
         return userId;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getEmail() {
         return email;
     }

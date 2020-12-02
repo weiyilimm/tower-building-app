@@ -13,7 +13,7 @@ public class PaneColours {
 
     @Id
     @Column(name = "ColourCode")
-    private int colourCode;
+    private long colourCode;
 
     @NotNull
     @Column(name = "Colours", unique = true)
@@ -24,16 +24,16 @@ public class PaneColours {
 
     public PaneColours() {};
 
-    public PaneColours(int colourCode, String colours) {
+    public PaneColours(long colourCode, String colours) {
         this.colourCode = colourCode;
         this.colours = colours;
     }
 
-    public int getColourCode() {
+    public long getColourCode() {
         return colourCode;
     }
 
-    public void setColourCode(int colourCode) {
+    public void setColourCode(long colourCode) {
         this.colourCode = colourCode;
     }
 

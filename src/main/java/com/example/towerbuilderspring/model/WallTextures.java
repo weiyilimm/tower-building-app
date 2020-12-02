@@ -12,7 +12,7 @@ public class WallTextures {
 
     @Id
     @Column(name = "wallCode")
-    private int wallCode;
+    private long wallCode;
 
     @NotNull
     @Column(name = "wallType", unique = true)
@@ -21,16 +21,16 @@ public class WallTextures {
 
     public WallTextures() {};
 
-    public WallTextures(int wallCode, String wallType) {
+    public WallTextures(long wallCode, String wallType) {
         this.wallCode = wallCode;
         this.wallType = wallType;
     }
 
-    public int getWallCode() {
+    public long getWallCode() {
         return wallCode;
     }
 
-    public void setWallCode(int wallCode) {
+    public void setWallCode(long wallCode) {
         this.wallCode = wallCode;
     }
 
