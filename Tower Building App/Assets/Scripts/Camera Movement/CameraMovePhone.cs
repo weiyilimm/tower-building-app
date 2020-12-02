@@ -57,7 +57,11 @@ public class CameraMovePhone : MonoBehaviour
                 startPos = touch.position;
 
                 //set point to rotate around(0.5,0.5 is center of 2d screen, last element is distance from camera (used current height for this))
-                if (! mode_pan) point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y));
+                // +3 for fun
+                if (! mode_pan) {
+                    point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y + 3));
+                    //Debug.Log(point);
+                }
                 
             }
 
@@ -289,7 +293,7 @@ public class CameraMovePhone : MonoBehaviour
 
         if(transform.position.y <= 5){
             rotation.x = 30;
-            moveSpeed = 1;
+            moveSpeed = 0.8f;
 
         }
 
@@ -301,9 +305,9 @@ public class CameraMovePhone : MonoBehaviour
         //changing x by rate of change in height
         if(transform.position.y >5 && transform.position.y <10){
             rotation.x += 3*(changeInHeight);
-            moveSpeed += 2 * ((changeInHeight) / 10);
+            moveSpeed += 2 * ((changeInHeight) / 14);
         }
-        Debug.Log(moveSpeed);
+        //Debug.Log(moveSpeed);
                 
         //updating cameras eulerAngles
         camScript.transform.eulerAngles = rotation;
