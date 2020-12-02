@@ -1,6 +1,7 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.UserTowers;
+import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.*;
 import com.example.towerbuilderspring.service.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class UserTowerController {
     @Autowired
     UserTowerRepository userTowerRepository;
 
+    @Autowired
     Validator check_input;
 
 
@@ -48,13 +50,14 @@ public class UserTowerController {
     @PostMapping("/UserTowers/")
     public ResponseEntity<UserTowers> createUserTower(@RequestBody UserTowers tower) {
         try {
-            if (check_input.validate(tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures())) {
-                UserTowers newTower = new UserTowers(tower.getTowerId(), tower.getName(), tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures());
+            if (check_input.validate(tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures()) == true) {
+                System.out.println("Passed the input test");
+                UserTowers newTower = new UserTowers(tower.getName(), tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures());
                 userTowerRepository.save(newTower);
                 return new ResponseEntity<>(newTower, HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -64,17 +67,27 @@ public class UserTowerController {
 
     // This code must also incoperate some backend checks first before changing data.
 
-//    @PutMapping("/UserTower/{id}")
-//    public ResponseEntity<UserTowers> updateUserTower(@PathVariable("id") long id, @RequestBody UserTowers userTower) {
-//
-//        Optional<UserTowers> userTowerData = userTowerRepository.findById(id);
-//
-//        if (userTowerData.isPresent()) {
-//            UserTowers tower_to_update = userTowerData.get();
-//            tower_to_update.setTowerId(id);
-//            tower_to_update.setName(userTower.getName());
-//            tower_to_update.setUser(userTower.getUser());
-//            tower_to_update.setModels(userTowerModels);
-//        }
-//    }
+    @PutMapping("/UserTowers/{id}")
+    public ResponseEntity<UserTowers> updateUserTower(@PathVariable("id") long id, @RequestBody UserTowers userTower) {
+
+        Optional<UserTowers> userTowerData = userTowerRepository.findById(id);
+
+        if (userTowerData.isPresent()) {
+            if (check_input.validate(userTower.getUser(), userTower.getModels(), userTower.getColours(), userTower.getTextures())) {
+                UserTowers tower_to_update = userTowerData.get();
+                tower_to_update.setTowerId(id);
+                tower_to_update.setName(userTower.getName());
+                tower_to_update.setUser(userTower.getUser());
+                tower_to_update.setModels(userTower.getModels());
+
+                return new ResponseEntity<>(userTowerRepository.save(tower_to_update), HttpStatus.ACCEPTED);
+            }
+            else {
+                return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+            }
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
