@@ -15,7 +15,7 @@ public class BuildingModels {
     @Id
     @NotNull
     @Column(name = "buildingCode")
-    private int buildingCode;
+    private long buildingCode;
 
     @NotNull
     @Column(name = "buildingName", unique = true)      // The name and model number must be unique.
@@ -26,12 +26,12 @@ public class BuildingModels {
 
     public BuildingModels() {};
 
-    public BuildingModels(int buildingCode, String buildingName) {
+    public BuildingModels(long buildingCode, String buildingName) {
         this.buildingCode = buildingCode;
         this.buildingName = buildingName;
     }
 
-    public int getBuildingCode() {
+    public long getBuildingCode() {
         return this.buildingCode;
     }
 
@@ -39,7 +39,7 @@ public class BuildingModels {
         return this.buildingName;
     }
 
-    public void setBuildingCode(int buildingCode) {
+    public void setBuildingCode(long buildingCode) {
         this.buildingCode = buildingCode;
     }
 

@@ -12,7 +12,7 @@ public class UserTowers {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int towerId;
+    private long towerId;
 
     @NotNull
     @Column(name = "TowerName")
@@ -32,7 +32,7 @@ public class UserTowers {
 
     public UserTowers() {};
 
-    public UserTowers(int towerId, @NotNull String name, Users user, BuildingModels models, PaneColours colours) {
+    public UserTowers(long towerId, @NotNull String name, Users user, BuildingModels models, PaneColours colours) {
         this.towerId = towerId;
         this.name = name;
         this.user = user;
@@ -64,11 +64,11 @@ public class UserTowers {
         this.colours = colours;
     }
 
-    public int getTowerId() {
+    public long getTowerId() {
         return towerId;
     }
 
-    public void setTowerId(int towerId) {
+    public void setTowerId(long towerId) {
         this.towerId = towerId;
     }
 
