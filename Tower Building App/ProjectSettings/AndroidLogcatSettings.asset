@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R58M83X21XB",
         "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 19726,
+        "processId": 10091,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -126,6 +126,18 @@
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
             "processId": 19726,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 6380,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 10091,
             "exited": false
         }
     ],
