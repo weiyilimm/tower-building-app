@@ -1,7 +1,6 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.UserTowers;
-import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.*;
 import com.example.towerbuilderspring.service.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-// This is the transaction table
 
 @RestController
 @RequestMapping("/api")
@@ -90,4 +88,23 @@ public class UserTowerController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/UserTowers/{id}")
+    public ResponseEntity<UserTowers> deleteUserTower(@PathVariable("id") long id) {
+
+        try {
+            Optional<UserTowers> towerToDelete = userTowerRepository.findById(id);
+            if (towerToDelete.isPresent()) {
+                userTowerRepository.deleteById(id);
+                return new ResponseEntity<>(towerToDelete.get(), HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
 }
