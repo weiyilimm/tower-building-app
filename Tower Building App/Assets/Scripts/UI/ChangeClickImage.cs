@@ -87,6 +87,10 @@ public class ChangeClickImage : MonoBehaviour
         SceneManager.LoadScene(6);
     }
 
+    public void CustomisationBuilding()
+    {
+        SceneManager.LoadScene(7);
+    }
 }
 
 
