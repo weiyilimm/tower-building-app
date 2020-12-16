@@ -77,6 +77,16 @@ public class ChangeClickImage : MonoBehaviour
         }
     }
 
+    public void XPcode()
+    {
+        SceneManager.LoadScene(5);
+    }
+
+    public void Customisation()
+    {
+        SceneManager.LoadScene(6);
+    }
+
 }
 
 
