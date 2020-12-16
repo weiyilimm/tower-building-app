@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuildingCustom.unity
     guid: b4d94c0733c9b9942b5e291eee15b7c3
+  - enabled: 1
+    path: Assets/Scenes/Custom_Building.unity
+    guid: 18b679549f41621439f91a3ab4b7e7b7
   m_configObjects: {}
