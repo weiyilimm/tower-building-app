@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "R58M83X21XB",
         "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 15352,
-        "exited": false
+        "processId": 3192,
+        "exited": true
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -79,6 +79,18 @@
             "name": "com.DefaultCompany.TowerBuildingApp",
             "processId": 15352,
             "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 30359,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M83X21XB",
+            "name": "com.DefaultCompany.TowerBuildingApp",
+            "processId": 3192,
+            "exited": true
         }
     ],
     "m_Tags": {
