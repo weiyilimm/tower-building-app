@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Customisation : MonoBehaviour{
     public Button Back_Button, Confirm_Button, Primary_Blue, Primary_Green, Primary_Purple, Primary_Red, Primary_Yellow;
     public Button Secondary_Blue, Secondary_Green, Secondary_Purple, Secondary_Red, Secondary_Yellow, Model_1, Model_2, Model_3;
-    public Text Building_Name, Building_XP;
+    public TMP_Text Building_Name, Building_XP;
     public string Building_Name_string;
     public int Building_XP_int, temp_Primary, temp_Secondary, temp_ModelCode;
 
@@ -17,8 +18,8 @@ public class Customisation : MonoBehaviour{
         temp_Secondary = 0;
         temp_ModelCode = 0;
         
-        Building_XP_int = 0;
-        Building_XP.text = Building_XP_int.ToString();
+        //Building_XP_int = 0;
+        //Building_XP.text = Building_XP_int.ToString();
         
         // Creates events for each colour of button, the numbers represent the type (primary or secondary) and then the 
         // colour itself. More numbers could be added to represent material type ect.
