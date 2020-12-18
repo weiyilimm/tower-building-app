@@ -4118,25 +4118,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901be5501643adc42b852beb399e0b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Back_Button: {fileID: 0}
-  Confirm_Button: {fileID: 0}
-  Primary_Blue: {fileID: 0}
-  Primary_Green: {fileID: 0}
-  Primary_Purple: {fileID: 0}
-  Primary_Red: {fileID: 0}
-  Primary_Yellow: {fileID: 0}
-  Secondary_Blue: {fileID: 0}
-  Secondary_Green: {fileID: 0}
-  Secondary_Purple: {fileID: 0}
-  Secondary_Red: {fileID: 0}
-  Secondary_Yellow: {fileID: 0}
-  Model_1: {fileID: 0}
-  Model_2: {fileID: 0}
-  Model_3: {fileID: 0}
-  Building_Name: {fileID: 0}
-  Building_XP: {fileID: 0}
+  Back_Button: {fileID: 596078132}
+  Confirm_Button: {fileID: 1474329564}
+  Primary_Blue: {fileID: 1423603509}
+  Primary_Green: {fileID: 678288453}
+  Primary_Purple: {fileID: 197441049}
+  Primary_Red: {fileID: 1362967264}
+  Primary_Yellow: {fileID: 2042707722}
+  Secondary_Blue: {fileID: 86914425}
+  Secondary_Green: {fileID: 252805038}
+  Secondary_Purple: {fileID: 1114}
+  Secondary_Red: {fileID: 467923267}
+  Secondary_Yellow: {fileID: 345711223}
+  Model_1: {fileID: 1161821380}
+  Model_2: {fileID: 2076578405}
+  Model_3: {fileID: 1985012149}
+  Building_Name: {fileID: 971815668}
+  Building_XP: {fileID: 1330224667}
   Building_Name_string: 
   Building_XP_int: 0
+  temp_Primary: 0
+  temp_Secondary: 0
+  temp_ModelCode: 0
 --- !u!1 &1985012147
 GameObject:
   m_ObjectHideFlags: 0
