@@ -14,9 +14,9 @@ public class Customisation : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
-        temp_Primary = 0;
-        temp_Secondary = 0;
-        temp_ModelCode = 0;
+        temp_Primary = 1;
+        temp_Secondary = 1;
+        temp_ModelCode = 1;
         
         //Building_XP_int = 0;
         //Building_XP.text = Building_XP_int.ToString();
