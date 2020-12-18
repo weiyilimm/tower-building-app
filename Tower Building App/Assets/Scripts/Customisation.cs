@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Customisation : MonoBehaviour{
     public Button Back_Button, Confirm_Button, Primary_Blue, Primary_Green, Primary_Purple, Primary_Red, Primary_Yellow;
     public Button Secondary_Blue, Secondary_Green, Secondary_Purple, Secondary_Red, Secondary_Yellow, Model_1, Model_2, Model_3;
     public Text Building_Name, Building_XP;
     public string Building_Name_string;
-    public int Building_XP_int;
+    public int Building_XP_int, temp_Primary, temp_Secondary, temp_ModelCode;
 
     // Start is called before the first frame update
     void Start(){
+        temp_Primary = 0;
+        temp_Secondary = 0;
+        temp_ModelCode = 0;
+        
         Building_XP_int = 0;
         Building_XP.text = Building_XP_int.ToString();
         
@@ -38,32 +43,34 @@ public class Customisation : MonoBehaviour{
     }
 
     void change_colour(int ColourType, int ColourCode){
-        SortedDictionary<int,Color> colour_map = new SortedDictionary<int,Color>();
-        colour_map.Add(1,Color.blue);
-        colour_map.Add(2,Color.green);
-        colour_map.Add(3,Color.magenta);
-        colour_map.Add(4,Color.red);
-        colour_map.Add(5,Color.yellow);
-
-        Color change_colour = colour_map[ColourCode];
-        
         //Update the temp User_Data here - 0 means primary, 1 means secondary
+        if (ColourType == 0){
+            temp_Primary = ColourCode;
+        } else {
+            temp_Secondary = ColourCode;
+        }
     }
 
     void change_model(int ModelCode){
-
+        temp_ModelCode = ModelCode;
     }
 
     void Confirm(){
         //Update the user data and return to main screen
+        User_Data.data.building_stats[0].primary_colour = temp_Primary;
+        User_Data.data.building_stats[0].secondary_colour = temp_Secondary;
+        User_Data.data.building_stats[0].model = temp_ModelCode;
+        
+        SceneManager.LoadScene(sceneName:"MainScene");
     }
 
     void Back(){
         //return to the main screen without updating
+        SceneManager.LoadScene(sceneName:"MainScene");
     }
 
     // Update is called once per frame
     void Update(){
-        
+    
     }
 }
