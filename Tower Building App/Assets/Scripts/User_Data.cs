@@ -25,8 +25,16 @@ public class User_Data : MonoBehaviour{
         data = this;
 
         //CREATE BUILDING INSTANCES HERE
-        Building newBuilding = new Building(1,2,1,500);
-        building_stats.Add(newBuilding);
+        Building MainBuilding = new Building(1,2,1,500);
+        building_stats.Add(MainBuilding);
+        Building BioBuilding = new Building(1,3,1,250);
+        building_stats.Add(BioBuilding);
+        Building CompBuilding = new Building(1,4,1,600);
+        building_stats.Add(CompBuilding);
+        Building GeoBuilding = new Building(2,1,1,100);
+        building_stats.Add(GeoBuilding);
+        Building HistBuilding = new Building(2,3,1,20);
+        building_stats.Add(HistBuilding);
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
         //file2.onClick.AddListener(() => LoadJson("Assets/JSON/file2.json"));
     }

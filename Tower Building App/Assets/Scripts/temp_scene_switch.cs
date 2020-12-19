@@ -12,6 +12,6 @@ public class temp_scene_switch : MonoBehaviour{
     }
 
     void Load_customise(){
-        SceneManager.LoadScene(sceneName:"Main_Building_Customisation");   
+        SceneManager.LoadScene(sceneName:"Temp_Customisation_select");   
     }
 }
