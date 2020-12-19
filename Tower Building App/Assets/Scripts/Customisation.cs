@@ -58,9 +58,18 @@ public class Customisation : MonoBehaviour{
 
     void Confirm(){
         //Update the user data and return to main screen
-        User_Data.data.building_stats[0].primary_colour = temp_Primary;
-        User_Data.data.building_stats[0].secondary_colour = temp_Secondary;
-        User_Data.data.building_stats[0].model = temp_ModelCode;
+        SortedDictionary<string,int> subject_map = new SortedDictionary<string,int>();
+        subject_map.Add("Main Building",0);
+        subject_map.Add("Biology Building",1);
+        subject_map.Add("Computer Science Building",2);
+        subject_map.Add("Geography Building",3);
+        subject_map.Add("History Building",4);
+        
+        int index = subject_map[Building_Name.text];
+
+        User_Data.data.building_stats[index].primary_colour = temp_Primary;
+        User_Data.data.building_stats[index].secondary_colour = temp_Secondary;
+        User_Data.data.building_stats[index].model = temp_ModelCode;
         
         SceneManager.LoadScene(sceneName:"MainScene");
     }

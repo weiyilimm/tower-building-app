@@ -11,9 +11,20 @@ public class MainScreenLoad : MonoBehaviour{
         colour_map.Add(3,Color.magenta);
         colour_map.Add(4,Color.red);
         colour_map.Add(5,Color.yellow);
+        
+        SortedDictionary<string,int> subject_map = new SortedDictionary<string,int>();
+        subject_map.Add("Main Building",0);
+        subject_map.Add("Biology Building",1);
+        subject_map.Add("Computer Science Building",2);
+        subject_map.Add("Geography Building",3);
+        subject_map.Add("History Building",4);
+        
 
-        GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[0].primary_colour];
-        GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[0].secondary_colour];
+        int length = User_Data.data.building_stats.Count;
+        int index = subject_map[transform.parent.name];
+
+        GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[index].primary_colour];
+        GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[index].secondary_colour];
     }
 
 }

@@ -847,7 +847,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5cdef49c5e64a34c8467b59f1a04c41,
         type: 3}
       propertyPath: m_Name
-      value: Parthenon
+      value: History Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5cdef49c5e64a34c8467b59f1a04c41, type: 3}
@@ -1234,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dff791808aa282c4bb45592eba73a336,
         type: 3}
       propertyPath: m_Name
-      value: pagoda
+      value: Geography Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff791808aa282c4bb45592eba73a336, type: 3}
@@ -1562,7 +1562,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2610835d50ca7e54a830ed35b8c18c92,
         type: 3}
       propertyPath: m_Name
-      value: boyd orr (1)
+      value: Main Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2610835d50ca7e54a830ed35b8c18c92, type: 3}
@@ -1744,7 +1744,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 70e9a9cf96cf9dd4aa8166ae714b40d3,
         type: 3}
       propertyPath: m_Name
-      value: glitch cube
+      value: Computer Science Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e9a9cf96cf9dd4aa8166ae714b40d3, type: 3}
@@ -1828,10 +1828,28 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c19a485bb14d1ed4ab2e9af874489718,
         type: 3}
       propertyPath: m_Name
-      value: Helix Building 1
+      value: Biology Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c19a485bb14d1ed4ab2e9af874489718, type: 3}
+--- !u!1 &2089782529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2652683247579454476, guid: c19a485bb14d1ed4ab2e9af874489718,
+    type: 3}
+  m_PrefabInstance: {fileID: 2089782528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2089782530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089782529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2133734021
 PrefabInstance:
   m_ObjectHideFlags: 0
