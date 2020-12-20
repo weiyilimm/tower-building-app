@@ -19,12 +19,22 @@ public class MainScreenLoad : MonoBehaviour{
         subject_map.Add("Geography Building",3);
         subject_map.Add("History Building",4);
         
+        int index = subject_map[transform.name];
 
-        int length = User_Data.data.building_stats.Count;
-        int index = subject_map[transform.parent.name];
+        foreach (Transform child in transform){
+            int length  = child.GetComponent<Renderer>().materials.Length;
+            for (int i=0; i<length; i++){
+                if (i == 0) {
+                    child.GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[index].primary_colour];
+                } else {
+                    child.GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[index].secondary_colour];
+                }
+            }
+        }
 
-        GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[index].primary_colour];
-        GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[index].secondary_colour];
+        // OLD WORKING CODE
+        // GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[index].primary_colour];
+        // GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[index].secondary_colour];
     }
 
 }
