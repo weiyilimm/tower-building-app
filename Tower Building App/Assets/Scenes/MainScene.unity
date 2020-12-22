@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1405,6 +1405,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 2610835d50ca7e54a830ed35b8c18c92,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -5338384031171060057, guid: 2610835d50ca7e54a830ed35b8c18c92,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 2610835d50ca7e54a830ed35b8c18c92,
         type: 3}
       propertyPath: m_Name
@@ -1632,6 +1638,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helix Building 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8401339013404769243, guid: c19a485bb14d1ed4ab2e9af874489718,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -6478536213147159724, guid: c19a485bb14d1ed4ab2e9af874489718,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c19a485bb14d1ed4ab2e9af874489718, type: 3}
 --- !u!1001 &2133734021
