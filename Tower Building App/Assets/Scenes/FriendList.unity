@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 203833327}
   - component: {fileID: 203833326}
   m_Layer: 5
-  m_Name: XPText
+  m_Name: FriendsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
