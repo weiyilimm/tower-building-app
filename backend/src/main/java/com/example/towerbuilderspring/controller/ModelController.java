@@ -53,7 +53,6 @@ public class ModelController {
         try {
             BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName());
             modelRepository.save(newModel);
-
             return new ResponseEntity<>(newModel, HttpStatus.OK);
         }
         catch (Exception e) {
