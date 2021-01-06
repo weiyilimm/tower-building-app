@@ -4061,10 +4061,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1941082544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901be5501643adc42b852beb399e0b50, type: 3}
+  m_Script: {fileID: 11500000, guid: bacbac88b93fd3b46a0f4482d618bfcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Back_Button: {fileID: 0}
   Confirm_Button: {fileID: 1474329564}
   Primary_Blue: {fileID: 1423603509}
   Primary_Green: {fileID: 678288453}
