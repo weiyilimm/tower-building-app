@@ -20,6 +20,7 @@ public class ChangeClickImage : MonoBehaviour
         icon = GetComponent<Button>();
     }
 
+    //Rotation Icon
     public void RotationIcon()
     {
         if (isRotate == true){
@@ -36,6 +37,7 @@ public class ChangeClickImage : MonoBehaviour
         movement.setMode(isRotate);
     }
 
+    //Main Scene Footer
     public void Building()
     {
         if (SceneManager.GetActiveScene().buildIndex == 1){
@@ -46,6 +48,8 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
     }
+
+    //Timing Clock Footer
     public void TimingClock()
     {
         if (SceneManager.GetActiveScene().buildIndex == 2){
@@ -56,6 +60,8 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
     }
+
+    //FriendList Footer
     public void FriendList()
     {
         if (SceneManager.GetActiveScene().buildIndex == 3){
@@ -66,6 +72,8 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
     }
+
+    //LeaderBoard Footer
     public void LeaderBoard()
     {
         if (SceneManager.GetActiveScene().buildIndex == 4){
@@ -77,20 +85,45 @@ public class ChangeClickImage : MonoBehaviour
         }
     }
 
+    //Profile Icon
     public void XPcode()
     {
         SceneManager.LoadScene(5);
     }
 
+    //Customisation Icon
     public void Customisation()
     {
         SceneManager.LoadScene(6);
     }
 
-    public void CustomisationBuilding()
+
+    //Buildings
+    public void MainBuilding()
     {
         SceneManager.LoadScene(7);
     }
+
+    public void ComputerScienceBuilding()
+    {
+        SceneManager.LoadScene(8);
+    }
+
+    public void GeographyBuilding()
+    {
+        SceneManager.LoadScene(9);
+    }
+
+    public void HistoryBuilding()
+    {
+        SceneManager.LoadScene(10);
+    }
+
+    public void BiologyBuilding()
+    {
+        SceneManager.LoadScene(11);
+    }
+
 }
 
 
