@@ -1,11 +1,14 @@
 package com.example.towerbuilderspring;
 
-import com.example.towerbuilderspring.controller.ModelController;
-import com.example.towerbuilderspring.controller.PaneController;
+import com.example.towerbuilderspring.controller.*;
 import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.PaneColours;
+import com.example.towerbuilderspring.model.Users;
+import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.ModelRepository;
 import com.example.towerbuilderspring.repository.PaneRepository;
+import com.example.towerbuilderspring.repository.TextureRepository;
+import com.example.towerbuilderspring.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.*;
@@ -147,7 +148,7 @@ public class TowerBuildingSpringUnitTests {
         when(paneRepository.findById(1l)).thenReturn(java.util.Optional.of(mockedOriginalPane));
         when(paneRepository.save(any(PaneColours.class))).thenReturn(mockedUpdatedPane);
 
-        // Pane colour updated succesfully.
+        // Pane colour updated successfully.
         assertEquals(new ResponseEntity<>(mockedUpdatedPane, HttpStatus.OK),
                 paneController.updateWindow(1, new PaneColours(1, "green")));
         // Requested colour to replace doesn't exist.
@@ -156,5 +157,132 @@ public class TowerBuildingSpringUnitTests {
     }
 
 
+    // Tests for the textures
+
+    @Mock
+    TextureRepository textureRepository;
+
+    @InjectMocks
+    TextureController textureController;
+
+    @Test
+    public void getAllTextures() {
+        List<WallTextures> mockedTexturesFull = Arrays.asList(new WallTextures(1, "Brick"),
+                new WallTextures(2, "Stone"), new WallTextures(3, "Marble"));
+        List<WallTextures> mockedTexturesEmpty = new ArrayList<>();
+
+        when(textureRepository.findAll()).thenReturn(mockedTexturesFull).thenReturn(mockedTexturesEmpty).thenReturn(null);
+
+        // Test when models present.
+        assertEquals(new ResponseEntity<>(mockedTexturesFull, HttpStatus.OK), textureController.getAllTextures());
+        // Test when models absent
+        assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), textureController.getAllTextures());
+        // In case of null (or any other error causing value) returned
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), textureController.getAllTextures());
+    }
+    
+    @Test
+    public void getTextureById() {
+        WallTextures mockedWallTexture = new WallTextures(1, "Brick");
+        when(textureRepository.findById(1l)).thenReturn(java.util.Optional.of(mockedWallTexture));
+        
+        assertEquals(new ResponseEntity<>(mockedWallTexture, HttpStatus.OK), textureController.getTextures(1l));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), textureController.getTextures(2l));
+    }
+
+
+
+    @Test
+    public void createTextureInRepository() {
+        WallTextures mockWallTexture = new WallTextures(1, "Brick");
+        WallTextures badMock = new WallTextures(666, "Dirt");
+        when(paneRepository.save(any(PaneColours.class))).then(returnsFirstArg());
+        //when(paneRepository.save(badMock)).thenReturn();
+
+        assertEquals(new ResponseEntity<>(textureRepository.save(mockWallTexture), HttpStatus.OK), textureController.createTexture(mockWallTexture));
+        //assertEquals(new ResponseEntity<>(HttpStatus.BAD_REQUEST), paneController.createWindow(badMock));
+    }
+
+    @Test
+    public void updateTextureInRepository()
+    {
+        WallTextures mockOriginalTexture = new WallTextures(1, "Brick");
+        WallTextures mockUpdatedTexture = new WallTextures(1, "Steel");
+
+        when(textureRepository.findById(1l)).thenReturn(java.util.Optional.of(mockOriginalTexture));
+        when(textureRepository.save(any(WallTextures.class))).thenReturn(mockUpdatedTexture);
+
+        // Pane colour updated successfully.
+        assertEquals(new ResponseEntity<>(mockUpdatedTexture, HttpStatus.OK),
+                textureController.updateTexture(1, new WallTextures(1, "Steel")));
+        // Requested colour to replace doesn't exist.
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND),
+                textureController.updateTexture(2, new WallTextures(2, "Sand")));
+    }
+    
+    // Tests for User Controller
+
+    @Mock
+    UserRepository userRepository;
+
+    @InjectMocks
+    UserController userController;
+
+
+    @Test
+    public void getUserModels() {
+        List<Users> mockedUsersFull = Arrays.asList(new Users("test@mail.com", "password", 0, 12),
+                new Users("test2@mail.com", "password", 0, 32));
+        List<Users> mockedUsersEmpty = new ArrayList<>();
+        List<Users> mockedBuildingsError = null;
+
+        when(userRepository.findAll()).thenReturn(mockedUsersFull).thenReturn(mockedUsersEmpty).thenReturn(null);
+
+        // Test when models present.
+        assertEquals(new ResponseEntity<>(mockedUsersFull, HttpStatus.OK), userController.getAllUsers());
+        // Test when models absent
+        assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), userController.getAllUsers());
+        // In case of null (or any other error causing value) returned
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), userController.getAllUsers());
+    }
+
+    @Test
+    public void getUserModelById() {
+        Users mockBuilding = new Users("test@mail.com", "password", 0, 12);
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(mockBuilding));
+        // If found
+        assertEquals(new ResponseEntity<>(mockBuilding, HttpStatus.OK), userController.getUser(1L));
+        // If not found
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), userController.getUser(2L));
+    }
+
+    @Test
+    public void createUserModelInRepository() {
+        Users mockedBuildingToSave = new Users("test@mail.com", "password", 0, 12);
+        // Return the building model that was just "saved".
+        when(userRepository.save(any(Users.class))).then(returnsFirstArg());
+        // Todo - Find another way to perform check
+        assertEquals(new ResponseEntity<>(mockedBuildingToSave, HttpStatus.OK), userController.createUser(mockedBuildingToSave));
+    }
+
+    // Updating user is slightly different as I get an id from the database, need to look into that.
+
+//    @Test
+//    public void updateBuildingModelInRepository()
+//    {
+//        Users mockOriginalBuilding = new Users("test@mail.com", "password", 0, 12);
+//        Users mockUpdatedBuilding = new Users("test@mail.com", "password", 0, 14);
+//
+//        when(userRepository.findById(1l)).thenReturn(java.util.Optional.of(mockOriginalBuilding));
+//        when(userRepository.save(any(Users.class))).thenReturn(mockUpdatedBuilding);
+//
+//        // The user exists.
+//        assertEquals(new ResponseEntity<>(mockUpdatedBuilding, HttpStatus.OK),
+//                userController.updateUser(1l, new Users(1, "Dummy Updated")));
+//        // The user does not exist.
+//        assertEquals(new ResponseEntity<>(null, HttpStatus.NOT_FOUND), userController.updateUser(2l,
+//                new Users(1, "Dummy Updated")));
+//
+//    }
 
 }
