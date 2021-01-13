@@ -676,10 +676,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 197733469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901be5501643adc42b852beb399e0b50, type: 3}
+  m_Script: {fileID: 11500000, guid: bacbac88b93fd3b46a0f4482d618bfcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Back_Button: {fileID: 0}
   Confirm_Button: {fileID: 28234999}
   Primary_Blue: {fileID: 993545406}
   Primary_Green: {fileID: 1396206369}
@@ -1560,8 +1559,8 @@ RectTransform:
   - {fileID: 1266244307}
   - {fileID: 1207904267}
   - {fileID: 271907751}
-  - {fileID: 29873223}
   - {fileID: 1891856771}
+  - {fileID: 29873223}
   - {fileID: 545955441}
   - {fileID: 1853603302}
   m_Father: {fileID: 0}
@@ -4048,7 +4047,7 @@ RectTransform:
   m_Children:
   - {fileID: 2071423692}
   m_Father: {fileID: 528283125}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

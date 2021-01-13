@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -213,8 +213,8 @@ RectTransform:
   m_Children:
   - {fileID: 319035810}
   - {fileID: 1493720081}
-  - {fileID: 1627171945}
   - {fileID: 525975716}
+  - {fileID: 1627171945}
   - {fileID: 778778540}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -397,7 +397,7 @@ RectTransform:
   m_Children:
   - {fileID: 785247070}
   m_Father: {fileID: 76903912}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 585396387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Script: {fileID: 11500000, guid: b0cccdc513abfae4d9e371cc6d978fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &769569737
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027126696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Script: {fileID: 11500000, guid: b0cccdc513abfae4d9e371cc6d978fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1090003585
@@ -1649,7 +1649,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729297517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Script: {fileID: 11500000, guid: b0cccdc513abfae4d9e371cc6d978fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1867372538 stripped
@@ -1667,7 +1667,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867372538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Script: {fileID: 11500000, guid: b0cccdc513abfae4d9e371cc6d978fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1890400212
@@ -1953,7 +1953,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089782529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ed56b782da6364c8292006641ed810, type: 3}
+  m_Script: {fileID: 11500000, guid: b0cccdc513abfae4d9e371cc6d978fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2133734021
