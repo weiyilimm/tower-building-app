@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NavyLightGreen
+  m_Name: 302 NavyLightGreen
   m_Shader: {fileID: -6465566751694194690, guid: fb25855e45b5ef84589a8cac06620cff,
     type: 3}
   m_ShaderKeywords: 
@@ -49,8 +49,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_3B8947AA: 5
-    - Vector1_F802C08A: 0
+    - Vector1_3B8947AA: 10
+    - Vector1_F802C08A: 0.04
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

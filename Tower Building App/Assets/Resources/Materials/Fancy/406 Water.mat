@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3926008140634830592
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Camo Arctic
-  m_Shader: {fileID: -6465566751694194690, guid: 3b0f9d911f0d66f45b9e50f396131525,
+  m_Name: 406 Water
+  m_Shader: {fileID: -6465566751694194690, guid: d389060b4d7975049b4eb887c07f036a,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -62,11 +49,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_204DD307: 0.4
-    - Vector1_711EED80: 20
-    - Vector1_76CB6998: 5
-    - Vector1_92F1EFDC: 2
-    - Vector1_E9F7647: 10
+    - Vector1_2C6BB062: 5
+    - Vector1_D08249DA: 4
+    - Vector1_F1C23663: 15
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -89,10 +74,22 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_27B726C2: {r: 0.24385902, g: 0.32827786, b: 0.3773585, a: 0}
-    - Color_582076DD: {r: 0.03921567, g: 0.43424454, b: 0.74509805, a: 0}
-    - Color_A88C3999: {r: 0.5960751, g: 0.86966443, b: 0.8962264, a: 0}
+    - Color_34408D55: {r: 0.4100659, g: 0.8680294, b: 0.9150943, a: 0}
+    - Color_BEB150BE: {r: 0.08788714, g: 0.57029265, b: 0.745283, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+--- !u!114 &3627409237829122532
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1

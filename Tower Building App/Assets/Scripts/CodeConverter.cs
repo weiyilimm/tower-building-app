@@ -42,7 +42,7 @@ public class CodeConverter : MonoBehaviour{
             counter++;
         }
 
-        /*
+        
         Material[] Gradient = Resources.LoadAll<Material>("Materials/Gradient");
         counter = 0;
         foreach (Material m in Gradient){
@@ -50,7 +50,17 @@ public class CodeConverter : MonoBehaviour{
             materials_map.Add(index,m);
             counter++;
         }
-        */
+
+        Material[] Fancy = Resources.LoadAll<Material>("Materials/Fancy");
+        counter = 0;
+        foreach (Material m in Fancy)
+        {
+            int index = 400 + counter;
+            materials_map.Add(index, m);
+            counter++;
+        }
+
+
 
 
         // Adds all of the buildings in the app to a lookup dictionary

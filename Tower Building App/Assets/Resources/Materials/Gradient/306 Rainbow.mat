@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4992542026842876911
+--- !u!114 &-169646956147280182
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lava
-  m_Shader: {fileID: -6465566751694194690, guid: 10e1fb2ecbfe5ab4398fb21ba87bfd3a,
+  m_Name: 306 Rainbow
+  m_Shader: {fileID: -6465566751694194690, guid: 6522295238fdd8641895b8e77001b0d6,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -62,11 +62,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2EA28487: 3.62
-    - Vector1_5BF269FC: 2
-    - Vector1_824B8756: 0.0107
-    - Vector1_98AFE734: 10
-    - Vector1_A862A929: 20
+    - Vector1_3B8947AA: 5
+    - Vector1_85698AD9: 9
+    - Vector1_F802C08A: 0
+    - Vector1_F8D73AA3: 0.02
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -89,8 +88,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_5CC047A0: {r: 0.07547168, g: 0.03901254, b: 0.01673193, a: 0}
-    - Color_C919D0F5: {r: 1, g: 0.33732823, b: 0, a: 0}
+    - Color_C048E079: {r: 0, g: 0.87587637, b: 1, a: 0}
+    - Color_C6AB5765: {r: 1, g: 0, b: 0.7276478, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
