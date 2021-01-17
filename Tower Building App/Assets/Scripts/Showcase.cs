@@ -13,6 +13,7 @@ public class Showcase : MonoBehaviour{
         int sec_counter = 0; //secondary
         int[] mat_len = { 14, 8, 6, 7, 8 };
         while (true){
+         
             //matte and metallic
             for (int i = 0; i < 2; i++)
             {
@@ -61,9 +62,13 @@ public class Showcase : MonoBehaviour{
             }
 
             //fancy
-            yield return new WaitForSeconds(1);
+            
             for (int j = 0; j < mat_len[4]; j++)
-            { 
+            {
+                yield return new WaitForSeconds(2);
+
+                
+
                 prim_counter = j + 400;
 
                 Material[] mats = GetComponent<Renderer>().materials; //object materials
@@ -71,7 +76,9 @@ public class Showcase : MonoBehaviour{
                 mats[1] = CodeConverter.codes.materials_map[prim_counter];
                 GetComponent<Renderer>().materials = mats;
 
-                yield return new WaitForSeconds(5);
+                if (j == 2 || j == 5 || j == 6 || j == 7)
+                    yield return new WaitForSeconds(3);
+
             }
         }
     }
