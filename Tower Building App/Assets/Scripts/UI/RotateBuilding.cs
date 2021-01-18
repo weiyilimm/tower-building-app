@@ -26,10 +26,10 @@ public class RotateBuilding : MonoBehaviour
 
     //method to see the limit area of touch rotating
 
-    public void OnGUI()
-    {
-        GUI.Box(rect, "This is a box");
-    }
+    // public void OnGUI()
+    // {
+    //     GUI.Box(rect, "This is a box");
+    // }
 }
 
 
