@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R58M83X21XB",
         "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 17360,
+        "processId": 17922,
         "exited": true
     },
     "m_SelectedPriority": 0,
@@ -11,145 +11,43 @@
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 22800,
+            "processId": 28743,
             "exited": true
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 19726,
+            "processId": 23959,
             "exited": true
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 6380,
+            "processId": 26566,
             "exited": true
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 10091,
+            "processId": 10939,
             "exited": true
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 24173,
-            "exited": true
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.sec.android.app.launcher",
-            "processId": 5063,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.microsoft.teams",
-            "processId": 31323,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 30920,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 19988,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 21116,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 11061,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 15352,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 30359,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 3192,
+            "processId": 12078,
             "exited": true
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 32340,
+            "processId": 13367,
             "exited": false
         },
         {
             "deviceId": "R58M83X21XB",
             "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 6954,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 8420,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 9385,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 11297,
-            "exited": true
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 12595,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 13538,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 14330,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 16268,
-            "exited": false
-        },
-        {
-            "deviceId": "R58M83X21XB",
-            "name": "com.DefaultCompany.TowerBuildingApp",
-            "processId": 17360,
+            "processId": 17922,
             "exited": true
         }
     ],
