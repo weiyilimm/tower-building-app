@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.6462264, g: 0.9959058, b: 1, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.006
+  m_FogDensity: 0.007
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.28635636, g: 0.40596694, b: 0.5188679, a: 1}
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2205,7 +2205,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 176f466cdf879f04c8d4c40a4c0b0b5a, type: 2}
+      objectReference: {fileID: 2100000, guid: 8666544c7ee448f46ab6c76ff79a36f8, type: 2}
     - target: {fileID: 3772287550547661129, guid: cdc975cbe79a5904b942aed2d4457c71,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
