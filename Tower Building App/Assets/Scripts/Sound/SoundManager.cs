@@ -57,6 +57,8 @@ public class SoundManager : MonoBehaviour
         s.source.Stop();
     }
 
+    //if we want a sound to change to bypass effects use this, not currently using it because I found a different way to do what I needed this
+    //for before
     public void Effects(string name, bool on)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
