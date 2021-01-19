@@ -17,7 +17,7 @@ public class RotateBuilding : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved){
                 if (rect.Contains(touch.position)){
-                    transform.Rotate(0f,-touch.deltaPosition.x * rotationSpeed, 0f);
+                    transform.Rotate(0f, 0f, -touch.deltaPosition.x * rotationSpeed);
                 }
             }
         }
