@@ -26,12 +26,14 @@ public class ChangeClickImage : MonoBehaviour
         if (isRotate == true){
             icon.image.overrideSprite = clickedImage;
             isRotate = false;
-   
         }
         else{
             icon.image.overrideSprite = normalImage;
             isRotate = true;
         }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
 
         //boolean in camera movement is true if panning. this script is true if rotating
         movement.setMode(isRotate);
@@ -47,6 +49,13 @@ public class ChangeClickImage : MonoBehaviour
             SceneManager.LoadScene(1);
             icon.image.overrideSprite = clickedImage;
         }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+
+
+        //if effects are on, turn them off
+        //FindObjectOfType<SoundManager>().Effects("theme music", false);
     }
 
     //Timing Clock Footer
@@ -59,6 +68,12 @@ public class ChangeClickImage : MonoBehaviour
             SceneManager.LoadScene(2);
             icon.image.overrideSprite = clickedImage;
         }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+
+        //if effects aren't on, turn them on
+       //FindObjectOfType<SoundManager>().Effects("theme music", true);
     }
 
     //FriendList Footer
@@ -71,6 +86,11 @@ public class ChangeClickImage : MonoBehaviour
             SceneManager.LoadScene(3);
             icon.image.overrideSprite = clickedImage;
         }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //if effects aren't on, turn them on
+        //FindObjectOfType<SoundManager>().Effects("theme music", true);
     }
 
     //LeaderBoard Footer
@@ -83,18 +103,33 @@ public class ChangeClickImage : MonoBehaviour
             SceneManager.LoadScene(4);
             icon.image.overrideSprite = clickedImage;
         }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //if effects aren't on, turn them on
+        //FindObjectOfType<SoundManager>().Effects("theme music", true);
     }
 
     //Profile Icon
     public void XPcode()
     {
         SceneManager.LoadScene(5);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //if effects aren't on, turn them on
+        //FindObjectOfType<SoundManager>().Effects("theme music", true);
     }
 
     //Customisation Icon
     public void Customisation()
     {
         SceneManager.LoadScene(6);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //if effects aren't on, turn them on
+        //FindObjectOfType<SoundManager>().Effects("theme music", true);
     }
 
 

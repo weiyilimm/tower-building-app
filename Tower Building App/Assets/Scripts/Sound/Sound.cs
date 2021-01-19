@@ -16,6 +16,8 @@ public class Sound{
 
     public bool loop;
 
+    public bool bypassEffects;
+
     [HideInInspector]
     public AudioSource source;
 }
