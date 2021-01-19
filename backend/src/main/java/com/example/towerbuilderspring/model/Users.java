@@ -9,28 +9,24 @@ import java.util.List;
 
 @Entity
 @Validated
-@Table(name = "Users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "ID")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "userId")
 })
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private long userId;
 
-    @Column(name = "EMAIL")
     private String email = null;    // The email address can be null
 
     @NotNull
-    @Column(name = "PASSWORD")
     private String password;
 
     @NotNull
-    @Column(name = "TOTALXP")
     private int totalxp = 0;        // Default Values
 
     @NotNull
-    @Column(name = "SCORE")
     private int score = 0;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

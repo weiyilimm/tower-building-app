@@ -15,16 +15,14 @@ public class UserTowers {
     private long towerId;
 
     @NotNull
-    @Column(name = "TowerName")
     private String name;
 
-    @Column(name = "UserId")
     private long user;
 
-    @Column(name = "BuildingName")
     private long models;
 
     private short primary = 200;
+
     private short secondary = 201;
 
     public UserTowers() {};
