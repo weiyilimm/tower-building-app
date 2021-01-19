@@ -48,9 +48,9 @@ public class UserTowerController {
     @PostMapping("/UserTowers/")
     public ResponseEntity<UserTowers> createUserTower(@RequestBody UserTowers tower) {
         try {
-            if (check_input.validate(tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures()) == true) {
+            if (check_input.validate(tower.getUser(), tower.getModels()) == true) {
                 System.out.println("Passed the input test");
-                UserTowers newTower = new UserTowers(tower.getName(), tower.getUser(), tower.getModels(), tower.getColours(), tower.getTextures());
+                UserTowers newTower = new UserTowers(tower.getName(), tower.getUser(), tower.getModels(), tower.getPrimaryColour(), tower.getSecondaryColour());
                 userTowerRepository.save(newTower);
                 return new ResponseEntity<>(newTower, HttpStatus.CREATED);
             }
@@ -63,7 +63,7 @@ public class UserTowerController {
     }
 
 
-    // This code must also incoperate some backend checks first before changing data.
+    // This code must also incorporate some backend checks first before changing data.
 
     @PutMapping("/UserTowers/{id}")
     public ResponseEntity<UserTowers> updateUserTower(@PathVariable("id") long id, @RequestBody UserTowers userTower) {
@@ -71,7 +71,7 @@ public class UserTowerController {
         Optional<UserTowers> userTowerData = userTowerRepository.findById(id);
 
         if (userTowerData.isPresent()) {
-            if (check_input.validate(userTower.getUser(), userTower.getModels(), userTower.getColours(), userTower.getTextures())) {
+            if (check_input.validate(userTower.getUser(), userTower.getModels())) {
                 UserTowers tower_to_update = userTowerData.get();
                 tower_to_update.setTowerId(id);
                 tower_to_update.setName(userTower.getName());
