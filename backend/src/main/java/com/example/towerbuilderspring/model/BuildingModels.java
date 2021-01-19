@@ -14,11 +14,10 @@ public class BuildingModels {
 
     @Id
     @NotNull
-    @Column(name = "buildingCode")
     private long buildingCode;
 
     @NotNull
-    @Column(name = "buildingName", unique = true)      // The name and model number must be unique.
+    @Column(unique = true)      // The name and model number must be unique.
     private String buildingName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "models")

@@ -684,7 +684,7 @@ true Pacific/Easter
 false Pacific/Efate
 false Pacific/Enderbury
 false Pacific/Fakaofo
-true Pacific/Fiji
+false Pacific/Fiji
 false Pacific/Funafuti
 false Pacific/Galapagos
 false Pacific/Gambier
@@ -784,7 +784,7 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <StartupTime>1605455530</StartupTime>
+      <StartupTime>1610946147</StartupTime>
     </root>
     <database id="2" parent="1" name="demo">
       <ObjectId>16440</ObjectId>
@@ -794,11 +794,11 @@ false Zulu
       <ObjectId>13442</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2566</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3466</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
-    <database id="4" parent="1" name="test">
-      <ObjectId>16395</ObjectId>
+    <database id="4" parent="1" name="prod">
+      <ObjectId>17106</ObjectId>
       <Owner>postgres</Owner>
     </database>
     <database id="5" parent="1" name="testdb">
@@ -854,7 +854,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2567</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3467</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="18" parent="3" name="heap">
