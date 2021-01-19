@@ -53,9 +53,8 @@ public class ChangeClickImage : MonoBehaviour
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
 
-
-        //if effects are on, turn them off
-        //FindObjectOfType<SoundManager>().Effects("theme music", false);
+        //turn filter off
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
     }
 
     //Timing Clock Footer
@@ -72,8 +71,8 @@ public class ChangeClickImage : MonoBehaviour
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
 
-        //if effects aren't on, turn them on
-       //FindObjectOfType<SoundManager>().Effects("theme music", true);
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     //FriendList Footer
@@ -89,8 +88,8 @@ public class ChangeClickImage : MonoBehaviour
 
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
-        //if effects aren't on, turn them on
-        //FindObjectOfType<SoundManager>().Effects("theme music", true);
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     //LeaderBoard Footer
@@ -106,8 +105,8 @@ public class ChangeClickImage : MonoBehaviour
 
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
-        //if effects aren't on, turn them on
-        //FindObjectOfType<SoundManager>().Effects("theme music", true);
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     //Profile Icon
@@ -117,8 +116,8 @@ public class ChangeClickImage : MonoBehaviour
 
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
-        //if effects aren't on, turn them on
-        //FindObjectOfType<SoundManager>().Effects("theme music", true);
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     //Customisation Icon
@@ -128,8 +127,8 @@ public class ChangeClickImage : MonoBehaviour
 
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
-        //if effects aren't on, turn them on
-        //FindObjectOfType<SoundManager>().Effects("theme music", true);
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
 
@@ -137,28 +136,52 @@ public class ChangeClickImage : MonoBehaviour
     public void MainBuilding()
     {
         SceneManager.LoadScene(7);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     public void ComputerScienceBuilding()
     {
         SceneManager.LoadScene(8);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     public void GeographyBuilding()
     {
         SceneManager.LoadScene(9);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     public void HistoryBuilding()
     {
         SceneManager.LoadScene(10);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
     public void BiologyBuilding()
     {
         SceneManager.LoadScene(11);
-    }
 
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
 }
 
 

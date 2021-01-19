@@ -11,5 +11,8 @@ public class Start : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("start button click");
         FindObjectOfType<SoundManager>().Stop("intro music");
         FindObjectOfType<SoundManager>().Play("theme music");
+        //turning the filter off and setting its frequency
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
+        FindObjectOfType<ListenerPersist>().setFilterFrequency(500);
     }
 }
