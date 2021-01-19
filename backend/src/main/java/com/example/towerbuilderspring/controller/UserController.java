@@ -1,7 +1,7 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.Users;
-import com.example.towerbuilderspring.model.WallTextures;
+//import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

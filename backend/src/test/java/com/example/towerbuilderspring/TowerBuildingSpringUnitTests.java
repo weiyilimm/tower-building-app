@@ -2,12 +2,8 @@ package com.example.towerbuilderspring;
 
 import com.example.towerbuilderspring.controller.*;
 import com.example.towerbuilderspring.model.BuildingModels;
-import com.example.towerbuilderspring.model.PaneColours;
 import com.example.towerbuilderspring.model.Users;
-import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.ModelRepository;
-import com.example.towerbuilderspring.repository.PaneRepository;
-import com.example.towerbuilderspring.repository.TextureRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -96,132 +92,7 @@ public class TowerBuildingSpringUnitTests {
     // to delete from).
 
 
-    // Test for PaneController.
-    @Mock
-    PaneRepository paneRepository;
-
-    @InjectMocks
-    PaneController paneController;
-
-    @Test
-    public void getAllPanes() {
-        List<PaneColours> mockPanesFull = Arrays.asList(new PaneColours(1, "Red"),
-                new PaneColours(2, "Blue"), new PaneColours(3, "Green"));
-        List<PaneColours> mockPanesEmpty = new ArrayList<>();
-
-        // Valid, valid but empty, invalid output tests respectively.
-        when(paneRepository.findAll()).thenReturn(mockPanesFull).thenReturn(mockPanesEmpty).thenReturn(null);
-
-        assertEquals(new ResponseEntity<>(mockPanesFull, HttpStatus.OK), paneController.getAllWindows());
-        assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), paneController.getAllWindows());
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), paneController.getAllWindows());
-    }
-
-    @Test
-    public void getPaneById() {
-        PaneColours mockPaneColour = new PaneColours(1, "Blue");
-        when(paneRepository.findById(1l)).thenReturn(java.util.Optional.of(mockPaneColour));
-
-        assertEquals(new ResponseEntity<>(mockPaneColour, HttpStatus.OK), paneController.getWindow(1l));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), paneController.getWindow(2l));
-    }
-
-    // Todo learn how to force an exception in mockinto.
-
-    @Test
-    public void createPaneInRepository() {
-        PaneColours mockPaneColour = new PaneColours(1, "Blue");
-        PaneColours badMock = new PaneColours(666, "Crimison");
-        when(paneRepository.save(any(PaneColours.class))).then(returnsFirstArg());
-        //when(paneRepository.save(badMock)).thenReturn();
-
-        assertEquals(new ResponseEntity<>(paneRepository.save(mockPaneColour), HttpStatus.OK), paneController.createWindow(mockPaneColour));
-        //assertEquals(new ResponseEntity<>(HttpStatus.BAD_REQUEST), paneController.createWindow(badMock));
-    }
-
-    @Test
-    public void updatePaneInRepository()
-    {
-        PaneColours mockedOriginalPane = new PaneColours(1, "blue");
-        PaneColours mockedUpdatedPane = new PaneColours(1, "green");
-
-        when(paneRepository.findById(1l)).thenReturn(java.util.Optional.of(mockedOriginalPane));
-        when(paneRepository.save(any(PaneColours.class))).thenReturn(mockedUpdatedPane);
-
-        // Pane colour updated successfully.
-        assertEquals(new ResponseEntity<>(mockedUpdatedPane, HttpStatus.OK),
-                paneController.updateWindow(1, new PaneColours(1, "green")));
-        // Requested colour to replace doesn't exist.
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND),
-                paneController.updateWindow(2, new PaneColours(2, "green")));
-    }
-
-
-    // Tests for the textures
-
-    @Mock
-    TextureRepository textureRepository;
-
-    @InjectMocks
-    TextureController textureController;
-
-    @Test
-    public void getAllTextures() {
-        List<WallTextures> mockedTexturesFull = Arrays.asList(new WallTextures(1, "Brick"),
-                new WallTextures(2, "Stone"), new WallTextures(3, "Marble"));
-        List<WallTextures> mockedTexturesEmpty = new ArrayList<>();
-
-        when(textureRepository.findAll()).thenReturn(mockedTexturesFull).thenReturn(mockedTexturesEmpty).thenReturn(null);
-
-        // Test when models present.
-        assertEquals(new ResponseEntity<>(mockedTexturesFull, HttpStatus.OK), textureController.getAllTextures());
-        // Test when models absent
-        assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), textureController.getAllTextures());
-        // In case of null (or any other error causing value) returned
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), textureController.getAllTextures());
-    }
-    
-    @Test
-    public void getTextureById() {
-        WallTextures mockedWallTexture = new WallTextures(1, "Brick");
-        when(textureRepository.findById(1l)).thenReturn(java.util.Optional.of(mockedWallTexture));
-        
-        assertEquals(new ResponseEntity<>(mockedWallTexture, HttpStatus.OK), textureController.getTextures(1l));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), textureController.getTextures(2l));
-    }
-
-
-
-    @Test
-    public void createTextureInRepository() {
-        WallTextures mockWallTexture = new WallTextures(1, "Brick");
-        WallTextures badMock = new WallTextures(666, "Dirt");
-        when(paneRepository.save(any(PaneColours.class))).then(returnsFirstArg());
-        //when(paneRepository.save(badMock)).thenReturn();
-
-        assertEquals(new ResponseEntity<>(textureRepository.save(mockWallTexture), HttpStatus.OK), textureController.createTexture(mockWallTexture));
-        //assertEquals(new ResponseEntity<>(HttpStatus.BAD_REQUEST), paneController.createWindow(badMock));
-    }
-
-    @Test
-    public void updateTextureInRepository()
-    {
-        WallTextures mockOriginalTexture = new WallTextures(1, "Brick");
-        WallTextures mockUpdatedTexture = new WallTextures(1, "Steel");
-
-        when(textureRepository.findById(1l)).thenReturn(java.util.Optional.of(mockOriginalTexture));
-        when(textureRepository.save(any(WallTextures.class))).thenReturn(mockUpdatedTexture);
-
-        // Pane colour updated successfully.
-        assertEquals(new ResponseEntity<>(mockUpdatedTexture, HttpStatus.OK),
-                textureController.updateTexture(1, new WallTextures(1, "Steel")));
-        // Requested colour to replace doesn't exist.
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND),
-                textureController.updateTexture(2, new WallTextures(2, "Sand")));
-    }
-    
     // Tests for User Controller
-
     @Mock
     UserRepository userRepository;
 
