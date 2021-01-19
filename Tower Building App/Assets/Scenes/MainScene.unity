@@ -1614,7 +1614,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1525227581}
   - component: {fileID: 1525227584}
-  - component: {fileID: 1525227583}
   - component: {fileID: 1525227582}
   - component: {fileID: 1525227585}
   m_Layer: 0
@@ -1651,14 +1650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1407329285}
---- !u!81 &1525227583
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525227580}
-  m_Enabled: 1
 --- !u!20 &1525227584
 Camera:
   m_ObjectHideFlags: 0
