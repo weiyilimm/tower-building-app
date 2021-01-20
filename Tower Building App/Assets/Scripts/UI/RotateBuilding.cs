@@ -7,7 +7,7 @@ public class RotateBuilding : MonoBehaviour
 
     [SerializeField] float rotationSpeed = 100f;
     private Touch touch;
-    Rect rect = new Rect(0, 260, 235, 120);
+    Rect rect = new Rect(0, 38, 235, 120);
 
     private void Update()
     {   
@@ -26,10 +26,10 @@ public class RotateBuilding : MonoBehaviour
 
     //method to see the limit area of touch rotating
 
-    // public void OnGUI()
-    // {
-    //     GUI.Box(rect, "This is a box");
-    // }
+    public void OnGUI()
+    {
+        GUI.Box(rect, "This is a box");
+    }
 }
 
 
