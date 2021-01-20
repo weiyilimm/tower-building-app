@@ -12363,6 +12363,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 44d71bcd8fe420849a2e9087e4c19043,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 44d71bcd8fe420849a2e9087e4c19043,
         type: 3}
       propertyPath: m_Name
@@ -12377,6 +12382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44d71bcd8fe420849a2e9087e4c19043,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d71bcd8fe420849a2e9087e4c19043, type: 3}
@@ -14255,7 +14265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f03203347434804f9ecbbe404106303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.4
+  rotationSpeed: 0.15
 --- !u!1 &1498436188
 GameObject:
   m_ObjectHideFlags: 0
@@ -16615,7 +16625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f03203347434804f9ecbbe404106303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.4
+  rotationSpeed: 0.15
 --- !u!1 &1725609677
 GameObject:
   m_ObjectHideFlags: 0
@@ -18535,7 +18545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f03203347434804f9ecbbe404106303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.4
+  rotationSpeed: 0.15
 --- !u!1 &1906348804
 GameObject:
   m_ObjectHideFlags: 0
