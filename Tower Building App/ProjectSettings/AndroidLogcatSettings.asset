@@ -1,10 +1,10 @@
 {
-    "m_SelectedDeviceId": "R58M83X21XB",
+    "m_SelectedDeviceId": "RF8M60T2SPW",
     "m_SelectedPackage": {
-        "deviceId": "R58M83X21XB",
-        "name": "com.DefaultCompany.TowerBuildingApp",
-        "processId": 17922,
-        "exited": true
+        "deviceId": "RF8M60T2SPW",
+        "name": "com.CS17.UniBuilder",
+        "processId": 16423,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -49,6 +49,12 @@
             "name": "com.DefaultCompany.TowerBuildingApp",
             "processId": 17922,
             "exited": true
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 16423,
+            "exited": false
         }
     ],
     "m_Tags": {
