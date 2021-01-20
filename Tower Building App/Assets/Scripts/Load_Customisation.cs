@@ -30,10 +30,4 @@ public class Load_Customisation : MonoBehaviour{
             counter += 1;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
