@@ -35,9 +35,9 @@ public class Customisation : MonoBehaviour{
         Secondary_Red.onClick.AddListener(() => change_colour(1,201));
         Secondary_Yellow.onClick.AddListener(() => change_colour(1,203));
 
-        Model_1.onClick.AddListener(() => change_model(1));
-        Model_2.onClick.AddListener(() => change_model(2));
-        Model_3.onClick.AddListener(() => change_model(3));
+        Model_1.onClick.AddListener(() => change_model(0));
+        Model_2.onClick.AddListener(() => change_model(1));
+        Model_3.onClick.AddListener(() => change_model(2));
 
         Confirm_Button.onClick.AddListener(Confirm);
     }
