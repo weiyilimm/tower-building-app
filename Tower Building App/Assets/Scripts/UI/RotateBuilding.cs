@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateBuilding : MonoBehaviour
 {
 
-    [SerializeField] float rotationSpeed = 100f;
+    [SerializeField] float rotationSpeed = 0.15f;
     private Touch touch;
     Rect rect = new Rect(0, 10, 1000, 1000);
 
