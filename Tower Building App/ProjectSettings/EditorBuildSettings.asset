@@ -24,21 +24,33 @@ EditorBuildSettings:
     path: Assets/Scenes/ProfileXP.unity
     guid: bdded426db8f6e2409ed6e0113986073
   - enabled: 1
-    path: Assets/Scenes/BuildingCustom.unity
+    path: Assets/Scenes/BuildingList.unity
     guid: b4d94c0733c9b9942b5e291eee15b7c3
   - enabled: 1
-    path: Assets/Scenes/MainBuilding.unity
-    guid: 68901f8609d2b874292a9ebf1c723c49
+    path: Assets/Scenes/Buildings/Main.unity
+    guid: fc5b1183279a3b94b8f3aa77448550cd
   - enabled: 1
-    path: Assets/Scenes/ComputerBulding.unity
-    guid: fffc57485fe0916419761dea32533615
+    path: Assets/Scenes/Buildings/Arts.unity
+    guid: a9614ff8e992d4140ae238774f56f0dd
   - enabled: 1
-    path: Assets/Scenes/GeographyBuilding.unity
-    guid: 1d43a446e6e46c842b1257210efd73d5
-  - enabled: 1
-    path: Assets/Scenes/HistoryBuilding.unity
-    guid: 61ab554a02661a54c87d1c431224fd26
-  - enabled: 1
-    path: Assets/Scenes/BiologyBuilding.unity
+    path: Assets/Scenes/Buildings/BioChe.unity
     guid: b6e9a37a553fcd949880982f00356c5e
+  - enabled: 1
+    path: Assets/Scenes/Buildings/ComSci.unity
+    guid: 0907bac628aa81c4a9db0acf805aeff5
+  - enabled: 1
+    path: Assets/Scenes/Buildings/Eng.unity
+    guid: 20ffd9deae4c0b14d8508c9a4cc59665
+  - enabled: 1
+    path: Assets/Scenes/Buildings/Geo.unity
+    guid: b62c240616cb84f44929187175d9bc28
+  - enabled: 1
+    path: Assets/Scenes/Buildings/Lan.unity
+    guid: d6dd9ab14720a8d4dbed99235786841f
+  - enabled: 1
+    path: Assets/Scenes/Buildings/LawPol.unity
+    guid: ea299f0ea9cca8443be643005f7547c2
+  - enabled: 1
+    path: Assets/Scenes/Buildings/PhyMath.unity
+    guid: 83bb567bf2853c94fbe8cb65551638af
   m_configObjects: {}
