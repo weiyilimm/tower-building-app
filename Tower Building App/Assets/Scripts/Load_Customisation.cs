@@ -11,14 +11,26 @@ public class Load_Customisation : MonoBehaviour{
 
         foreach (Transform child in transform){
             Material[] mats = child.transform.GetComponent<Renderer>().materials;
-            int primary = User_Data.data.building_stats[index].primary_colour;
-            int secondary = User_Data.data.building_stats[index].secondary_colour;
-            if (primary != 0){
-                mats[0] = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].primary_colour];
+            Material swap;
+
+            for (int i=0; i<mats.Length; i++){
+                if (mats[i].name.Substring(0,1) == "1"){
+                    int primary = User_Data.data.building_stats[index].primary_colour;
+                    if (primary != 0){
+                        swap = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].primary_colour];
+                        swap.name = "1 " + swap.name;
+                        mats[i] = swap;
+                    }
+                } else if (mats[i].name.Substring(0,1) == "2"){
+                    int secondary = User_Data.data.building_stats[index].secondary_colour;
+                    if (secondary != 0){
+                        swap = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].secondary_colour];
+                        swap.name = "2 " + swap.name;
+                        mats[i] = swap;
+                    }
+                }
             }
-            if (secondary != 0){
-                mats[1] = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].secondary_colour];
-            }
+            
             child.transform.GetComponent<Renderer>().materials = mats;
 
             if (counter == model){
