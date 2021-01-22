@@ -42,7 +42,6 @@ public class CodeConverter : MonoBehaviour{
             counter++;
         }
 
-        /*
         Material[] Gradient = Resources.LoadAll<Material>("Materials/Gradient");
         counter = 0;
         foreach (Material m in Gradient){
@@ -50,16 +49,26 @@ public class CodeConverter : MonoBehaviour{
             materials_map.Add(index,m);
             counter++;
         }
-        */
 
+        Material[] Fancy = Resources.LoadAll<Material>("Materials/Fancy");
+        counter = 0;
+        foreach (Material m in Fancy){
+            int index = 400 + counter;
+            materials_map.Add(index,m);
+            counter++;
+        }
 
         // Adds all of the buildings in the app to a lookup dictionary
         // NOTE - once we have a finalised list of buildings we should be able to change the code to use a loop
         //  until then the static form provides a slightly easier and more flexible approach for testing
-        subject_map.Add("Main Building",0);
-        subject_map.Add("Biology Building",1);
-        subject_map.Add("Computer Science Building",2);
-        subject_map.Add("Geography Building",3);
-        subject_map.Add("History Building",4);
+        subject_map.Add("Main",0);
+        subject_map.Add("Art",1);
+        subject_map.Add("Biology&Chemistry",2);
+        subject_map.Add("ComputerScience",3);
+        subject_map.Add("Engineering",4);
+        subject_map.Add("Geography&History",5);
+        subject_map.Add("Languages",6);
+        subject_map.Add("Law&Politics",7);
+        subject_map.Add("Physics&Maths",8);
     }
 }
