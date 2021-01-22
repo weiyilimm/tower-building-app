@@ -18,18 +18,6 @@ public class MainScreenLoad : MonoBehaviour{
                 mats[1] = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].secondary_colour];
                 child.GetComponent<Renderer>().materials = mats;
             }
-            // for (int i=0; i<length; i++){
-            //    if (i == 0) {
-            //        child.GetComponent<MeshRenderer>().materials[0] = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].primary_colour];
-            //    } else {
-            //        child.GetComponent<MeshRenderer>().materials[1] = CodeConverter.codes.materials_map[User_Data.data.building_stats[index].secondary_colour];
-            //    }
-            //}
         }
-
-        // OLD WORKING CODE
-        // GetComponent<Renderer>().materials[0].color = colour_map[User_Data.data.building_stats[index].primary_colour];
-        // GetComponent<Renderer>().materials[1].color = colour_map[User_Data.data.building_stats[index].secondary_colour];
     }
-
 }
