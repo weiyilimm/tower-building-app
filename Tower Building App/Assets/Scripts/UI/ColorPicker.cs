@@ -11,11 +11,19 @@ public class ColorPicker : MonoBehaviour
     public Material[] Gradient;
     public Material[] Fancy;
 
-    MeshRenderer[] meshRenderer;
-    Material[] materials;
-    GameObject building;
-    Button button;
+    public MeshRenderer[] meshRenderer;
+    public Material[] materials;
+    public GameObject building;
+    public Button button;
     
+    private void Awake() {
+
+    if (building != null)
+        {
+         Destroy(building);
+        }
+    }
+
     void Start()
     {   
         //get the current colour button
