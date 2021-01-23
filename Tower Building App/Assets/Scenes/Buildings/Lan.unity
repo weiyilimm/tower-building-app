@@ -671,6 +671,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &67858410
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +867,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &81164959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,6 +1068,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &100094218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1296,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &105365278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1447,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &107139027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1591,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &108258982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1816,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.15
+--- !u!23 &115565412 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 409a4b1e5df12924eaef9b5fd81de668,
+    type: 3}
+  m_PrefabInstance: {fileID: 115565408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &118885474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1892,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &118885477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,6 +2039,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &137803429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2296,6 +2334,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &186106323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2620,6 +2662,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &216160706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2939,6 +2985,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &260807280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3186,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &264366998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3276,6 +3330,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &342652704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3986,6 +4044,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &377315367
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4459,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &416340956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4717,6 +4783,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &424081944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4937,6 +5007,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &434470663
 GameObject:
   m_ObjectHideFlags: 0
@@ -5168,6 +5242,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &442054556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,6 +5385,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &483658822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,6 +5455,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &483658825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5593,6 +5679,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &511891070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5740,6 +5830,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &554580185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,6 +6160,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &558874078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6283,6 +6381,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &583435885
 GameObject:
   m_ObjectHideFlags: 0
@@ -6424,6 +6526,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &591517052
 GameObject:
   m_ObjectHideFlags: 0
@@ -6571,6 +6677,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &632776680
 GameObject:
   m_ObjectHideFlags: 0
@@ -6683,6 +6793,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!222 &632776684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6773,6 +6887,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &638879896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6954,6 +7072,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.15
+--- !u!23 &651566515 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 35799e10eae409a4ab2a563610e4e1cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 651566511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &652363621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7101,6 +7225,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &659038010
 GameObject:
   m_ObjectHideFlags: 0
@@ -7284,6 +7412,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &683405459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7502,6 +7634,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &751686457
 GameObject:
   m_ObjectHideFlags: 0
@@ -7566,6 +7702,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &751686460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7790,6 +7930,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &810914042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8278,6 +8422,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &844755895
 GameObject:
   m_ObjectHideFlags: 0
@@ -8348,6 +8496,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &844755898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8699,6 +8851,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &884638399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8761,6 +8917,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &884638402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8902,6 +9062,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &884747474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9256,6 +9420,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &956406846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9440,6 +9608,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1023894105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9581,6 +9753,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1027647282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9797,6 +9973,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1119361735
 GameObject:
   m_ObjectHideFlags: 0
@@ -9867,6 +10047,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1119361738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10208,6 +10392,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1137553642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10272,6 +10460,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1137553645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10415,6 +10607,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1148890646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10862,6 +11058,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1214302740
 GameObject:
   m_ObjectHideFlags: 0
@@ -11088,6 +11288,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1221250749
 GameObject:
   m_ObjectHideFlags: 0
@@ -11235,6 +11439,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1230158240
 GameObject:
   m_ObjectHideFlags: 0
@@ -11453,6 +11661,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1235918078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11692,6 +11904,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1270070083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11916,6 +12132,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1289557413
 GameObject:
   m_ObjectHideFlags: 0
@@ -12141,6 +12361,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1323582810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12359,6 +12583,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1339195169
 GameObject:
   m_ObjectHideFlags: 0
@@ -12429,6 +12657,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1339195172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12782,6 +13014,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1379884827
 GameObject:
   m_ObjectHideFlags: 0
@@ -12967,6 +13203,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1419101524
 GameObject:
   m_ObjectHideFlags: 0
@@ -13029,6 +13269,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1419101527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13169,6 +13413,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1422219856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13387,6 +13635,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1467029587
 GameObject:
   m_ObjectHideFlags: 0
@@ -13846,6 +14098,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1513920586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13993,6 +14249,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1529226306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14592,6 +14852,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1593554859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14739,6 +15003,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1595398394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14882,6 +15150,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1599896585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15025,6 +15297,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1611890766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15241,6 +15517,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1660895303
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,6 +15660,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1663834002
 GameObject:
   m_ObjectHideFlags: 0
@@ -15520,6 +15804,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1671616424
 GameObject:
   m_ObjectHideFlags: 0
@@ -15886,6 +16174,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1737755325
 GameObject:
   m_ObjectHideFlags: 0
@@ -15956,6 +16248,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1737755328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16309,6 +16605,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1786090795
 GameObject:
   m_ObjectHideFlags: 0
@@ -16492,6 +16792,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1788976556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16813,6 +17117,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1811189594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17033,6 +17341,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1848958023
 GameObject:
   m_ObjectHideFlags: 0
@@ -17173,6 +17485,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1874133903
 GameObject:
   m_ObjectHideFlags: 0
@@ -17235,6 +17551,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1874133906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17457,6 +17777,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1902302243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17751,6 +18075,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1957194511
 GameObject:
   m_ObjectHideFlags: 0
@@ -17898,6 +18226,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &1970286972
 GameObject:
   m_ObjectHideFlags: 0
@@ -17999,6 +18331,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &1981476962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18566,6 +18902,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &2018972254
 GameObject:
   m_ObjectHideFlags: 0
@@ -18804,6 +19144,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &2024927230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19020,6 +19364,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7a2a44b30934004cbdc13f0017274fa, type: 2}
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &2043199332
 GameObject:
   m_ObjectHideFlags: 0
@@ -19163,6 +19511,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &2055197405
 GameObject:
   m_ObjectHideFlags: 0
@@ -19400,6 +19752,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61ce020f3fa91747b49d2ae0f80b697, type: 2}
   - {fileID: 2100000, guid: 7306718760129294d80adc80e0f39b79, type: 2}
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &2078544676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19618,6 +19974,10 @@ MonoBehaviour:
   Emissive: []
   Gradient: []
   Fancy: []
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1 &2089325181
 GameObject:
   m_ObjectHideFlags: 0
@@ -19684,6 +20044,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &2089325184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19904,6 +20268,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!1001 &2116315021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20008,6 +20376,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.15
+--- !u!23 &2116315025 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: dff791808aa282c4bb45592eba73a336,
+    type: 3}
+  m_PrefabInstance: {fileID: 2116315021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2132257257
 GameObject:
   m_ObjectHideFlags: 0
@@ -20074,6 +20448,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 994940e3c6ff3bf46a8be4568e74dbd5, type: 2}
   - {fileID: 2100000, guid: c85cd92781782dc4f8ebb4f2af3923d0, type: 2}
   - {fileID: 2100000, guid: 0ad57cfd52c1d8c4094929d85a4cc0a1, type: 2}
+  meshRenderer:
+  - {fileID: 651566515}
+  - {fileID: 2116315025}
+  - {fileID: 115565412}
 --- !u!114 &2132257260
 MonoBehaviour:
   m_ObjectHideFlags: 0

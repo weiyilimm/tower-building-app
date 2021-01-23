@@ -10,53 +10,36 @@ public class ColorPicker : MonoBehaviour
     public Material[] Emissive;
     public Material[] Gradient;
     public Material[] Fancy;
-
     public MeshRenderer[] meshRenderer;
-    public Material[] materials;
-    public GameObject building;
-    public Button button;
     
-    private void Awake() {
-
-    if (building != null)
-        {
-         Destroy(building);
-        }
-    }
+    private Material[] materials;
+    private Button button;
 
     void Start()
     {   
         //get the current colour button
         button = this.GetComponent<Button>();
-        //find the buildings object which consist of all buildings as children
-        building = GameObject.Find("Buildings");
-        //get the number of buildings
-        int childrenSize = building.transform.childCount;
-        if (childrenSize >0){
-            meshRenderer = new MeshRenderer[childrenSize];
-            for (int i=0; i<childrenSize; i++){
-                // we need a copy of the current index, in order to change color
-                var x = i;
-                meshRenderer[x] = building.transform.GetChild(x).GetComponent<MeshRenderer>();
-                //take the third and fourth digit of the button name
-                int colours = int.Parse(button.name.Substring(1,2));
-                int elements = int.Parse(button.name[3].ToString());
-                //check the first 2 digit of the button name to determine which materials
-                if (button.name[0].ToString() == "0"){
-                    button.onClick.AddListener(() => MatteColor(x,colours,elements));
-                }
-                if (button.name[0].ToString() == "1"){
-                    button.onClick.AddListener(() => MetallicColor(x,colours,elements));
-                }
-                if (button.name[0].ToString() == "2"){
-                    button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
-                }
-                if (button.name[0].ToString() == "3"){
-                    button.onClick.AddListener(() => GradientColor(x,colours,elements));
-                }
-                if (button.name[0].ToString() == "4"){
-                    button.onClick.AddListener(() => FancyColor(x,colours,elements));
-                }
+        for (int i=0; i<meshRenderer.Length; i++){
+            // we need a copy of the current index, in order to change color
+            var x = i;
+            //take the third and fourth digit of the button name
+            int colours = int.Parse(button.name.Substring(1,2));
+            int elements = int.Parse(button.name[3].ToString());
+            //check the first 2 digit of the button name to determine which materials
+            if (button.name[0].ToString() == "0"){
+                button.onClick.AddListener(() => MatteColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "1"){
+                button.onClick.AddListener(() => MetallicColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "2"){
+                button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "3"){
+                button.onClick.AddListener(() => GradientColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "4"){
+                button.onClick.AddListener(() => FancyColor(x,colours,elements));
             }
         }
     }
