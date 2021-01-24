@@ -25,7 +25,7 @@ public class User_Data : MonoBehaviour{
         data = this;
 
         //CREATE BUILDING INSTANCES HERE
-        Building Main = new Building(0,0,0,500);
+        Building Main = new Building(3,4,0,500);
         building_stats.Add(Main);
         Building Art = new Building(0,0,0,450);
         building_stats.Add(Art);
