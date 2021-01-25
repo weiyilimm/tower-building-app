@@ -17,7 +17,8 @@ public class CodeConverter : MonoBehaviour{
         DontDestroyOnLoad(ConverterObject);
         codes = this;
         
-        //Test code for loading all of a type in a single command then looping to add
+        //The sets of materials are loaded from the resources folder into an array. Then each element in the array is 
+        // taken in turn and added to the Materials dictionary under its predecided code
         Material[] Matte = Resources.LoadAll<Material>("Materials/Matte"); 
         int counter = 0;
         foreach (Material m in Matte){
@@ -58,9 +59,8 @@ public class CodeConverter : MonoBehaviour{
             counter++;
         }
 
-        // Adds all of the buildings in the app to a lookup dictionary
-        // NOTE - once we have a finalised list of buildings we should be able to change the code to use a loop
-        //  until then the static form provides a slightly easier and more flexible approach for testing
+        // The subjects are each given a corresponding code so that they know which part of the users
+        // list of buildings they must access on read and write operations
         subject_map.Add("Main",0);
         subject_map.Add("Art",1);
         subject_map.Add("Biology&Chemistry",2);
