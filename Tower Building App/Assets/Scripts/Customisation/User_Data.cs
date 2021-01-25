@@ -29,7 +29,7 @@ public class User_Data : MonoBehaviour{
         building_stats.Add(Main);
         Building Art = new Building(0,0,0,450);
         building_stats.Add(Art);
-        Building Biology_Chemistry = new Building(0,0,0,400);
+        Building Biology_Chemistry = new Building(3,5,0,400);
         building_stats.Add(Biology_Chemistry);
         Building ComputerScience = new Building(0,0,0,350);
         building_stats.Add(ComputerScience);
