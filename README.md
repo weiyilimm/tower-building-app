@@ -47,8 +47,8 @@ We may have a balancing scale, where the heights of the towers will need to be b
 
 ---
 
-##### Progress Report - Updated 127/01/2021
-### Completed components
+# Progress Report - Updated 127/01/2021
+## Completed components
  - Ability to move, pan and zoom around an enclosed area
  - Ability to customise
    - Change the primary and secondary colours of each building
@@ -58,12 +58,12 @@ We may have a balancing scale, where the heights of the towers will need to be b
  - Created a working backend where data is stored and can be accessed using CRUD requests.
  - Menu background video and music
 
-### Work in progress
+## Work in progress
  - Polish the move and rotate mechanics
  - read Database in Unity
  - Create tests for the database and unity project
 
-### Asset progress
+## Asset progress
  - `Blender Models/` 22/26 Building models
    - 3/4 Physics and Maths
    - 2/3 Computer Science
@@ -83,7 +83,7 @@ We may have a balancing scale, where the heights of the towers will need to be b
    - music for the rest fo the app
    - Button click for the rest of the app
 
-# Plans
+## Plans
 There are some features we plan on implementing but that we are not currently working on. 
 
 Something we intend to improve is how users can gain xp. Our original plan was just to use the in-app timer. We now intend to add 2 more ways of earning xp
