@@ -143,7 +143,7 @@ public class ChangeClickImage : MonoBehaviour
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
-    public void ComputerScienceBuilding()
+    public void ArtsBuilding()
     {
         SceneManager.LoadScene(8);
 
@@ -153,7 +153,7 @@ public class ChangeClickImage : MonoBehaviour
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
-    public void GeographyBuilding()
+    public void BioCheBuilding()
     {
         SceneManager.LoadScene(9);
 
@@ -163,7 +163,7 @@ public class ChangeClickImage : MonoBehaviour
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
-    public void HistoryBuilding()
+    public void ComSciBuilding()
     {
         SceneManager.LoadScene(10);
 
@@ -173,9 +173,49 @@ public class ChangeClickImage : MonoBehaviour
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 
-    public void BiologyBuilding()
+    public void EngBuilding()
     {
         SceneManager.LoadScene(11);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    public void GeoBuilding()
+    {
+        SceneManager.LoadScene(12);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    public void LanBuilding()
+    {
+        SceneManager.LoadScene(13);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    public void LawPolBuilding()
+    {
+        SceneManager.LoadScene(14);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    public void PhyMathBuilding()
+    {
+        SceneManager.LoadScene(15);
 
         //plays standard button click sound
         FindObjectOfType<SoundManager>().Play("standard button click");
