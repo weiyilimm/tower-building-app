@@ -1,356 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorPicker : MonoBehaviour
 {   
-    // public Renderer[] PrimaryObject;
+    public Material[] Matte;
+    public Material[] Metallic;
     public Material[] Emissive;
     public Material[] Gradient;
-    public Material[] ImageTexture;
-    public Material[] Matte;
-    public Material[] Mettalic;
-    Material CurrentColor;
-    Renderer[] renderers;
-    // Start is called before the first frame update
+    public Material[] Fancy;
+    public MeshRenderer[] meshRenderer;
+    
+    private Material[] materials;
+    private Button button;
+
     void Start()
-    {
-        renderers = GetComponentsInChildren<Renderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void BlueEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[0];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void RedEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[1];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void GreenEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[2];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void YellowEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[3];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void PurpleEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[4];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void WhiteEmissive(){
-        foreach (var r in renderers)
-        {
-            r.material = Emissive[5];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void BlackRedGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[0];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void BlackWhiteGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[1];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void LightBluePurpleGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[2];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void NavyLightBlueGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[3];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void NavyLightGreenGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[4];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void RainbowGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[5];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void RedYellowGradient(){
-        foreach (var r in renderers)
-        {
-            r.material = Gradient[6];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void CamoArcticTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[0];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void CamoTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[1];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void LavaTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[2];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void TronBlueTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[3];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void TronRedTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[4];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void WaterTexture(){
-        foreach (var r in renderers)
-        {
-            r.material = ImageTexture[5];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void WhiteMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[0];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void LightFadedGreenMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[1];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void LightBlueMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[2];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void RedMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[3];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void OrangeMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[4];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void PurpleMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[5];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void YellowMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[6];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void CyanMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[7];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void SandMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[8];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void LiliacMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[9];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void PinkMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[10];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void DarkGreenMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[11];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void DarkNavyBlueMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[12];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void BlackMatte(){
-        foreach (var r in renderers)
-        {
-            r.material = Matte[13];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void RedMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[0];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void BlueMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[1];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void GreenMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[2];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void PurpleMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[3];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void BronzeMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[4];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void SilverMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[5];
-            CurrentColor = r.material;
-        }
-    }
-
-    public void GoldMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[6];
-            CurrentColor = r.material;
+    {   
+        //get the current colour button
+        button = this.GetComponent<Button>();
+        for (int i=0; i<meshRenderer.Length; i++){
+            // we need a copy of the current index, in order to change color
+            var x = i;
+            //take the third and fourth digit of the button name
+            int colours = int.Parse(button.name.Substring(1,2));
+            int elements = int.Parse(button.name[3].ToString());
+            //check the first 2 digit of the button name to determine which materials
+            if (button.name[0].ToString() == "0"){
+                button.onClick.AddListener(() => MatteColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "1"){
+                button.onClick.AddListener(() => MetallicColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "2"){
+                button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "3"){
+                button.onClick.AddListener(() => GradientColor(x,colours,elements));
+            }
+            if (button.name[0].ToString() == "4"){
+                button.onClick.AddListener(() => FancyColor(x,colours,elements));
+            }
         }
     }
     
-    public void PlatinumMetallic(){
-        foreach (var r in renderers)
-        {
-            r.material = Mettalic[7];
-            CurrentColor = r.material;
-        }
+    /*
+    i indicates which building's meshRenderer
+    j indicates which the colours of specific material e.g. Emissive[0] is Blue 
+    k indicates primary key or secondary key e.g. 0 is primary key, 1 is secondary key
+    */
+
+    //MATTE COLOURS
+    public void MatteColor(int i,int j, int k){
+        materials = meshRenderer[i].materials;
+        materials[k] = Matte[j];
+        meshRenderer[i].materials = materials;
     }
 
+    //METALLIC COLOURS
+    public void MetallicColor(int i,int j, int k){
+        materials = meshRenderer[i].materials;
+        materials[k] = Metallic[j];
+        meshRenderer[i].materials = materials;
+    }
+
+    //EMISSIVE COLOURS
+    public void EmissiveColor(int i,int j, int k){
+        materials = meshRenderer[i].materials;
+        materials[k] = Emissive[j];
+        meshRenderer[i].materials = materials;
+    }
+    
+    //GRADIENT COLOURS
+    public void GradientColor(int i,int j, int k){
+        materials = meshRenderer[i].materials;
+        materials[k] = Gradient[j];
+        meshRenderer[i].materials = materials;
+    }
+
+    //FANCY COLOURS
+    public void FancyColor(int i,int j, int k){
+        materials = meshRenderer[i].materials;
+        materials[k] = Fancy[j];
+        meshRenderer[i].materials = materials;
+    }
 
 }
