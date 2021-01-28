@@ -11,6 +11,10 @@ public class User_Data : MonoBehaviour{
     public GameObject UserProfile;
     public string Username,json;
     public int global_xp;
+
+    public int temp_primary;
+    public int temp_secondary;
+    public int temp_model;
     public List<Building> building_stats = new List<Building>();
     
     //public Button file1,file2;
