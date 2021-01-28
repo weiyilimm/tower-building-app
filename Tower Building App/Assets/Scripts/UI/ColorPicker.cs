@@ -54,16 +54,18 @@ public class ColorPicker : MonoBehaviour
     //MATTE COLOURS
     public void MatteColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Matte[j];
-        meshRenderer[i].materials = materials;
-
         string subject_name = SceneManager.GetActiveScene().name;
         int index = CodeConverter.codes.subject_map[subject_name];
+
         if (k == 0){
             User_Data.data.temp_primary = j;
+            materials = find_mat(Matte,materials,"1",j);
         } else {
             User_Data.data.temp_secondary = j;
+            materials = find_mat(Matte,materials,"2",j);
         }
+
+        meshRenderer[i].materials = materials;
     }
 
     //METALLIC COLOURS
@@ -124,6 +126,17 @@ public class ColorPicker : MonoBehaviour
         } else {
             User_Data.data.temp_secondary = 400+j;
         }
+    }
+
+    public Material[] find_mat(Material[] mat_type, Material[] materials, string identifier, int j){
+        for (int iter=0; iter<materials.Length; iter++){
+            if (materials[iter].name.Substring(0,1) == identifier){
+                Material swap = Instantiate(mat_type[j] as Material);
+                swap.name = identifier + " " + swap.name;
+                materials[iter] = swap;
+            }
+        }
+        return materials;
     }
 
 }
