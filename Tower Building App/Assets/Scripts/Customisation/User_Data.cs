@@ -31,21 +31,21 @@ public class User_Data : MonoBehaviour{
         //CREATE BUILDING INSTANCES HERE
         Building Main = new Building(3,4,0,500);
         building_stats.Add(Main);
-        Building Art = new Building(0,0,0,450);
+        Building Art = new Building(-1,-1,0,450);
         building_stats.Add(Art);
         Building Biology_Chemistry = new Building(3,5,0,400);
         building_stats.Add(Biology_Chemistry);
-        Building ComputerScience = new Building(0,0,0,350);
+        Building ComputerScience = new Building(-1,-1,0,350);
         building_stats.Add(ComputerScience);
-        Building Engineering = new Building(0,0,0,300);
+        Building Engineering = new Building(-1,-1,0,300);
         building_stats.Add(Engineering);
-        Building Geography_History = new Building(0,0,0,250);
+        Building Geography_History = new Building(-1,-1,0,250);
         building_stats.Add(Geography_History);
-        Building Languages = new Building(0,0,0,200);
+        Building Languages = new Building(-1,-1,0,200);
         building_stats.Add(Languages);
-        Building Law_Politics = new Building(0,0,0,150);
+        Building Law_Politics = new Building(-1,-1,0,150);
         building_stats.Add(Law_Politics);
-        Building Physics_Maths = new Building(0,0,0,100);
+        Building Physics_Maths = new Building(-1,-1,0,100);
         building_stats.Add(Physics_Maths);
 
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
