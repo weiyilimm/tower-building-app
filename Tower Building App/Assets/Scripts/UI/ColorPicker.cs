@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ColorPicker : MonoBehaviour
 {   
@@ -55,6 +56,14 @@ public class ColorPicker : MonoBehaviour
         materials = meshRenderer[i].materials;
         materials[k] = Matte[j];
         meshRenderer[i].materials = materials;
+
+        string subject_name = SceneManager.GetActiveScene().name;
+        int index = CodeConverter.codes.subject_map[subject_name];
+        if (k == 0){
+            User_Data.data.temp_primary = j;
+        } else {
+            User_Data.data.temp_secondary = j;
+        }
     }
 
     //METALLIC COLOURS
@@ -62,6 +71,14 @@ public class ColorPicker : MonoBehaviour
         materials = meshRenderer[i].materials;
         materials[k] = Metallic[j];
         meshRenderer[i].materials = materials;
+
+        string subject_name = SceneManager.GetActiveScene().name;
+        int index = CodeConverter.codes.subject_map[subject_name];
+        if (k == 0){
+            User_Data.data.temp_primary = 100+j;
+        } else {
+            User_Data.data.temp_secondary = 100+j;
+        }
     }
 
     //EMISSIVE COLOURS
@@ -69,6 +86,14 @@ public class ColorPicker : MonoBehaviour
         materials = meshRenderer[i].materials;
         materials[k] = Emissive[j];
         meshRenderer[i].materials = materials;
+
+        string subject_name = SceneManager.GetActiveScene().name;
+        int index = CodeConverter.codes.subject_map[subject_name];
+        if (k == 0){
+            User_Data.data.temp_primary = 200+j;
+        } else {
+            User_Data.data.temp_secondary = 200+j;
+        }
     }
     
     //GRADIENT COLOURS
@@ -76,6 +101,14 @@ public class ColorPicker : MonoBehaviour
         materials = meshRenderer[i].materials;
         materials[k] = Gradient[j];
         meshRenderer[i].materials = materials;
+
+        string subject_name = SceneManager.GetActiveScene().name;
+        int index = CodeConverter.codes.subject_map[subject_name];
+        if (k == 0){
+            User_Data.data.temp_primary = 300+j;
+        } else {
+            User_Data.data.temp_secondary = 300+j;
+        }
     }
 
     //FANCY COLOURS
@@ -83,6 +116,14 @@ public class ColorPicker : MonoBehaviour
         materials = meshRenderer[i].materials;
         materials[k] = Fancy[j];
         meshRenderer[i].materials = materials;
+
+        string subject_name = SceneManager.GetActiveScene().name;
+        int index = CodeConverter.codes.subject_map[subject_name];
+        if (k == 0){
+            User_Data.data.temp_primary = 400+j;
+        } else {
+            User_Data.data.temp_secondary = 400+j;
+        }
     }
 
 }
