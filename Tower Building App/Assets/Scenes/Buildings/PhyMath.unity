@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -674,7 +674,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &69479357
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +825,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &81164959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &100094218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &105365278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &107139027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &108258982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &118885477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,7 +1887,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &137803429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2068,7 +2068,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1257946032}
+      - m_Target: {fileID: 363598441}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &186106323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,7 +2489,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &216160706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,7 +2620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.99945, y: -1.9999189}
+  m_AnchoredPosition: {x: -503.88907, y: -1.9999189}
   m_SizeDelta: {x: 1720, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &227409216
@@ -2812,7 +2812,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &260807280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,7 +3013,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &264366998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,7 +3157,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &342652704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3755,6 +3755,37 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &363598441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1685544244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &363598442 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1685544244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &363598443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363598441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f03203347434804f9ecbbe404106303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 0.15
+--- !u!4 &363598445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1685544244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &374780364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,7 +3929,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &377315367
 GameObject:
   m_ObjectHideFlags: 0
@@ -4313,7 +4344,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &416340956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,7 +4668,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &424081944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4861,7 +4892,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &434470663
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,7 +5127,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &442054556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,7 +5270,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &483658822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,7 +5340,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &483658825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5533,7 +5564,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &511891070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5684,7 +5715,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &554580185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6014,7 +6045,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &558874078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6235,7 +6266,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &583435885
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,7 +6411,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &591517052
 GameObject:
   m_ObjectHideFlags: 0
@@ -6531,7 +6562,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &626346128
 GameObject:
   m_ObjectHideFlags: 0
@@ -6635,7 +6666,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1257946032}
+      - m_Target: {fileID: 363598441}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -6795,7 +6826,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!222 &632776684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6889,7 +6920,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &638879896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7117,7 +7148,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &659038010
 GameObject:
   m_ObjectHideFlags: 0
@@ -7304,7 +7335,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &683405459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7526,7 +7557,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &699154287
 GameObject:
   m_ObjectHideFlags: 0
@@ -7630,7 +7661,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1257946032}
+      - m_Target: {fileID: 363598441}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -7742,7 +7773,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &751686460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7970,7 +8001,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &810914042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8462,7 +8493,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &844755895
 GameObject:
   m_ObjectHideFlags: 0
@@ -8536,7 +8567,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &844755898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8891,7 +8922,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &884638399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8957,7 +8988,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &884638402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9102,7 +9133,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &884747474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9438,7 +9469,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &956406846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9736,7 +9767,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1023894105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9881,7 +9912,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1027647282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10101,7 +10132,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1119361735
 GameObject:
   m_ObjectHideFlags: 0
@@ -10175,7 +10206,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1119361738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10520,7 +10551,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1137553642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10588,7 +10619,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1137553645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10735,7 +10766,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1148890646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11003,7 +11034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414.0005, y: -0.000067711}
+  m_AnchoredPosition: {x: -503.88907, y: -0.000067711}
   m_SizeDelta: {x: 0, y: 314.79376}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1184870624
@@ -11195,7 +11226,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1214302740
 GameObject:
   m_ObjectHideFlags: 0
@@ -11425,7 +11456,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1221250749
 GameObject:
   m_ObjectHideFlags: 0
@@ -11576,7 +11607,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1235918075
 GameObject:
   m_ObjectHideFlags: 0
@@ -11650,7 +11681,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1235918078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11820,116 +11851,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &1257946029
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1914625453}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.21
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.86602545
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.49999994
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -120
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_Name
-      value: Shuttle
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 34ec2bd7949a34a4890f99187e9ab50f, type: 3}
---- !u!4 &1257946030 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1257946029}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1257946031 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1257946029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1257946032 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1257946029}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1257946033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257946032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f03203347434804f9ecbbe404106303, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 0.15
 --- !u!1 &1270070080
 GameObject:
   m_ObjectHideFlags: 0
@@ -12003,7 +11924,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1270070083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12231,7 +12152,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1299793207
 GameObject:
   m_ObjectHideFlags: 0
@@ -12415,7 +12336,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1323582810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12637,7 +12558,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1339195169
 GameObject:
   m_ObjectHideFlags: 0
@@ -12711,7 +12632,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1339195172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13178,7 +13099,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1408417575
 GameObject:
   m_ObjectHideFlags: 0
@@ -13322,7 +13243,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1419101524
 GameObject:
   m_ObjectHideFlags: 0
@@ -13388,7 +13309,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1419101527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13532,7 +13453,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1422219856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13754,7 +13675,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1467029587
 GameObject:
   m_ObjectHideFlags: 0
@@ -14217,7 +14138,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1513920586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14368,7 +14289,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1529226306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14955,7 +14876,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1593554859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15106,7 +15027,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1595398394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15253,7 +15174,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1599896585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15400,7 +15321,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1611890766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15620,7 +15541,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1660895303
 GameObject:
   m_ObjectHideFlags: 0
@@ -15763,7 +15684,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1663834002
 GameObject:
   m_ObjectHideFlags: 0
@@ -15907,7 +15828,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1666107322
 GameObject:
   m_ObjectHideFlags: 0
@@ -16169,7 +16090,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.99945, y: -1.9999193}
+  m_AnchoredPosition: {x: -503.88907, y: -1.9999193}
   m_SizeDelta: {x: 1720, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1677525619
@@ -16211,6 +16132,85 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!1001 &1685544244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1914625453}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.86602545
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.49999994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_Name
+      value: shuttle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 34ec2bd7949a34a4890f99187e9ab50f, type: 3}
 --- !u!1 &1725609677
 GameObject:
   m_ObjectHideFlags: 0
@@ -16357,7 +16357,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1737755325
 GameObject:
   m_ObjectHideFlags: 0
@@ -16431,7 +16431,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1737755328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16788,7 +16788,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1786090795
 GameObject:
   m_ObjectHideFlags: 0
@@ -16975,7 +16975,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1788976556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17300,7 +17300,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1811189594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17524,7 +17524,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1848958023
 GameObject:
   m_ObjectHideFlags: 0
@@ -17668,7 +17668,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1874133903
 GameObject:
   m_ObjectHideFlags: 0
@@ -17734,7 +17734,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1874133906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17960,7 +17960,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1902302243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18067,7 +18067,7 @@ Transform:
   m_Children:
   - {fileID: 1339754162}
   - {fileID: 1012776419}
-  - {fileID: 1257946030}
+  - {fileID: 363598445}
   m_Father: {fileID: 912103260}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18213,7 +18213,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1957194511
 GameObject:
   m_ObjectHideFlags: 0
@@ -18364,7 +18364,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &1970286972
 GameObject:
   m_ObjectHideFlags: 0
@@ -18469,7 +18469,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &1981476962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18892,7 +18892,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &2018972254
 GameObject:
   m_ObjectHideFlags: 0
@@ -19134,7 +19134,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &2024927230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19354,7 +19354,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &2043199332
 GameObject:
   m_ObjectHideFlags: 0
@@ -19501,7 +19501,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &2055197405
 GameObject:
   m_ObjectHideFlags: 0
@@ -19742,7 +19742,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &2078544676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19964,7 +19964,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &2089325181
 GameObject:
   m_ObjectHideFlags: 0
@@ -20034,7 +20034,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &2089325184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20258,7 +20258,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!1 &2132257257
 GameObject:
   m_ObjectHideFlags: 0
@@ -20328,7 +20328,7 @@ MonoBehaviour:
   meshRenderer:
   - {fileID: 1339754163}
   - {fileID: 1012776420}
-  - {fileID: 1257946031}
+  - {fileID: 363598442}
 --- !u!114 &2132257260
 MonoBehaviour:
   m_ObjectHideFlags: 0
