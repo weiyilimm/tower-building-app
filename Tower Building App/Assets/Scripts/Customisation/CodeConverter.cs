@@ -62,13 +62,13 @@ public class CodeConverter : MonoBehaviour{
         // The subjects are each given a corresponding code so that they know which part of the users
         // list of buildings they must access on read and write operations
         subject_map.Add("Main",0);
-        subject_map.Add("Art",1);
-        subject_map.Add("Biology&Chemistry",2);
-        subject_map.Add("ComputerScience",3);
-        subject_map.Add("Engineering",4);
-        subject_map.Add("Geography&History",5);
-        subject_map.Add("Languages",6);
-        subject_map.Add("Law&Politics",7);
-        subject_map.Add("Physics&Maths",8);
+        subject_map.Add("Arts",1);
+        subject_map.Add("BioChe",2);
+        subject_map.Add("ComSci",3);
+        subject_map.Add("Eng",4);
+        subject_map.Add("Geo",5);
+        subject_map.Add("Lan",6);
+        subject_map.Add("LawPol",7);
+        subject_map.Add("PhyMath",8);
     }
 }
