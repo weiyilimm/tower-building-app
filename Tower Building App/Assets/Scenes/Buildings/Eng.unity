@@ -2158,7 +2158,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4badf55e73e0a2946b163bc976dc69c4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4badf55e73e0a2946b163bc976dc69c4,
         type: 3}
@@ -2717,7 +2717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.56577, y: -1.9999189}
+  m_AnchoredPosition: {x: -1194.6667, y: -1.9999189}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &227409216
@@ -3198,7 +3198,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: aba448659587ea14e9613bbafb71e728,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000031035196
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aba448659587ea14e9613bbafb71e728,
         type: 3}
@@ -3233,7 +3233,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: aba448659587ea14e9613bbafb71e728,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aba448659587ea14e9613bbafb71e728,
         type: 3}
@@ -10938,7 +10938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.56586, y: -0.000067711}
+  m_AnchoredPosition: {x: -1194.6667, y: -0.000067711}
   m_SizeDelta: {x: 0, y: 314.79376}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1184870624
@@ -16032,7 +16032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.56577, y: -1.9999193}
+  m_AnchoredPosition: {x: -1194.6667, y: -1.9999193}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1677525619
@@ -17929,8 +17929,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -12.30007, z: -1107.0062}
   m_LocalScale: {x: 12.30007, y: 12.30007, z: 12.30007}
   m_Children:
-  - {fileID: 158066703}
   - {fileID: 274531724}
+  - {fileID: 158066703}
   - {fileID: 285573995}
   m_Father: {fileID: 912103260}
   m_RootOrder: 0
