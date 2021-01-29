@@ -202,7 +202,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[2].audio_clip
       value: 
-      objectReference: {fileID: 8300000, guid: 3c8b69fe510f1464fa531a21075729b1, type: 3}
+      objectReference: {fileID: 8300000, guid: 104eac3accd8ade48919c6d83492283f, type: 3}
     - target: {fileID: 8768617685904406271, guid: 1e74a3512a58df34994f08565dceafe6,
         type: 3}
       propertyPath: sounds.Array.data[2].volume
@@ -258,6 +258,11 @@ PrefabInstance:
       propertyPath: sounds.Array.data[2].bypassEffects
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8768617685904406271, guid: 1e74a3512a58df34994f08565dceafe6,
+        type: 3}
+      propertyPath: sounds.Array.data[1].audio_clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a6a35a9a23eba4a4ebbfee0f3948152a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e74a3512a58df34994f08565dceafe6, type: 3}
 --- !u!1 &168226558
@@ -293,6 +298,9 @@ MonoBehaviour:
   Username: JumJumJr
   json: 
   global_xp: 1250
+  temp_primary: 0
+  temp_secondary: 0
+  temp_model: 0
 --- !u!4 &168226560
 Transform:
   m_ObjectHideFlags: 0
