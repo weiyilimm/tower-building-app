@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Landscape Water
-  m_Shader: {fileID: -6465566751694194690, guid: d389060b4d7975049b4eb887c07f036a,
+  m_Shader: {fileID: -6465566751694194690, guid: fbaedc208c5a01a4fa21a53deb8cf82b,
     type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
@@ -71,10 +71,10 @@ Material:
     - Vector1_2C6BB062: 4.3
     - Vector1_71EE389: 167
     - Vector1_B218AE04: 0.497
-    - Vector1_D08249DA: 1.1
+    - Vector1_D08249DA: 1.7
     - Vector1_D74995AA: 0.369
     - Vector1_E1C948BA: 10
-    - Vector1_F1C23663: 29.4
+    - Vector1_F1C23663: 68
     - Vector1_F84A099F: 20
     - _AlphaClip: 0
     - _Blend: 1
