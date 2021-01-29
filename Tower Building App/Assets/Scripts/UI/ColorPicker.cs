@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ColorPicker : MonoBehaviour
 {   
@@ -53,36 +54,87 @@ public class ColorPicker : MonoBehaviour
     //MATTE COLOURS
     public void MatteColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Matte[j];
+
+        if (k == 0){
+            User_Data.data.temp_primary = j;
+            materials = find_mat(Matte,materials,"1",j);
+        } else {
+            User_Data.data.temp_secondary = j;
+            materials = find_mat(Matte,materials,"2",j);
+        }
+
         meshRenderer[i].materials = materials;
     }
 
     //METALLIC COLOURS
     public void MetallicColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Metallic[j];
+
+        if (k == 0){
+            User_Data.data.temp_primary = 100+j;
+            materials = find_mat(Metallic,materials,"1",j);
+        } else {
+            User_Data.data.temp_secondary = 100+j;
+            materials = find_mat(Metallic,materials,"2",j);
+        }
+
         meshRenderer[i].materials = materials;
     }
 
     //EMISSIVE COLOURS
     public void EmissiveColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Emissive[j];
+
+        if (k == 0){
+            User_Data.data.temp_primary = 200+j;
+            materials = find_mat(Emissive,materials,"1",j);
+        } else {
+            User_Data.data.temp_secondary = 200+j;
+            materials = find_mat(Emissive,materials,"2",j);
+        }
+
         meshRenderer[i].materials = materials;
     }
     
     //GRADIENT COLOURS
     public void GradientColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Gradient[j];
+
+        if (k == 0){
+            User_Data.data.temp_primary = 300+j;
+            materials = find_mat(Gradient,materials,"1",j);
+        } else {
+            User_Data.data.temp_secondary = 300+j;
+            materials = find_mat(Gradient,materials,"2",j);
+        }
+
         meshRenderer[i].materials = materials;
     }
 
     //FANCY COLOURS
     public void FancyColor(int i,int j, int k){
         materials = meshRenderer[i].materials;
-        materials[k] = Fancy[j];
+
+        if (k == 0){
+            User_Data.data.temp_primary = 400+j;
+            materials = find_mat(Fancy,materials,"1",j);
+        } else {
+            User_Data.data.temp_secondary = 400+j;
+            materials = find_mat(Fancy,materials,"2",j);
+        }
+
         meshRenderer[i].materials = materials;
+    }
+
+    public Material[] find_mat(Material[] mat_type, Material[] materials, string identifier, int j){
+        for (int iter=0; iter<materials.Length; iter++){
+            if (materials[iter].name.Substring(0,1) == identifier){
+                Material swap = Instantiate(mat_type[j] as Material);
+                swap.name = identifier + " " + swap.name;
+                materials[iter] = swap;
+            }
+        }
+        return materials;
     }
 
 }
