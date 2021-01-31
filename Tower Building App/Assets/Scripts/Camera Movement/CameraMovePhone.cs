@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -37,6 +37,16 @@ public class CameraMovePhone : MonoBehaviour
     private float rotated = 0;
     private Vector3 point = Vector3.zero;
 
+    //making a dict to store the world borders (co-ords)
+    private Dictionary<String,float> worldBorders = new Dictionary<string, float>();
+    public void Start(){
+        //on program start, set current world borders
+        worldBorders.Add("minX",-30);
+        worldBorders.Add("maxX", 30);
+        worldBorders.Add("minZ", -30);
+        worldBorders.Add("maxZ", 30);
+    }
+
     //change the movement/rotation setting
     public void setMode(bool b)
     {
@@ -50,6 +60,7 @@ public class CameraMovePhone : MonoBehaviour
         //check if only one finger is touching the screen
         if(Input.touchCount == 1){
             //create Touch object to store info on users touch
+
             Touch touch = Input.GetTouch(0);
 
             //if touch object just started moving, store that as the start Pos
@@ -60,7 +71,6 @@ public class CameraMovePhone : MonoBehaviour
                 // +3 for fun
                 if (! mode_pan) {
                     point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y + 3));
-                    //Debug.Log(point);
                 }
                 
             }
@@ -85,19 +95,13 @@ public class CameraMovePhone : MonoBehaviour
                     float x = moved.x * (moveSpeed / 100);
                     float z = moved.y * (moveSpeed / 100);
 
-                    //check if we can pan camera box
-                    //minX = -30, maxX = 30, minZ = -32, maxZ = 18;
-                    bool[] canPan = canPanWithinBounds(-30,30,-32,18);
+                    //panning the camera within a world box (only x and z are clamped to the world box. I made a method which works for...
+                    //...restraining y, although its not as efficient, it works without the same issues as the x and z restraining methods I...
+                    //...made, as rotation doesn't mess with height/y like it does with x and z)
                     
-                    //if x can pan, pan on x
-                    if(canPan[0] == true){
-                        transform.Translate(x, 0, 0); //moved.x * (moveSpeed/100),0,0,Space.World);
-                    }
-
-                    //if z can pan, pan on z
-                    if(canPan[1] == true){
-                        transform.Translate(0, 0, z); //0,0,moved.z * (moveSpeed/100),Space.World);
-                    }
+                    //making the movement transformation, then clamping the positions to be within bounds
+                    transform.Translate(x,0,z);
+                    transform.position = new Vector3 (Mathf.Clamp(transform.position.x, worldBorders["minX"], worldBorders["maxX"]), transform.position.y, Mathf.Clamp(transform.position.z, worldBorders["minZ"], worldBorders["maxZ"]));
                 }else{
                     //if not set,set rotateOrigin to the startPos
                     if(rotateOrigin == Vector3.zero){
@@ -114,6 +118,8 @@ public class CameraMovePhone : MonoBehaviour
 
                     //rotate
                     transform.RotateAround(point,Vector3.up,rotated/5);//replace 5 with some kind of speed variable later
+                    //clamping the rotation so it can't rotate outside of bounds
+                    transform.position = new Vector3 (Mathf.Clamp(transform.position.x, worldBorders["minX"], worldBorders["maxX"]), transform.position.y, Mathf.Clamp(transform.position.z, worldBorders["minZ"], worldBorders["maxZ"]));
                 }
             }
 
@@ -243,41 +249,6 @@ public class CameraMovePhone : MonoBehaviour
             }
         return canZoom;
     }
-    bool[] canPanWithinBounds(int minX, int maxX, int minZ, int maxZ){
-        bool[] returnVals = new bool[2];
-
-        //making sure x changes are within x bounds
-        if (transform.position.x > minX && transform.position.x < maxX){
-                returnVals[0] = true;
-        }else{//if current position not within x bounds
-            if (transform.position.x <= minX && moved.x > 0)
-            {
-                returnVals[0] = true;
-            }
-            //check if x is too high, if so, only apply appropriate position changes
-            if (transform.position.x >= maxX && moved.x < 0)
-            {
-                returnVals[0] = true;
-            }
-        }
-
-        //making sure z changes are within z bounds
-        if (transform.position.z > minZ && transform.position.z < maxZ)//if within z bounds, change position
-            {
-                returnVals[1] = true;
-            }else{//if current position not within z bounds
-                if (transform.position.z <= minZ && moved.z > 0)
-                {
-                    returnVals[1] = true;
-                }
-                //check if z is too high, if so, only apply appropriate position changes
-                if (transform.position.z >= maxZ && moved.z < 0)
-                {
-                    returnVals[1] = true;
-                }
-            }
-        return returnVals; 
-    }
 
     float Distance2D(Vector3 point1, Vector3 point2){
         //uses the distance formula to find distance between two 2d points
@@ -307,7 +278,6 @@ public class CameraMovePhone : MonoBehaviour
             rotation.x += 3*(changeInHeight);
             moveSpeed += 2 * ((changeInHeight) / 14);
         }
-        //Debug.Log(moveSpeed);
                 
         //updating cameras eulerAngles
         camScript.transform.eulerAngles = rotation;
