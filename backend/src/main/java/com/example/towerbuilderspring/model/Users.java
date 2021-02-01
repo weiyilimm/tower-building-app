@@ -6,12 +6,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 
 @Entity
 @Validated
 public class Users {
     @Id
+    private UUID id;
+
+    @Column(unique = true)
     private String userName;
 
     @Column(unique = true)
@@ -37,7 +41,7 @@ public class Users {
 
     public Users() {};
 
-    public Users(String userName, String email, String password, int totalexp, int score) {
+    public Users(UUID id, String userName, String email, String password, int totalexp, int score) {
         this.userName = userName;
         this.email = email;
         this.password = password;

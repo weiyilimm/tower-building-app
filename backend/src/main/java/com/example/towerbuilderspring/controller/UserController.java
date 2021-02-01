@@ -1,5 +1,6 @@
 package com.example.towerbuilderspring.controller;
 
+import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -49,7 +48,7 @@ public class UserController {
     @PostMapping("/Users/")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
+            Users newUser = new Users(UUID.randomUUID(), user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
@@ -85,5 +84,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+//    // Get all of the user buildings
+//    @GetMapping("/Users/{id}/Buildings")
+//    public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") )
 
 }
