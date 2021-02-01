@@ -1,16 +1,14 @@
 package com.example.towerbuilderspring.controller;
 
+import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.Users;
-//import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -50,7 +48,7 @@ public class UserController {
     @PostMapping("/Users/")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users(user.getEmail(), user.getPassword(), user.getTotalXp(), user.getScore());
+            Users newUser = new Users(UUID.randomUUID(), user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
@@ -66,7 +64,7 @@ public class UserController {
         if (userData.isPresent()) {
             Users user_to_update = userData.get();
             user_to_update.setEmail(user.getEmail());
-            user_to_update.setTotalXP(user.getTotalXp());
+            user_to_update.setTotalExp(user.getTotalExp());
             user_to_update.setScore(user.getScore());
 
             return new ResponseEntity<>(userRepository.save(user_to_update), HttpStatus.OK);
@@ -86,5 +84,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+//    // Get all of the user buildings
+//    @GetMapping("/Users/{id}/Buildings")
+//    public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") )
 
 }
