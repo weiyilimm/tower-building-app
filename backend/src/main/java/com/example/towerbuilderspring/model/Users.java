@@ -4,81 +4,108 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 
 @Entity
 @Validated
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = "userId")
-})
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true, nullable = false)
-    private long userId;
+    private UUID id;
 
-    private String email = null;    // The email address can be null
+    @Column(unique = true)
+    private String userName;
+
+    @Column(unique = true)
+    private String email;    // The email address can be null
 
     @NotNull
     private String password;
 
-    @NotNull
-    private int totalxp = 0;        // Default Values
+    private int totalexp = 0;        // Default Values
 
-    @NotNull
     private int score = 0;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<UserTowers> users;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_towers",
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "userName",
+                        nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                @JoinColumn(name = "building_id", referencedColumnName = "buildingCode",
+                        nullable = false, updatable = false)})
 
+    private Set<BuildingModels> userBuildings = new HashSet<>();
 
     public Users() {};
 
-    public Users(String email, String password, int totalxp, int score) {
+    public Users(UUID id, String userName, String email, String password, int totalexp, int score) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
-        this.totalxp = totalxp;
+        this.totalexp = totalexp;
         this.score = score;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getPassword() {
-        return password;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    // No method to get the password right now (first need to figure out how to salt)
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public int getTotalXp() {
-        return totalxp;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getTotalExp() {
+        return totalexp;
+    }
+
+    public void setTotalExp(int totalexp) {
+        this.totalexp = totalexp;
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setTotalXP(int xp) {
-        this.totalxp = xp;
-    }
-
     public void setScore(int score) {
         this.score = score;
     }
 
+    public Set<BuildingModels> getUserBuildings() {
+        return userBuildings;
+    }
+
+    public void setUserBuildings(Set<BuildingModels> userBuildings) {
+        this.userBuildings = userBuildings;
+    }
+
     @Override
     public String toString() {
-        return "User Id: " + userId + " Email: " + email + " totalXP: " + totalxp + " score: " + score;
-    };
-
+        return "Users{" +
+                "userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", totalxp=" + totalexp +
+                ", score=" + score +
+                ", userBuildings=" + userBuildings +
+                '}';
+    }
 }
