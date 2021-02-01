@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -102,8 +103,8 @@ public class TowerBuildingSpringUnitTests {
 
     @Test
     public void getUserModels() {
-        List<Users> mockedUsersFull = Arrays.asList(new Users("CameronLit2", "test@mail.com", "password", 0, 12),
-                new Users("ReubanYo", "test2@mail.com", "password", 0, 32));
+        List<Users> mockedUsersFull = Arrays.asList(new Users(UUID.randomUUID(), "CameronLit2", "test@mail.com", "password", 0, 12),
+                new Users(UUID.randomUUID(), "ReubanYo", "test2@mail.com", "password", 0, 32));
         List<Users> mockedUsersEmpty = new ArrayList<>();
         List<Users> mockedBuildingsError = null;
 
