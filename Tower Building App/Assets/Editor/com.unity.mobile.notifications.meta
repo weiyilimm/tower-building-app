@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 0ba1e649d941e364b8260b4704cb455f
+<<<<<<< HEAD
+guid: 6d8e2e3178665be488e481c57be9527e
+=======
+guid: 8b2cb9010c652d746b61da2035db2683
+>>>>>>> Biology_UI
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
