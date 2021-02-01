@@ -1,7 +1,6 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.Users;
-//import com.example.towerbuilderspring.model.WallTextures;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,7 @@ public class UserController {
     @PostMapping("/Users/")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users(user.getEmail(), user.getPassword(), user.getTotalXp(), user.getScore());
+            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
@@ -66,7 +65,7 @@ public class UserController {
         if (userData.isPresent()) {
             Users user_to_update = userData.get();
             user_to_update.setEmail(user.getEmail());
-            user_to_update.setTotalXP(user.getTotalXp());
+            user_to_update.setTotalExp(user.getTotalExp());
             user_to_update.setScore(user.getScore());
 
             return new ResponseEntity<>(userRepository.save(user_to_update), HttpStatus.OK);

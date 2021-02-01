@@ -102,8 +102,8 @@ public class TowerBuildingSpringUnitTests {
 
     @Test
     public void getUserModels() {
-        List<Users> mockedUsersFull = Arrays.asList(new Users("test@mail.com", "password", 0, 12),
-                new Users("test2@mail.com", "password", 0, 32));
+        List<Users> mockedUsersFull = Arrays.asList(new Users("CameronLit2", "test@mail.com", "password", 0, 12),
+                new Users("ReubanYo", "test2@mail.com", "password", 0, 32));
         List<Users> mockedUsersEmpty = new ArrayList<>();
         List<Users> mockedBuildingsError = null;
 
@@ -119,7 +119,7 @@ public class TowerBuildingSpringUnitTests {
 
     @Test
     public void getUserModelById() {
-        Users mockBuilding = new Users("test@mail.com", "password", 0, 12);
+        Users mockBuilding = new Users("CameronLit2", "test@mail.com", "password", 0, 12);
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(mockBuilding));
         // If found
         assertEquals(new ResponseEntity<>(mockBuilding, HttpStatus.OK), userController.getUser(1L));
@@ -129,7 +129,7 @@ public class TowerBuildingSpringUnitTests {
 
     @Test
     public void createUserModelInRepository() {
-        Users mockedBuildingToSave = new Users("test@mail.com", "password", 0, 12);
+        Users mockedBuildingToSave = new Users("Wei23","test@mail.com", "password", 0, 12);
         // Return the building model that was just "saved".
         when(userRepository.save(any(Users.class))).then(returnsFirstArg());
         // Todo - Find another way to perform check
