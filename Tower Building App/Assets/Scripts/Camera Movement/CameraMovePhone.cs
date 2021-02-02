@@ -35,11 +35,15 @@ public class CameraMovePhone : MonoBehaviour
     private Vector3 rotateOrigin;
     private Vector3 rotateCurrent;
     private float rotated = 0;
-    private Vector3 point = Vector3.zero;
+    //GameObject camera_for_point = GameObject.FindGameObjectWithTag("MainCamera");
+    public Vector3 point = Vector3.zero;
+    private bool canChangePoint;
 
     //making a dict to store the world borders (co-ords)
     private Dictionary<String,float> worldBorders = new Dictionary<string, float>();
     public void Start(){
+        //initialising canChangePoint  to true
+        canChangePoint = true;
         //on program start, set current world borders
         worldBorders.Add("minX",-30);
         worldBorders.Add("maxX", 30);
@@ -57,6 +61,18 @@ public class CameraMovePhone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!mode_pan && canChangePoint){
+            cam = GameObject.FindGameObjectWithTag("MainCamera");
+            Raycast raycastClass = cam.GetComponent<Raycast>();
+            RaycastHit hit = raycastClass.hit;
+            point = hit.point;
+            canChangePoint = false;
+        }
+
+        if(mode_pan){
+            canChangePoint = true;
+        }
+
         //check if only one finger is touching the screen
         if(Input.touchCount == 1){
             //create Touch object to store info on users touch
@@ -66,13 +82,7 @@ public class CameraMovePhone : MonoBehaviour
             //if touch object just started moving, store that as the start Pos
             if(touch.phase == TouchPhase.Began){
                 startPos = touch.position;
-
-                //set point to rotate around(0.5,0.5 is center of 2d screen, last element is distance from camera (used current height for this))
-                // +3 for fun
-                if (! mode_pan) {
-                    point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y + 3));
-                }
-                
+                //rip +3    
             }
 
             if(touch.phase == TouchPhase.Moved){
@@ -117,9 +127,19 @@ public class CameraMovePhone : MonoBehaviour
                     rotated = rotateCurrent.x - rotateOrigin.x;
 
                     //rotate
-                    transform.RotateAround(point,Vector3.up,rotated/5);//replace 5 with some kind of speed variable later
+                    transform.RotateAround(point,Vector3.up,rotated*(moveSpeed/10));//replace 5 with some kind of speed variable later
                     //clamping the rotation so it can't rotate outside of bounds
+                    Vector3 init = transform.position;
                     transform.position = new Vector3 (Mathf.Clamp(transform.position.x, worldBorders["minX"], worldBorders["maxX"]), transform.position.y, Mathf.Clamp(transform.position.z, worldBorders["minZ"], worldBorders["maxZ"]));
+
+                    //this if else checks if the camera is currently being clamped inside the box, if so, the point we're rotating around is
+                    //... allowed to change to adjust for position changes caused by the clamping on the camera
+                    if (init != transform.position){
+                        canChangePoint = true;
+                    }else{
+                        canChangePoint = false;
+                    }
+
                 }
             }
 
@@ -156,6 +176,10 @@ public class CameraMovePhone : MonoBehaviour
         if(Input.touchCount == 2){
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
+
+
+            canChangePoint = true;
+
 
             //dont need to get check for touch1 as it wont be on began, it will have began in the first if statement
             if(touch2.phase == TouchPhase.Began){
@@ -270,13 +294,13 @@ public class CameraMovePhone : MonoBehaviour
 
         if(transform.position.y >= 10){
             rotation.x = 45;
-            moveSpeed = 2;
+            moveSpeed = 1.5f;
         }
 
         //changing x by rate of change in height
         if(transform.position.y >5 && transform.position.y <10){
             rotation.x += 3*(changeInHeight);
-            moveSpeed += 2 * ((changeInHeight) / 14);
+            moveSpeed += 2 * ((changeInHeight) / 15);
         }
                 
         //updating cameras eulerAngles
