@@ -11,11 +11,6 @@ public class Raycast : MonoBehaviour
     void Update()
     {
         Ray camRay = new Ray(transform.position, transform.forward);
-
-        if(Physics.Raycast(camRay, out hit)){
-            //Debug.Log("ray hit: " + hit.point);
-        }else{
-            //Debug.Log("no hit");
-        }
+        Physics.Raycast(camRay, out hit);
     }
 }

@@ -472,6 +472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parthenon
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5cdef49c5e64a34c8467b59f1a04c41,
+        type: 3}
+      propertyPath: m_TagString
+      value: Parthenon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5cdef49c5e64a34c8467b59f1a04c41, type: 3}
 --- !u!4 &245456134 stripped
@@ -676,6 +681,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: mi6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f9a5e1092346b654eb8fc150ed783ff0,
+        type: 3}
+      propertyPath: m_TagString
+      value: mi6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a5e1092346b654eb8fc150ed783ff0, type: 3}
 --- !u!4 &434143579 stripped
@@ -771,6 +781,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC Tower
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed23851a53b7f674e9f0a834bfd9373d,
+        type: 3}
+      propertyPath: m_TagString
+      value: PC Tower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed23851a53b7f674e9f0a834bfd9373d, type: 3}
 --- !u!4 &436065654 stripped
@@ -859,6 +874,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 21d84de0d52ade5469de1db857df8d17,
         type: 3}
       propertyPath: m_Name
+      value: Chess
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21d84de0d52ade5469de1db857df8d17,
+        type: 3}
+      propertyPath: m_TagString
       value: Chess
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1163,6 +1183,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parthenon-Destroyed2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80f6fa40043eb844bb0af589fd440de8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Parthenon-Destroyed2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f6fa40043eb844bb0af589fd440de8, type: 3}
 --- !u!4 &573896288 stripped
@@ -1378,6 +1403,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dff791808aa282c4bb45592eba73a336,
         type: 3}
       propertyPath: m_Name
+      value: pagoda
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dff791808aa282c4bb45592eba73a336,
+        type: 3}
+      propertyPath: m_TagString
       value: pagoda
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1606,6 +1636,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c19a485bb14d1ed4ab2e9af874489718,
         type: 3}
       propertyPath: m_Name
+      value: Helix Building 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c19a485bb14d1ed4ab2e9af874489718,
+        type: 3}
+      propertyPath: m_TagString
       value: Helix Building 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1854,11 +1889,10 @@ GameObject:
   - component: {fileID: 934928824}
   - component: {fileID: 934928823}
   - component: {fileID: 934928822}
-  - component: {fileID: 934928821}
   - component: {fileID: 934928820}
   m_Layer: 0
   m_Name: hitPoint
-  m_TagString: Untagged
+  m_TagString: hitSphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1875,19 +1909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b627ad6646263345bda7086e665052d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &934928821
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934928819}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  rend: {fileID: 0}
 --- !u!23 &934928822
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1944,7 +1966,7 @@ Transform:
   m_GameObject: {fileID: 934928819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
@@ -2029,6 +2051,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3e83b81a362a75944bf47a149312e88a,
         type: 3}
       propertyPath: m_Name
+      value: Sci-fi
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e83b81a362a75944bf47a149312e88a,
+        type: 3}
+      propertyPath: m_TagString
       value: Sci-fi
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2119,6 +2146,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ecef8bdbc56edeb498aeaeef1477b0c9,
         type: 3}
       propertyPath: m_Name
+      value: louvre
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ecef8bdbc56edeb498aeaeef1477b0c9,
+        type: 3}
+      propertyPath: m_TagString
       value: louvre
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2586,6 +2618,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0a448ac1a06023a488414c8d5ad99bcf,
         type: 3}
       propertyPath: m_Name
+      value: CourtHouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a448ac1a06023a488414c8d5ad99bcf,
+        type: 3}
+      propertyPath: m_TagString
       value: CourtHouse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3321,6 +3358,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Globe
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3048894e0e2186643ae180cb55e2e59d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Globe
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3048894e0e2186643ae180cb55e2e59d, type: 3}
 --- !u!4 &1549580963 stripped
@@ -3411,6 +3453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microscope
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44d71bcd8fe420849a2e9087e4c19043,
+        type: 3}
+      propertyPath: m_TagString
+      value: Microscope
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d71bcd8fe420849a2e9087e4c19043, type: 3}
 --- !u!4 &1556011739 stripped
@@ -3499,6 +3546,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fbb4e4fc3d3090d4284fbca6390ce8b5,
         type: 3}
       propertyPath: m_Name
+      value: BurjKhalifa
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbb4e4fc3d3090d4284fbca6390ce8b5,
+        type: 3}
+      propertyPath: m_TagString
       value: BurjKhalifa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3683,6 +3735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: crane
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aba448659587ea14e9613bbafb71e728,
+        type: 3}
+      propertyPath: m_TagString
+      value: crane
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aba448659587ea14e9613bbafb71e728, type: 3}
 --- !u!4 &1635994674 stripped
@@ -3819,6 +3876,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shuttle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ec2bd7949a34a4890f99187e9ab50f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shuttle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34ec2bd7949a34a4890f99187e9ab50f, type: 3}
 --- !u!4 &1683201755 stripped
@@ -3907,6 +3969,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4badf55e73e0a2946b163bc976dc69c4,
         type: 3}
       propertyPath: m_Name
+      value: BigBen
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4badf55e73e0a2946b163bc976dc69c4,
+        type: 3}
+      propertyPath: m_TagString
       value: BigBen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4184,6 +4251,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EiffelTower
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35799e10eae409a4ab2a563610e4e1cd,
+        type: 3}
+      propertyPath: m_TagString
+      value: EiffelTower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35799e10eae409a4ab2a563610e4e1cd, type: 3}
 --- !u!4 &1774388110 stripped
@@ -4279,6 +4351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: glitch cube
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 70e9a9cf96cf9dd4aa8166ae714b40d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: glitch cube
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e9a9cf96cf9dd4aa8166ae714b40d3, type: 3}
 --- !u!4 &1844596648 stripped
@@ -4369,6 +4446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DNA Building
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 45ccc484e2ffc4244a8bae053cea457c,
+        type: 3}
+      propertyPath: m_TagString
+      value: DNA Building
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45ccc484e2ffc4244a8bae053cea457c, type: 3}
 --- !u!4 &1849175904 stripped
@@ -4457,6 +4539,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 409a4b1e5df12924eaef9b5fd81de668,
         type: 3}
       propertyPath: m_Name
+      value: pisa
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 409a4b1e5df12924eaef9b5fd81de668,
+        type: 3}
+      propertyPath: m_TagString
       value: pisa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4649,6 +4736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JapaneseTemple
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5756d8a96c83c674db1dbb9478bfc3ec,
+        type: 3}
+      propertyPath: m_TagString
+      value: JapaneseTemple
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5756d8a96c83c674db1dbb9478bfc3ec, type: 3}
 --- !u!4 &2084494435 stripped
@@ -4737,6 +4829,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c7bf5e584e42ad44bb3a3a757a55ffb9,
         type: 3}
       propertyPath: m_Name
+      value: Polygons
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c7bf5e584e42ad44bb3a3a757a55ffb9,
+        type: 3}
+      propertyPath: m_TagString
       value: Polygons
       objectReference: {fileID: 0}
     m_RemovedComponents: []
