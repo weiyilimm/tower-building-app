@@ -28,6 +28,8 @@ public class CameraMovePhone : MonoBehaviour
     GameObject cam;
     CamAttatch camScript;
 
+    GameObject hitSphere;
+
 
     //rotation variables
     private bool mode_pan = true;
@@ -40,15 +42,52 @@ public class CameraMovePhone : MonoBehaviour
     private bool canChangePoint;
 
     //making a dict to store the world borders (co-ords)
-    private Dictionary<String,float> worldBorders = new Dictionary<string, float>();
+    private Dictionary<String,float> worldBorders = new Dictionary<String, float>();
+
+    //making a list to store the bulding names
+    private List<String> buildingNames = new List<String>();
     public void Start(){
         //initialising canChangePoint  to true
         canChangePoint = true;
+
         //on program start, set current world borders
         worldBorders.Add("minX",-30);
         worldBorders.Add("maxX", 30);
         worldBorders.Add("minZ", -30);
         worldBorders.Add("maxZ", 30);
+
+        //on program start, save building names to rotate centre point of if in focus
+        //Arts
+        buildingNames.Add("louvre");
+        //BioChe
+        buildingNames.Add("Helix Building 1");
+        buildingNames.Add("DNA Building");
+        buildingNames.Add("Microscope");
+        //ComSci
+        buildingNames.Add("PC Tower");
+        buildingNames.Add("Sci-fi");
+        //Eng
+        buildingNames.Add("crane");
+        buildingNames.Add("BigBen");
+        buildingNames.Add("BurjKhalifa");
+        //Geo
+        buildingNames.Add("Parthenon");
+        buildingNames.Add("Parthenon-Destroyed2");
+        buildingNames.Add("JapaneseTemple");
+        buildingNames.Add("Globe");
+        //Lan
+        buildingNames.Add("pagoda");
+        buildingNames.Add("pisa");
+        buildingNames.Add("EiffelTower");
+        //LawPol
+        buildingNames.Add("Chess");
+        buildingNames.Add("mi6");
+        buildingNames.Add("CourtHouse");
+        //PhyMath
+        buildingNames.Add("glitch cube");
+        buildingNames.Add("Polygons");
+        buildingNames.Add("Shuttle");
+
     }
 
     //change the movement/rotation setting
@@ -65,11 +104,30 @@ public class CameraMovePhone : MonoBehaviour
             cam = GameObject.FindGameObjectWithTag("MainCamera");
             Raycast raycastClass = cam.GetComponent<Raycast>();
             RaycastHit hit = raycastClass.hit;
-            point = hit.point;
+
+            //gets hitPoint sphere's script to enable its visibility
+            hitSphere = GameObject.FindGameObjectWithTag("hitSphere");
+            goToHitPoint hitPointClass = hitSphere.GetComponent<goToHitPoint>();
+            hitPointClass.rend.enabled = true;
+
+            if (buildingNames.Contains(hit.collider.name)){
+                //Debug.Log("you hit : " + hit.collider.name);
+                GameObject building = GameObject.FindGameObjectWithTag(hit.collider.name);
+                //Debug.Log(building.transform.position);
+                point = hit.collider.transform.position;
+            }else{
+                point = hit.point;
+            }
             canChangePoint = false;
         }
 
         if(mode_pan){
+            //gets hitPoint sphere's script to disable its visibility
+            hitSphere = GameObject.FindGameObjectWithTag("hitSphere");
+            goToHitPoint hitPointClass = hitSphere.GetComponent<goToHitPoint>();
+            hitPointClass.rend.enabled = false;
+    
+            //Raycast raycastClass = cam.GetComponent<Raycast>();
             canChangePoint = true;
         }
 
