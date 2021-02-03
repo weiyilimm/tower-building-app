@@ -1,5 +1,6 @@
 package com.example.towerbuilderspring.model;
 
+import com.example.towerbuilderspring.repository.ModelRepository;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -31,22 +32,30 @@ public class Users {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_towers",
             joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "userName",
+                @JoinColumn(name = "user_id", referencedColumnName = "id",
                         nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "building_id", referencedColumnName = "buildingCode",
                         nullable = false, updatable = false)})
-
     private Set<BuildingModels> userBuildings = new HashSet<>();
 
     public Users() {};
 
-    public Users(UUID id, String userName, String email, String password, int totalexp, int score) {
+    public Users(String userName, String email, String password, int totalexp, int score) {
+        this.id = UUID.randomUUID();
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.totalexp = totalexp;
         this.score = score;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -93,8 +102,18 @@ public class Users {
         return userBuildings;
     }
 
-    public void setUserBuildings(Set<BuildingModels> userBuildings) {
-        this.userBuildings = userBuildings;
+    public BuildingModels getUserBuilding(BuildingModels buildingModel) {
+        if (userBuildings.contains(buildingModel)) {
+            return buildingModel;
+        }
+        else{
+            return null;
+        }
+    }
+
+
+    public void addUserBuilding(BuildingModels building) {
+        this.userBuildings.add(building);
     }
 
     @Override
