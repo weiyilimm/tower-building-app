@@ -32,12 +32,11 @@ public class Users {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_towers",
             joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "userName",
+                @JoinColumn(name = "user_id", referencedColumnName = "id",
                         nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "building_id", referencedColumnName = "buildingCode",
                         nullable = false, updatable = false)})
-
     private Set<BuildingModels> userBuildings = new HashSet<>();
 
     public Users() {};
