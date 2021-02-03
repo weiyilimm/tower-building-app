@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RF8M60T2SPW",
         "name": "com.CS17.UniBuilder",
-        "processId": 16423,
+        "processId": 28060,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -54,6 +54,54 @@
             "deviceId": "RF8M60T2SPW",
             "name": "com.CS17.UniBuilder",
             "processId": 16423,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 20677,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 4430,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 6881,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 15909,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 28060,
+            "exited": false
+        },
+        {
+            "deviceId": "89U4C18828001766",
+            "name": "com.CS17.UniBuilder",
+            "processId": 12760,
+            "exited": false
+        },
+        {
+            "deviceId": "89U4C18828001766",
+            "name": "com.CS17.UniBuilder",
+            "processId": 30563,
+            "exited": false
+        },
+        {
+            "deviceId": "89U4C18828001766",
+            "name": "com.CS17.UniBuilder",
+            "processId": 32756,
             "exited": false
         }
     ],

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -28,6 +28,8 @@ public class CameraMovePhone : MonoBehaviour
     GameObject cam;
     CamAttatch camScript;
 
+    GameObject hitSphere;
+
 
     //rotation variables
     private bool mode_pan = true;
@@ -35,7 +37,58 @@ public class CameraMovePhone : MonoBehaviour
     private Vector3 rotateOrigin;
     private Vector3 rotateCurrent;
     private float rotated = 0;
-    private Vector3 point = Vector3.zero;
+    //GameObject camera_for_point = GameObject.FindGameObjectWithTag("MainCamera");
+    public Vector3 point = Vector3.zero;
+    private bool canChangePoint;
+
+    //making a dict to store the world borders (co-ords)
+    private Dictionary<String,float> worldBorders = new Dictionary<String, float>();
+
+    //making a list to store the bulding names
+    private List<String> buildingNames = new List<String>();
+    public void Start(){
+        //initialising canChangePoint  to true
+        canChangePoint = true;
+
+        //on program start, set current world borders
+        worldBorders.Add("minX",-30);
+        worldBorders.Add("maxX", 30);
+        worldBorders.Add("minZ", -30);
+        worldBorders.Add("maxZ", 30);
+
+        //on program start, save building names to rotate centre point of if in focus
+        //Arts
+        buildingNames.Add("louvre");
+        //BioChe
+        buildingNames.Add("Helix Building 1");
+        buildingNames.Add("DNA Building");
+        buildingNames.Add("Microscope");
+        //ComSci
+        buildingNames.Add("PC Tower");
+        buildingNames.Add("Sci-fi");
+        //Eng
+        buildingNames.Add("crane");
+        buildingNames.Add("BigBen");
+        buildingNames.Add("BurjKhalifa");
+        //Geo
+        buildingNames.Add("Parthenon");
+        buildingNames.Add("Parthenon-Destroyed2");
+        buildingNames.Add("JapaneseTemple");
+        buildingNames.Add("Globe");
+        //Lan
+        buildingNames.Add("pagoda");
+        buildingNames.Add("pisa");
+        buildingNames.Add("EiffelTower");
+        //LawPol
+        buildingNames.Add("Chess");
+        buildingNames.Add("mi6");
+        buildingNames.Add("CourtHouse");
+        //PhyMath
+        buildingNames.Add("glitch cube");
+        buildingNames.Add("Polygons");
+        buildingNames.Add("Shuttle");
+
+    }
 
     //change the movement/rotation setting
     public void setMode(bool b)
@@ -47,22 +100,47 @@ public class CameraMovePhone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!mode_pan && canChangePoint){
+            cam = GameObject.FindGameObjectWithTag("MainCamera");
+            Raycast raycastClass = cam.GetComponent<Raycast>();
+            RaycastHit hit = raycastClass.hit;
+
+            //gets hitPoint sphere's script to enable its visibility
+            hitSphere = GameObject.FindGameObjectWithTag("hitSphere");
+            goToHitPoint hitPointClass = hitSphere.GetComponent<goToHitPoint>();
+            hitPointClass.rend.enabled = true;
+
+            if (buildingNames.Contains(hit.collider.name)){
+                //Debug.Log("you hit : " + hit.collider.name);
+                GameObject building = GameObject.FindGameObjectWithTag(hit.collider.name);
+                //Debug.Log(building.transform.position);
+                point = hit.collider.transform.position;
+            }else{
+                point = hit.point;
+            }
+            canChangePoint = false;
+        }
+
+        if(mode_pan){
+            //gets hitPoint sphere's script to disable its visibility
+            hitSphere = GameObject.FindGameObjectWithTag("hitSphere");
+            goToHitPoint hitPointClass = hitSphere.GetComponent<goToHitPoint>();
+            hitPointClass.rend.enabled = false;
+    
+            //Raycast raycastClass = cam.GetComponent<Raycast>();
+            canChangePoint = true;
+        }
+
         //check if only one finger is touching the screen
         if(Input.touchCount == 1){
             //create Touch object to store info on users touch
+
             Touch touch = Input.GetTouch(0);
 
             //if touch object just started moving, store that as the start Pos
             if(touch.phase == TouchPhase.Began){
                 startPos = touch.position;
-
-                //set point to rotate around(0.5,0.5 is center of 2d screen, last element is distance from camera (used current height for this))
-                // +3 for fun
-                if (! mode_pan) {
-                    point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.y + 3));
-                    //Debug.Log(point);
-                }
-                
+                //rip +3    
             }
 
             if(touch.phase == TouchPhase.Moved){
@@ -85,19 +163,13 @@ public class CameraMovePhone : MonoBehaviour
                     float x = moved.x * (moveSpeed / 100);
                     float z = moved.y * (moveSpeed / 100);
 
-                    //check if we can pan camera box
-                    //minX = -30, maxX = 30, minZ = -32, maxZ = 18;
-                    bool[] canPan = canPanWithinBounds(-30,30,-32,18);
+                    //panning the camera within a world box (only x and z are clamped to the world box. I made a method which works for...
+                    //...restraining y, although its not as efficient, it works without the same issues as the x and z restraining methods I...
+                    //...made, as rotation doesn't mess with height/y like it does with x and z)
                     
-                    //if x can pan, pan on x
-                    if(canPan[0] == true){
-                        transform.Translate(x, 0, 0); //moved.x * (moveSpeed/100),0,0,Space.World);
-                    }
-
-                    //if z can pan, pan on z
-                    if(canPan[1] == true){
-                        transform.Translate(0, 0, z); //0,0,moved.z * (moveSpeed/100),Space.World);
-                    }
+                    //making the movement transformation, then clamping the positions to be within bounds
+                    transform.Translate(x,0,z);
+                    transform.position = new Vector3 (Mathf.Clamp(transform.position.x, worldBorders["minX"], worldBorders["maxX"]), transform.position.y, Mathf.Clamp(transform.position.z, worldBorders["minZ"], worldBorders["maxZ"]));
                 }else{
                     //if not set,set rotateOrigin to the startPos
                     if(rotateOrigin == Vector3.zero){
@@ -113,7 +185,19 @@ public class CameraMovePhone : MonoBehaviour
                     rotated = rotateCurrent.x - rotateOrigin.x;
 
                     //rotate
-                    transform.RotateAround(point,Vector3.up,rotated/5);//replace 5 with some kind of speed variable later
+                    transform.RotateAround(point,Vector3.up,rotated*(moveSpeed/10));//replace 5 with some kind of speed variable later
+                    //clamping the rotation so it can't rotate outside of bounds
+                    Vector3 init = transform.position;
+                    transform.position = new Vector3 (Mathf.Clamp(transform.position.x, worldBorders["minX"], worldBorders["maxX"]), transform.position.y, Mathf.Clamp(transform.position.z, worldBorders["minZ"], worldBorders["maxZ"]));
+
+                    //this if else checks if the camera is currently being clamped inside the box, if so, the point we're rotating around is
+                    //... allowed to change to adjust for position changes caused by the clamping on the camera
+                    if (init != transform.position){
+                        canChangePoint = true;
+                    }else{
+                        canChangePoint = false;
+                    }
+
                 }
             }
 
@@ -150,6 +234,10 @@ public class CameraMovePhone : MonoBehaviour
         if(Input.touchCount == 2){
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
+
+
+            canChangePoint = true;
+
 
             //dont need to get check for touch1 as it wont be on began, it will have began in the first if statement
             if(touch2.phase == TouchPhase.Began){
@@ -243,41 +331,6 @@ public class CameraMovePhone : MonoBehaviour
             }
         return canZoom;
     }
-    bool[] canPanWithinBounds(int minX, int maxX, int minZ, int maxZ){
-        bool[] returnVals = new bool[2];
-
-        //making sure x changes are within x bounds
-        if (transform.position.x > minX && transform.position.x < maxX){
-                returnVals[0] = true;
-        }else{//if current position not within x bounds
-            if (transform.position.x <= minX && moved.x > 0)
-            {
-                returnVals[0] = true;
-            }
-            //check if x is too high, if so, only apply appropriate position changes
-            if (transform.position.x >= maxX && moved.x < 0)
-            {
-                returnVals[0] = true;
-            }
-        }
-
-        //making sure z changes are within z bounds
-        if (transform.position.z > minZ && transform.position.z < maxZ)//if within z bounds, change position
-            {
-                returnVals[1] = true;
-            }else{//if current position not within z bounds
-                if (transform.position.z <= minZ && moved.z > 0)
-                {
-                    returnVals[1] = true;
-                }
-                //check if z is too high, if so, only apply appropriate position changes
-                if (transform.position.z >= maxZ && moved.z < 0)
-                {
-                    returnVals[1] = true;
-                }
-            }
-        return returnVals; 
-    }
 
     float Distance2D(Vector3 point1, Vector3 point2){
         //uses the distance formula to find distance between two 2d points
@@ -299,15 +352,14 @@ public class CameraMovePhone : MonoBehaviour
 
         if(transform.position.y >= 10){
             rotation.x = 45;
-            moveSpeed = 2;
+            moveSpeed = 1.5f;
         }
 
         //changing x by rate of change in height
         if(transform.position.y >5 && transform.position.y <10){
             rotation.x += 3*(changeInHeight);
-            moveSpeed += 2 * ((changeInHeight) / 14);
+            moveSpeed += 2 * ((changeInHeight) / 15);
         }
-        //Debug.Log(moveSpeed);
                 
         //updating cameras eulerAngles
         camScript.transform.eulerAngles = rotation;
