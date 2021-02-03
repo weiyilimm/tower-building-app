@@ -42,7 +42,8 @@ public class Users {
 
     public Users() {};
 
-    public Users(UUID id, String userName, String email, String password, int totalexp, int score) {
+    public Users(String userName, String email, String password, int totalexp, int score) {
+        this.id = UUID.randomUUID();
         this.userName = userName;
         this.email = email;
         this.password = password;

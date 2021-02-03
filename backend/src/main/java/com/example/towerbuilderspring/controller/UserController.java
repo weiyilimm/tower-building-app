@@ -50,7 +50,7 @@ public class UserController {
     @PostMapping("/Users/")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users(UUID.randomUUID(), user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
+            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
