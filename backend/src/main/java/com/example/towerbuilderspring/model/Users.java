@@ -1,5 +1,6 @@
 package com.example.towerbuilderspring.model;
 
+import com.example.towerbuilderspring.repository.ModelRepository;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -49,6 +50,14 @@ public class Users {
         this.score = score;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -93,8 +102,18 @@ public class Users {
         return userBuildings;
     }
 
-    public void setUserBuildings(Set<BuildingModels> userBuildings) {
-        this.userBuildings = userBuildings;
+    public BuildingModels getUserBuilding(BuildingModels buildingModel) {
+        if (userBuildings.contains(buildingModel)) {
+            return buildingModel;
+        }
+        else{
+            return null;
+        }
+    }
+
+
+    public void addUserBuilding(BuildingModels building) {
+        this.userBuildings.add(building);
     }
 
     @Override

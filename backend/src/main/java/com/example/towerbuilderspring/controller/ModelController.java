@@ -51,7 +51,8 @@ public class ModelController {
     @PostMapping("/Models")
     public ResponseEntity<BuildingModels> createModel(@RequestBody BuildingModels model) {
         try {
-            BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName());
+            BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName(),
+                    model.getModelGroup());
             modelRepository.save(newModel);
             return new ResponseEntity<>(newModel, HttpStatus.OK);
         }
@@ -68,6 +69,7 @@ public class ModelController {
             BuildingModels modelUpdate = modelData.get();
             modelUpdate.setBuildingCode(model.getBuildingCode());
             modelUpdate.setBuildingName(model.getBuildingName());
+            modelUpdate.setModelGroup(model.getModelGroup());
 
             return new ResponseEntity<>(modelRepository.save(modelUpdate), HttpStatus.OK);
         } else {
