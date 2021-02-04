@@ -95,23 +95,22 @@ public class Main_Building_Customisation : MonoBehaviour{
         Transform Cap = Stack.transform.Find("Roof");
             
         if (direction == "up") {
-            //do this
             if (Block.transform.localScale == new Vector3(100,100,500)){
+                //These messages will change to a pop up message once we are able to do so
                 Debug.Log("Can't get any taller than this!");
             } else {
                 var ScaleChange = new Vector3(0,0,100);
-                var PosChange = new Vector3(0,1,0);
+                var PosChange = new Vector3(0,1.5f,0);
                 Block.transform.localScale += ScaleChange;
                 Block.transform.position += (PosChange/2);
                 Cap.transform.position += PosChange;
             }
         } else if (direction == "down") {
-            //do this
             if (Block.transform.localScale == new Vector3(100,100,100)){
                 Debug.Log("Can't get any shorter than this!");
             } else {
                 var ScaleChange = new Vector3(0,0,-100);
-                var PosChange = new Vector3(0,-1,0);
+                var PosChange = new Vector3(0,-1.5f,0);
                 Block.transform.localScale += ScaleChange;
                 Block.transform.position += (PosChange/2);
                 Cap.transform.position += PosChange;
