@@ -45,7 +45,8 @@ public class Main_Building_Customisation : MonoBehaviour{
 
                     int height = User_Data.data.building_stats[index].m_height;
                     var ScaleChange = new Vector3(0,0,(100*height));
-                    var PosChange = new Vector3(0,(1*height),0);
+                    float pos_height = (float)(1.5*height);
+                    var PosChange = new Vector3(0,pos_height,0);
 
                     Block.transform.localScale += ScaleChange;
                     Block.transform.position += (PosChange/2);
@@ -82,37 +83,42 @@ public class Main_Building_Customisation : MonoBehaviour{
                 index += 1;
             }
         }
-    }
-
-    void change_height(Transform Stack, string direction){
-        foreach (Transform stack_types in Stack){
-            Transform Block = stack_types.transform.Find("Tower");
-            Transform Cap = stack_types.transform.Find("Roof");
-            
-            if (direction == "up") {
-                //do this
-                if (Block.transform.localScale == new Vector3(100,100,500)){
-                    Debug.Log("Can't get any taller than this!");
-                } else {
-                    var ScaleChange = new Vector3(0,0,100);
-                    var PosChange = new Vector3(0,1,0);
-                    Block.transform.localScale += ScaleChange;
-                    Block.transform.position += (PosChange/2);
-                    Cap.transform.position += PosChange;
-                }
-            } else if (direction == "down") {
-                //do this
-                if (Block.transform.localScale == new Vector3(100,100,100)){
-                    Debug.Log("Can't get any shorter than this!");
-                } else {
-                    var ScaleChange = new Vector3(0,0,-100);
-                    var PosChange = new Vector3(0,-1,0);
-                    Block.transform.localScale += ScaleChange;
-                    Block.transform.position += (PosChange/2);
-                    Cap.transform.position += PosChange;
+        if (Input.GetKeyDown("t")){
+            foreach (Transform tower in Main.transform){
+                foreach (Transform model in tower.transform){
+                    change_height(model,"up");
                 }
             }
         }
+    }
+
+    void change_height(Transform Stack, string direction){
+        Transform Block = Stack.transform.Find("Tower");
+        Transform Cap = Stack.transform.Find("Roof");
+            
+        if (direction == "up") {
+            //do this
+            if (Block.transform.localScale == new Vector3(100,100,500)){
+                Debug.Log("Can't get any taller than this!");
+            } else {
+                var ScaleChange = new Vector3(0,0,100);
+                var PosChange = new Vector3(0,1,0);
+                Block.transform.localScale += ScaleChange;
+                Block.transform.position += (PosChange/2);
+                Cap.transform.position += PosChange;
+            }
+        } else if (direction == "down") {
+            //do this
+            if (Block.transform.localScale == new Vector3(100,100,100)){
+                Debug.Log("Can't get any shorter than this!");
+            } else {
+                var ScaleChange = new Vector3(0,0,-100);
+                var PosChange = new Vector3(0,-1,0);
+                Block.transform.localScale += ScaleChange;
+                Block.transform.position += (PosChange/2);
+                Cap.transform.position += PosChange;
+            }
+        }    
     }
 }
 
