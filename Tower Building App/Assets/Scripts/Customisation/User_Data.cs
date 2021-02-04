@@ -29,23 +29,29 @@ public class User_Data : MonoBehaviour{
         data = this;
 
         //CREATE BUILDING INSTANCES HERE
-        Building Main = new Building(3,4,0,500);
+        Building Main = new Building(100,4,0,500,4);
         building_stats.Add(Main);
-        Building Art = new Building(-1,-1,0,450);
+        Building Main2 = new Building(101,5,1,500,2);
+        building_stats.Add(Main2);
+        Building Main3 = new Building(102,9,2,500,1);
+        building_stats.Add(Main3);
+        Building Main4 = new Building(103,11,3,500,3);
+        building_stats.Add(Main4);
+        Building Art = new Building(-1,-1,0,450,1);
         building_stats.Add(Art);
-        Building Biology_Chemistry = new Building(3,5,0,400);
+        Building Biology_Chemistry = new Building(3,5,0,400,1);
         building_stats.Add(Biology_Chemistry);
-        Building ComputerScience = new Building(-1,-1,0,350);
+        Building ComputerScience = new Building(-1,-1,0,350,1);
         building_stats.Add(ComputerScience);
-        Building Engineering = new Building(-1,-1,0,300);
+        Building Engineering = new Building(-1,-1,0,300,1);
         building_stats.Add(Engineering);
-        Building Geography_History = new Building(-1,-1,0,250);
+        Building Geography_History = new Building(-1,-1,0,250,1);
         building_stats.Add(Geography_History);
-        Building Languages = new Building(-1,-1,0,200);
+        Building Languages = new Building(-1,-1,0,200,1);
         building_stats.Add(Languages);
-        Building Law_Politics = new Building(-1,-1,0,150);
+        Building Law_Politics = new Building(-1,-1,0,150,1);
         building_stats.Add(Law_Politics);
-        Building Physics_Maths = new Building(-1,-1,0,100);
+        Building Physics_Maths = new Building(-1,-1,0,100,1);
         building_stats.Add(Physics_Maths);
 
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
@@ -79,7 +85,8 @@ public class User_Data : MonoBehaviour{
             Debug.Log(model);
             int building_xp = int.Parse(node["buildings"][i]["building_xp"].Value);
             Debug.Log(building_xp);
-            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp);
+            int m_height = 1;
+            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats.Add(newBuilding);
         }
     }
@@ -90,11 +97,13 @@ public class Building{
     public int secondary_colour;
     public int model;
     public int building_xp;
+    public int m_height;
 
-    public Building(int primary, int secondary, int m, int xp){
+    public Building(int primary, int secondary, int m, int xp, int h){
         primary_colour = primary;
         secondary_colour = secondary;
         model = m;
         building_xp = xp;
+        m_height = h;
     }
 }
