@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class UnlockBuilding : MonoBehaviour
 {
     public GameObject[] buildings;
-    [SerializeField] int XP = 5000;
+    private int XP = 0;
     private Button button;
-    private int BuildingXP = 500;
+    private int BuildingXP = 2000;
+    private GameObject lockIcon;
+
     void Start()
     {   
         button = this.GetComponent<Button>();
+        lockIcon = this.transform.GetChild(0).gameObject;
         for (int i = 0; i<buildings.Length; i++){
             /*
             XP required to unlock the building
@@ -21,6 +24,7 @@ public class UnlockBuilding : MonoBehaviour
             */
             if (XP >= i * BuildingXP){
                 if (button.name[0].ToString() == i.ToString()){
+                    lockIcon.SetActive(false);
                     for (int j = 0; j<buildings.Length; j++){
                         //We need assign new varibale for add listener to work
                         //Otherwise we will get indexoutofrange error

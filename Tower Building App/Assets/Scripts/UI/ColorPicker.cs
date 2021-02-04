@@ -16,55 +16,59 @@ public class ColorPicker : MonoBehaviour
     private Material[] materials;
     private Button button;
 
-    [SerializeField] int XP = 0;
+    private int XP = 5000;
     //No need study to get matte color
-    public int MatteXP = 0;
+    private int MatteXP = 500;
     //18 hourss of study to get metallic color
-    public int MetallicXP = 64800;
+    private int MetallicXP = 1000;
     //36 hours of study to get emissive color
-    public int EmissiveXP = 129600;
+    private int EmissiveXP = 1500;
     //72 hours of study to get gradient color
-    public int GradientXP = 259200;
+    private int GradientXP = 2000;
     //144 hours of study to get fancy color
-    public int FancyXP = 518400;
+    private int FancyXP = 2500;
+    private GameObject lockIcon;
 
     void Start()
     {   
         //get the current colour button
         button = this.GetComponent<Button>();
+        lockIcon = this.transform.GetChild(0).gameObject;
         for (int i=0; i<meshRenderer.Length; i++){
             // we need a copy of the current index, in order to change color
             var x = i;
             //take the third and fourth digit of the button name
             int colours = int.Parse(button.name.Substring(1,2));
             int elements = int.Parse(button.name[3].ToString());
-            //check the first 2 digit of the button name to determine which materials
-            if (XP >= MatteXP){
+
+
+            if (XP >= colours * MatteXP){
                 if (button.name[0].ToString() == "0"){
-                button.onClick.AddListener(() => MatteColor(x,colours,elements));
+                    lockIcon.SetActive(false);
+                    button.onClick.AddListener(() => MatteColor(x,colours,elements));
                 }
             }
-
-            if (XP >= MetallicXP){
+            if (XP >= ((colours * MetallicXP) + 500)){
                 if (button.name[0].ToString() == "1"){
+                    lockIcon.SetActive(false);
                     button.onClick.AddListener(() => MetallicColor(x,colours,elements));
                 }
             }
-
-            if (XP >= EmissiveXP){
+            if (XP >= ((colours * EmissiveXP) + 500)){
                 if (button.name[0].ToString() == "2"){
+                    lockIcon.SetActive(false);
                     button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
                 }
             }
-
-            if (XP >= GradientXP){
+            if (XP >= ((colours * GradientXP) + 500)){
                 if (button.name[0].ToString() == "3"){
+                    lockIcon.SetActive(false);
                     button.onClick.AddListener(() => GradientColor(x,colours,elements));
                 }
             }
-
-            if (XP >= FancyXP){
+            if (XP >= ((colours * FancyXP) + 500)){
                 if (button.name[0].ToString() == "4"){
+                    lockIcon.SetActive(false);
                     button.onClick.AddListener(() => FancyColor(x,colours,elements));
                 }
             }
