@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -516,6 +516,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &69479357
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +673,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &81164959
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +880,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &100094218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1096,6 +1114,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &105365278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1271,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &107139027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,6 +1421,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &108258982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1618,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &118885477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,6 +1771,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &137803429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,8 +2030,9 @@ GameObject:
   - component: {fileID: 152273495}
   - component: {fileID: 152273494}
   - component: {fileID: 152273493}
+  - component: {fileID: 152273496}
   m_Layer: 5
-  m_Name: Helix
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2050,40 +2099,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 152273494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 145886272}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1964273098}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1078551685}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &152273494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,6 +2134,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152273491}
   m_CullTransparentMesh: 0
+--- !u!114 &152273496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152273491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957c18caef994a34fb9bcf520f9b45d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings:
+  - {fileID: 145886272}
+  - {fileID: 1964273098}
+  - {fileID: 1078551685}
+  XP: 0
 --- !u!1 &186106320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,6 +2221,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &186106323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,6 +2521,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &216160706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414, y: -0.00000059605}
+  m_AnchoredPosition: {x: -447.14337, y: -0.00000059605}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &227409216
@@ -2805,6 +2850,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &260807280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,6 +3057,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &264366998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3150,6 +3207,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &342652704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3629,6 +3692,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &377315367
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4113,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &416340956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,6 +4310,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &424081944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4459,6 +4540,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &434470663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4694,6 +4781,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &442054556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4837,6 +4930,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &483658822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4907,6 +5006,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &483658825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5131,6 +5236,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &511891070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5282,6 +5393,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &527206503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,6 +5700,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &558874078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5804,6 +5927,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &583435885
 GameObject:
   m_ObjectHideFlags: 0
@@ -5949,6 +6078,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &587605081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6233,6 +6368,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &632776680
 GameObject:
   m_ObjectHideFlags: 0
@@ -6349,6 +6490,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!222 &632776684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6443,6 +6590,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &638879896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6671,6 +6824,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &659038010
 GameObject:
   m_ObjectHideFlags: 0
@@ -6858,6 +7017,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &683405459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7080,6 +7245,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &751686457
 GameObject:
   m_ObjectHideFlags: 0
@@ -7148,6 +7319,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &751686460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7376,6 +7553,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &788398138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8038,6 +8221,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &844755895
 GameObject:
   m_ObjectHideFlags: 0
@@ -8112,6 +8301,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &844755898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8334,6 +8529,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &884638399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8400,6 +8601,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &884638402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8545,6 +8752,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &884747474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8827,6 +9040,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &956406846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9015,6 +9234,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1023894105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9160,6 +9385,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1027647282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9710,6 +9941,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1078551685 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 44d71bcd8fe420849a2e9087e4c19043,
@@ -9815,6 +10052,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1119361738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10160,6 +10403,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1137553642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10228,6 +10477,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1137553645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10375,6 +10630,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1148890646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10666,7 +10927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414.0001, y: -0.000067711}
+  m_AnchoredPosition: {x: -447.14343, y: -0.000067711}
   m_SizeDelta: {x: 0, y: 314.79376}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1184870624
@@ -10861,8 +11122,9 @@ GameObject:
   - component: {fileID: 1209754274}
   - component: {fileID: 1209754273}
   - component: {fileID: 1209754272}
+  - component: {fileID: 1209754275}
   m_Layer: 5
-  m_Name: DNA
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10929,40 +11191,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1209754273}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 145886272}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1964273098}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1078551685}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1209754273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10997,6 +11226,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209754270}
   m_CullTransparentMesh: 0
+--- !u!114 &1209754275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209754270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957c18caef994a34fb9bcf520f9b45d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings:
+  - {fileID: 145886272}
+  - {fileID: 1964273098}
+  - {fileID: 1078551685}
+  XP: 0
 --- !u!1 &1210889397
 GameObject:
   m_ObjectHideFlags: 0
@@ -11140,6 +11386,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1214302740
 GameObject:
   m_ObjectHideFlags: 0
@@ -11370,6 +11622,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1221250749
 GameObject:
   m_ObjectHideFlags: 0
@@ -11521,6 +11779,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1235918075
 GameObject:
   m_ObjectHideFlags: 0
@@ -11595,6 +11859,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1235918078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11838,6 +12108,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1270070083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12066,6 +12342,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1294231021
 GameObject:
   m_ObjectHideFlags: 0
@@ -12501,6 +12783,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1323582810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12723,6 +13011,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1339195169
 GameObject:
   m_ObjectHideFlags: 0
@@ -12797,6 +13091,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1339195172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13021,6 +13321,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1408417575
 GameObject:
   m_ObjectHideFlags: 0
@@ -13165,6 +13471,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1408973416
 GameObject:
   m_ObjectHideFlags: 0
@@ -13482,6 +13794,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1419101527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13626,6 +13944,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1422219856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14186,6 +14510,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1467029587
 GameObject:
   m_ObjectHideFlags: 0
@@ -14475,6 +14805,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1513920586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14626,6 +14962,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1529226306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15423,6 +15765,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1593554859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15574,6 +15922,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1595398394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15721,6 +16075,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1599896585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16001,6 +16361,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1611890766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16090,8 +16456,9 @@ GameObject:
   - component: {fileID: 1614923088}
   - component: {fileID: 1614923087}
   - component: {fileID: 1614923086}
+  - component: {fileID: 1614923089}
   m_Layer: 5
-  m_Name: Microscope
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16158,40 +16525,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1614923087}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 145886272}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1964273098}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1078551685}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1614923087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16226,6 +16560,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614923084}
   m_CullTransparentMesh: 0
+--- !u!114 &1614923089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614923084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957c18caef994a34fb9bcf520f9b45d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings:
+  - {fileID: 145886272}
+  - {fileID: 1964273098}
+  - {fileID: 1078551685}
+  XP: 0
 --- !u!1 &1622715465
 GameObject:
   m_ObjectHideFlags: 0
@@ -16369,6 +16720,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1660895303
 GameObject:
   m_ObjectHideFlags: 0
@@ -16512,6 +16869,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1663834002
 GameObject:
   m_ObjectHideFlags: 0
@@ -16656,6 +17019,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1666107322
 GameObject:
   m_ObjectHideFlags: 0
@@ -16917,7 +17286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.99994, y: 0.00000095367}
+  m_AnchoredPosition: {x: -447.14337, y: 0.00000095367}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1677525619
@@ -17106,6 +17475,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1737755325
 GameObject:
   m_ObjectHideFlags: 0
@@ -17180,6 +17555,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1737755328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17537,6 +17918,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1786090795
 GameObject:
   m_ObjectHideFlags: 0
@@ -17724,6 +18111,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1788976556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17875,6 +18268,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1811189594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18099,6 +18498,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1848958023
 GameObject:
   m_ObjectHideFlags: 0
@@ -18243,6 +18648,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1874133903
 GameObject:
   m_ObjectHideFlags: 0
@@ -18309,6 +18720,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1874133906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18668,6 +19085,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1902302243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18935,6 +19358,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1957194511
 GameObject:
   m_ObjectHideFlags: 0
@@ -19086,6 +19515,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &1964273098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 45ccc484e2ffc4244a8bae053cea457c,
@@ -19222,6 +19657,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &1981476962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19645,6 +20086,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &2005839406
 GameObject:
   m_ObjectHideFlags: 0
@@ -19846,6 +20293,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &2024927230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20066,6 +20519,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &2043199332
 GameObject:
   m_ObjectHideFlags: 0
@@ -20213,6 +20672,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &2078544673
 GameObject:
   m_ObjectHideFlags: 0
@@ -20280,6 +20745,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &2078544676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20502,6 +20973,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &2089325181
 GameObject:
   m_ObjectHideFlags: 0
@@ -20572,6 +21049,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &2089325184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20796,6 +21279,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!1 &2132257257
 GameObject:
   m_ObjectHideFlags: 0
@@ -20866,6 +21355,12 @@ MonoBehaviour:
   - {fileID: 145886273}
   - {fileID: 1964273099}
   - {fileID: 1078551686}
+  XP: 0
+  MatteXP: 0
+  MetallicXP: 64800
+  EmissiveXP: 129600
+  GradientXP: 259200
+  FancyXP: 518400
 --- !u!114 &2132257260
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ColorPicker : MonoBehaviour
 {   
@@ -12,9 +13,20 @@ public class ColorPicker : MonoBehaviour
     public Material[] Gradient;
     public Material[] Fancy;
     public MeshRenderer[] meshRenderer;
-    
     private Material[] materials;
     private Button button;
+
+    [SerializeField] int XP = 0;
+    //No need study to get matte color
+    public int MatteXP = 0;
+    //18 hourss of study to get metallic color
+    public int MetallicXP = 64800;
+    //36 hours of study to get emissive color
+    public int EmissiveXP = 129600;
+    //72 hours of study to get gradient color
+    public int GradientXP = 259200;
+    //144 hours of study to get fancy color
+    public int FancyXP = 518400;
 
     void Start()
     {   
@@ -27,21 +39,36 @@ public class ColorPicker : MonoBehaviour
             int colours = int.Parse(button.name.Substring(1,2));
             int elements = int.Parse(button.name[3].ToString());
             //check the first 2 digit of the button name to determine which materials
-            if (button.name[0].ToString() == "0"){
+            if (XP >= MatteXP){
+                if (button.name[0].ToString() == "0"){
                 button.onClick.AddListener(() => MatteColor(x,colours,elements));
+                }
             }
-            if (button.name[0].ToString() == "1"){
-                button.onClick.AddListener(() => MetallicColor(x,colours,elements));
+
+            if (XP >= MetallicXP){
+                if (button.name[0].ToString() == "1"){
+                    button.onClick.AddListener(() => MetallicColor(x,colours,elements));
+                }
             }
-            if (button.name[0].ToString() == "2"){
-                button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
+
+            if (XP >= EmissiveXP){
+                if (button.name[0].ToString() == "2"){
+                    button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
+                }
             }
-            if (button.name[0].ToString() == "3"){
-                button.onClick.AddListener(() => GradientColor(x,colours,elements));
+
+            if (XP >= GradientXP){
+                if (button.name[0].ToString() == "3"){
+                    button.onClick.AddListener(() => GradientColor(x,colours,elements));
+                }
             }
-            if (button.name[0].ToString() == "4"){
-                button.onClick.AddListener(() => FancyColor(x,colours,elements));
+
+            if (XP >= FancyXP){
+                if (button.name[0].ToString() == "4"){
+                    button.onClick.AddListener(() => FancyColor(x,colours,elements));
+                }
             }
+
         }
     }
     
