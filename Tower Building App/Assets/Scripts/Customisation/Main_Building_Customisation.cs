@@ -16,18 +16,12 @@ public class Main_Building_Customisation : MonoBehaviour{
     // >>> C (single model) --- LOOP HERE FOR MATERIALS
     // >>>> GGC (single model component)
 
-
-    // Start is called before the first frame update
     void Start(){
-        
-    }
-
-    void Update(){
-        if (Input.GetKeyDown("r")){
             //This index can be changed to read from dictionary once codeConverter can be updated
             int index = 0;
             foreach (Transform tower in Main.transform){
                 int sub_counter = 0;
+                int location_counter = 0;
                 foreach (Transform model in tower.transform){
                     //Model and Size changes here
                     if (sub_counter == User_Data.data.building_stats[index].model){
@@ -38,10 +32,22 @@ public class Main_Building_Customisation : MonoBehaviour{
 
                     Transform Block = model.transform.Find("Tower");
                     Transform Cap = model.transform.Find("Roof");
-
+                    
                     Block.transform.localScale = new Vector3(100,100,100);
-                    //Block.transform.position = new Vector3(0,0,0);
-                    //Cap.transform.position = new Vector3(0,0,0);
+                    if (location_counter == 0){
+                        Block.transform.localPosition = new Vector3(0.5f,0.6f,0.5f);
+                        Cap.transform.localPosition = new Vector3(0.5f,1.1f,0.5f);
+                    } else if (location_counter == 1){
+                        Block.transform.localPosition = new Vector3(-0.5f,0.6f,0.5f);
+                        Cap.transform.localPosition = new Vector3(-0.5f,1.1f,0.5f);
+                    } else if (location_counter == 2){
+                        Block.transform.localPosition = new Vector3(-0.5f,0.6f,-0.5f);
+                        Cap.transform.localPosition = new Vector3(-0.5f,1.1f,-0.5f);
+                    } else if (location_counter == 3){
+                        Block.transform.localPosition = new Vector3(0.5f,0.6f,-0.5f);
+                        Cap.transform.localPosition = new Vector3(0.5f,1.1f,-0.5f);
+                    }
+                    location_counter += 1;
 
                     int height = User_Data.data.building_stats[index].m_height;
                     var ScaleChange = new Vector3(0,0,(100*height));
@@ -82,14 +88,6 @@ public class Main_Building_Customisation : MonoBehaviour{
 
                 index += 1;
             }
-        }
-        if (Input.GetKeyDown("t")){
-            foreach (Transform tower in Main.transform){
-                foreach (Transform model in tower.transform){
-                    change_height(model,"up");
-                }
-            }
-        }
     }
 
     void change_height(Transform Stack, string direction){
