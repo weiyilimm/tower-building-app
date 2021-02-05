@@ -7,6 +7,11 @@ public class MB_Confirm : MonoBehaviour{
     public void ConfirmButton(){
         string[] indexes = {"1","2","3","4"};
         int tindex = 0;
+        
+        // Gets the index from the array and appends it to the subjectname to make the name of the tower for look up in the dictionary
+        // with the result of the look up, an integer index can be used on the user_data to get the corresponding entry for the building in the building_stats array
+        // the entry is then updated to store the values currently in the temp variables
+
         foreach (string index in indexes){
             string subject_name = SceneManager.GetActiveScene().name;
             subject_name = subject_name + index;
