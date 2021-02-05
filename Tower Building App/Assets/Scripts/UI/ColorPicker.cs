@@ -7,6 +7,7 @@ using TMPro;
 
 public class ColorPicker : MonoBehaviour
 {   
+    public TextMeshProUGUI XPText;
     public Material[] Matte;
     public Material[] Metallic;
     public Material[] Emissive;
@@ -15,7 +16,7 @@ public class ColorPicker : MonoBehaviour
     public MeshRenderer[] meshRenderer;
     private Material[] materials;
     private Button button;
-
+    
     private double XP;
     //No need study to get matte color
     private int MatteXP = 500;
@@ -32,6 +33,7 @@ public class ColorPicker : MonoBehaviour
     void Start()
     {   
         XP = StopWatch.GlobalXP;
+        XPText.text = XP.ToString() + "XP";
         //get the current colour button
         button = this.GetComponent<Button>();
         lockIcon = this.transform.GetChild(0).gameObject;
