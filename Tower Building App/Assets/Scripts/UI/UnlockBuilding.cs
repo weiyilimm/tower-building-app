@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class UnlockBuilding : MonoBehaviour
 {
     public GameObject[] buildings;
-    private int XP = 0;
+    private double XP;
     private Button button;
     private int BuildingXP = 2000;
     private GameObject lockIcon;
 
     void Start()
     {   
+        XP = StopWatch.GlobalXP;
         button = this.GetComponent<Button>();
         lockIcon = this.transform.GetChild(0).gameObject;
         for (int i = 0; i<buildings.Length; i++){

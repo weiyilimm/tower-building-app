@@ -16,7 +16,7 @@ public class ColorPicker : MonoBehaviour
     private Material[] materials;
     private Button button;
 
-    private int XP = 5000;
+    private double XP;
     //No need study to get matte color
     private int MatteXP = 500;
     //18 hourss of study to get metallic color
@@ -31,6 +31,7 @@ public class ColorPicker : MonoBehaviour
 
     void Start()
     {   
+        XP = StopWatch.GlobalXP;
         //get the current colour button
         button = this.GetComponent<Button>();
         lockIcon = this.transform.GetChild(0).gameObject;
