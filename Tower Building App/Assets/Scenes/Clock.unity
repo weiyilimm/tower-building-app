@@ -523,6 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerText: {fileID: 0}
   EarnedScoreText: {fileID: 0}
+  dropDown: {fileID: 0}
   PopUp: {fileID: 0}
 --- !u!222 &230283312
 CanvasRenderer:
@@ -998,7 +999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -118}
+  m_AnchoredPosition: {x: 0, y: -118}
   m_SizeDelta: {x: -400, y: -1174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828462948
@@ -2443,6 +2444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerText: {fileID: 1522675897}
   EarnedScoreText: {fileID: 230283310}
+  dropDown: {fileID: 2016244255}
   PopUp: {fileID: 460675922}
 --- !u!114 &1522675897
 MonoBehaviour:
@@ -3262,21 +3264,21 @@ MonoBehaviour:
     m_Options:
     - m_Text: MAIN
       m_Image: {fileID: 0}
-    - m_Text: COMPUTER SCIENCE
+    - m_Text: ARTS
       m_Image: {fileID: 0}
-    - m_Text: GEOGRAPHY
+    - m_Text: BIOLOGY CHEMISTRY
+      m_Image: {fileID: 0}
+    - m_Text: COMPUTER SCIENCE
       m_Image: {fileID: 0}
     - m_Text: ENGINEERING
       m_Image: {fileID: 0}
-    - m_Text: PHYSICS
-      m_Image: {fileID: 0}
-    - m_Text: MATHEMATICS
+    - m_Text: GEOGRAPHY
       m_Image: {fileID: 0}
     - m_Text: LANGUAGES
       m_Image: {fileID: 0}
-    - m_Text: CHEMISTRY
+    - m_Text: LAW POLITICS
       m_Image: {fileID: 0}
-    - m_Text: BIOLOGY
+    - m_Text: PHYSICS MATH
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

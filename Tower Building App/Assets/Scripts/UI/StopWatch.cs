@@ -9,9 +9,21 @@ public class StopWatch : MonoBehaviour {
 
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI EarnedScoreText;
+    public TMP_Dropdown dropDown;
     public static double GlobalXP = 0;
+    public static double MainXP = 0;
+    public static double ArtsXP = 0;
+    public static double BioCheXP = 0;
+    public static double ComSciXP = 0;
+    public static double EngXP = 0;
+    public static double GeoXP = 0;
+    public static double LanXP = 0;
+    public static double LawPolXP = 0;
+    public static double PhyMathXP = 0;
+
     private int multiplierXP = 2;
-    private double earnedScore;
+    private double earnedLocalXP;
+    private double earnedGlobalXP;
     private bool playing;
     private float theTime;
     public GameObject PopUp;
@@ -39,14 +51,53 @@ public class StopWatch : MonoBehaviour {
 
     public void Reset()
     {   
-        PopUp.SetActive(true);
-        earnedScore = Math.Round(theTime) * multiplierXP;
-        GlobalXP += earnedScore;
-        EarnedScoreText.text = "You've just earned" + " " + (earnedScore).ToString() + "XP" 
-                                + " " + "with a total global XP of" + " " + (GlobalXP).ToString() + "XP";
+        //Local XP 2XP per second
+        earnedLocalXP = Math.Round(theTime) * multiplierXP;
+        //Global XP 1XP per second
+        earnedGlobalXP = Math.Round(theTime);
+        GlobalXP += earnedGlobalXP;
         playing = false;
-        TimerText.text = "00:00:00";
+        //Set the time to 0 
         theTime = 0;
-        Debug.Log(GlobalXP);
+        //Replace the timer text to 00:00:00
+        TimerText.text = "00:00:00";
+        //Pop up appears to show how much XP user has earned
+        PopUp.SetActive(true);
+        //Pop up text
+        EarnedScoreText.text = "You've just earned" + " " + (earnedGlobalXP).ToString() + "XP in Global and"
+                                + " " + (earnedLocalXP).ToString() +"XP in" + " " + (dropDown.options[dropDown.value].text);
+
+
+        theTime = 0;
+
+        switch (dropDown.options[dropDown.value].text){
+            case "MAIN":
+                MainXP += earnedLocalXP;
+                break;
+            case "ARTS":
+                ArtsXP += earnedLocalXP;
+                break;
+            case "BIOLOGY CHEMISTRY":
+                BioCheXP += earnedLocalXP;
+                break;
+            case "COMPUTER SCIENCE":
+                ComSciXP += earnedLocalXP;
+                break;
+            case "ENGINEERING":
+                EngXP += earnedLocalXP;
+                break;
+            case "GEOGRAPHY":
+                GeoXP += earnedLocalXP;
+                break;
+            case "LANGUAGES":
+                LanXP += earnedLocalXP;
+                break;
+            case "LAW POLITICS":
+                LawPolXP += earnedLocalXP;
+                break;
+            case "PHYSICS MATH":
+                PhyMathXP += earnedLocalXP;
+                break;
+        }
     }
 }
