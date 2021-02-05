@@ -5,15 +5,15 @@ using UnityEngine;
 public class Main_Building_Customisation : MonoBehaviour{
     public GameObject Main;
 
-    // MAIN BUILDING CUSTOMISATION NEEDS
+    // MAIN BUILDING CUSTOMISATION
 
     // Ability to change materials
     // Ability to change tower model
     // Ability to change tower height
 
     // > GP (all towers (4 towers with 4 models each))
-    // >> P (4 models for single tower) --- LOOP HERE FOR HEIGHT AND MODEL
-    // >>> C (single model) --- LOOP HERE FOR MATERIALS
+    // >> P (4 models for single tower)
+    // >>> C (single model)
     // >>>> GGC (single model component)
 
     void Start(){
@@ -23,16 +23,18 @@ public class Main_Building_Customisation : MonoBehaviour{
                 int sub_counter = 0;
                 int location_counter = 0;
                 foreach (Transform model in tower.transform){
-                    //Model and Size changes here
+                    // This statements checks if the current model is the one that should be displayed or not.
                     if (sub_counter == User_Data.data.building_stats[index].model){
                         model.gameObject.SetActive(true);
                     } else {
                         model.gameObject.SetActive(false);
                     }
 
+                    // Get the Tower and roof model components
                     Transform Block = model.transform.Find("Tower");
                     Transform Cap = model.transform.Find("Roof");
                     
+                    // Resets the starting positions of the Tower and Roof components so that they will always display correctly
                     Block.transform.localScale = new Vector3(100,100,100);
                     if (location_counter == 0){
                         Block.transform.localPosition = new Vector3(0.5f,0.6f,0.5f);
@@ -49,6 +51,7 @@ public class Main_Building_Customisation : MonoBehaviour{
                     }
                     location_counter += 1;
 
+                    // Get and apply the height changes to the tower and roof components
                     int height = User_Data.data.building_stats[index].m_height;
                     var ScaleChange = new Vector3(0,0,(100*height));
                     float pos_height = (float)(1.5*height);
@@ -58,6 +61,7 @@ public class Main_Building_Customisation : MonoBehaviour{
                     Block.transform.position += (PosChange/2);
                     Cap.transform.position += PosChange;
 
+                    // Loops through the model components applying the chosen materials to the primary and secondary slots
                     foreach (Transform model_component in model.transform){
                         //material change here
                         Material[] mats = model_component.transform.GetComponent<Renderer>().materials;
@@ -90,6 +94,7 @@ public class Main_Building_Customisation : MonoBehaviour{
             }
     }
 
+    // This function will probably be pulled into a seperate script once the UI for the MB has been implemented
     void change_height(Transform Stack, string direction){
         Transform Block = Stack.transform.Find("Tower");
         Transform Cap = Stack.transform.Find("Roof");
