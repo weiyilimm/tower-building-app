@@ -17,7 +17,8 @@ public class ColorPicker : MonoBehaviour
     private Material[] materials;
     private Button button;
     
-    private double XP;
+    private double globalXP;
+    private double localXP;
     //No need study to get matte color
     private int MatteXP = 500;
     //18 hourss of study to get metallic color
@@ -29,11 +30,43 @@ public class ColorPicker : MonoBehaviour
     //144 hours of study to get fancy color
     private int FancyXP = 2500;
     private GameObject lockIcon;
+    private string currentSceneName;
 
     void Start()
     {   
-        XP = StopWatch.GlobalXP;
-        XPText.text = XP.ToString() + "XP";
+        currentSceneName = SceneManager.GetActiveScene().name;
+        switch (currentSceneName){
+            case "Main":
+                localXP = StopWatch.MainXP;
+                break;
+            case "Arts":
+                localXP = StopWatch.ArtsXP;
+                break;
+            case "BioChe":
+                localXP = StopWatch.BioCheXP;
+                break;
+            case "ComSci":
+                localXP = StopWatch.ComSciXP;
+                break;
+            case "Eng":
+                localXP = StopWatch.EngXP;
+                break;
+            case "Geo":
+                localXP = StopWatch.GeoXP;
+                break;
+            case "Lan":
+                localXP = StopWatch.LanXP;
+                break;
+            case "LawPol":
+                localXP = StopWatch.LawPolXP;
+                break;
+            case "PhyMath":
+                localXP = StopWatch.PhyMathXP;
+                break;
+        }
+
+        globalXP = StopWatch.GlobalXP;
+        XPText.text = localXP.ToString() + "XP";
         //get the current colour button
         button = this.GetComponent<Button>();
         lockIcon = this.transform.GetChild(0).gameObject;
@@ -45,31 +78,31 @@ public class ColorPicker : MonoBehaviour
             int elements = int.Parse(button.name[3].ToString());
 
 
-            if (XP >= colours * MatteXP){
+            if ((globalXP >= colours * MatteXP) || (localXP >= colours * MatteXP)){
                 if (button.name[0].ToString() == "0"){
                     lockIcon.SetActive(false);
                     button.onClick.AddListener(() => MatteColor(x,colours,elements));
                 }
             }
-            if (XP >= ((colours * MetallicXP) + 500)){
+            if ((globalXP >= ((colours * MetallicXP) + 500)) || (localXP >= ((colours * MetallicXP) + 500))){
                 if (button.name[0].ToString() == "1"){
                     lockIcon.SetActive(false);
                     button.onClick.AddListener(() => MetallicColor(x,colours,elements));
                 }
             }
-            if (XP >= ((colours * EmissiveXP) + 500)){
+            if ((globalXP >= ((colours * EmissiveXP) + 500)) || (localXP >= ((colours * EmissiveXP) + 500))){
                 if (button.name[0].ToString() == "2"){
                     lockIcon.SetActive(false);
                     button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
                 }
             }
-            if (XP >= ((colours * GradientXP) + 500)){
+            if ((globalXP >= ((colours * GradientXP) + 500)) || (localXP >= ((colours * GradientXP) + 500))){
                 if (button.name[0].ToString() == "3"){
                     lockIcon.SetActive(false);
                     button.onClick.AddListener(() => GradientColor(x,colours,elements));
                 }
             }
-            if (XP >= ((colours * FancyXP) + 500)){
+            if ((globalXP >= ((colours * FancyXP) + 500)) || (localXP >= ((colours * FancyXP) + 500))){
                 if (button.name[0].ToString() == "4"){
                     lockIcon.SetActive(false);
                     button.onClick.AddListener(() => FancyColor(x,colours,elements));
