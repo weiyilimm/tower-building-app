@@ -10,7 +10,7 @@ public class Scoring : MonoBehaviour
     //All static attributes will be used in UnlockBuilding.cs & ColorPicker.cs
     public static double MainXP = 0,
                         ArtsXP = 0,
-                        BioCheXP = 100000,
+                        BioCheXP = 0,
                         ComSciXP = 0,
                         EngXP = 0,
                         GeoXP = 0,
