@@ -21,7 +21,7 @@ public class StopWatch : MonoBehaviour {
     public static double LawPolXP = 0;
     public static double PhyMathXP = 0;
 
-    private int multiplierXP = 2;
+    private int multiplierXP = 1;
     private double earnedLocalXP;
     private double earnedGlobalXP;
     private bool playing;
@@ -45,16 +45,11 @@ public class StopWatch : MonoBehaviour {
     }
 
     public void ClickStop()
-    {
-        playing = false;
-    }
-
-    public void Reset()
     {   
-        //Local XP 2XP per second
+        //Local XP 1XP per second
         earnedLocalXP = Math.Round(theTime) * multiplierXP;
-        //Global XP 1XP per second
-        earnedGlobalXP = Math.Round(theTime);
+        //Global XP is 10% of local XP
+        earnedGlobalXP = earnedLocalXP * 0.1;
         GlobalXP += earnedGlobalXP;
         playing = false;
         //Set the time to 0 
@@ -64,21 +59,30 @@ public class StopWatch : MonoBehaviour {
         //Pop up appears to show how much XP user has earned
         PopUp.SetActive(true);
         //Pop up text
-        EarnedScoreText.text = "You've just earned" + " " + (earnedGlobalXP).ToString() + "XP in Global and"
-                                + " " + (earnedLocalXP).ToString() +"XP in" + " " + (dropDown.options[dropDown.value].text);
-
+        EarnedScoreText.text = "You've just earned" + " " + (earnedLocalXP + GlobalXP).ToString() +"XP in" + " " + (dropDown.options[dropDown.value].text)
+                                + " " + (earnedGlobalXP).ToString() + "XP in other buildings";
 
         theTime = 0;
-
+        MainXP += earnedGlobalXP;
+        ArtsXP += earnedGlobalXP;
+        BioCheXP += earnedGlobalXP;
+        ComSciXP += earnedGlobalXP;
+        EngXP += earnedGlobalXP;
+        GeoXP += earnedGlobalXP;
+        LanXP += earnedGlobalXP;
+        LawPolXP += earnedGlobalXP;
+        PhyMathXP += earnedGlobalXP;
         switch (dropDown.options[dropDown.value].text){
             case "MAIN":
                 MainXP += earnedLocalXP;
+                Debug.Log(BioCheXP);
                 break;
             case "ARTS":
                 ArtsXP += earnedLocalXP;
                 break;
             case "BIOLOGY CHEMISTRY":
                 BioCheXP += earnedLocalXP;
+                Debug.Log(BioCheXP);
                 break;
             case "COMPUTER SCIENCE":
                 ComSciXP += earnedLocalXP;

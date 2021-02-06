@@ -10,11 +10,12 @@ public class UnlockBuilding : MonoBehaviour
     private double globalXP;
     private double localXP;
     private Button button;
-    private int BuildingXP = 2000;
+    private int BuildingXP = 90000;
     private GameObject lockIcon;
     private string currentSceneName;
     void Start()
     {   
+        globalXP = StopWatch.GlobalXP;
         currentSceneName = SceneManager.GetActiveScene().name;
         switch (currentSceneName){
             case "Main":
@@ -45,7 +46,7 @@ public class UnlockBuilding : MonoBehaviour
                 localXP = StopWatch.PhyMathXP;
                 break;
         }
-        globalXP = StopWatch.GlobalXP;
+        
         button = this.GetComponent<Button>();
         lockIcon = this.transform.GetChild(0).gameObject;
         for (int i = 0; i<buildings.Length; i++){
