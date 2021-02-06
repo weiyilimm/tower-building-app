@@ -20,15 +20,15 @@ public class ColorPicker : MonoBehaviour
     private double globalXP;
     private double localXP;
     //No need study to get matte color
-    private int MatteXP = 500;
+    private int MatteXP = 15000;
     //18 hourss of study to get metallic color
-    private int MetallicXP = 1000;
+    private int MetallicXP = 30000;
     //36 hours of study to get emissive color
-    private int EmissiveXP = 1500;
+    private int EmissiveXP = 45000;
     //72 hours of study to get gradient color
-    private int GradientXP = 2000;
+    private int GradientXP = 60000;
     //144 hours of study to get fancy color
-    private int FancyXP = 2500;
+    private int FancyXP = 75000;
     private GameObject lockIcon;
     private string currentSceneName;
 
