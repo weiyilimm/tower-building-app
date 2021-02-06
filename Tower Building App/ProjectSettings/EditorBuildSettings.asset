@@ -31,7 +31,7 @@ EditorBuildSettings:
     guid: cc6d75e874f762b48ac5c7e2cda8e00e
   - enabled: 1
     path: Assets/Scenes/Buildings/Arts.unity
-    guid: a9614ff8e992d4140ae238774f56f0dd
+    guid: 43eb4c37cab17a24b81b7e10c8eb0a2d
   - enabled: 1
     path: Assets/Scenes/Buildings/BioChe.unity
     guid: cf881dcf0eff560449c93bdb29ac9ef0

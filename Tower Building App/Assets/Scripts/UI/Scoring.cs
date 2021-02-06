@@ -21,7 +21,7 @@ public class Scoring : MonoBehaviour
     XP multiplier is used to multiply the XP per second
     Default is 1XP per second
     */
-    private int multiplierXP = 1000000;
+    private int multiplierXP = 1;
     //Local Earned XP is how much XP earned in a specific building
     private double localEarnedXP;
     /*
