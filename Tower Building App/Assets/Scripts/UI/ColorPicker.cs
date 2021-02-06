@@ -7,120 +7,121 @@ using TMPro;
 
 public class ColorPicker : MonoBehaviour
 {   
-    public TextMeshProUGUI XPText;
     public Material[] Matte;
     public Material[] Metallic;
     public Material[] Emissive;
     public Material[] Gradient;
     public Material[] Fancy;
-    public MeshRenderer[] meshRenderer;
+    //To store buildings' renderer
+    public MeshRenderer[] MeshRenderer;
+    //To store each color buttons
+    public Button[] Buttons;
     private Material[] materials;
-    private Button button;
     
-    private double globalXP;
+    //Get the specific building XP by accessing Scoring.cs 
     private double localXP;
-    //No need study to get matte color
-    private int MatteXP = 15000;
-    //18 hourss of study to get metallic color
-    private int MetallicXP = 30000;
-    //36 hours of study to get emissive color
-    private int EmissiveXP = 45000;
-    //72 hours of study to get gradient color
-    private int GradientXP = 60000;
-    //144 hours of study to get fancy color
-    private int FancyXP = 75000;
+    //15000XP required to to next matte color
+    private int matteXP = 15000;
+    //30000XP required to to next metallic color
+    private int metallicXP = 30000;
+    //45000XP required to to next eemissive color
+    private int emissiveXP = 45000;
+    //60000XP required to to next gradient color
+    private int gradientXP = 60000;
+    //75000XP required to to next fancy color
+    private int fancyXP = 75000;
     private GameObject lockIcon;
+    //Get the current scene that user in
     private string currentSceneName;
-
     void Start()
     {   
+        //Get the current scene name that user in
         currentSceneName = SceneManager.GetActiveScene().name;
-        switch (currentSceneName){
+        //Assign the localXP to be specific building's XP
+        switch (currentSceneName)
+        {
             case "Main":
-                localXP = StopWatch.MainXP;
+                localXP = Scoring.MainXP;
                 break;
             case "Arts":
-                localXP = StopWatch.ArtsXP;
+                localXP = Scoring.ArtsXP;
                 break;
             case "BioChe":
-                localXP = StopWatch.BioCheXP;
+                localXP = Scoring.BioCheXP;
                 break;
             case "ComSci":
-                localXP = StopWatch.ComSciXP;
+                localXP = Scoring.ComSciXP;
                 break;
             case "Eng":
-                localXP = StopWatch.EngXP;
+                localXP = Scoring.EngXP;
                 break;
             case "Geo":
-                localXP = StopWatch.GeoXP;
+                localXP = Scoring.GeoXP;
                 break;
             case "Lan":
-                localXP = StopWatch.LanXP;
+                localXP = Scoring.LanXP;
                 break;
             case "LawPol":
-                localXP = StopWatch.LawPolXP;
+                localXP = Scoring.LawPolXP;
                 break;
             case "PhyMath":
-                localXP = StopWatch.PhyMathXP;
+                localXP = Scoring.PhyMathXP;
                 break;
         }
 
-        globalXP = StopWatch.GlobalXP;
-        XPText.text = localXP.ToString() + "XP";
-        //get the current colour button
-        button = this.GetComponent<Button>();
-        lockIcon = this.transform.GetChild(0).gameObject;
-        for (int i=0; i<meshRenderer.Length; i++){
-            // we need a copy of the current index, in order to change color
-            var x = i;
-            //take the third and fourth digit of the button name
-            int colours = int.Parse(button.name.Substring(1,2));
-            int elements = int.Parse(button.name[3].ToString());
+        for (int i = 0; i<Buttons.Length; i++){
+            //get the current colour button
+            lockIcon = Buttons[i].transform.GetChild(0).gameObject;
+            for (int j=0; j<MeshRenderer.Length; j++){
+                // we need a copy of the current index, in order to change color
+                var x = j;
+                //take the third and fourth digit of the button name
+                int colours = int.Parse(Buttons[i].name.Substring(1,2));
+                int elements = int.Parse(Buttons[i].name[3].ToString());
 
-
-            if ((globalXP >= colours * MatteXP) || (localXP >= colours * MatteXP)){
-                if (button.name[0].ToString() == "0"){
-                    lockIcon.SetActive(false);
-                    button.onClick.AddListener(() => MatteColor(x,colours,elements));
+                if (localXP >= colours * matteXP){
+                    if (Buttons[i].name[0].ToString() == "0"){
+                        lockIcon.SetActive(false);
+                        Buttons[i].onClick.AddListener(() => MatteColor(x,colours,elements));
+                    }
+                }
+                if (localXP >= ((colours * metallicXP) + 500)){
+                    if (Buttons[i].name[0].ToString() == "1"){
+                        lockIcon.SetActive(false);
+                        Buttons[i].onClick.AddListener(() => MetallicColor(x,colours,elements));
+                    }
+                }
+                if (localXP >= ((colours * emissiveXP) + 500)){
+                    if (Buttons[i].name[0].ToString() == "2"){
+                        lockIcon.SetActive(false);
+                        Buttons[i].onClick.AddListener(() => EmissiveColor(x,colours,elements));
+                    }
+                }
+                if (localXP >= ((colours * gradientXP) + 500)){
+                    if (Buttons[i].name[0].ToString() == "3"){
+                        lockIcon.SetActive(false);
+                        Buttons[i].onClick.AddListener(() => GradientColor(x,colours,elements));
+                    }
+                }
+                if (localXP >= ((colours * fancyXP) + 500)){
+                    if (Buttons[i].name[0].ToString() == "4"){
+                        lockIcon.SetActive(false);
+                        Buttons[i].onClick.AddListener(() => FancyColor(x,colours,elements));
+                    }
                 }
             }
-            if ((globalXP >= ((colours * MetallicXP) + 500)) || (localXP >= ((colours * MetallicXP) + 500))){
-                if (button.name[0].ToString() == "1"){
-                    lockIcon.SetActive(false);
-                    button.onClick.AddListener(() => MetallicColor(x,colours,elements));
-                }
-            }
-            if ((globalXP >= ((colours * EmissiveXP) + 500)) || (localXP >= ((colours * EmissiveXP) + 500))){
-                if (button.name[0].ToString() == "2"){
-                    lockIcon.SetActive(false);
-                    button.onClick.AddListener(() => EmissiveColor(x,colours,elements));
-                }
-            }
-            if ((globalXP >= ((colours * GradientXP) + 500)) || (localXP >= ((colours * GradientXP) + 500))){
-                if (button.name[0].ToString() == "3"){
-                    lockIcon.SetActive(false);
-                    button.onClick.AddListener(() => GradientColor(x,colours,elements));
-                }
-            }
-            if ((globalXP >= ((colours * FancyXP) + 500)) || (localXP >= ((colours * FancyXP) + 500))){
-                if (button.name[0].ToString() == "4"){
-                    lockIcon.SetActive(false);
-                    button.onClick.AddListener(() => FancyColor(x,colours,elements));
-                }
-            }
-
         }
     }
     
     /*
-    i indicates which building's meshRenderer
+    i indicates which building's MeshRenderer
     j indicates which the colours of specific material e.g. Emissive[0] is Blue 
     k indicates primary key or secondary key e.g. 0 is primary key, 1 is secondary key
     */
 
     //MATTE COLOURS
     public void MatteColor(int i,int j, int k){
-        materials = meshRenderer[i].materials;
+        materials = MeshRenderer[i].materials;
 
         if (k == 0){
             User_Data.data.temp_primary = j;
@@ -130,12 +131,12 @@ public class ColorPicker : MonoBehaviour
             materials = find_mat(Matte,materials,"2",j);
         }
 
-        meshRenderer[i].materials = materials;
+        MeshRenderer[i].materials = materials;
     }
 
     //METALLIC COLOURS
     public void MetallicColor(int i,int j, int k){
-        materials = meshRenderer[i].materials;
+        materials = MeshRenderer[i].materials;
 
         if (k == 0){
             User_Data.data.temp_primary = 100+j;
@@ -145,12 +146,12 @@ public class ColorPicker : MonoBehaviour
             materials = find_mat(Metallic,materials,"2",j);
         }
 
-        meshRenderer[i].materials = materials;
+        MeshRenderer[i].materials = materials;
     }
 
     //EMISSIVE COLOURS
     public void EmissiveColor(int i,int j, int k){
-        materials = meshRenderer[i].materials;
+        materials = MeshRenderer[i].materials;
 
         if (k == 0){
             User_Data.data.temp_primary = 200+j;
@@ -160,12 +161,12 @@ public class ColorPicker : MonoBehaviour
             materials = find_mat(Emissive,materials,"2",j);
         }
 
-        meshRenderer[i].materials = materials;
+        MeshRenderer[i].materials = materials;
     }
     
     //GRADIENT COLOURS
     public void GradientColor(int i,int j, int k){
-        materials = meshRenderer[i].materials;
+        materials = MeshRenderer[i].materials;
 
         if (k == 0){
             User_Data.data.temp_primary = 300+j;
@@ -175,12 +176,12 @@ public class ColorPicker : MonoBehaviour
             materials = find_mat(Gradient,materials,"2",j);
         }
 
-        meshRenderer[i].materials = materials;
+        MeshRenderer[i].materials = materials;
     }
 
     //FANCY COLOURS
     public void FancyColor(int i,int j, int k){
-        materials = meshRenderer[i].materials;
+        materials = MeshRenderer[i].materials;
 
         if (k == 0){
             User_Data.data.temp_primary = 400+j;
@@ -190,7 +191,7 @@ public class ColorPicker : MonoBehaviour
             materials = find_mat(Fancy,materials,"2",j);
         }
 
-        meshRenderer[i].materials = materials;
+        MeshRenderer[i].materials = materials;
     }
 
     public Material[] find_mat(Material[] mat_type, Material[] materials, string identifier, int j){
