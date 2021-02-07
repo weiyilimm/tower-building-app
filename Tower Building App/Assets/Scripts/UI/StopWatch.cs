@@ -1,31 +1,29 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class StopWatch : MonoBehaviour {
 
-    private TextMeshProUGUI text;
-    float theTime;
-    public float speed = 1;
-    bool playing;
+    //Used capitalize character to indicate public field
+    //Used for 00:00:00 text shown in the clock scene
+    public TextMeshProUGUI TimerText;
+    //The variable will be used in scoring.cs 
+    public static float TimeCounted;
+    //Used lower case character to indicate private field
+    private bool playing;
+    
 
- // Use this for initialization
-    void Start () {
-        
-        text = GetComponent<TMPro.TextMeshProUGUI>();
-    }
- 
- // Update is called once per frame
     void Update () {
         if (playing == true)
-        {
-            theTime += Time.deltaTime * speed;
-            string hours = Mathf.Floor((theTime % 216000) / 3600).ToString("00");
-            string minutes = Mathf.Floor((theTime % 3600) / 60).ToString("00");
-            string seconds = (theTime % 60).ToString("00");
-            text.text = hours + ":" + minutes + ":" + seconds;
+        {   
+            TimeCounted += Time.deltaTime;
+            string hours = Mathf.Floor((TimeCounted % 216000) / 3600).ToString("00");
+            string minutes = Mathf.Floor((TimeCounted % 3600) / 60).ToString("00");
+            string seconds = (TimeCounted % 60).ToString("00");
+            TimerText.text = hours + ":" + minutes + ":" + seconds;
         }
     }
 
@@ -35,14 +33,11 @@ public class StopWatch : MonoBehaviour {
     }
 
     public void ClickStop()
-    {
+    {   
         playing = false;
-    }
-
-    public void Reset()
-    {
-        playing = false;
-        text.text = "00:00:00";
-        theTime = 0;
+        //Set the time to 0 
+        TimeCounted = 0;
+        //Replace the timer text to 00:00:00
+        TimerText.text = "00:00:00";
     }
 }
