@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1583,6 +1583,7 @@ GameObject:
   - component: {fileID: 789581732}
   - component: {fileID: 789581734}
   - component: {fileID: 789581733}
+  - component: {fileID: 789581735}
   m_Layer: 5
   m_Name: Buildings
   m_TagString: Untagged
@@ -1657,6 +1658,28 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &789581735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789581731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f73b92d524c1a4b8970f8ebd85e2f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EarnedScoreText:
+  - {fileID: 1892504315866347404}
+  - {fileID: 1702897433}
+  - {fileID: 725157814}
+  - {fileID: 1893691846}
+  - {fileID: 587186665}
+  - {fileID: 96253406}
+  - {fileID: 403549175}
+  - {fileID: 26551314}
+  - {fileID: 2062954047}
 --- !u!1 &856422963
 GameObject:
   m_ObjectHideFlags: 0
