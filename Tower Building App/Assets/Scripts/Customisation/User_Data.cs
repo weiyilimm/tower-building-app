@@ -30,6 +30,20 @@ public class User_Data : MonoBehaviour{
         data = this;
 
         //CREATE BUILDING INSTANCES HERE
+        createBuildings();
+
+        // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
+
+        // Login 
+        // GetRequest("User");
+        // GetRequest("Buildings");
+
+        // OLD CODE leaving for referal to for now
+        //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
+        
+    }
+
+    private void createBuildings(){
         Building Main = new Building(100,4,0,500,4);
         building_stats.Add(Main);
         Building Main2 = new Building(101,5,1,500,2);
@@ -54,9 +68,6 @@ public class User_Data : MonoBehaviour{
         building_stats.Add(Law_Politics);
         Building Physics_Maths = new Building(-1,-1,0,100,1);
         building_stats.Add(Physics_Maths);
-
-        //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
-        //file2.onClick.AddListener(() => LoadJson("Assets/JSON/file2.json"));
     }
 
     private void LoadJson(string filename)
@@ -90,6 +101,34 @@ public class User_Data : MonoBehaviour{
             Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats.Add(newBuilding);
         }
+    }
+
+    private void CreateBuildingJSON(){
+        // Create the JSON file storing the building data for writing to the database
+    }
+
+    private void CreateUserJSON(){
+        // Create the JSON file storing the User login data for writing to the database
+    }
+
+    private void TranslateBuildingJSON(){
+        // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
+    }
+
+    private void TranslateUserJSON(){
+        // Reads a JSON file from the database to create / update the Users data stored in Unity 
+    }
+
+    private void GetRequest(string targetAPI){
+        // Constructs and sends a GET request to the database to retreive a JSON file
+
+        // targetAPI determines whether a BuildingAPI or UserAPI request will be made
+    }
+
+    private void PutRequest(string targetAPI){
+        // Constructs and sends a PUT request to the database to update it with the given JSON file
+
+        // targetAPI determines whether a BuildingAPI or UserAPI request will be made
     }
 }
 
