@@ -1,6 +1,4 @@
 package com.example.towerbuilderspring.model;
-
-import com.example.towerbuilderspring.repository.ModelRepository;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -28,8 +26,6 @@ public class Users {
 
     private int totalexp = 0;        // Default Values
 
-    private int score = 0;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_towers",
             joinColumns = {
@@ -48,7 +44,6 @@ public class Users {
         this.email = email;
         this.password = password;
         this.totalexp = totalexp;
-        this.score = score;
     }
 
     public UUID getId() {
@@ -89,14 +84,6 @@ public class Users {
 
     public void setTotalExp(int totalexp) {
         this.totalexp = totalexp;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public Set<BuildingModels> getUserBuildings() {
