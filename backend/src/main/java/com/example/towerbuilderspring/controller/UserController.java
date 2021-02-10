@@ -123,26 +123,39 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/User/{userId}/Buildings/{buildingId}")
-//    public ResponseEntity<List<Object>> changeUserBuilding(@PathVariable("userId") UUID userId,
-//                                                           @PathVariable("buildingID") long buildingId,
-//                                                           @RequestBody BuildingModels building) {
-//        try {
-//            BuildingRequestValid validator = new BuildingRequestValid();
-//            List<Object> result = validator.validate(userId, buildingId);
-//            if (result != null) {
-//                Users user = (Users) result.get(0);
-//                BuildingModels previousBuilding = (BuildingModels) result.get(1);
-//
-//                // Find the current user model of the same group and replace it.
-//
-//
-//            } else {
-//                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @PostMapping("/User/{userId}/Buildings/{buildingId}")
+    public ResponseEntity<List<Object>> changeUserBuilding(@PathVariable("userId") UUID userId,
+                                                           @PathVariable("buildingID") long buildingId,
+                                                           @RequestBody BuildingModels building) {
+        try {
+            BuildingRequestValid validator = new BuildingRequestValid();
+            List<Object> result = validator.validate(userId, buildingId);
+            if (result != null) {
+                Users user = (Users) result.get(0);
+                BuildingModels buildingToAdd = (BuildingModels) result.get(1);
+                // Get the group of the building.
+                long group = buildingToAdd.getModelGroup();
+
+                // Look for the building that is currently representing that user in the group.
+                BuildingModels getCurrentUserBuildingModel = user.findByBuildingGroup(group);
+
+                // User already has a model from that group activated.
+                if (getCurrentUserBuildingModel != null) {
+                    // Todo Create method to remove model.
+                } else {
+                    user.getUserBuildings().add(buildingToAdd);
+                    userRepository.save(user);
+                    return new ResponseEntity<>(null, HttpStatus.OK);
+                }
+
+
+                // Find the current user model of the same group and replace it.
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

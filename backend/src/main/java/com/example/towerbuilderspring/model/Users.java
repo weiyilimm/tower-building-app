@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,6 +49,16 @@ public class Users {
         this.password = password;
         this.totalexp = totalexp;
         this.score = score;
+    }
+
+    public BuildingModels findByBuildingGroup(long group) {
+        for (Iterator<BuildingModels> it = userBuildings.iterator(); it.hasNext();) {
+            BuildingModels buildingByGroup = it.next();
+            if (buildingByGroup.getModelGroup() == group ){
+                return buildingByGroup;
+            }
+        }
+        return null;
     }
 
     public UUID getId() {
