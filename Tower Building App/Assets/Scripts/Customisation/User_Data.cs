@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using SimpleJSON;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class User_Data : MonoBehaviour{
@@ -40,7 +41,11 @@ public class User_Data : MonoBehaviour{
 
         // OLD CODE leaving for referal to for now
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
-        
+        Debug.Log("Run from User Data");
+        CreateRequest("GET", "Models", 0);
+
+
+
     }
 
     private void createBuildings(){
@@ -103,9 +108,37 @@ public class User_Data : MonoBehaviour{
         }
     }
 
+    /* 
+        RequestType = "GET" or "Update"
+        Table = "Users" or "Models"
+     */
+    private void CreateRequest(string RequestType, string Table, int id = -1)
+    {
+        // Building name, User name. User -> 
+        string apiString = "api/";
+
+        // Go to Users table or the Buildings Table.
+        if (RequestType == "GET")
+        {
+            // Get all the buildings.
+            apiString = string.Concat(apiString, Table);
+
+            if (id > -1)
+            {
+                string requestedId = string.Concat("/", id.ToString());
+                apiString = string.Concat(apiString, requestedId);
+            }
+            apiString = string.Concat("http://localhost:8080/", apiString);
+            StartCoroutine(GetRequest(apiString));
+
+        }
+    }
+
     private void CreateBuildingJSON(){
         // Create the JSON file storing the building data for writing to the database
     }
+
+    // Translation Functions
 
     private void CreateUserJSON(){
         // Create the JSON file storing the User login data for writing to the database
@@ -119,8 +152,27 @@ public class User_Data : MonoBehaviour{
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
     }
 
-    private void GetRequest(string targetAPI){
+
+    IEnumerator GetRequest(string targetAPI){
+
+        Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
+        UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
+        Debug.Log("Got the data");
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error while sending " + uwr.error);
+        } 
+        else
+        {
+            string raw = uwr.downloadHandler.text;
+            Debug.Log("Received: " + raw);
+            BuildingTemp modelGot = JsonUtility.FromJson<BuildingTemp>(raw);
+            Debug.Log("The model given was " + modelGot.name);
+
+        }
 
         // targetAPI determines whether a BuildingAPI or UserAPI request will be made
     }
@@ -146,4 +198,12 @@ public class Building{
         building_xp = xp;
         m_height = h;
     }
+}
+
+public class BuildingTemp
+{
+    public long buildingCode;
+    public string name;
+    public long group;  
+
 }
