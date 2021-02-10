@@ -50,7 +50,7 @@ public class UserController {
     @PostMapping("/Users/")
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp(), user.getScore());
+            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp());
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
@@ -67,7 +67,6 @@ public class UserController {
             Users user_to_update = userData.get();
             user_to_update.setEmail(user.getEmail());
             user_to_update.setTotalExp(user.getTotalExp());
-            user_to_update.setScore(user.getScore());
 
             return new ResponseEntity<>(userRepository.save(user_to_update), HttpStatus.OK);
         }
