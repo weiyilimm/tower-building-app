@@ -103,12 +103,44 @@ public class User_Data : MonoBehaviour{
 
     private void CreateBuildingJSON(){
         // Create the JSON file storing the building data for writing to the database
+
+        /*
+            Assuming the JSON will be formatted as such:
+            {MainBuildings: 
+                [[Name:"Tower1", Primary:104, Secondary:201, Model:2, Height:3], ... , [Name:"Tower4", Primary...]],   
+            SubjectBuildings:
+                [[Name:"Arts", Primary:012, Secondary:402, Model:1, XP:2036], ... , [Name:"Physics&Maths", Primary...]]
+            }
+        */
+
+        string BuildingsJSON = "test";
+        
+        // Loop through the 4 main building towers to add their data to the JSON string
+        for (int i=0; i<4; i++){
+            //do this
+        }
+
+        // Loop through the 8 subject buildings to add their data to the JSON string
+        for (int j=0; j<8; j++){
+            //do this
+        }
+
     }
 
     // Translation Functions
 
-    private void CreateUserJSON(){
+    private string CreateUserJSON(){
         // Create the JSON file storing the User login data for writing to the database
+
+        /*
+            Assuming the JSON will be formatted as such:
+            {User: 
+                [username:"John", globalXP:24564, (any other relevant data)]   
+            }
+        */
+
+        string UserJSON = "{User:[username:" + Username + ",globalXP:" + global_xp.ToString() + "]}";
+        return UserJSON;
     }
 
     private void TranslateBuildingJSON(string rawJSON){
