@@ -75,39 +75,6 @@ public class User_Data : MonoBehaviour{
         building_stats.Add(Physics_Maths);
     }
 
-    private void LoadJson(string filename)
-    {
-        JSONNode node;
-        using (StreamReader r = new StreamReader(filename))
-        {
-            //read in the json
-            json = r.ReadToEnd();
-
-            //reformat the json into dictionary style convention
-            node = JSON.Parse(json);
-        }
-        string username = JSON.Parse(node["username"].Value);
-        Debug.Log(username);
-        Username = username;
-        int xp = int.Parse(node["global_xp"].Value);
-        Debug.Log(global_xp);
-        global_xp = xp;
-        building_stats.Clear();
-        for (int i=0; i<2; i++){
-            int primary_colour = int.Parse(node["buildings"][i]["primary_colour"].Value);
-            Debug.Log(primary_colour);
-            int secondary_colour = int.Parse(node["buildings"][i]["secondary_colour"].Value);
-            Debug.Log(secondary_colour);
-            int model = int.Parse(node["buildings"][i]["model"].Value);
-            Debug.Log(model);
-            int building_xp = int.Parse(node["buildings"][i]["building_xp"].Value);
-            Debug.Log(building_xp);
-            int m_height = 1;
-            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
-            building_stats.Add(newBuilding);
-        }
-    }
-
     /* 
         RequestType = "GET" or "Update"
         Table = "Users" or "Models"
@@ -144,12 +111,81 @@ public class User_Data : MonoBehaviour{
         // Create the JSON file storing the User login data for writing to the database
     }
 
-    private void TranslateBuildingJSON(){
+    private void TranslateBuildingJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
+        
+        /*
+            Assuming the JSON will be formatted as such:
+            {MainBuildings: 
+                [[Name:"Tower1", Primary:104, Secondary:201, Model:2, Height:3], ... , [Name:"Tower4", Primary...]],   
+            SubjectBuildings:
+                [[Name:"Arts", Primary:012, Secondary:402, Model:1, XP:2036], ... , [Name:"Physics&Maths", Primary...]]
+            }
+        */
+        
+        JSONNode node;
+        using (StreamReader r = new StreamReader(rawJSON)) {
+            //read in the json
+            json = r.ReadToEnd();
+
+            //reformat the json into dictionary style convention
+            node = JSON.Parse(json);
+        }
+
+        //Clears the Unity building list representation so it can be created fresh with the correct data
+        building_stats.Clear();
+
+        // Loop through the 4 main building towers to create their Unity representations
+        for (int i=0; i<4; i++){
+            int primary_colour = int.Parse(node["MainBuildings"][i]["Primary"].Value);
+            
+            int secondary_colour = int.Parse(node["MainBuildings"][i]["Secondary"].Value);
+            
+            int model = int.Parse(node["MainBuildings"][i]["Model"].Value);
+            
+            int m_height = int.Parse(node["MainBuildings"][i]["Height"].Value);
+
+            Building newBuilding = new Building(primary_colour,secondary_colour,model,0, m_height);
+            building_stats.Add(newBuilding);
+        }
+
+        // Loop through the 8 subject buildings to create their Unity representations 
+        for (int j=0; j<8; j++){
+            int primary_colour = int.Parse(node["SubjectBuildings"][j]["Primary"].Value);
+            
+            int secondary_colour = int.Parse(node["SubjectBuildings"][j]["Secondary"].Value);
+            
+            int model = int.Parse(node["SubjectBuildings"][j]["Model"].Value);
+            
+            int building_xp = int.Parse(node["SubjectBuildings"][j]["XP"].Value);
+
+            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, 0);
+            building_stats.Add(newBuilding);
+        }
     }
 
-    private void TranslateUserJSON(){
+    private void TranslateUserJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
+
+        /*
+            Assuming the JSON will be formatted as such:
+            {User: 
+                [username:"John", globalXP:24564, (any other relevant data)]   
+            }
+        */
+
+        JSONNode node;
+        using (StreamReader r = new StreamReader(rawJSON)) {
+            //read in the json
+            json = r.ReadToEnd();
+
+            //reformat the json into dictionary style convention
+            node = JSON.Parse(json);
+        }
+        string username = JSON.Parse(node["User"]["username"].Value);
+        Username = username;
+        int xp = int.Parse(node["User"]["global_xp"].Value);
+        global_xp = xp;
     }
 
 
@@ -171,16 +207,29 @@ public class User_Data : MonoBehaviour{
             Debug.Log("Received: " + raw);
             BuildingTemp modelGot = JsonUtility.FromJson<BuildingTemp>(raw);
             Debug.Log("The model given was " + modelGot.name);
-
         }
-
-        // targetAPI determines whether a BuildingAPI or UserAPI request will be made
     }
 
-    private void PutRequest(string targetAPI){
+    IEnumerator PutRequest(string targetAPI, string json){
         // Constructs and sends a PUT request to the database to update it with the given JSON file
 
-        // targetAPI determines whether a BuildingAPI or UserAPI request will be made
+        Debug.Log(targetAPI);
+        
+        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, json);
+        
+        // add the JSON data to send here? or before in the creation of the call?
+        Debug.Log("Sending the data...");
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error while sending " + uwr.error);
+        } 
+        else
+        {
+            string raw = uwr.downloadHandler.text;
+            Debug.Log("Message Recieved - data updated");
+        }
     }
 }
 
