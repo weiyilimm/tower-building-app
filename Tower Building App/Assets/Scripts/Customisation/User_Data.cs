@@ -101,7 +101,7 @@ public class User_Data : MonoBehaviour{
         }
     }
 
-    private void CreateBuildingJSON(){
+    private string CreateBuildingJSON(){
         // Create the JSON file storing the building data for writing to the database
 
         /*
@@ -113,17 +113,27 @@ public class User_Data : MonoBehaviour{
             }
         */
 
-        string BuildingsJSON = "test";
+        string BuildingJSON = "{Buildings:[";
         
-        // Loop through the 4 main building towers to add their data to the JSON string
-        for (int i=0; i<4; i++){
-            //do this
+        // Loop through the buildings to add their data to the JSON string
+        string toAppend = "";
+        for (int i=0; i<12; i++){
+            string bc = i.ToString() + building_stats[i].model.ToString();
+            string bn = "TEMP"; // Create a dictionary in codeConverter to get the name
+            string bx = building_stats[i].building_xp.ToString();
+            string h = building_stats[i].m_height.ToString();
+            string mg = i.ToString(); //Need to check this is correct
+            string pc = building_stats[i].primary_colour.ToString();
+            string sc = building_stats[i].secondary_colour.ToString();
+            
+            string ParttoAppend = "[building_code: " + bc + ",building_name:" + bn + ",building_xp:" + bx + ",height:" + h + ",model_group:" + mg + ",primary_colour:" + pc + ",secondary_colour:" + sc + "],";
+            toAppend = toAppend + ParttoAppend;
         }
+        
+        BuildingJSON = BuildingJSON + toAppend;
+        BuildingJSON = BuildingJSON + "]}";
 
-        // Loop through the 8 subject buildings to add their data to the JSON string
-        for (int j=0; j<8; j++){
-            //do this
-        }
+        return BuildingJSON;
 
     }
 
@@ -148,10 +158,8 @@ public class User_Data : MonoBehaviour{
         
         /*
             Assuming the JSON will be formatted as such:
-            {MainBuildings: 
-                [[Name:"Tower1", Primary:104, Secondary:201, Model:2, Height:3], ... , [Name:"Tower4", Primary...]],   
-            SubjectBuildings:
-                [[Name:"Arts", Primary:012, Secondary:402, Model:1, XP:2036], ... , [Name:"Physics&Maths", Primary...]]
+            {Buildings:
+                [[Name:"MainTower1", Primary:012, Secondary:402, Model:1, XP:2036, height:3], ... , [Name:"Physics&Maths", Primary...]]
             }
         */
         
@@ -167,31 +175,22 @@ public class User_Data : MonoBehaviour{
         //Clears the Unity building list representation so it can be created fresh with the correct data
         building_stats.Clear();
 
-        // Loop through the 4 main building towers to create their Unity representations
-        for (int i=0; i<4; i++){
-            int primary_colour = int.Parse(node["MainBuildings"][i]["Primary"].Value);
+        // Loop through the buildings to create their Unity representations 
+        for (int j=0; j<12; j++){
+            int primary_colour = int.Parse(node["Buildings"][j]["primary_colour"].Value);
             
-            int secondary_colour = int.Parse(node["MainBuildings"][i]["Secondary"].Value);
+            int secondary_colour = int.Parse(node["Buildings"][j]["secondary_colour"].Value);
             
-            int model = int.Parse(node["MainBuildings"][i]["Model"].Value);
-            
-            int m_height = int.Parse(node["MainBuildings"][i]["Height"].Value);
+            int model_code = int.Parse(node["Buildings"][j]["building_code"].Value);
+            string model_string = model_code.ToString();
+            model_string = model_string.Substring(-1);
+            int model = System.Convert.ToInt32(model_string);
 
-            Building newBuilding = new Building(primary_colour,secondary_colour,model,0, m_height);
-            building_stats.Add(newBuilding);
-        }
+            int building_xp = int.Parse(node["Buildings"][j]["building_xp"].Value);
 
-        // Loop through the 8 subject buildings to create their Unity representations 
-        for (int j=0; j<8; j++){
-            int primary_colour = int.Parse(node["SubjectBuildings"][j]["Primary"].Value);
-            
-            int secondary_colour = int.Parse(node["SubjectBuildings"][j]["Secondary"].Value);
-            
-            int model = int.Parse(node["SubjectBuildings"][j]["Model"].Value);
-            
-            int building_xp = int.Parse(node["SubjectBuildings"][j]["XP"].Value);
+            int m_height = int.Parse(node["Buildings"][j]["height"].Value);
 
-            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, 0);
+            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats.Add(newBuilding);
         }
     }
