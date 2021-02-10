@@ -42,7 +42,7 @@ public class User_Data : MonoBehaviour{
         // OLD CODE leaving for referal to for now
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
         Debug.Log("Run from User Data");
-        CreateRequest("GET", "Models", 0);
+        CreateRequest("GET", "Models", 100);
 
 
 
@@ -237,8 +237,8 @@ public class User_Data : MonoBehaviour{
         {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
-            BuildingTemp modelGot = JsonUtility.FromJson<BuildingTemp>(raw);
-            Debug.Log("The model given was " + modelGot.name);
+            BuildingTrue modelGot = JsonUtility.FromJson<BuildingTrue>(raw);
+            Debug.Log("The model given was " + modelGot.building_name);
         }
     }
 
@@ -281,10 +281,26 @@ public class Building{
     }
 }
 
-public class BuildingTemp
+public class BuildingTrue
 {
-    public long buildingCode;
-    public string name;
-    public long group;  
+    public long building_code;
+    public string building_name;
+    public int building_xp;
+    public int height;
+    public long model_group;
+    public string primary_colour;
+    public string secondary_colour;
 
+    public BuildingTrue(long building_code, long building_name, int building_xp, int height,
+        long model_group, string primary_colour, string secondary_colour)
+    {
+        building_code = building_code;
+        building_name = building_name;
+        building_xp = building_xp;
+        height = height;
+        model_group = model_group;
+        primary_colour = primary_colour;
+        secondary_colour = secondary_colour;
+    }
 }
+
