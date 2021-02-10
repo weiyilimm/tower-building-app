@@ -29,22 +29,21 @@ public class BuildingModels {
     private int height;
 
     @NotNull
-    private String primaryColour;
+    private int primaryColour;
 
     @NotNull
-    private String secondaryColour;
+    private int secondaryColour;
 
     @NotNull
     private long modelGroup; // Each building has it's own "group". When a building is swapped,
                              // the building it swaps with must coincide with it's own group.
-
 
     @ManyToMany(mappedBy = "userBuildings", fetch = FetchType.LAZY)
     private Set<Users> users = new HashSet<>();
 
     public BuildingModels() {};
 
-    public BuildingModels(long buildingCode, String buildingName, long modelGroup, int building_xp, String primaryColour, String secondaryColour) {
+    public BuildingModels(long buildingCode, String buildingName, long modelGroup, int building_xp, int primaryColour, int secondaryColour) {
         this.buildingCode = buildingCode;
         this.buildingName = buildingName;
         this.modelGroup = modelGroup;
@@ -61,19 +60,19 @@ public class BuildingModels {
         this.height = height;
     }
 
-    public String getPrimaryColour() {
+    public int getPrimaryColour() {
         return primaryColour;
     }
 
-    public void setPrimaryColour(String primaryColour) {
+    public void setPrimaryColour(int primaryColour) {
         this.primaryColour = primaryColour;
     }
 
-    public String getSecondaryColour() {
+    public int getSecondaryColour() {
         return secondaryColour;
     }
 
-    public void setSecondaryColour(String secondaryColour) {
+    public void setSecondaryColour(int secondaryColour) {
         this.secondaryColour = secondaryColour;
     }
 

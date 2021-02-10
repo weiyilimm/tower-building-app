@@ -148,7 +148,6 @@ public class UserController {
 
                 // User already has a model from that group activated.
                 if (getCurrentUserBuildingModel != null) {
-                    // Todo Create method to remove model.
                     user.deleteUserBuilding(buildingId);
                 }
 
