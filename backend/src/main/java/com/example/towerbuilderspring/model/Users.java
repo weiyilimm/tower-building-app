@@ -38,7 +38,7 @@ public class Users {
 
     public Users() {};
 
-    public Users(String userName, String email, String password, int totalexp, int score) {
+    public Users(String userName, String email, String password, int totalexp) {
         this.id = UUID.randomUUID();
         this.userName = userName;
         this.email = email;
@@ -131,7 +131,6 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", totalxp=" + totalexp +
-                ", score=" + score +
                 ", userBuildings=" + userBuildings +
                 '}';
     }
