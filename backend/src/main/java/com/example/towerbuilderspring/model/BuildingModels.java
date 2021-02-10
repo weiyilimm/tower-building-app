@@ -22,29 +22,21 @@ public class BuildingModels {
     private String buildingName;
 
     @NotNull
-    private int buildingModel;
-
-    /**
-     *      Height is an attribute that only appears for the main building.
-     */
-
-    @NotNull
     private int building_xp;
 
+    // Height only exists for the custom building.
     @NotNull
     private int height;
 
     @NotNull
-    private String primary;
+    private String primaryColour;
 
     @NotNull
-    private String secondary;
+    private String secondaryColour;
 
     @NotNull
     private long modelGroup; // Each building has it's own "group". When a building is swapped,
                              // the building it swaps with must coincide with it's own group.
-
-
 
 
     @ManyToMany(mappedBy = "userBuildings", fetch = FetchType.LAZY)
@@ -52,37 +44,37 @@ public class BuildingModels {
 
     public BuildingModels() {};
 
-    public BuildingModels(long buildingCode, String buildingName, long modelGroup, int building_xp, String primary, String secondary) {
+    public BuildingModels(long buildingCode, String buildingName, long modelGroup, int building_xp, String primaryColour, String secondaryColour) {
         this.buildingCode = buildingCode;
         this.buildingName = buildingName;
         this.modelGroup = modelGroup;
         this.building_xp = building_xp;
-        this.primary = primary;
-        this.secondary = secondary;
+        this.primaryColour = primaryColour;
+        this.secondaryColour = secondaryColour;
     }
 
-    public String getPrimary() {
-        return primary;
+    public int getHeight() {
+        return height;
     }
 
-    public void setPrimary(String primary) {
-        this.primary = primary;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public String getSecondary() {
-        return secondary;
+    public String getPrimaryColour() {
+        return primaryColour;
     }
 
-    public void setSecondary(String secondary) {
-        this.secondary = secondary;
+    public void setPrimaryColour(String primaryColour) {
+        this.primaryColour = primaryColour;
     }
 
-    public int getBuildingModel() {
-        return buildingModel;
+    public String getSecondaryColour() {
+        return secondaryColour;
     }
 
-    public void setBuildingModel(int buildingModel) {
-        this.buildingModel = buildingModel;
+    public void setSecondaryColour(String secondaryColour) {
+        this.secondaryColour = secondaryColour;
     }
 
     public int getBuilding_xp() {
