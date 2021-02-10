@@ -2,7 +2,6 @@ package com.example.towerbuilderspring.controller;
 
 
 import com.example.towerbuilderspring.model.BuildingModels;
-import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +51,7 @@ public class ModelController {
     public ResponseEntity<BuildingModels> createModel(@RequestBody BuildingModels model) {
         try {
             BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName(),
-                    model.getModelGroup(), model.getBuilding_xp(), model.getPrimary(), model.getSecondary());
+                    model.getModelGroup(), model.getBuilding_xp(), model.getPrimaryColour(), model.getSecondaryColour());
             modelRepository.save(newModel);
             return new ResponseEntity<>(newModel, HttpStatus.OK);
         }
