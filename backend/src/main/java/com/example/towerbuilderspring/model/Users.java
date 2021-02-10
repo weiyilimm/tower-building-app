@@ -51,16 +51,6 @@ public class Users {
         this.score = score;
     }
 
-    public BuildingModels findByBuildingGroup(long group) {
-        for (Iterator<BuildingModels> it = userBuildings.iterator(); it.hasNext();) {
-            BuildingModels buildingByGroup = it.next();
-            if (buildingByGroup.getModelGroup() == group ){
-                return buildingByGroup;
-            }
-        }
-        return null;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -122,6 +112,26 @@ public class Users {
         }
     }
 
+    public BuildingModels deleteUserBuilding(long id) {
+        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
+            BuildingModels buildingByGroup = it.next();
+            if (buildingByGroup.getBuildingCode() == id) {
+                this.userBuildings.remove(buildingByGroup);
+                return buildingByGroup;
+            }
+        }
+        return null;
+    }
+
+    public BuildingModels findByBuildingGroup(long group) {
+        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
+            BuildingModels buildingByGroup = it.next();
+            if (buildingByGroup.getModelGroup() == group ){
+                return buildingByGroup;
+            }
+        }
+        return null;
+    }
 
     public void addUserBuilding(BuildingModels building) {
         this.userBuildings.add(building);

@@ -142,11 +142,15 @@ public class UserController {
                 // User already has a model from that group activated.
                 if (getCurrentUserBuildingModel != null) {
                     // Todo Create method to remove model.
-                } else {
-                    user.getUserBuildings().add(buildingToAdd);
-                    userRepository.save(user);
-                    return new ResponseEntity<>(null, HttpStatus.OK);
+                    user.deleteUserBuilding(buildingId);
                 }
+
+                // Update the user repository to reflect the new model.
+                user.getUserBuildings().add(buildingToAdd);
+                userRepository.save(user);
+                return new ResponseEntity<>(null, HttpStatus.OK);
+
+
 
 
                 // Find the current user model of the same group and replace it.
