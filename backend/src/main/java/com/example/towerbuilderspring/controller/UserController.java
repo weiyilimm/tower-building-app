@@ -123,6 +123,11 @@ public class UserController {
         }
     }
 
+    /**
+     Implemented updating a User's building as a Post instead of a Put because we're updating a set
+     within the user repository rather then a user (which would be directly modifiable through the
+     repository interface) itself.
+    **/
     @PostMapping("/User/{userId}/Buildings/{buildingId}")
     public ResponseEntity<List<Object>> changeUserBuilding(@PathVariable("userId") UUID userId,
                                                            @PathVariable("buildingID") long buildingId,

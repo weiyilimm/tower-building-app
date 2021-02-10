@@ -10,6 +10,5 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<Users, UUID> {
     List<Users> findByEmail(String email);
-    BuildingModels findByBuildingGroup(long group);
 
 }
