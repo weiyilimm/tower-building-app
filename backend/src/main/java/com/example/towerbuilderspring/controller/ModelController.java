@@ -52,7 +52,7 @@ public class ModelController {
     public ResponseEntity<BuildingModels> createModel(@RequestBody BuildingModels model) {
         try {
             BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName(),
-                    model.getModelGroup());
+                    model.getModelGroup(), model.getBuilding_xp(), model.getPrimary(), model.getSecondary());
             modelRepository.save(newModel);
             return new ResponseEntity<>(newModel, HttpStatus.OK);
         }
