@@ -246,10 +246,9 @@ public class User_Data : MonoBehaviour{
 
         Debug.Log(targetAPI);
         
-        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, json);
-        
-        // add the JSON data to send here? or before in the creation of the call?
-        Debug.Log("Sending the data...");
+        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(json);
+        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
+        uwr.SetRequestHeader("Content-Type", "application/json"); 
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError)
