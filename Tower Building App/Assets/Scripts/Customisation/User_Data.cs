@@ -11,6 +11,7 @@ public class User_Data : MonoBehaviour{
     public static User_Data data;
     public GameObject UserProfile;
     public string Username,json;
+    public string userID;
     public int global_xp;
 
     public int temp_primary;
@@ -98,6 +99,18 @@ public class User_Data : MonoBehaviour{
             apiString = string.Concat("http://localhost:8080/", apiString);
             StartCoroutine(GetRequest(apiString));
 
+        } else if (RequestType == "PUT") {
+            apiString = string.Concat(apiString, Table);
+            string jsonData = "";
+            if (Table == "User"){
+                jsonData = CreateUserJSON();
+            } else if (Table == "UserBuildings"){
+                jsonData = CreateBuildingJSON();
+            }
+            string targetUserID = "/" + userID;
+            apiString = string.Concat(apiString, targetUserID);
+            apiString = string.Concat("http://localhost:8080/", apiString);
+            StartCoroutine(PutRequest(apiString, jsonData));
         }
     }
 
