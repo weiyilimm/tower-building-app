@@ -43,7 +43,8 @@ public class User_Data : MonoBehaviour{
         // OLD CODE leaving for referal to for now
         //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
         Debug.Log("Run from User Data");
-        CreateRequest("GET", "Models", 100);
+        CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+
 
 
 
@@ -80,7 +81,7 @@ public class User_Data : MonoBehaviour{
         RequestType = "GET" or "Update"
         Table = "Users" or "Models"
      */
-    private void CreateRequest(string RequestType, string Table, int id = -1)
+    private void CreateRequest(string RequestType, string Table, string id = "-1")
     {
         // Building name, User name. User -> 
         string apiString = "api/";
@@ -91,27 +92,42 @@ public class User_Data : MonoBehaviour{
             // Get all the buildings.
             apiString = string.Concat(apiString, Table);
 
-            if (id > -1)
-            {
-                string requestedId = string.Concat("/", id.ToString());
-                apiString = string.Concat(apiString, requestedId);
-            }
+            string requestedId = string.Concat("/", id);
+            apiString = string.Concat(apiString, requestedId);
             apiString = string.Concat("http://localhost:8080/", apiString);
+            Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString));
 
-        } else if (RequestType == "PUT") {
-            apiString = string.Concat(apiString, Table);
-            string jsonData = "";
-            if (Table == "User"){
-                jsonData = CreateUserJSON();
-            } else if (Table == "UserBuildings"){
-                jsonData = CreateBuildingJSON();
-            }
-            string targetUserID = "/" + userID;
-            apiString = string.Concat(apiString, targetUserID);
-            apiString = string.Concat("http://localhost:8080/", apiString);
-            StartCoroutine(PutRequest(apiString, jsonData));
         }
+
+
+        //// Go to Users table or the Buildings Table.
+        //if (RequestType == "GET")
+        //{
+        //    // Get all the buildings.
+        //    apiString = string.Concat(apiString, Table);
+
+        //    if (id > -1)
+        //    {
+        //        string requestedId = string.Concat("/", id.ToString());
+        //        apiString = string.Concat(apiString, requestedId);
+        //    }
+        //    apiString = string.Concat("http://localhost:8080/", apiString);
+        //    StartCoroutine(GetRequest(apiString));
+
+        //} else if (RequestType == "PUT") {
+        //    apiString = string.Concat(apiString, Table);
+        //    string jsonData = "";
+        //    if (Table == "User"){
+        //        jsonData = CreateUserJSON();
+        //    } else if (Table == "UserBuildings"){
+        //        jsonData = CreateBuildingJSON();
+        //    }
+        //    string targetUserID = "/" + userID;
+        //    apiString = string.Concat(apiString, targetUserID);
+        //    apiString = string.Concat("http://localhost:8080/", apiString);
+        //    StartCoroutine(PutRequest(apiString, jsonData));
+        //}
     }
 
     private string CreateBuildingJSON(){

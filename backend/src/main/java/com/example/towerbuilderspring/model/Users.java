@@ -34,6 +34,7 @@ public class Users {
             inverseJoinColumns = {
                 @JoinColumn(name = "building_id", referencedColumnName = "buildingCode",
                         nullable = false, updatable = false)})
+
     private Set<BuildingModels> userBuildings = new HashSet<>();
 
     public Users() {};
