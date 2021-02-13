@@ -238,10 +238,16 @@ public class User_Data : MonoBehaviour{
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
         }
-        string username = JSON.Parse(node["User"]["username"].Value);
+        string userid = JSON.Parse(node["id"].Value);
+        string username = JSON.Parse(node["userName"].Value);
+        string email = JSON.Parse(node["email"].Value);
+        string password = JSON.Parse(node["password"].Value);
+        int totalExp = int.Parse(node["totalExp"].Value);
+        UserID = userid;
         Username = username;
-        int xp = int.Parse(node["User"]["global_xp"].Value);
-        global_xp = xp;
+        Email = email;
+        Password = password;
+        global_xp = totalExp;
     }
 
 
