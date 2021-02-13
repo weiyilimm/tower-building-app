@@ -161,7 +161,8 @@ public class User_Data : MonoBehaviour{
         string toAppend = "";
         for (int i=0; i<12; i++){
             string bc = i.ToString() + building_stats[i].model.ToString(); // The unique code for the model within the subject
-            string bn = "TEMP"; // The name of the building (MAKE dictionary to map int to name)
+            int name_index = (i*10) + building_stats[i].model;
+            string bn = CodeConverter.codes.buildingName_map[name_index]; // The name of the building (MAKE dictionary to map int to name)
             string bx = building_stats[i].building_xp.ToString(); // The specific xp of the building
             string h = building_stats[i].m_height.ToString(); // The height of the building (only differs for the Main)
             string mg = i.ToString(); // The subject index
