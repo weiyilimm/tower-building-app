@@ -11,7 +11,7 @@ public class ShowScore : MonoBehaviour
     private double localEarnedXP;
     void Start()
     {
-        for (int i = 0; i <= EarnedScoreText.Length; i ++){
+        for (int i = 0; i < EarnedScoreText.Length; i ++){
             switch(i){
                 case 0:
                     localEarnedXP = Scoring.MainXP;

@@ -95,7 +95,7 @@ public class Main_Building_Customisation : MonoBehaviour{
     }
 
     // This function will probably be pulled into a seperate script once the UI for the MB has been implemented
-    void change_height(Transform Stack, string direction){
+    public void change_height(Transform Stack, string direction){
         Transform Block = Stack.transform.Find("Tower");
         Transform Cap = Stack.transform.Find("Roof");
             
