@@ -10,8 +10,7 @@ using UnityEngine.Networking;
 public class User_Data : MonoBehaviour{
     public static User_Data data;
     public GameObject UserProfile;
-    public string Username,json;
-    public string userID;
+    public string UserID, Username, Email, Password;
     public int global_xp;
 
     public int temp_primary;
@@ -40,14 +39,19 @@ public class User_Data : MonoBehaviour{
         // GetRequest("User");
         // GetRequest("Buildings");
 
-        // OLD CODE leaving for referal to for now
-        //file1.onClick.AddListener(() => LoadJson("Assets/JSON/file1.json"));
+        /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA
+
+        Debug.Log("Starting translation...");
+        TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
+        Debug.Log(building_stats[0].primary_colour);
+        Debug.Log(building_stats[0].secondary_colour);
+        Debug.Log(building_stats[0].building_xp);
+        Debug.Log(building_stats[0].model);
+        Debug.Log(building_stats[0].m_height);
+        */
+
         Debug.Log("Run from User Data");
         CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
-
-
-
-
     }
 
     private void createBuildings(){
@@ -130,32 +134,41 @@ public class User_Data : MonoBehaviour{
         //}
     }
 
+    /*
+            JSON will be formatted as such:
+            {"id":???, 
+                "userName":"example", 
+                "email":email@email.com,
+                "password":aifbreiu,
+                "userBuildings":
+                    [{buildingCode:"Tower1", 
+                        buildingName:"",
+                        building_xp:"", 
+                        "height":1, 
+                        "primaryColour":104, 
+                        "secondaryColour":201, 
+                        "modelGroup":2}, ... , ],
+                "totalExp":27353
+            }
+        */
+    
     private string CreateBuildingJSON(){
         // Create the JSON file storing the building data for writing to the database
 
-        /*
-            Assuming the JSON will be formatted as such:
-            {MainBuildings: 
-                [[Name:"Tower1", Primary:104, Secondary:201, Model:2, Height:3], ... , [Name:"Tower4", Primary...]],   
-            SubjectBuildings:
-                [[Name:"Arts", Primary:012, Secondary:402, Model:1, XP:2036], ... , [Name:"Physics&Maths", Primary...]]
-            }
-        */
-
-        string BuildingJSON = "{Buildings:[";
+        string BuildingJSON = "{userBuildings:[";
         
         // Loop through the buildings to add their data to the JSON string
         string toAppend = "";
         for (int i=0; i<12; i++){
-            string bc = i.ToString() + building_stats[i].model.ToString();
-            string bn = "TEMP"; // Create a dictionary in codeConverter to get the name
-            string bx = building_stats[i].building_xp.ToString();
-            string h = building_stats[i].m_height.ToString();
-            string mg = i.ToString(); //Need to check this is correct
-            string pc = building_stats[i].primary_colour.ToString();
-            string sc = building_stats[i].secondary_colour.ToString();
+            string bc = i.ToString() + building_stats[i].model.ToString(); // The unique code for the model within the subject
+            string bn = "TEMP"; // The name of the building (MAKE dictionary to map int to name)
+            string bx = building_stats[i].building_xp.ToString(); // The specific xp of the building
+            string h = building_stats[i].m_height.ToString(); // The height of the building (only differs for the Main)
+            string mg = i.ToString(); // The subject index
+            string pc = building_stats[i].primary_colour.ToString(); // The primary colour of the building
+            string sc = building_stats[i].secondary_colour.ToString(); // The secondary colour of the building
             
-            string ParttoAppend = "[building_code: " + bc + ",building_name:" + bn + ",building_xp:" + bx + ",height:" + h + ",model_group:" + mg + ",primary_colour:" + pc + ",secondary_colour:" + sc + "],";
+            string ParttoAppend = "{buildingCode: " + bc + ",buildingName:" + bn + ",building_xp:" + bx + ",height:" + h + ",primary_colour:" + pc + ",secondary_colour:" + sc + ",modelGroup:" + mg + "},";
             toAppend = toAppend + ParttoAppend;
         }
         
@@ -166,36 +179,25 @@ public class User_Data : MonoBehaviour{
 
     }
 
-    // Translation Functions
-
     private string CreateUserJSON(){
         // Create the JSON file storing the User login data for writing to the database
-
-        /*
-            Assuming the JSON will be formatted as such:
-            {User: 
-                [username:"John", globalXP:24564, (any other relevant data)]   
-            }
-        */
-
-        string UserJSON = "{User:[username:" + Username + ",globalXP:" + global_xp.ToString() + "]}";
+        // id, userName, email, password, userBuidlings, totalExp
+        string UserJSON = "{id:" + UserID;
+        UserJSON = UserJSON + ", userName:" + Username;
+        UserJSON = UserJSON + ", email:" + Email;
+        UserJSON = UserJSON + ", password" + Password;
+        UserJSON = UserJSON + CreateBuildingJSON();
+        UserJSON = UserJSON + ", totalExp:" + global_xp.ToString() + "}";
         return UserJSON;
     }
 
     private void TranslateBuildingJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
         
-        /*
-            Assuming the JSON will be formatted as such:
-            {Buildings:
-                [[Name:"MainTower1", Primary:012, Secondary:402, Model:1, XP:2036, height:3], ... , [Name:"Physics&Maths", Primary...]]
-            }
-        */
-        
         JSONNode node;
         using (StreamReader r = new StreamReader(rawJSON)) {
             //read in the json
-            json = r.ReadToEnd();
+            string json = r.ReadToEnd();
 
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
@@ -205,19 +207,20 @@ public class User_Data : MonoBehaviour{
         building_stats.Clear();
 
         // Loop through the buildings to create their Unity representations 
-        for (int j=0; j<12; j++){
-            int primary_colour = int.Parse(node["Buildings"][j]["primary_colour"].Value);
+        for (int j=0; j<2; j++){
+            // Might need to get the modelGroup as well if the buildings are not sent in order
             
-            int secondary_colour = int.Parse(node["Buildings"][j]["secondary_colour"].Value);
-            
-            int model_code = int.Parse(node["Buildings"][j]["building_code"].Value);
-            string model_string = model_code.ToString();
-            model_string = model_string.Substring(-1);
-            int model = System.Convert.ToInt32(model_string);
+            int primary_colour = int.Parse(node["userBuildings"][j]["primaryColour"].Value);
+            int secondary_colour = int.Parse(node["userBuildings"][j]["secondaryColour"].Value);
+            // Model integer is the final digit in the buildingCode
+            string model_code = JSON.Parse(node["userBuildings"][j]["buildingCode"].Value);
+            //string model_string = model_code.ToString();
+            model_code = model_code.Substring(model_code.Length - 1);
+            int model = int.Parse(model_code);
 
-            int building_xp = int.Parse(node["Buildings"][j]["building_xp"].Value);
+            int building_xp = int.Parse(node["userBuildings"][j]["building_xp"].Value);
 
-            int m_height = int.Parse(node["Buildings"][j]["height"].Value);
+            int m_height = int.Parse(node["userBuildings"][j]["height"].Value);
 
             Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats.Add(newBuilding);
@@ -227,17 +230,10 @@ public class User_Data : MonoBehaviour{
     private void TranslateUserJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
 
-        /*
-            Assuming the JSON will be formatted as such:
-            {User: 
-                [username:"John", globalXP:24564, (any other relevant data)]   
-            }
-        */
-
         JSONNode node;
         using (StreamReader r = new StreamReader(rawJSON)) {
             //read in the json
-            json = r.ReadToEnd();
+            string json = r.ReadToEnd();
 
             //reformat the json into dictionary style convention
             node = JSON.Parse(json);
