@@ -14,8 +14,13 @@ public class ColorPicker : MonoBehaviour
     public Material[] Fancy;
     //To store buildings' renderer
     public MeshRenderer[] MeshRenderer;
+    public MeshRenderer[] MainBuilding1;
+    public MeshRenderer[] MainBuilding2;
+    public MeshRenderer[] MainBuilding3;
+    public MeshRenderer[] MainBuilding4;
     //To store each color buttons
     public Button[] Buttons;
+    public Button[] MainBuildings;
     private Material[] materials;
     
     //Get the specific building XP by accessing Scoring.cs 
@@ -39,9 +44,14 @@ public class ColorPicker : MonoBehaviour
         currentSceneName = SceneManager.GetActiveScene().name;
         //Assign the localXP to be specific building's XP
         switch (currentSceneName)
-        {
+        {   
             case "Main":
+                MeshRenderer = new MeshRenderer[3];
                 localXP = Scoring.MainXP;
+                MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
+                MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
+                MainBuildings[2].onClick.AddListener(() => WhichBuildings(3));
+                MainBuildings[3].onClick.AddListener(() => WhichBuildings(4));
                 break;
             case "Arts":
                 localXP = Scoring.ArtsXP;
@@ -205,4 +215,19 @@ public class ColorPicker : MonoBehaviour
         return materials;
     }
 
+    public void WhichBuildings(int num){
+        if (num == 1){
+            MeshRenderer = MainBuilding1;
+        }
+        if (num == 2){
+            MeshRenderer = MainBuilding2;
+        }
+        if (num == 3){
+            MeshRenderer = MainBuilding3;
+        }
+        if (num == 4){
+            MeshRenderer = MainBuilding4;
+        }
+
+    }
 }
