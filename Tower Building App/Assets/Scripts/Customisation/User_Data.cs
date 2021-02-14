@@ -50,8 +50,21 @@ public class User_Data : MonoBehaviour{
         Debug.Log(building_stats[0].m_height);
         */
 
-        Debug.Log("Run from User Data");
-        CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+        // Debug.Log("Run from User Data");
+        // CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+    }
+
+    public void Update() {
+        if (Input.GetKeyDown("t")){
+            /* CODE FOR TESTING JSON CREATION */
+            UserID = "abc";
+            Username = "BobertRoss";
+            Email = "bobert@bobert.com";
+            Password = "321password";
+            global_xp = 17;
+            string stringOutput = CreateUserJSON();
+            Debug.Log(stringOutput);
+        }
     }
 
     private void createBuildings(){
@@ -141,9 +154,9 @@ public class User_Data : MonoBehaviour{
                 "email":email@email.com,
                 "password":aifbreiu,
                 "userBuildings":
-                    [{buildingCode:"Tower1", 
-                        buildingName:"",
-                        building_xp:"", 
+                    [{buildingCode:12, 
+                        buildingName:"Tower1",
+                        building_xp:1454, 
                         "height":1, 
                         "primaryColour":104, 
                         "secondaryColour":201, 
@@ -180,16 +193,43 @@ public class User_Data : MonoBehaviour{
 
     }
 
-    private string CreateUserJSON(){
+    public List<DatabaseBuildings> CreateBuildingJSON2() {
+        
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
+        
+        for (int i=0; i<12; i++){
+            int bc = (i*10) + building_stats[i].model; // The unique code for the model within the subject
+            string bn = CodeConverter.codes.buildingName_map[bc]; // The name of the building (MAKE dictionary to map int to name)
+            int bx = building_stats[i].building_xp; // The specific xp of the building
+            int h = building_stats[i].m_height; // The height of the building (only differs for the Main)
+            int mg = i; // The subject index
+            string pc = building_stats[i].primary_colour.ToString(); // The primary colour of the building
+            string sc = building_stats[i].secondary_colour.ToString(); // The secondary colour of the building
+            
+            DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bn,bx,h,mg,pc,sc);
+            uB.Add(currentBuilding);
+        }
+        return uB;
+    }
+
+    private string CreateUserJSON() {
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
         string UserJSON = "{id:" + UserID;
         UserJSON = UserJSON + ", userName:" + Username;
         UserJSON = UserJSON + ", email:" + Email;
         UserJSON = UserJSON + ", password" + Password;
-        UserJSON = UserJSON + CreateBuildingJSON();
+        //UserJSON = UserJSON + CreateBuildingJSON();
         UserJSON = UserJSON + ", totalExp:" + global_xp.ToString() + "}";
-        return UserJSON;
+
+        // OR
+        // If the string method above does not work - try the following method which uses SimpleJSON
+
+        List<DatabaseBuildings> uB = CreateBuildingJSON2();
+        DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
+        string UserJSON2 = JsonUtility.ToJson(putData);
+
+        return UserJSON2;
     }
 
     private void TranslateBuildingJSON(string rawJSON){
@@ -268,8 +308,8 @@ public class User_Data : MonoBehaviour{
         {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
-            BuildingTrue modelGot = JsonUtility.FromJson<BuildingTrue>(raw);
-            Debug.Log("The model given was " + modelGot.building_name);
+            // BuildingTrue modelGot = JsonUtility.FromJson<DatabaseBuildings>(raw);
+            // Debug.Log("The model given was " + modelGot.building_name);
         }
     }
 
@@ -311,26 +351,45 @@ public class Building{
     }
 }
 
-public class BuildingTrue
+[System.Serializable]
+public class DatabaseUser {
+    public string id;
+    public string userName;
+    public string email;
+    public string password;
+    public List<DatabaseBuildings> userBuildings;
+    public long totalExp;
+
+    public DatabaseUser(string userid, string un, string e, string p, List<DatabaseBuildings> uB, long xp) {
+        id = userid;
+        userName = un;
+        email = e;
+        password = p;
+        userBuildings = uB;
+        totalExp = xp;
+    }
+}
+
+[System.Serializable]
+public class DatabaseBuildings
 {
-    public long building_code;
-    public string building_name;
+    public long buildingCode;
+    public string buildingName;
     public int building_xp;
     public int height;
-    public long model_group;
-    public string primary_colour;
-    public string secondary_colour;
+    public long modelGroup;
+    public string primaryColour;
+    public string secondaryColour;
 
-    public BuildingTrue(long building_code, long building_name, int building_xp, int height,
-        long model_group, string primary_colour, string secondary_colour)
+    public DatabaseBuildings(long bc, string bn, int bx, int h, long mg, string pc, string sc)
     {
-        building_code = building_code;
-        building_name = building_name;
-        building_xp = building_xp;
-        height = height;
-        model_group = model_group;
-        primary_colour = primary_colour;
-        secondary_colour = secondary_colour;
+        buildingCode = bc;
+        buildingName = bn;
+        building_xp = bx;
+        height = h;
+        modelGroup = mg;
+        primaryColour = pc;
+        secondaryColour = sc;
     }
 }
 
