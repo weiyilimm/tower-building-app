@@ -215,6 +215,10 @@ public class ColorPicker : MonoBehaviour
         return materials;
     }
 
+    /*
+    Method used for main building UI
+    It select the building that user want 
+    */
     public void WhichBuildings(int num){
         if (num == 1){
             MeshRenderer = MainBuilding1;
