@@ -48,12 +48,12 @@ public class Scoring : MonoBehaviour
     "Failure is not the opposite of success, it's part of success.",
     "Never put off until tomorrow what you can do the day after tomorrow.",
     "I didn’t fail the test. I just found 100 ways to do it wrong.",
-    "Hard work pays off eventually, but laziness pays off now.",
     "Look at those successful people, you're not one of them.",
     "Strive for progress, not perfection.",
     "There are no traffic jams on the extra mile.",
     "People say nothing is impossible, but I do nothing every day.",
     "Procrastination gives you something to look forward to.",
+    "Hard work pays off eventually, but laziness pays off now.",
     "I love deadlines. I love the whooshing noise they make as they go by.",
     "Nothing makes a person more productive than the last minute.",
     "Due tomorrow? Do tomorrow."
