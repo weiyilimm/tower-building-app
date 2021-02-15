@@ -65,7 +65,7 @@ public class Scoring : MonoBehaviour
         //Local XP 1XP per second
         localEarnedXP = Math.Round(timeCounted) * multiplierXP;
         //Global XP is 10% of local XP
-        globalEarnedXP = localEarnedXP * 0.1;
+        globalEarnedXP = Math.Round(localEarnedXP * 0.1);
         
         //Pop up appears to show how much XP user has earned
         PopUp.SetActive(true);
