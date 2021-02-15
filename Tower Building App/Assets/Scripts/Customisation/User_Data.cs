@@ -28,7 +28,8 @@ public class User_Data : MonoBehaviour{
 
     void Start(){
         DontDestroyOnLoad(UserProfile);
-        data = this;
+
+        //data = this;
 
         //CREATE BUILDING INSTANCES HERE
         createBuildings();
@@ -50,16 +51,38 @@ public class User_Data : MonoBehaviour{
         Debug.Log(building_stats[0].m_height);
         */
 
-        Debug.Log("Run from User Data");
+
+        /*
+         *      GET REQUESTS
+        */
+        Debug.Log("Running the GET requests");
         // Get a saved user
         CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
-        // Get all saved users;
-        Debug.Log("Running next");
+        // Get all saved users
         CreateRequest("GET", "Users");
+
+        /*
+         *      POST REQUESTS
+        */
+        string data = "";
+
+        
+        data = "{\"email\": \"ben@email.com\", \"password\": \"1287\", \"totalexp\": 16, \"userName\": \"ben1\"}";
+
+
+        Debug.Log("Running the POST request");
+        // Create a new user
+        CreateRequest("POST", "Users", data: data);
+        //// Create a new model
+        //CreateRequest("POST", "Models", data: data);
+        //// Edit a existing user's personal details.
+        //CreateRequest("POST", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e", data: data);
+        //// Add/Remove a building from an existing user.
+        //CreateRequest("POST", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e", 140, data);
 
 
     }
-
+    
     public void Update() {
         if (Input.GetKeyDown("t")){
             /* CODE FOR TESTING JSON CREATION */
@@ -105,16 +128,13 @@ public class User_Data : MonoBehaviour{
         Table = "Users" or "Models"
         id = URI of either an User or Building.
      */
-    private void CreateRequest(string RequestType, string Table, string id = "-1")
+    private void CreateRequest(string RequestType, string Table, string id = "-1", int buildingid = -1, string data = "")
     {
         // Building name, User name. User -> 
-        string apiString = "api/";
+        string apiString = string.Concat("api/", Table);
 
-        // Go to Users table or the Buildings Table.
         if (RequestType == "GET")
         {
-            apiString = string.Concat(apiString, Table);
-
             // Want to get a specfic User/Building.
             if (id != "-1")
             {
@@ -134,37 +154,38 @@ public class User_Data : MonoBehaviour{
                 Debug.Log(apiString);
                 StartCoroutine(GetRequest(apiString));
             }
-
         }
-
-
-        //// Go to Users table or the Buildings Table.
-        //if (RequestType == "GET")
-        //{
-        //    // Get all the buildings.
-        //    apiString = string.Concat(apiString, Table);
-
-        //    if (id > -1)
-        //    {
-        //        string requestedId = string.Concat("/", id.ToString());
-        //        apiString = string.Concat(apiString, requestedId);
-        //    }
-        //    apiString = string.Concat("http://localhost:8080/", apiString);
-        //    StartCoroutine(GetRequest(apiString));
-
-        //} else if (RequestType == "PUT") {
-        //    apiString = string.Concat(apiString, Table);
-        //    string jsonData = "";
-        //    if (Table == "User"){
-        //        jsonData = CreateUserJSON();
-        //    } else if (Table == "UserBuildings"){
-        //        jsonData = CreateBuildingJSON();
-        //    }
-        //    string targetUserID = "/" + userID;
-        //    apiString = string.Concat(apiString, targetUserID);
-        //    apiString = string.Concat("http://localhost:8080/", apiString);
-        //    StartCoroutine(PutRequest(apiString, jsonData));
-        //}
+        else
+        {
+            // POST 
+            if (id == "-1")
+            {
+                // Create a new User
+                apiString = string.Concat(apiString + "/");
+                apiString = string.Concat("http://localhost:8080/", apiString);
+                Debug.Log(apiString);
+                StartCoroutine(PostRequest(apiString, data));
+            }
+            else
+            {
+                if (buildingid == -1)
+                {
+                    // Change the Users personal details 
+                    apiString = apiString + "/" + id;
+                    apiString = "http://localhost:8080/" + apiString;
+                    Debug.Log(apiString);
+                    StartCoroutine(PostRequest(apiString, data));
+                }
+                else
+                {
+                    // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
+                    apiString = apiString + "/" + id + "/" + buildingid;
+                    apiString = "http://localhost:8080/" + apiString;
+                    Debug.Log(apiString);
+                    StartCoroutine(PostRequest(apiString, data));
+                }
+            }
+        }
     }
 
     /*
@@ -324,15 +345,39 @@ public class User_Data : MonoBehaviour{
 
         if (uwr.isNetworkError)
         {
-            Debug.Log("Error while sending " + uwr.error);
+            Debug.Log("An Internal Server Error Was Encountered");
         } 
         else
         {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
+
+            // TRANSLATION CODE HERE
+
             // BuildingTrue modelGot = JsonUtility.FromJson<DatabaseBuildings>(raw);
             // Debug.Log("The model given was " + modelGot.building_name);
         }
+    }
+
+    IEnumerator PostRequest(string targetAPI, string data)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Post(targetAPI, data);
+        Debug.Log("Sending the data ");
+        yield return uwr.SendWebRequest();
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("An Internal Server Error Was Encountered");
+        }
+        else
+        {
+            // The POST request also returns the object it entered into the database.
+            string raw = uwr.downloadHandler.text;
+            Debug.Log("Received: " + raw);
+
+            // TRANSLATION CODE HERE (to check if data was correctly entered).
+
+        }
+        
     }
 
     IEnumerator PutRequest(string targetAPI, string json){
