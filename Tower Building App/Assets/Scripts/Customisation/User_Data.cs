@@ -50,8 +50,14 @@ public class User_Data : MonoBehaviour{
         Debug.Log(building_stats[0].m_height);
         */
 
-        // Debug.Log("Run from User Data");
-        // CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+        Debug.Log("Run from User Data");
+        // Get a saved user
+        CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+        // Get all saved users;
+        Debug.Log("Running next");
+        CreateRequest("GET", "Users");
+
+
     }
 
     public void Update() {
@@ -97,6 +103,7 @@ public class User_Data : MonoBehaviour{
     /* 
         RequestType = "GET" or "Update"
         Table = "Users" or "Models"
+        id = URI of either an User or Building.
      */
     private void CreateRequest(string RequestType, string Table, string id = "-1")
     {
@@ -106,14 +113,27 @@ public class User_Data : MonoBehaviour{
         // Go to Users table or the Buildings Table.
         if (RequestType == "GET")
         {
-            // Get all the buildings.
             apiString = string.Concat(apiString, Table);
 
-            string requestedId = string.Concat("/", id);
-            apiString = string.Concat(apiString, requestedId);
-            apiString = string.Concat("http://localhost:8080/", apiString);
-            Debug.Log(apiString);
-            StartCoroutine(GetRequest(apiString));
+            // Want to get a specfic User/Building.
+            if (id != "-1")
+            {
+                string requestedId = "";
+                // Want to get all the attributes of a particular user (USE CASE: to get all the buildings belonging to the user at the start of the game).
+                requestedId = "/" + id;
+                apiString = string.Concat(apiString, requestedId);
+                apiString = string.Concat("http://localhost:8080/", apiString);
+                Debug.Log(apiString);
+                StartCoroutine(GetRequest(apiString));
+            } 
+            // Get all the Users/Buildings
+            else
+            {
+                apiString = string.Concat(apiString + "/");
+                apiString = string.Concat("http://localhost:8080/", apiString);
+                Debug.Log(apiString);
+                StartCoroutine(GetRequest(apiString));
+            }
 
         }
 
@@ -165,6 +185,7 @@ public class User_Data : MonoBehaviour{
             }
         */
     
+    // WRITE
     private string CreateBuildingJSON(){
         // Create the JSON file storing the building data for writing to the database
 
@@ -211,7 +232,8 @@ public class User_Data : MonoBehaviour{
         }
         return uB;
     }
-
+    
+    // WRITE
     private string CreateUserJSON() {
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
