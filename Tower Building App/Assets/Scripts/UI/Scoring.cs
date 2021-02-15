@@ -90,9 +90,6 @@ public class Scoring : MonoBehaviour
 
         //Get the current value of the dropdown, when the stop button is clicked
         switch (DropDown.options[DropDown.value].text){
-            case "MAIN":
-                MainXP += localEarnedXP;
-                break;
             case "ARTS":
                 ArtsXP += localEarnedXP;
                 break;
