@@ -132,7 +132,7 @@ public class UserController {
     **/
     @PostMapping("/User/{userId}/Buildings/{buildingId}")
     public ResponseEntity<List<Object>> changeUserBuilding(@PathVariable("userId") UUID userId,
-                                                           @PathVariable("buildingID") long buildingId,
+                                                           @PathVariable("buildingId") long buildingId,
                                                            @RequestBody BuildingModels building) {
         try {
             BuildingRequestValid validator = new BuildingRequestValid();
