@@ -7,7 +7,8 @@ using TMPro;
 
 public class ChangeHeight : MonoBehaviour
 {   
-    public Button ChangeHeightButton;
+    public Button IncreaseHeightButton;
+    public Button DecreaseHeightButton;
     public GameObject[] Roofs;
     public GameObject[] Towers;
     public Button[] MainBuildings;
@@ -25,8 +26,8 @@ public class ChangeHeight : MonoBehaviour
         MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
         MainBuildings[2].onClick.AddListener(() => SelectBuilding(2));
         MainBuildings[3].onClick.AddListener(() => SelectBuilding(3));
-        ChangeHeightButton.onClick.AddListener(() => ChangeBuildingHeight());
-        
+        IncreaseHeightButton.onClick.AddListener(() => IncreaseBuildingHeight());
+        DecreaseHeightButton.onClick.AddListener(() => DecreseBuildingHeight());
     }
 
     /*
@@ -65,7 +66,7 @@ public class ChangeHeight : MonoBehaviour
     The roof y position +1 to match the top 
     The ratio of towerScale:roofPosition:towerPosition is 50:0.5:0.25
     */
-    public void ChangeBuildingHeight(){
+    public void IncreaseBuildingHeight(){
         /*
         To check which building has been selected and check the height
         The maximum height for the building is 7 times click 
@@ -96,6 +97,40 @@ public class ChangeHeight : MonoBehaviour
             roof.transform.localPosition += new Vector3(0, 0.25f, 0);
             tower.transform.localPosition += new Vector3(0, 0.125f, 0);
             towerFourHeight += 1;
+            BuildingHeight.text = towerFourHeight.ToString();
+        }
+        //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
+        if (roof == null){
+            PopUpHeight.SetActive(true);
+        }
+    }
+    public void DecreseBuildingHeight(){
+        if (roof == Roofs[0] && towerOneHeight>0){
+            tower.transform.localScale -= new Vector3(0,0,25);
+            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
+            towerOneHeight -= 1;
+            BuildingHeight.text = towerOneHeight.ToString();
+        }
+        if (roof == Roofs[1] && towerTwoHeight>0){
+            tower.transform.localScale -= new Vector3(0,0,25);
+            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
+            towerTwoHeight -= 1;
+            BuildingHeight.text = towerTwoHeight.ToString();
+        }
+        if (roof == Roofs[2] && towerThreeHeight>0){
+            tower.transform.localScale -= new Vector3(0,0,25);
+            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
+            towerThreeHeight -= 1;
+            BuildingHeight.text = towerThreeHeight.ToString();
+        }
+        if (roof == Roofs[3] && towerFourHeight>0){
+            tower.transform.localScale -= new Vector3(0,0,25);
+            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
+            towerFourHeight -= 1;
             BuildingHeight.text = towerFourHeight.ToString();
         }
         //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
