@@ -98,6 +98,7 @@ public class ChangeHeight : MonoBehaviour
             towerFourHeight += 1;
             BuildingHeight.text = towerFourHeight.ToString();
         }
+        //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
         if (roof == null){
             PopUpHeight.SetActive(true);
         }
