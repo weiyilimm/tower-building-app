@@ -11,6 +11,8 @@ public class ChangeHeight : MonoBehaviour
     public GameObject[] Roofs;
     public GameObject[] Towers;
     public Button[] MainBuildings;
+    public TextMeshProUGUI BuildingHeight;
+    public GameObject PopUpHeight;
     private GameObject roof;
     private GameObject tower;
     private int towerOneHeight = 0;
@@ -19,20 +21,12 @@ public class ChangeHeight : MonoBehaviour
     private int towerFourHeight = 0;
     void Start()
     {   
-        if (towerOneHeight <= 7){
-            MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
-        }
-        if (towerTwoHeight <= 7){
-            MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
-        }
-        if (towerThreeHeight <= 7){
-            MainBuildings[2].onClick.AddListener(() => SelectBuilding(2));
-        }
-        if (towerFourHeight <= 7){
-            MainBuildings[3].onClick.AddListener(() => SelectBuilding(3));
-        }
-
+        MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
+        MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
+        MainBuildings[2].onClick.AddListener(() => SelectBuilding(2));
+        MainBuildings[3].onClick.AddListener(() => SelectBuilding(3));
         ChangeHeightButton.onClick.AddListener(() => ChangeBuildingHeight());
+        
     }
 
     /*
@@ -44,26 +38,24 @@ public class ChangeHeight : MonoBehaviour
         if (num == 0){
             roof = Roofs[0];
             tower = Towers[0];
-            towerOneHeight += 1;
-            Debug.Log(towerOneHeight);
+            BuildingHeight.text = towerOneHeight.ToString();
         }
         if (num == 1){
             roof = Roofs[1];
             tower = Towers[1];
-            towerTwoHeight += 1;
+            BuildingHeight.text = towerTwoHeight.ToString();
         }
         if (num == 2){
             roof = Roofs[2];
             tower = Towers[2];
-            towerThreeHeight += 1;
+            BuildingHeight.text = towerThreeHeight.ToString();
         }
         if (num == 3){
             roof = Roofs[3];
             tower = Towers[3];
-            towerFourHeight += 1;
+            BuildingHeight.text = towerFourHeight.ToString();
         }
     }
-    
     
     /*
     Change building height feature
@@ -74,8 +66,40 @@ public class ChangeHeight : MonoBehaviour
     The ratio of towerScale:roofPosition:towerPosition is 50:0.5:0.25
     */
     public void ChangeBuildingHeight(){
-        tower.transform.localScale += new Vector3(0,0,25);
-        roof.transform.localPosition += new Vector3(0, 0.25f, 0);
-        tower.transform.localPosition += new Vector3(0, 0.125f, 0);
+        /*
+        To check which building has been selected and check the height
+        The maximum height for the building is 7 times click 
+        */
+        if (roof == Roofs[0] && towerOneHeight<7){
+            tower.transform.localScale += new Vector3(0,0,25);
+            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
+            towerOneHeight += 1;
+            BuildingHeight.text = towerOneHeight.ToString();
+        }
+        if (roof == Roofs[1] && towerTwoHeight<7){
+            tower.transform.localScale += new Vector3(0,0,25);
+            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
+            towerTwoHeight += 1;
+            BuildingHeight.text = towerTwoHeight.ToString();
+        }
+        if (roof == Roofs[2] && towerThreeHeight<7){
+            tower.transform.localScale += new Vector3(0,0,25);
+            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
+            towerThreeHeight += 1;
+            BuildingHeight.text = towerThreeHeight.ToString();
+        }
+        if (roof == Roofs[3] && towerFourHeight<7){
+            tower.transform.localScale += new Vector3(0,0,25);
+            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
+            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
+            towerFourHeight += 1;
+            BuildingHeight.text = towerFourHeight.ToString();
+        }
+        if (roof == null){
+            PopUpHeight.SetActive(true);
+        }
     }
 }
