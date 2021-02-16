@@ -22,62 +22,14 @@ public class BuildingModels {
     private String buildingName;
 
     @NotNull
-    private int building_xp;
-
-    // Height only exists for the custom building.
-    @NotNull
-    private int height;
-
-    @NotNull
-    private int primaryColour;
-
-    @NotNull
-    private int secondaryColour;
-
-    @NotNull
     private long model;
 
     public BuildingModels() {};
 
-    public BuildingModels(long buildingCode, String buildingName, long modelGroup, int building_xp, int primaryColour, int secondaryColour) {
+    public BuildingModels(long buildingCode, String buildingName, long modelGroup) {
         this.buildingCode = buildingCode;
         this.buildingName = buildingName;
         this.model = modelGroup;
-        this.building_xp = building_xp;
-        this.primaryColour = primaryColour;
-        this.secondaryColour = secondaryColour;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getPrimaryColour() {
-        return primaryColour;
-    }
-
-    public void setPrimaryColour(int primaryColour) {
-        this.primaryColour = primaryColour;
-    }
-
-    public int getSecondaryColour() {
-        return secondaryColour;
-    }
-
-    public void setSecondaryColour(int secondaryColour) {
-        this.secondaryColour = secondaryColour;
-    }
-
-    public int getBuilding_xp() {
-        return building_xp;
-    }
-
-    public void setBuilding_xp(int building_xp) {
-        this.building_xp = building_xp;
     }
 
     public long getBuildingCode() {
@@ -109,8 +61,7 @@ public class BuildingModels {
         return "BuildingModels{" +
                 "buildingCode=" + buildingCode +
                 ", buildingName='" + buildingName + '\'' +
-                ", modelGroup=" + model +
-//                ", users=" + users +
+                ", model=" + model +
                 '}';
     }
 }

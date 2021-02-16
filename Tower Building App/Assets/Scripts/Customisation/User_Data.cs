@@ -18,15 +18,15 @@ public class User_Data : MonoBehaviour{
     public int temp_model;
     public int temp_height;
     public List<Building> building_stats = new List<Building>();
-    
+
     //public Button file1,file2;
-    
+
     //This script will store all of the data assigned to a single user
     // It will contain the object it travels thorugh the scenes on (Empty GameObject)
     // the details of the player (username, game-wide-XP, ect...)
     // and a List to store the data on each of the buildings (building name, building xp, wallcolour, ect...)
 
-    void Start(){
+    void Start() {
         DontDestroyOnLoad(UserProfile);
 
         //data = this;
@@ -55,34 +55,50 @@ public class User_Data : MonoBehaviour{
         /*
          *      GET REQUESTS
         */
-        Debug.Log("Running the GET requests");
-        // Get a saved user
-        CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
-        // Get all saved users
-        CreateRequest("GET", "Users");
+        //Debug.Log("Running the GET requests");
+        //// Get a saved user
+        //CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
+        //// Get all saved users
+        //CreateRequest("GET", "Users");
 
         /*
          *      POST REQUESTS
         */
-        string data = "";
+        Debug.Log("Start");
 
-        
-        data = "{\"email\": \"ben@email.com\", \"password\": \"1287\", \"totalexp\": 16, \"userName\": \"ben1\"}";
+        //var jsonStringData = JsonUtility.ToJson(data) ?? "";
 
+        // Dev User
+        UserID = System.Guid.NewGuid().ToString();
+        Username = "Jim";
+        Email = "Jim@email.com";
+        Password = "7638";
+        global_xp = 500;
+
+        var stringUserJSONData = CreateUserJSON();
+        Debug.Log(stringUserJSONData);
+
+        // Dev Building
+        DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
+        var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
 
         Debug.Log("Running the POST request");
         // Create a new user
-        CreateRequest("POST", "Users", data: data);
+
+        //CreateRequest("POST", "Users", data: stringUserJSONData);
+
         //// Create a new model
         //CreateRequest("POST", "Models", data: data);
+
         //// Edit a existing user's personal details.
-        //CreateRequest("POST", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e", data: data);
-        //// Add/Remove a building from an existing user.
-        //CreateRequest("POST", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e", 140, data);
+        //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
+
+        // Add/Remove a building from an existing user.
+        CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
 
 
     }
-    
+
     public void Update() {
         if (Input.GetKeyDown("t")){
             /* CODE FOR TESTING JSON CREATION */
@@ -128,7 +144,7 @@ public class User_Data : MonoBehaviour{
         Table = "Users" or "Models"
         id = URI of either an User or Building.
      */
-    private void CreateRequest(string RequestType, string Table, string id = "-1", int buildingid = -1, string data = "")
+    private void CreateRequest(string RequestType, string Table, string id = "-1", int buildingid = -1, string data = "-1")
     {
         // Building name, User name. User -> 
         string apiString = string.Concat("api/", Table);
@@ -174,15 +190,15 @@ public class User_Data : MonoBehaviour{
                     apiString = apiString + "/" + id;
                     apiString = "http://localhost:8080/" + apiString;
                     Debug.Log(apiString);
-                    StartCoroutine(PostRequest(apiString, data));
+                    StartCoroutine(PostRequest(apiString, data, "PUT"));
                 }
                 else
                 {
                     // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
-                    apiString = apiString + "/" + id + "/" + buildingid;
+                    apiString = apiString + "/" + id + "/" + "Buildings" + "/" + buildingid;
                     apiString = "http://localhost:8080/" + apiString;
                     Debug.Log(apiString);
-                    StartCoroutine(PostRequest(apiString, data));
+                    StartCoroutine(PostRequest(apiString, data, "POST"));
                 }
             }
         }
@@ -245,8 +261,8 @@ public class User_Data : MonoBehaviour{
             int bx = building_stats[i].building_xp; // The specific xp of the building
             int h = building_stats[i].m_height; // The height of the building (only differs for the Main)
             int mg = i; // The subject index
-            string pc = building_stats[i].primary_colour.ToString(); // The primary colour of the building
-            string sc = building_stats[i].secondary_colour.ToString(); // The secondary colour of the building
+            int pc = building_stats[i].primary_colour; // The primary colour of the building
+            int sc = building_stats[i].secondary_colour; // The secondary colour of the building
             
             DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bn,bx,h,mg,pc,sc);
             uB.Add(currentBuilding);
@@ -268,7 +284,7 @@ public class User_Data : MonoBehaviour{
         // OR
         // If the string method above does not work - try the following method which uses SimpleJSON
 
-        List<DatabaseBuildings> uB = CreateBuildingJSON2();
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
         string UserJSON2 = JsonUtility.ToJson(putData);
 
@@ -359,10 +375,15 @@ public class User_Data : MonoBehaviour{
         }
     }
 
-    IEnumerator PostRequest(string targetAPI, string data)
+    IEnumerator PostRequest(string targetAPI, string data, string type = "POST")
     {
-        UnityWebRequest uwr = UnityWebRequest.Post(targetAPI, data);
+        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(data);
+
+        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
+        uwr.method = type;
+        uwr.SetRequestHeader("Content-Type", "application/json");
         Debug.Log("Sending the data ");
+        Debug.Log("Data : " + data);
         yield return uwr.SendWebRequest();
         if (uwr.isNetworkError)
         {
@@ -445,10 +466,10 @@ public class DatabaseBuildings
     public int building_xp;
     public int height;
     public long modelGroup;
-    public string primaryColour;
-    public string secondaryColour;
+    public int primaryColour;
+    public int secondaryColour;
 
-    public DatabaseBuildings(long bc, string bn, int bx, int h, long mg, string pc, string sc)
+    public DatabaseBuildings(long bc, string bn, int bx, int h, long mg, int pc, int sc)
     {
         buildingCode = bc;
         buildingName = bn;

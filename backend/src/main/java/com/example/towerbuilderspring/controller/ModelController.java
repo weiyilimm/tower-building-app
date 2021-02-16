@@ -51,7 +51,7 @@ public class ModelController {
     public ResponseEntity<BuildingModels> createModel(@RequestBody BuildingModels model) {
         try {
             BuildingModels newModel = new BuildingModels(model.getBuildingCode(), model.getBuildingName(),
-                    model.getModelGroup(), model.getBuilding_xp(), model.getPrimaryColour(), model.getSecondaryColour());
+                    model.getModelGroup());
             modelRepository.save(newModel);
             return new ResponseEntity<>(newModel, HttpStatus.OK);
         }
