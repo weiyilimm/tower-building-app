@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 @RestController
@@ -89,83 +90,129 @@ public class UserController {
         }
     }
 
-    @GetMapping("/Users/{id}/Buildings")
+
+    @GetMapping("Users/{id}/Buidlings")
     public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") UUID id) {
-        try {
-            Optional<Users> fetched_user = userRepository.findById(id);
-            if (fetched_user.isPresent()) {
-                Users user = fetched_user.get();
-                return new ResponseEntity<>(user.getUserBuildings(), HttpStatus.ACCEPTED);
-            }
-            else {
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return null;
     }
 
-    @PostMapping("/Users/{id}/Buildings")
-    public ResponseEntity<List<Object>> addUserBuilding(@PathVariable("id") UUID id,
-                                                          @RequestBody BuildingModels building) {
-        try {
-            Optional<Users> fetched_user = userRepository.findById(id);
-            if (fetched_user.isPresent()) {
-                Users user = fetched_user.get();
-                // TODO Create new validator service here.
-                user.addUserBuilding(building);
-                List<Object> userAndBuildingAdded = Arrays.asList(user, building);
-                return new ResponseEntity<>(userAndBuildingAdded, HttpStatus.OK);
+//    @GetMapping("/Users/{id}/Buildings")
+//    public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") UUID id) {
+//        try {
+//            Optional<Users> fetched_user = userRepository.findById(id);
+//            if (fetched_user.isPresent()) {
+//                Users user = fetched_user.get();
+//                return new ResponseEntity<>(user.getUserBuildings(), HttpStatus.ACCEPTED);
+//            }
+//            else {
+//                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//            }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
-            } else {
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/Users/{id}/Buildings")
+//    public ResponseEntity<List<Object>> addUserBuilding(@PathVariable("id") UUID id,
+//                                                          @RequestBody BuildingModels building) {
+//        try {
+//            Optional<Users> fetched_user = userRepository.findById(id);
+//            if (fetched_user.isPresent()) {
+//                Users user = fetched_user.get();
+//                // TODO Create new validator service here.
+//                user.addUserBuilding(building);
+//                List<Object> userAndBuildingAdded = Arrays.asList(user, building);
+//                return new ResponseEntity<>(userAndBuildingAdded, HttpStatus.OK);
+//
+//            } else {
+//                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//            }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     /**
      Implemented updating a User's building as a Post instead of a Put because we're updating a set
      within the user repository rather then a user (which would be directly modifiable through the
      repository interface) itself.
     **/
-    @PostMapping("/User/{userId}/Buildings/{buildingId}")
-    public ResponseEntity<List<Object>> changeUserBuilding(@PathVariable("userId") UUID userId,
-                                                           @PathVariable("buildingId") long buildingId,
-                                                           @RequestBody BuildingModels building) {
-        try {
-            BuildingRequestValid validator = new BuildingRequestValid();
-            List<Object> result = validator.validate(userId, buildingId);
-            if (result != null) {
-                Users user = (Users) result.get(0);
-                BuildingModels buildingToAdd = (BuildingModels) result.get(1);
-                // Get the group of the building.
-                long group = buildingToAdd.getModelGroup();
-
-                // Look for the building that is currently representing that user in the group.
-                BuildingModels getCurrentUserBuildingModel = user.findByBuildingGroup(group);
-
-                // User already has a model from that group activated.
-                if (getCurrentUserBuildingModel != null) {
-                    user.deleteUserBuilding(buildingId);
-                }
-
-                // Update the user repository to reflect the new model.
-                user.getUserBuildings().add(buildingToAdd);
-                userRepository.save(user);
-                return new ResponseEntity<>(null, HttpStatus.OK);
-
-
-
-
-                // Find the current user model of the same group and replace it.
-            } else {
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
+//    public ResponseEntity<Set<BuildingModels>> changeUserBuilding(@PathVariable("userId") UUID userId,
+//                                                           @PathVariable("buildingId") long buildingId,
+//                                                           @RequestBody BuildingModels building) {
+//
+////        try {
+//        Optional<Users> fetchedUser = userRepository.findById(userId);
+//        Optional<BuildingModels> fetchedBuilding = modelRepository.findById(buildingId);
+//
+//        if (fetchedBuilding.isPresent() && fetchedUser.isPresent()) {
+//            Users user = fetchedUser.get();
+//            BuildingModels buildingCheck = fetchedBuilding.get();
+//
+//            // Get the group of the building.
+//            long group = buildingCheck.getModelGroup();
+//
+//            System.out.println("Group: " + group);
+//            // Look for the building that is currently representing that user in the group.
+//            BuildingModels getCurrentUserBuildingModel = user.findByBuildingGroup(group);
+//            System.out.println("Models: " + getCurrentUserBuildingModel);
+//
+//            // User already has a model from that group activated.
+//            if (getCurrentUserBuildingModel != null) {
+//                user.deleteUserBuilding(buildingId);
+//            }
+//
+//            BuildingModels buildingToAdd = new BuildingModels(building.getBuildingCode(), building.getBuildingName(),
+//                    building.getModelGroup());
+//
+//            System.out.println(buildingToAdd);
+//
+//            // Update the user repository to reflect the new model.
+//            user.getUserBuildings().add(buildingToAdd);
+//            System.out.println("Before saving: " + user.getUserBuildings());
+//            userRepository.save(user);
+//            System.out.println("After saving: " + user.getUserBuildings());
+//
+//            return new ResponseEntity<>(user.getUserBuildings(), HttpStatus.OK);
+//            // Find the current user model of the same group and replace it.
+//        }
+//        else {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//            BuildingRequestValid validator = new BuildingRequestValid();
+//            List<Object> result = validator.validate(userId, buildingId);
+//            String result = {null};
+//
+//            System.out.println("The result was " + result);
+//            if (result != null) {
+//                Users user = (Users) result.get(0);
+//                BuildingModels buildingToAdd = (BuildingModels) result.get(1);
+//                // Get the group of the building.
+//                long group = buildingToAdd.getModelGroup();
+//
+//                // Look for the building that is currently representing that user in the group.
+//                BuildingModels getCurrentUserBuildingModel = user.findByBuildingGroup(group);
+//
+//                // User already has a model from that group activated.
+//                if (getCurrentUserBuildingModel != null) {
+//                    user.deleteUserBuilding(buildingId);
+//                }
+//
+//                // Update the user repository to reflect the new model.
+//                user.getUserBuildings().add(buildingToAdd);
+//                userRepository.save(user);
+//                return new ResponseEntity<>(null, HttpStatus.OK);
+//
+//                // Find the current user model of the same group and replace it.
+//            } else {
+//                return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Something else");
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
 
 }

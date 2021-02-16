@@ -26,17 +26,6 @@ public class Users {
 
     private int totalexp = 0;        // Default Values
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_towers",
-            joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "id",
-                        nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                @JoinColumn(name = "building_id", referencedColumnName = "buildingCode",
-                        nullable = false, updatable = false)})
-
-    private Set<BuildingModels> userBuildings = new HashSet<>();
-
     public Users() {};
 
     public Users(String userName, String email, String password, int totalexp) {
@@ -87,43 +76,43 @@ public class Users {
         this.totalexp = totalexp;
     }
 
-    public Set<BuildingModels> getUserBuildings() {
-        return userBuildings;
-    }
-
-    public BuildingModels getUserBuilding(BuildingModels buildingModel) {
-        if (userBuildings.contains(buildingModel)) {
-            return buildingModel;
-        }
-        else{
-            return null;
-        }
-    }
-
-    public BuildingModels deleteUserBuilding(long id) {
-        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
-            BuildingModels buildingByGroup = it.next();
-            if (buildingByGroup.getBuildingCode() == id) {
-                this.userBuildings.remove(buildingByGroup);
-                return buildingByGroup;
-            }
-        }
-        return null;
-    }
-
-    public BuildingModels findByBuildingGroup(long group) {
-        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
-            BuildingModels buildingByGroup = it.next();
-            if (buildingByGroup.getModelGroup() == group ){
-                return buildingByGroup;
-            }
-        }
-        return null;
-    }
-
-    public void addUserBuilding(BuildingModels building) {
-        this.userBuildings.add(building);
-    }
+//    public Set<BuildingModels> getUserBuildings() {
+//        return userBuildings;
+//    }
+//
+//    public BuildingModels getUserBuilding(BuildingModels buildingModel) {
+//        if (userBuildings.contains(buildingModel)) {
+//            return buildingModel;
+//        }
+//        else{
+//            return null;
+//        }
+//    }
+//
+//    public BuildingModels deleteUserBuilding(long id) {
+//        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
+//            BuildingModels buildingByGroup = it.next();
+//            if (buildingByGroup.getBuildingCode() == id) {
+//                this.userBuildings.remove(buildingByGroup);
+//                return buildingByGroup;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public BuildingModels findByBuildingGroup(long group) {
+//        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
+//            BuildingModels buildingByGroup = it.next();
+//            if (buildingByGroup.getModelGroup() == group ){
+//                return buildingByGroup;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public void addUserBuilding(BuildingModels building) {
+//        this.userBuildings.add(building);
+//    }
 
     @Override
     public String toString() {
@@ -132,7 +121,6 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", totalxp=" + totalexp +
-                ", userBuildings=" + userBuildings +
                 '}';
     }
 }
