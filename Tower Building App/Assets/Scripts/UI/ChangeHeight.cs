@@ -7,54 +7,158 @@ using TMPro;
 
 public class ChangeHeight : MonoBehaviour
 {   
+    /*
+    Increase building Height Button
+    It will increase all individual shapes in building 
+    But only the one that been selected by user will be shown, others will be hiden
+    */
     public Button IncreaseHeightButton;
+    //Decrease building Height Button
     public Button DecreaseHeightButton;
-    public GameObject[] Roofs;
-    public GameObject[] Towers;
+    /*
+    Each individual building roofs and towers consist of multiple shapes
+    E.G. BuildingOneRoofs array is storing rectangle roof, octagon roof
+    */
+    public GameObject[] BuildingOneRoofs;
+    public GameObject[] BuildingOneTowers;
+    public GameObject[] BuildingTwoRoofs;
+    public GameObject[] BuildingTwoTowers;
+    public GameObject[] BuildingThreeRoofs;
+    public GameObject[] BuildingThreeTowers;
+    public GameObject[] BuildingFourRoofs;
+    public GameObject[] BuildingFourTowers;
+    /*
+    The buildings can be customized from materials, heights, and shapes
+    Total of 4 buildings
+    */
     public Button[] MainBuildings;
+    /*
+    The building shapes
+    Currently has 4 shapes
+    */
+    public Button[] BuildingShapes;
+    //A text to indidate how tall the building is as the button pressed count increases
     public TextMeshProUGUI BuildingHeight;
+    //A pop up to indicate when the user hasn't selected a building
     public GameObject PopUpHeight;
-    private GameObject roof;
-    private GameObject tower;
-    private int towerOneHeight = 0;
-    private int towerTwoHeight = 0;
-    private int towerThreeHeight = 0;
-    private int towerFourHeight = 0;
+    /*
+    A counter to count each individual building height
+    Maximum height is 7 times button pressed
+    */
+    private int buildingOneHeight = 0;
+    private int buildingTwoHeight = 0;
+    private int buildingThreeHeight = 0;
+    private int buildingFourHeight = 0;
+    /*
+    An integer to store which building been selected
+    E.G. if the user select first building(Top right in the UI), then it is 0
+    */
+    private int buildingDecider;
     void Start()
     {   
+        
+        //When the user select a building, it triggger the SelectBuilding function
         MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
         MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
         MainBuildings[2].onClick.AddListener(() => SelectBuilding(2));
         MainBuildings[3].onClick.AddListener(() => SelectBuilding(3));
+        //When the user select a shape for a building, it triggger the SelectShape function
+        BuildingShapes[0].onClick.AddListener(() => SelectShape(0));
+        BuildingShapes[1].onClick.AddListener(() => SelectShape(1));
+        BuildingShapes[2].onClick.AddListener(() => SelectShape(2));
+        BuildingShapes[3].onClick.AddListener(() => SelectShape(3));
         IncreaseHeightButton.onClick.AddListener(() => IncreaseBuildingHeight());
         DecreaseHeightButton.onClick.AddListener(() => DecreseBuildingHeight());
     }
 
     /*
-    Choose which building to change height
+    Choose which building to change materials, heights and shapes
     User have to select a building by clicking the building button in order to change height
-    0 = first building, 1 = second building etc..
+    i parameter is to indicate which button been pressed
+    E.G. 0 = first building, 1 = second building etc..
     */
     public void SelectBuilding(int num){
         if (num == 0){
-            roof = Roofs[0];
-            tower = Towers[0];
-            BuildingHeight.text = towerOneHeight.ToString();
+            buildingDecider = num;
         }
         if (num == 1){
-            roof = Roofs[1];
-            tower = Towers[1];
-            BuildingHeight.text = towerTwoHeight.ToString();
+            buildingDecider = num;
         }
         if (num == 2){
-            roof = Roofs[2];
-            tower = Towers[2];
-            BuildingHeight.text = towerThreeHeight.ToString();
+            buildingDecider = num;
         }
         if (num == 3){
-            roof = Roofs[3];
-            tower = Towers[3];
-            BuildingHeight.text = towerFourHeight.ToString();
+            buildingDecider = num;
+        }
+    }
+
+    /*
+    Select a shape for a building
+    i parameter is to indicate which shape button been pressed for a building
+    E.G. 0 = first shape in the UI models, 1 = second shape in the UI models
+    */
+    public void SelectShape(int i){
+        //Use the temporary stored integer to get which building been selected
+        if (buildingDecider == 0){
+            for (int j = 0; j<4; j++){
+                //Show the specific shape of building that user select
+                if (j==i){
+                    BuildingOneRoofs[j].SetActive(true);
+                    BuildingOneTowers[j].SetActive(true);
+                }
+                //Hide all the other building 
+                else{
+                    BuildingOneRoofs[j].SetActive(false);
+                    BuildingOneTowers[j].SetActive(false);
+                } 
+            }
+            //Show the height to the screen
+            BuildingHeight.text = buildingOneHeight.ToString();
+        }
+        if (buildingDecider == 1){
+            for (int j = 0; j<4; j++){
+                //Show the specific shape of building that user select
+                if (j==i){
+                    BuildingTwoRoofs[j].SetActive(true);
+                    BuildingTwoTowers[j].SetActive(true);
+                }
+                //Hide all the other building 
+                else{
+                    BuildingTwoRoofs[j].SetActive(false);
+                    BuildingTwoTowers[j].SetActive(false);
+                } 
+            }
+            BuildingHeight.text = buildingTwoHeight.ToString();
+        }
+        if (buildingDecider == 2){
+            for (int j = 0; j<4; j++){
+                //Show the specific shape of building that user select
+                if (j==i){
+                    BuildingThreeRoofs[j].SetActive(true);
+                    BuildingThreeTowers[j].SetActive(true);
+                }
+                //Hide all the other building 
+                else{
+                    BuildingThreeRoofs[j].SetActive(false);
+                    BuildingThreeTowers[j].SetActive(false);
+                } 
+            }
+            BuildingHeight.text = buildingThreeHeight.ToString();
+        }
+        if (buildingDecider == 3){
+            for (int j = 0; j<4; j++){
+                //Show the specific shape of building that user select
+                if (j==i){
+                    BuildingFourRoofs[j].SetActive(true);
+                    BuildingFourTowers[j].SetActive(true);
+                }
+                //Hide all the other building 
+                else{
+                    BuildingFourRoofs[j].SetActive(false);
+                    BuildingFourTowers[j].SetActive(false);
+                } 
+            }
+            BuildingHeight.text = buildingFourHeight.ToString();
         }
     }
     
@@ -71,70 +175,96 @@ public class ChangeHeight : MonoBehaviour
         To check which building has been selected and check the height
         The maximum height for the building is 7 times click 
         */
-        if (roof == Roofs[0] && towerOneHeight<7){
-            tower.transform.localScale += new Vector3(0,0,25);
-            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
-            towerOneHeight += 1;
-            BuildingHeight.text = towerOneHeight.ToString();
+        if (buildingDecider == 0 && buildingOneHeight<7){
+            //Increase height of each individual shape of buildings 
+            for(int i = 0; i<4; i++){
+                BuildingOneTowers[i].transform.localScale += new Vector3(0,0,25);
+                BuildingOneRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
+                BuildingOneTowers[i].transform.localPosition += new Vector3(0, 0.125f, 0);
+            }
+            buildingOneHeight += 1;
+            BuildingHeight.text = buildingOneHeight.ToString();
         }
-        if (roof == Roofs[1] && towerTwoHeight<7){
-            tower.transform.localScale += new Vector3(0,0,25);
-            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
-            towerTwoHeight += 1;
-            BuildingHeight.text = towerTwoHeight.ToString();
+        if (buildingDecider == 1 && buildingTwoHeight<7){
+            for(int i = 0; i<4; i++){
+                BuildingTwoTowers[i].transform.localScale += new Vector3(0,0,25);
+                BuildingTwoRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
+                BuildingTwoTowers[i].transform.localPosition += new Vector3(0, 0.125f, 0);
+            }
+            buildingTwoHeight += 1;
+            BuildingHeight.text = buildingTwoHeight.ToString();
         }
-        if (roof == Roofs[2] && towerThreeHeight<7){
-            tower.transform.localScale += new Vector3(0,0,25);
-            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
-            towerThreeHeight += 1;
-            BuildingHeight.text = towerThreeHeight.ToString();
+        if (buildingDecider == 2 && buildingThreeHeight<7){
+            for(int i = 0; i<4; i++){
+                BuildingThreeTowers[i].transform.localScale += new Vector3(0,0,25);
+                BuildingThreeRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
+                BuildingThreeTowers[i].transform.localPosition += new Vector3(0, 0.125f, 0);
+            }
+            buildingThreeHeight += 1;
+            BuildingHeight.text = buildingThreeHeight.ToString();
         }
-        if (roof == Roofs[3] && towerFourHeight<7){
-            tower.transform.localScale += new Vector3(0,0,25);
-            roof.transform.localPosition += new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition += new Vector3(0, 0.125f, 0);
-            towerFourHeight += 1;
-            BuildingHeight.text = towerFourHeight.ToString();
+        if (buildingDecider == 3 && buildingFourHeight<7){
+            for(int i = 0; i<4; i++){
+                BuildingFourTowers[i].transform.localScale += new Vector3(0,0,25);
+                BuildingFourRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
+                BuildingFourTowers[i].transform.localPosition += new Vector3(0, 0.125f, 0);
+            }
+            buildingFourHeight += 1;
+            BuildingHeight.text = buildingFourHeight.ToString();
         }
         //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
-        if (roof == null){
+        if (buildingDecider == null){
             PopUpHeight.SetActive(true);
         }
     }
+
+    /*
+    Same method as IncreaseBuildingHeight
+    Just use -= instead of +=
+    */
     public void DecreseBuildingHeight(){
-        if (roof == Roofs[0] && towerOneHeight>0){
-            tower.transform.localScale -= new Vector3(0,0,25);
-            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
-            towerOneHeight -= 1;
-            BuildingHeight.text = towerOneHeight.ToString();
+        /*
+        To check which building has been selected and check the height
+        The minimum height for the building is 0 times click 
+        */
+        if (buildingDecider == 0 && buildingOneHeight>0){
+            for(int i = 0; i<4; i++){
+                BuildingOneTowers[i].transform.localScale -= new Vector3(0,0,25);
+                BuildingOneRoofs[i].transform.localPosition -= new Vector3(0, 0.25f, 0);
+                BuildingOneTowers[i].transform.localPosition -= new Vector3(0, 0.125f, 0);
+            }
+            buildingOneHeight -= 1;
+            BuildingHeight.text = buildingOneHeight.ToString();
         }
-        if (roof == Roofs[1] && towerTwoHeight>0){
-            tower.transform.localScale -= new Vector3(0,0,25);
-            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
-            towerTwoHeight -= 1;
-            BuildingHeight.text = towerTwoHeight.ToString();
+        if (buildingDecider == 1 && buildingTwoHeight>0){
+            for(int i = 0; i<4; i++){
+                BuildingTwoTowers[i].transform.localScale -= new Vector3(0,0,25);
+                BuildingTwoRoofs[i].transform.localPosition -= new Vector3(0, 0.25f, 0);
+                BuildingTwoTowers[i].transform.localPosition -= new Vector3(0, 0.125f, 0);
+            }
+            buildingTwoHeight -= 1;
+            BuildingHeight.text = buildingTwoHeight.ToString();
         }
-        if (roof == Roofs[2] && towerThreeHeight>0){
-            tower.transform.localScale -= new Vector3(0,0,25);
-            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
-            towerThreeHeight -= 1;
-            BuildingHeight.text = towerThreeHeight.ToString();
+        if (buildingDecider == 2 && buildingThreeHeight>0){
+            for(int i = 0; i<4; i++){
+                BuildingThreeTowers[i].transform.localScale -= new Vector3(0,0,25);
+                BuildingThreeRoofs[i].transform.localPosition -= new Vector3(0, 0.25f, 0);
+                BuildingThreeTowers[i].transform.localPosition -= new Vector3(0, 0.125f, 0);
+            }
+            buildingThreeHeight -= 1;
+            BuildingHeight.text = buildingThreeHeight.ToString();
         }
-        if (roof == Roofs[3] && towerFourHeight>0){
-            tower.transform.localScale -= new Vector3(0,0,25);
-            roof.transform.localPosition -= new Vector3(0, 0.25f, 0);
-            tower.transform.localPosition -= new Vector3(0, 0.125f, 0);
-            towerFourHeight -= 1;
-            BuildingHeight.text = towerFourHeight.ToString();
+        if (buildingDecider == 3 && buildingFourHeight>0){
+            for(int i = 0; i<4; i++){
+                BuildingFourTowers[i].transform.localScale -= new Vector3(0,0,25);
+                BuildingFourRoofs[i].transform.localPosition -= new Vector3(0, 0.25f, 0);
+                BuildingFourTowers[i].transform.localPosition -= new Vector3(0, 0.125f, 0);
+            }
+            buildingFourHeight -= 1;
+            BuildingHeight.text = buildingFourHeight.ToString();
         }
-        //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
-        if (roof == null){
+
+        if (buildingDecider == null){
             PopUpHeight.SetActive(true);
         }
     }
