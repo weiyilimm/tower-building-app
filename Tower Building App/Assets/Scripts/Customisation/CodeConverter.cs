@@ -7,19 +7,12 @@ using SimpleJSON;
 
 [System.Serializable]
 public class CodeConverter : MonoBehaviour{
-    // The CodeConverter Class
     public static CodeConverter codes;
-    
-    // The object in the scene that stores the CodeConverter Class
-    public GameObject ConverterObject; 
-    
-    // The dictionary mapping the material codes to their respective material object
-    public SortedDictionary<int,Material> materials_map = new SortedDictionary<int,Material>(); 
-    
-    // The dictionary mapping the name of a subject to its building_stats index
+    public GameObject ConverterObject;
+    public SortedDictionary<int,Material> materials_map = new SortedDictionary<int,Material>();
     public SortedDictionary<string,int> subject_map = new SortedDictionary<string,int>();
 
-
+    // Start is called before the first frame update
     void Start(){
         DontDestroyOnLoad(ConverterObject);
         codes = this;

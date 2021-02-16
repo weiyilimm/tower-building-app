@@ -46,7 +46,7 @@ public class Main_Building_Customisation : MonoBehaviour{
                         Block.transform.localPosition = new Vector3(-0.5f,0.6f,-0.5f);
                         Cap.transform.localPosition = new Vector3(-0.5f,1.1f,-0.5f);
                     } else if (location_counter == 3){
-                        Block.transform.localPosition = new Vector3(0.458f,0.6f,-0.458f);
+                        Block.transform.localPosition = new Vector3(0.5f,0.6f,-0.5f);
                         Cap.transform.localPosition = new Vector3(0.5f,1.1f,-0.5f);
                     }
                     location_counter += 1;
