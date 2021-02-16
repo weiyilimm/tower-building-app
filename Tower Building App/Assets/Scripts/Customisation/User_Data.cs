@@ -91,7 +91,7 @@ public class User_Data : MonoBehaviour{
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
 
         // Add/Remove a building from an existing user.
-        CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
+        //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
 
 
     }
@@ -141,11 +141,63 @@ public class User_Data : MonoBehaviour{
         Table = "Users" or "Models"
         id = URI of either an User or Building.
      */
-    private void CreateRequest(string RequestType, string Table, string id = "-1", int buildingid = -1, string data = "-1")
+    public void CreateRequest(string RequestType, string id = "-1")
     {
         // Building name, User name. User -> 
-        string apiString = string.Concat("api/", Table);
+        string apiString = "http://localhost:800/api/";
 
+        // The data and any building ids will be generated in function as a means
+        // of reducing the number of external function calls in other parts of the app
+        // and to increase the protection of said variables
+        string data;
+        int buildingid;
+
+        if (RequestType == "CREATE User") {
+            // Create a new User
+            apiString = string.Concat(apiString + "Users/");
+            Debug.Log(apiString);
+            data = CreateUserJSON();
+            StartCoroutine(PostRequest(apiString, data));
+
+        } else if (RequestType == "GET User") {
+            // Get the data of the current User
+            string requestedId = UserID + "/";
+            // USE CASE: to get all the buildings belonging to the user at the start of the game.
+            apiString = string.Concat(apiString, "Users/");
+            apiString = string.Concat(apiString, requestedId);
+            Debug.Log(apiString);
+            StartCoroutine(GetRequest(apiString, "Single"));
+
+        } else if (RequestType == "GET All Users") {
+            // get the userid(hidden), username and xp of all users
+            apiString = string.Concat(apiString + "Users/");
+            Debug.Log(apiString);
+            StartCoroutine(GetRequest(apiString, "Multiple"));
+
+        } else if (RequestType == "UPDATE User") {
+            // Change the Users personal details 
+            // Call CreateUserJSON
+            apiString = apiString + "Users/" + UserID;
+            Debug.Log(apiString);
+            data = CreateUserJSON();
+            StartCoroutine(PostRequest(apiString, data, "PUT"));
+
+        } else if (RequestType == "UPDATE Buildings") {
+            // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
+            // Call CreateBuildingJSON
+            apiString = apiString + "/" + UserID + "/" + "Buildings" + "/";
+            List<string> buildingData = CreateBuildingJSON();
+            for (int i=0; i<12; i++) {
+                buildingid = (i*10) + (building_stats[i].model);
+                apiString = apiString + buildingid.ToString();
+                data = buildingData[i];
+                Debug.Log(apiString);
+                StartCoroutine(PostRequest(apiString, data, "POST"));
+            }
+        }
+
+        /* OLD CODE KEEPING UNTIL NEW CODE HAS BEEN TESTED */
+        /*
         if (RequestType == "GET")
         {
             // Want to get a specfic User/Building.
@@ -198,7 +250,7 @@ public class User_Data : MonoBehaviour{
                     StartCoroutine(PostRequest(apiString, data, "POST"));
                 }
             }
-        }
+        } */
     }
 
     /*
