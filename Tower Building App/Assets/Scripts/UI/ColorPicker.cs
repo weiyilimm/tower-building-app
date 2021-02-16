@@ -46,7 +46,7 @@ public class ColorPicker : MonoBehaviour
         switch (currentSceneName)
         {   
             case "Main":
-                MeshRenderer = new MeshRenderer[3];
+                MeshRenderer = new MeshRenderer[9];
                 localXP = Scoring.MainXP;
                 MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
                 MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
