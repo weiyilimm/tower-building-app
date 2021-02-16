@@ -19,8 +19,6 @@ public class User_Data : MonoBehaviour{
     public int temp_height;
     public List<Building> building_stats = new List<Building>();
 
-    //public Button file1,file2;
-
     //This script will store all of the data assigned to a single user
     // It will contain the object it travels thorugh the scenes on (Empty GameObject)
     // the details of the player (username, game-wide-XP, ect...)
@@ -28,8 +26,7 @@ public class User_Data : MonoBehaviour{
 
     void Start() {
         DontDestroyOnLoad(UserProfile);
-
-        //data = this;
+        data = this;
 
         //CREATE BUILDING INSTANCES HERE
         createBuildings();
@@ -113,29 +110,29 @@ public class User_Data : MonoBehaviour{
     }
 
     private void createBuildings(){
-        Building Main = new Building(100,4,0,500,4);
+        Building Main = new Building(100,4,0,0,4);
         building_stats.Add(Main);
-        Building Main2 = new Building(101,5,1,500,2);
+        Building Main2 = new Building(101,5,1,0,2);
         building_stats.Add(Main2);
-        Building Main3 = new Building(102,9,2,500,1);
+        Building Main3 = new Building(102,9,2,0,1);
         building_stats.Add(Main3);
-        Building Main4 = new Building(103,11,3,500,3);
+        Building Main4 = new Building(103,11,3,0,3);
         building_stats.Add(Main4);
-        Building Art = new Building(-1,-1,0,450,1);
+        Building Art = new Building(-1,-1,0,0,1);
         building_stats.Add(Art);
-        Building Biology_Chemistry = new Building(3,5,0,400,1);
+        Building Biology_Chemistry = new Building(3,5,0,0,1);
         building_stats.Add(Biology_Chemistry);
-        Building ComputerScience = new Building(-1,-1,0,350,1);
+        Building ComputerScience = new Building(-1,-1,0,0,1);
         building_stats.Add(ComputerScience);
-        Building Engineering = new Building(-1,-1,0,300,1);
+        Building Engineering = new Building(-1,-1,0,0,1);
         building_stats.Add(Engineering);
-        Building Geography_History = new Building(-1,-1,0,250,1);
+        Building Geography_History = new Building(-1,-1,0,0,1);
         building_stats.Add(Geography_History);
-        Building Languages = new Building(-1,-1,0,200,1);
+        Building Languages = new Building(-1,-1,0,0,1);
         building_stats.Add(Languages);
-        Building Law_Politics = new Building(-1,-1,0,150,1);
+        Building Law_Politics = new Building(-1,-1,0,0,1);
         building_stats.Add(Law_Politics);
-        Building Physics_Maths = new Building(-1,-1,0,100,1);
+        Building Physics_Maths = new Building(-1,-1,0,0,1);
         building_stats.Add(Physics_Maths);
     }
 
@@ -160,7 +157,7 @@ public class User_Data : MonoBehaviour{
                 apiString = string.Concat(apiString, requestedId);
                 apiString = string.Concat("http://localhost:8080/", apiString);
                 Debug.Log(apiString);
-                StartCoroutine(GetRequest(apiString));
+                StartCoroutine(GetRequest(apiString, "Single"));
             } 
             // Get all the Users/Buildings
             else
@@ -168,7 +165,7 @@ public class User_Data : MonoBehaviour{
                 apiString = string.Concat(apiString + "/");
                 apiString = string.Concat("http://localhost:8080/", apiString);
                 Debug.Log(apiString);
-                StartCoroutine(GetRequest(apiString));
+                StartCoroutine(GetRequest(apiString, "Multiple"));
             }
         }
         else
@@ -222,42 +219,13 @@ public class User_Data : MonoBehaviour{
             }
         */
     
-    // WRITE
-    private string CreateBuildingJSON(){
-        // Create the JSON file storing the building data for writing to the database
-
-        string BuildingJSON = "{userBuildings:[";
+    public List<string> CreateBuildingJSON() {
         
-        // Loop through the buildings to add their data to the JSON string
-        string toAppend = "";
-        for (int i=0; i<12; i++){
-            string bc = i.ToString() + building_stats[i].model.ToString(); // The unique code for the model within the subject
-            int name_index = (i*10) + building_stats[i].model;
-            string bn = CodeConverter.codes.buildingName_map[name_index]; // The name of the building (MAKE dictionary to map int to name)
-            string bx = building_stats[i].building_xp.ToString(); // The specific xp of the building
-            string h = building_stats[i].m_height.ToString(); // The height of the building (only differs for the Main)
-            string mg = i.ToString(); // The subject index
-            string pc = building_stats[i].primary_colour.ToString(); // The primary colour of the building
-            string sc = building_stats[i].secondary_colour.ToString(); // The secondary colour of the building
-            
-            string ParttoAppend = "{buildingCode: " + bc + ",buildingName:" + bn + ",building_xp:" + bx + ",height:" + h + ",primary_colour:" + pc + ",secondary_colour:" + sc + ",modelGroup:" + mg + "},";
-            toAppend = toAppend + ParttoAppend;
-        }
-        
-        BuildingJSON = BuildingJSON + toAppend;
-        BuildingJSON = BuildingJSON + "]}";
-
-        return BuildingJSON;
-
-    }
-
-    public List<DatabaseBuildings> CreateBuildingJSON2() {
-        
-        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
+        List<string> uB = new List<string>();
         
         for (int i=0; i<12; i++){
             int bc = (i*10) + building_stats[i].model; // The unique code for the model within the subject
-            string bn = CodeConverter.codes.buildingName_map[bc]; // The name of the building (MAKE dictionary to map int to name)
+            string bn = CodeConverter.codes.buildingName_map[bc]; // The name of the building
             int bx = building_stats[i].building_xp; // The specific xp of the building
             int h = building_stats[i].m_height; // The height of the building (only differs for the Main)
             int mg = i; // The subject index
@@ -265,7 +233,8 @@ public class User_Data : MonoBehaviour{
             int sc = building_stats[i].secondary_colour; // The secondary colour of the building
             
             DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bn,bx,h,mg,pc,sc);
-            uB.Add(currentBuilding);
+            string currentBuilding_string = JsonUtility.ToJson(currentBuilding);
+            uB.Add(currentBuilding_string);
         }
         return uB;
     }
@@ -274,21 +243,12 @@ public class User_Data : MonoBehaviour{
     private string CreateUserJSON() {
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
-        string UserJSON = "{id:" + UserID;
-        UserJSON = UserJSON + ", userName:" + Username;
-        UserJSON = UserJSON + ", email:" + Email;
-        UserJSON = UserJSON + ", password" + Password;
-        //UserJSON = UserJSON + CreateBuildingJSON();
-        UserJSON = UserJSON + ", totalExp:" + global_xp.ToString() + "}";
-
-        // OR
-        // If the string method above does not work - try the following method which uses SimpleJSON
-
+        
         List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
-        string UserJSON2 = JsonUtility.ToJson(putData);
+        string UserJSON = JsonUtility.ToJson(putData);
 
-        return UserJSON2;
+        return UserJSON;
     }
 
     private void TranslateBuildingJSON(string rawJSON){
@@ -351,7 +311,7 @@ public class User_Data : MonoBehaviour{
     }
 
 
-    IEnumerator GetRequest(string targetAPI){
+    IEnumerator GetRequest(string targetAPI, string translationType){
 
         Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
@@ -369,9 +329,16 @@ public class User_Data : MonoBehaviour{
             Debug.Log("Received: " + raw);
 
             // TRANSLATION CODE HERE
-
-            // BuildingTrue modelGot = JsonUtility.FromJson<DatabaseBuildings>(raw);
-            // Debug.Log("The model given was " + modelGot.building_name);
+            if (translationType == "Single") {
+                // If the translation type is Single then we know that the database is sending all of the Users data
+                // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
+                // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
+                TranslateUserJSON(raw);
+                TranslateBuildingJSON(raw);
+            } else if (translationType == "Multiple Users") {
+                // This will be used for the leaderboard
+                // New translation function will be written for this
+            }
         }
     }
 
