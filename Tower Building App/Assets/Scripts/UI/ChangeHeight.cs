@@ -41,6 +41,8 @@ public class ChangeHeight : MonoBehaviour
     public TextMeshProUGUI BuildingHeight;
     //A pop up to indicate when the user hasn't selected a building
     public GameObject PopUpHeight;
+    //A text from pop up
+    public TextMeshProUGUI PopUpText;
     /*
     A counter to count each individual building height
     Maximum height is 7 times button pressed
@@ -53,7 +55,7 @@ public class ChangeHeight : MonoBehaviour
     An integer to store which building been selected
     E.G. if the user select first building(Top right in the UI), then it is 0
     */
-    private int buildingDecider;
+    private int buildingDecider = -1;
     void Start()
     {   
         
@@ -160,6 +162,10 @@ public class ChangeHeight : MonoBehaviour
             }
             BuildingHeight.text = buildingFourHeight.ToString();
         }
+        if (buildingDecider == -1){
+            PopUpText.text = "Please select a building to change shape.";
+            PopUpHeight.SetActive(true);
+        }
     }
     
     /*
@@ -213,7 +219,8 @@ public class ChangeHeight : MonoBehaviour
             BuildingHeight.text = buildingFourHeight.ToString();
         }
         //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
-        if (buildingDecider == null){
+        if (buildingDecider == -1){
+            PopUpText.text = "Please select a building to change height.";
             PopUpHeight.SetActive(true);
         }
     }
@@ -264,7 +271,8 @@ public class ChangeHeight : MonoBehaviour
             BuildingHeight.text = buildingFourHeight.ToString();
         }
 
-        if (buildingDecider == null){
+        if (buildingDecider == -1){
+            PopUpText.text = "Please select a building to change height.";
             PopUpHeight.SetActive(true);
         }
     }
