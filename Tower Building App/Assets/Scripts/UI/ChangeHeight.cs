@@ -105,6 +105,7 @@ public class ChangeHeight : MonoBehaviour
     */
     public void SelectShape(int i){
         //Use the temporary stored integer to get which building been selected
+        User_Data.data.temp_data[buildingDecider][2] = i;
         if (buildingDecider == 0){
             for (int j = 0; j<4; j++){
                 //Show the specific shape of building that user select
@@ -217,6 +218,11 @@ public class ChangeHeight : MonoBehaviour
             buildingFourHeight += 1;
             BuildingHeight.text = buildingFourHeight.ToString();
         }
+
+        if (User_Data.data.temp_data[buildingDecider][3] < 7){
+            User_Data.data.temp_data[buildingDecider][3] += 1;
+        }
+
         //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
         if (buildingDecider == -1){
             PopUpText.text = "Please select a building to change height.";
@@ -233,6 +239,7 @@ public class ChangeHeight : MonoBehaviour
         To check which building has been selected and check the height
         The minimum height for the building is 0 times click 
         */
+        
         if (buildingDecider == 0 && buildingOneHeight>0){
             for(int i = 0; i<4; i++){
                 BuildingOneTowers[i].transform.localScale -= new Vector3(0,0,25);
@@ -268,6 +275,10 @@ public class ChangeHeight : MonoBehaviour
             }
             buildingFourHeight -= 1;
             BuildingHeight.text = buildingFourHeight.ToString();
+        }
+
+        if (User_Data.data.temp_data[buildingDecider][3] > 0){
+            User_Data.data.temp_data[buildingDecider][3] -= 1;
         }
 
         if (buildingDecider == -1){
