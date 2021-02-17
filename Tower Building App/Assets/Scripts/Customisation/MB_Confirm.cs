@@ -17,10 +17,10 @@ public class MB_Confirm : MonoBehaviour{
             subject_name = subject_name + index;
             int intdex = CodeConverter.codes.subject_map[subject_name];
 
-            User_Data.data.building_stats[intdex].primary_colour = User_Data.data.temp_primary;
-            User_Data.data.building_stats[intdex].secondary_colour = User_Data.data.temp_secondary;
-            User_Data.data.building_stats[intdex].model = User_Data.data.temp_model;
-            User_Data.data.building_stats[intdex].m_height = User_Data.data.temp_height;
+            //User_Data.data.building_stats[intdex].primary_colour = User_Data.data.temp_primary;
+            //User_Data.data.building_stats[intdex].secondary_colour = User_Data.data.temp_secondary;
+            //User_Data.data.building_stats[intdex].model = User_Data.data.temp_model;
+            //User_Data.data.building_stats[intdex].m_height = User_Data.data.temp_height;
 
             tindex += 1;
         }

@@ -13,10 +13,7 @@ public class User_Data : MonoBehaviour{
     public string UserID, Username, Email, Password;
     public int global_xp;
 
-    public int temp_primary;
-    public int temp_secondary;
-    public int temp_model;
-    public int temp_height;
+    public List<int[]> temp_data = new List<int[]>();
     public List<Building> building_stats = new List<Building>();
 
     //This script will store all of the data assigned to a single user
@@ -78,28 +75,17 @@ public class User_Data : MonoBehaviour{
 
         Debug.Log("Running the POST request");
 
-        // Create a new user - OLD
-        //CreateRequest("POST", "Users", data: stringUserJSONData);
-        
-        // NEW CALLING CODE
-        CreateRequest("CREATE User");
+        //// Create a new user
+        // CreateRequest("CREATE User");
 
-        //// Create a new model - OLD
+        //// Create a new model
         //CreateRequest("POST", "Models", data: data);
 
-        //// Edit a existing user's personal details. - OLD
-        //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
-        
-        // NEW CALLING CODE
-        CreateRequest("UPDATE User");
+        //// Edit a existing user's details
+        // CreateRequest("UPDATE User");
 
         // Add/Remove a building from an existing user. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
-        
-        // NEW CALLING CODE
-        CreateRequest("UPDATE Buildings");
-
-
     }
 
     public void Update() {

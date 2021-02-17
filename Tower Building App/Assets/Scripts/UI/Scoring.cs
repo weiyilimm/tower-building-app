@@ -116,6 +116,6 @@ public class Scoring : MonoBehaviour
                 break;
         }
         // POST to User
-        User_Data.data.CreateRequest("UPDATE_User");
+        //User_Data.data.CreateRequest("UPDATE_User");
     }
 }

@@ -38,6 +38,9 @@ public class ColorPicker : MonoBehaviour
     private GameObject lockIcon;
     //Get the current scene that user in
     private string currentSceneName;
+
+    private int main_index;
+
     void Start()
     {   
         //Get the current scene name that user in
@@ -134,10 +137,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = j;
+            User_Data.data.temp_data[main_index][0] = j;
             materials = find_mat(Matte,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = j;
+            User_Data.data.temp_data[main_index][1] = j;
             materials = find_mat(Matte,materials,"2",j);
         }
 
@@ -149,10 +152,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 100+j;
+            User_Data.data.temp_data[main_index][0] = 100+j;
             materials = find_mat(Metallic,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 100+j;
+            User_Data.data.temp_data[main_index][1] = 100+j;
             materials = find_mat(Metallic,materials,"2",j);
         }
 
@@ -164,10 +167,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 200+j;
+            User_Data.data.temp_data[main_index][0] = 200+j;
             materials = find_mat(Emissive,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 200+j;
+            User_Data.data.temp_data[main_index][1] = 200+j;
             materials = find_mat(Emissive,materials,"2",j);
         }
 
@@ -179,10 +182,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 300+j;
+            User_Data.data.temp_data[main_index][0] = 300+j;
             materials = find_mat(Gradient,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 300+j;
+            User_Data.data.temp_data[main_index][1] = 300+j;
             materials = find_mat(Gradient,materials,"2",j);
         }
 
@@ -194,10 +197,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 400+j;
+            User_Data.data.temp_data[main_index][0] = 400+j;
             materials = find_mat(Fancy,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 400+j;
+            User_Data.data.temp_data[main_index][1] = 400+j;
             materials = find_mat(Fancy,materials,"2",j);
         }
 
@@ -222,15 +225,19 @@ public class ColorPicker : MonoBehaviour
     public void WhichBuildings(int num){
         if (num == 1){
             MeshRenderer = MainBuilding1;
+            main_index = 0;
         }
         if (num == 2){
             MeshRenderer = MainBuilding2;
+            main_index = 1;
         }
         if (num == 3){
             MeshRenderer = MainBuilding3;
+            main_index = 2;
         }
         if (num == 4){
             MeshRenderer = MainBuilding4;
+            main_index = 3;
         }
 
     }

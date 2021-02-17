@@ -15,7 +15,7 @@ public class Model_Switch : MonoBehaviour{
         for(int counter=0; counter<parent_length; counter++){
             GameObject child = parent.transform.GetChild(counter).gameObject;
             if (child.activeSelf) {
-                User_Data.data.temp_model = counter;
+                User_Data.data.temp_data[0][2] = counter;
             }
         }
     }    

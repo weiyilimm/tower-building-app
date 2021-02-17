@@ -11,12 +11,12 @@ public class Confirm : MonoBehaviour{
         string subject_name = SceneManager.GetActiveScene().name;
         int index = CodeConverter.codes.subject_map[subject_name];
 
-        User_Data.data.building_stats[index].primary_colour = User_Data.data.temp_primary;
-        User_Data.data.building_stats[index].secondary_colour = User_Data.data.temp_secondary;
-        User_Data.data.building_stats[index].model = User_Data.data.temp_model;
+        User_Data.data.building_stats[index].primary_colour = User_Data.data.temp_data[0][0];
+        User_Data.data.building_stats[index].secondary_colour = User_Data.data.temp_data[0][1];
+        User_Data.data.building_stats[index].model = User_Data.data.temp_data[0][2];
 
         // POST to User
-        User_Data.data.CreateRequest("UPDATE_User");
+        //User_Data.data.CreateRequest("UPDATE_User");
 
         SceneManager.LoadScene(1);
     }
