@@ -115,5 +115,7 @@ public class Scoring : MonoBehaviour
                 PhyMathXP += localEarnedXP;
                 break;
         }
+        // POST to User
+        User_Data.data.CreateRequest("UPDATE_User");
     }
 }

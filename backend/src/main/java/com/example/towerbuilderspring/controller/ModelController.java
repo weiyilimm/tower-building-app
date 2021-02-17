@@ -2,7 +2,6 @@ package com.example.towerbuilderspring.controller;
 
 
 import com.example.towerbuilderspring.model.BuildingModels;
-import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
