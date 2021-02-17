@@ -5,25 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MB_Confirm : MonoBehaviour{
     public void ConfirmButton(){
-        string[] indexes = {"1","2","3","4"};
-        int tindex = 0;
-        
         // Gets the index from the array and appends it to the subjectname to make the name of the tower for look up in the dictionary
         // with the result of the look up, an integer index can be used on the user_data to get the corresponding entry for the building in the building_stats array
         // the entry is then updated to store the values currently in the temp variables
 
-        foreach (string index in indexes){
-            string subject_name = SceneManager.GetActiveScene().name;
-            subject_name = subject_name + index;
-            int intdex = CodeConverter.codes.subject_map[subject_name];
+        for (int i=0; i<4; i++){
+            User_Data.data.building_stats[i].primary_colour = User_Data.data.temp_data[i][0];
+            User_Data.data.building_stats[i].secondary_colour = User_Data.data.temp_data[i][1];
+            User_Data.data.building_stats[i].model = User_Data.data.temp_data[i][2];
+            User_Data.data.building_stats[i].m_height = User_Data.data.temp_data[i][3];
 
-            //User_Data.data.building_stats[intdex].primary_colour = User_Data.data.temp_primary;
-            //User_Data.data.building_stats[intdex].secondary_colour = User_Data.data.temp_secondary;
-            //User_Data.data.building_stats[intdex].model = User_Data.data.temp_model;
-            //User_Data.data.building_stats[intdex].m_height = User_Data.data.temp_height;
-
-            tindex += 1;
+            User_Data.data.temp_data[i][0] = -1;
+            User_Data.data.temp_data[i][1] = -1;
+            User_Data.data.temp_data[i][2] = 0;
+            User_Data.data.temp_data[i][3] = 1;
         }
+
         SceneManager.LoadScene(1);
     }
 }
