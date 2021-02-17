@@ -1,6 +1,7 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.BuildingModels;
+import com.example.towerbuilderspring.model.UserModelId;
 import com.example.towerbuilderspring.model.UserModels;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.ModelRepository;
@@ -106,7 +107,7 @@ public class UserController {
 
         if (fetched_user.isPresent()) {
             Users requestedUser = fetched_user.get();
-            
+
             // Currently manually going through the list as the key UserModels is mapped to a composite key.
             for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
                 UserModels currentModel = it.next();
@@ -165,22 +166,6 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping("/Users/{id}/Buildings")
-//    public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") UUID id) {
-//        try {
-//            Optional<Users> fetched_user = userRepository.findById(id);
-//            if (fetched_user.isPresent()) {
-//                Users user = fetched_user.get();
-//                return new ResponseEntity<>(user.getUserBuildings(), HttpStatus.ACCEPTED);
-//            }
-//            else {
-//                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
 //    @PostMapping("/Users/{id}/Buildings")
 //    public ResponseEntity<List<Object>> addUserBuilding(@PathVariable("id") UUID id,
 //                                                          @RequestBody BuildingModels building) {
@@ -206,6 +191,58 @@ public class UserController {
      within the user repository rather then a user (which would be directly modifiable through the
      repository interface) itself.
     **/
+//    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
+//    public ResponseEntity<Set<BuildingModels>> updateUserBuilding(@PathVariable("userId") UUID userId,
+//                                                           @PathVariable("buildingId") long buildingId,
+//                                                           @RequestBody UserModels newUserModel) {
+//
+//        Optional<Users> fetched_user = userRepository.findById(userId);
+//        Optional<BuildingModels> fetched_model = modelRepository.findById(buildingId);
+//        List<UserModels> all_models = userModelRepository.findAll();
+//
+//        // Make sure that both the user and the building exist.
+//        if (fetched_user.isPresent() && fetched_model.isPresent()) {
+//
+//            System.out.println("Step1");
+//            System.out.println();
+//
+//            Users user = fetched_user.get();
+//            BuildingModels newModel = fetched_model.get();
+//            // Get the group to be updated.
+//            long modelGroup = newModel.getModelGroup();
+//
+//            // Search variables
+//            UserModels currentModel;
+//            Users currentUser;
+//            BuildingModels currentBuilding;
+//            // TODO See if you can make a method in the User Models Repository to do this instead.
+//            // Go through all the global models and find the one belonging both to the same group and the same user.
+//            for (int i = 0; i < all_models.size(); i++) {
+//                currentModel = all_models.get(i);
+//                currentUser = currentModel.getUserModelId().getFk_user();
+//                currentBuilding = currentModel.getUserModelId().getFk_building();
+//
+//                System.out.print(currentBuilding);
+//                System.out.println(" " + modelGroup);
+//
+//                System.out.print(currentUser);
+//                System.out.println(" " + userId.toString());
+//
+//                System.out.println();
+//
+//                if (currentUser.getId() == userId &&
+//                        currentBuilding.getModelGroup() == modelGroup) {
+//                    System.out.println("deleting a model");
+//                    UserModelId modelToDelete = new UserModelId(currentUser, currentBuilding);
+////                    userModelRepository.deleteById(modelToDelete);
+//                    userModelRepository.save(newUserModel);
+//                    return new ResponseEntity<>(null, HttpStatus.OK);
+//                }
+//            }
+//        }
+//        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+//    }
+
 //    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
 //    public ResponseEntity<Set<BuildingModels>> changeUserBuilding(@PathVariable("userId") UUID userId,
 //                                                           @PathVariable("buildingId") long buildingId,

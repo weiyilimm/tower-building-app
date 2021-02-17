@@ -21,6 +21,11 @@ public class UserModelId implements Serializable {
 
     public UserModelId() {};
 
+    public UserModelId(Users user, BuildingModels model) {
+        this.fk_user = user;
+        this.fk = model;
+    }
+
     @Override
     public String toString() {
         return "UserModelId{" +
