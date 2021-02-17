@@ -38,8 +38,11 @@ public class ColorPicker : MonoBehaviour
     private GameObject lockIcon;
     //Get the current scene that user in
     private string currentSceneName;
-
-    private int main_index;
+    
+    // This index is used to determine which of the 4 temp_data arrays to store the temp data in
+    // All normal buildings will use 0, whereas the Main building will change between 0-3 based on
+    // which tower is beign customised
+    private int main_index = 0;
 
     void Start()
     {   

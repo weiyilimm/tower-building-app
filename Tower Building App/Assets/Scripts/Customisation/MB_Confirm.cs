@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MB_Confirm : MonoBehaviour{
     public void ConfirmButton(){
-        // Gets the index from the array and appends it to the subjectname to make the name of the tower for look up in the dictionary
-        // with the result of the look up, an integer index can be used on the user_data to get the corresponding entry for the building in the building_stats array
-        // the entry is then updated to store the values currently in the temp variables
-
+        // Loop through the 4 int arrays which store the temporary data and update
+        // the main buildings persistant data with these values
         for (int i=0; i<4; i++){
             User_Data.data.building_stats[i].primary_colour = User_Data.data.temp_data[i][0];
             User_Data.data.building_stats[i].secondary_colour = User_Data.data.temp_data[i][1];
@@ -20,6 +18,9 @@ public class MB_Confirm : MonoBehaviour{
             User_Data.data.temp_data[i][2] = 0;
             User_Data.data.temp_data[i][3] = 0;
         }
+        
+        // POST to User
+        //User_Data.data.CreateRequest("UPDATE_User");
 
         SceneManager.LoadScene(1);
     }

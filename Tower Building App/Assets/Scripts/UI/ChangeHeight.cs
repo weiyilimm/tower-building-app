@@ -219,6 +219,7 @@ public class ChangeHeight : MonoBehaviour
             BuildingHeight.text = buildingFourHeight.ToString();
         }
 
+        // Check the height of the building is below the maximum and if so increase its height
         if (User_Data.data.temp_data[buildingDecider][3] < 7){
             User_Data.data.temp_data[buildingDecider][3] += 1;
         }
@@ -277,6 +278,7 @@ public class ChangeHeight : MonoBehaviour
             BuildingHeight.text = buildingFourHeight.ToString();
         }
 
+        // Check the height of the building is above the minimum and if so decrease its height
         if (User_Data.data.temp_data[buildingDecider][3] > 0){
             User_Data.data.temp_data[buildingDecider][3] -= 1;
         }
