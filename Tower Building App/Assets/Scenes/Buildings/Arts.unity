@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -197,7 +197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 361109906}
   - component: {fileID: 361109905}
-  - component: {fileID: 361109904}
   - component: {fileID: 361109907}
   m_Layer: 0
   m_Name: Main Camera
@@ -206,14 +205,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &361109904
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361109903}
-  m_Enabled: 1
 --- !u!20 &361109905
 Camera:
   m_ObjectHideFlags: 0
@@ -947,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 4188648047011778922, guid: f0bd6ae59e4c6d14a90bf1cc95d40f5d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -447.99933
+      value: -447.14343
       objectReference: {fileID: 0}
     - target: {fileID: 4188648047069008335, guid: f0bd6ae59e4c6d14a90bf1cc95d40f5d,
         type: 3}
