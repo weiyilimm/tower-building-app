@@ -76,6 +76,10 @@ public class Users {
         this.totalexp = totalexp;
     }
 
+    /*
+    CURRENTLY REQUIRED: THE FUNCTIONS TO BE TRANSFERRED INTO THE CURRENT FRAMEWORK.
+     */
+
 //    public Set<BuildingModels> getUserBuildings() {
 //        return userBuildings;
 //    }
@@ -114,13 +118,15 @@ public class Users {
 //        this.userBuildings.add(building);
 //    }
 
+
     @Override
     public String toString() {
         return "Users{" +
-                "userName='" + userName + '\'' +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", totalxp=" + totalexp +
+                ", totalexp=" + totalexp +
                 '}';
     }
 }

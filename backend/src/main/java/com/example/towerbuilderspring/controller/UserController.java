@@ -1,8 +1,10 @@
 package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.BuildingModels;
+import com.example.towerbuilderspring.model.UserModels;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.ModelRepository;
+import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import com.example.towerbuilderspring.service.BuildingRequestValid;
 import org.aspectj.asm.IModelFilter;
@@ -18,11 +20,15 @@ import java.util.*;
 @RequestMapping("/api")
 public class UserController {
 
+    //Todo Convert field injections in constructor injections.
     @Autowired
     ModelRepository modelRepository;
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserModelRepository userModelRepository;
 
     @GetMapping("/Users/")
     public ResponseEntity<List<Users>> getAllUsers() {
@@ -91,9 +97,72 @@ public class UserController {
     }
 
 
-    @GetMapping("Users/{id}/Buidlings")
-    public ResponseEntity<Set<BuildingModels>> getUserBuildings(@PathVariable("id") UUID id) {
-        return null;
+    @GetMapping("Users/{id}/Buildings")
+    public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
+
+        Optional<Users> fetched_user = userRepository.findById(id);
+        List<UserModels> all_models = userModelRepository.findAll();
+        Set<UserModels> userModels = new HashSet<>();
+
+        if (fetched_user.isPresent()) {
+            Users requestedUser = fetched_user.get();
+            
+            // Currently manually going through the list as the key UserModels is mapped to a composite key.
+            for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
+                UserModels currentModel = it.next();
+                // TODO clean this up.
+                if (currentModel.getUserModelId().getFk_user().getId() == id) {
+                    userModels.add(currentModel);
+                }
+            }
+
+            /**
+            Formatting the values to match the frontend model.
+             **/
+
+            // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
+            HashMap<String, Object> formattedUserModels = new HashMap<>();
+            List<HashMap<String, Object>> modelsList = new ArrayList<HashMap<String, Object>>();
+
+
+                // User Details
+            formattedUserModels.put("id", id.toString());
+            formattedUserModels.put("userName", requestedUser.getUserName());
+            formattedUserModels.put("password", requestedUser.getPassword());
+            formattedUserModels.put("totalExp", requestedUser.getTotalExp());
+                // Their current models
+            for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
+                UserModels currentModel = it.next();
+
+                /* TESTING
+                System.out.println(currentModel.getUserModelId().getFk_building().getBuildingCode());
+                System.out.println(currentModel.getUserModelId().getFk_building().getBuildingName());
+                System.out.println(currentModel.getUserModelId().getFk_building().getModelGroup());
+                System.out.println(currentModel.getBuilding_xp());
+                System.out.println(currentModel.getPrimaryColour());
+                System.out.println(currentModel.getSecondaryColour());
+                System.out.println(currentModel.getHeight());
+                 */
+
+                // Don't use clear() apparently.
+                HashMap<String, Object> tempModelData = new HashMap<>();
+
+                tempModelData.put("buildingCode", currentModel.getUserModelId().getFk_building().getBuildingCode());
+                tempModelData.put("buildingName", currentModel.getUserModelId().getFk_building().getBuildingName());
+                tempModelData.put("buildingGroup", currentModel.getUserModelId().getFk_building().getModelGroup());
+                tempModelData.put("building_xp", currentModel.getBuilding_xp());
+                tempModelData.put("primaryColour", currentModel.getPrimaryColour());
+                tempModelData.put("secondaryColour", currentModel.getSecondaryColour());
+                tempModelData.put("height", currentModel.getHeight());
+
+                // Add the data to the list.
+                modelsList.add(tempModelData);
+            }
+
+            formattedUserModels.put("userBuildings", modelsList);
+            return new ResponseEntity<>(formattedUserModels, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
 //    @GetMapping("/Users/{id}/Buildings")
