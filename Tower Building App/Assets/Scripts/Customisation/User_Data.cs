@@ -108,15 +108,15 @@ public class User_Data : MonoBehaviour{
             Building newBuilding = new Building(-1,-1,0,40000,0);
             building_stats.Add(newBuilding);    
         }
-        Scoring.MainXP = 40000;
-        Scoring.ArtsXP = 40000;
-        Scoring.BioCheXP = 40000;
-        Scoring.ComSciXP = 40000;
-        Scoring.EngXP = 40000;
-        Scoring.GeoXP = 40000;
-        Scoring.LanXP = 40000;
-        Scoring.LawPolXP = 40000;
-        Scoring.PhyMathXP = 40000;
+        Scoring.MainXP = 400000;
+        Scoring.ArtsXP = 400000;
+        Scoring.BioCheXP = 400000;
+        Scoring.ComSciXP = 400000;
+        Scoring.EngXP = 400000;
+        Scoring.GeoXP = 400000;
+        Scoring.LanXP = 400000;
+        Scoring.LawPolXP = 400000;
+        Scoring.PhyMathXP = 400000;
     }
 
     /* 

@@ -45,6 +45,7 @@ public class ColorPicker : MonoBehaviour
     {   
         //Get the current scene name that user in
         currentSceneName = SceneManager.GetActiveScene().name;
+        
         //Assign the localXP to be specific building's XP
         switch (currentSceneName)
         {   
