@@ -44,17 +44,6 @@ public class User_Data : MonoBehaviour{
         // GetRequest("User");
         // GetRequest("Buildings");
 
-        /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA
-
-        Debug.Log("Starting translation...");
-        TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
-        Debug.Log(building_stats[0].primary_colour);
-        Debug.Log(building_stats[0].secondary_colour);
-        Debug.Log(building_stats[0].building_xp);
-        Debug.Log(building_stats[0].model);
-        Debug.Log(building_stats[0].m_height);
-        */
-
         /*
          *      GET REQUESTS
         */
@@ -67,7 +56,6 @@ public class User_Data : MonoBehaviour{
         /*
          *      POST REQUESTS
         */
-        Debug.Log("Start");
 
         // Dev User
         UserID = System.Guid.NewGuid().ToString();
@@ -76,14 +64,9 @@ public class User_Data : MonoBehaviour{
         Password = "7638";
         global_xp = 500;
 
-        var stringUserJSONData = CreateUserJSON();
-        Debug.Log(stringUserJSONData);
-
         // Dev Building
         DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
         var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
-
-        Debug.Log("Running the POST request");
 
         //// Create a new user
         // CreateRequest("CREATE User");
@@ -108,6 +91,15 @@ public class User_Data : MonoBehaviour{
             global_xp = 2000000;
             string stringOutput = CreateUserJSON();
             Debug.Log(stringOutput);
+        } else if (Input.GetKeyDown("y")) {
+            /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA */
+            Debug.Log("Starting translation...");
+            TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
+            Debug.Log(building_stats[0].primary_colour);
+            Debug.Log(building_stats[0].secondary_colour);
+            Debug.Log(building_stats[0].building_xp);
+            Debug.Log(building_stats[0].model);
+            Debug.Log(building_stats[0].m_height);
         }
     }
 
@@ -116,6 +108,15 @@ public class User_Data : MonoBehaviour{
             Building newBuilding = new Building(-1,-1,0,40000,0);
             building_stats.Add(newBuilding);    
         }
+        Scoring.MainXP = 40000;
+        Scoring.ArtsXP = 40000;
+        Scoring.BioCheXP = 40000;
+        Scoring.ComSciXP = 40000;
+        Scoring.EngXP = 40000;
+        Scoring.GeoXP = 40000;
+        Scoring.LanXP = 40000;
+        Scoring.LawPolXP = 40000;
+        Scoring.PhyMathXP = 40000;
     }
 
     /* 

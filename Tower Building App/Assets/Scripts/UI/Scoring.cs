@@ -88,31 +88,44 @@ public class Scoring : MonoBehaviour
         LawPolXP += globalEarnedXP;
         PhyMathXP += globalEarnedXP;
 
+        // Loop through the users building data and increase all of them by the 10% value
+        for (int k=0; k<12; k++) {
+            User_Data.data.building_stats[k].building_xp += (int)globalEarnedXP;
+        }
+
         //Get the current value of the dropdown, when the stop button is clicked
         switch (DropDown.options[DropDown.value].text){
             case "ARTS":
                 ArtsXP += localEarnedXP;
+                User_Data.data.building_stats[11].building_xp += (int)localEarnedXP;
                 break;
             case "BIOLOGY CHEMISTRY":
                 BioCheXP += localEarnedXP;
+                User_Data.data.building_stats[6].building_xp += (int)localEarnedXP;
                 break;
             case "COMPUTER SCIENCE":
                 ComSciXP += localEarnedXP;
+                User_Data.data.building_stats[5].building_xp += (int)localEarnedXP;
                 break;
             case "ENGINEERING":
                 EngXP += localEarnedXP;
+                User_Data.data.building_stats[9].building_xp += (int)localEarnedXP;
                 break;
             case "GEOGRAPHY":
                 GeoXP += localEarnedXP;
+                User_Data.data.building_stats[7].building_xp += (int)localEarnedXP;
                 break;
             case "LANGUAGES":
                 LanXP += localEarnedXP;
+                User_Data.data.building_stats[8].building_xp += (int)localEarnedXP;
                 break;
             case "LAW POLITICS":
                 LawPolXP += localEarnedXP;
+                User_Data.data.building_stats[10].building_xp += (int)localEarnedXP;
                 break;
             case "PHYSICS MATH":
                 PhyMathXP += localEarnedXP;
+                User_Data.data.building_stats[4].building_xp += (int)localEarnedXP;
                 break;
         }
         // POST to User

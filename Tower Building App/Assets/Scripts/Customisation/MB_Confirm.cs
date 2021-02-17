@@ -18,7 +18,7 @@ public class MB_Confirm : MonoBehaviour{
             User_Data.data.temp_data[i][0] = -1;
             User_Data.data.temp_data[i][1] = -1;
             User_Data.data.temp_data[i][2] = 0;
-            User_Data.data.temp_data[i][3] = 1;
+            User_Data.data.temp_data[i][3] = 0;
         }
 
         SceneManager.LoadScene(1);
