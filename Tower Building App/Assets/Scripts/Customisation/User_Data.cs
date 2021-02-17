@@ -10,10 +10,15 @@ using UnityEngine.Networking;
 public class User_Data : MonoBehaviour{
     public static User_Data data;
     public GameObject UserProfile;
+
+    // The Users data
     public string UserID, Username, Email, Password;
     public int global_xp;
 
+    // A list of 4 int arrays which each store Primary, Secondary, Model and Height values
     public List<int[]> temp_data = new List<int[]>();
+
+    // A list that stores the Users building data
     public List<Building> building_stats = new List<Building>();
 
     //This script will store all of the data assigned to a single user

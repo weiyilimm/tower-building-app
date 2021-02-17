@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Confirm : MonoBehaviour{
     public void ConfirmButton()
     {
-        // Assigns the temp value chosen by the user to the persistant data structure and returns 
+        // Assigns the temp values chosen by the user to the persistant data structure and returns 
         // to the main scene
         string subject_name = SceneManager.GetActiveScene().name;
         int index = CodeConverter.codes.subject_map[subject_name];
