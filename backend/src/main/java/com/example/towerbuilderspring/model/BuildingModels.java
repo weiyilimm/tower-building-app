@@ -21,21 +21,15 @@ public class BuildingModels {
     @Column(unique = true)
     private String buildingName;
 
-
     @NotNull
-    @Column(unique = true)
-    private long modelGroup; // Each building has it's own "group". When a building is swapped,
-                             // the building it swaps with must coincide with it's own group.
-
-    @ManyToMany(mappedBy = "userBuildings", fetch = FetchType.LAZY)
-    private Set<Users> users = new HashSet<>();
+    private long model;
 
     public BuildingModels() {};
 
     public BuildingModels(long buildingCode, String buildingName, long modelGroup) {
         this.buildingCode = buildingCode;
         this.buildingName = buildingName;
-        this.modelGroup = modelGroup;
+        this.model = modelGroup;
     }
 
     public long getBuildingCode() {
@@ -55,19 +49,11 @@ public class BuildingModels {
     }
 
     public long getModelGroup() {
-        return modelGroup;
+        return model;
     }
 
     public void setModelGroup(long modelGroup) {
-        this.modelGroup = modelGroup;
-    }
-
-    public Set<Users> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<Users> users) {
-        this.users = users;
+        this.model = modelGroup;
     }
 
     @Override
@@ -75,8 +61,7 @@ public class BuildingModels {
         return "BuildingModels{" +
                 "buildingCode=" + buildingCode +
                 ", buildingName='" + buildingName + '\'' +
-                ", modelGroup=" + modelGroup +
-                ", users=" + users +
+                ", model=" + model +
                 '}';
     }
 }
