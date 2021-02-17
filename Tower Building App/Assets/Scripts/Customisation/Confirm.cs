@@ -17,6 +17,7 @@ public class Confirm : MonoBehaviour{
 
         User_Data.data.temp_data[0][0] = -1;
         User_Data.data.temp_data[0][1] = -1;
+        User_Data.data.temp_data[0][2] = 0;
 
         // POST to User
         //User_Data.data.CreateRequest("UPDATE_User");
