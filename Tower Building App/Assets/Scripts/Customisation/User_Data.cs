@@ -25,6 +25,16 @@ public class User_Data : MonoBehaviour{
         DontDestroyOnLoad(UserProfile);
         data = this;
 
+        // Initialize the four temp_data arrays
+        int[] main1 = new int[] {-1,-1,0,0};
+        int[] main2 = new int[] {-1,-1,0,0};
+        int[] main3 = new int[] {-1,-1,0,0};
+        int[] main4 = new int[] {-1,-1,0,0};
+        temp_data.Add(main1);
+        temp_data.Add(main2);
+        temp_data.Add(main3);
+        temp_data.Add(main4);
+
         //CREATE BUILDING INSTANCES HERE
         createBuildings();
 
