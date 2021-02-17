@@ -48,7 +48,6 @@ public class User_Data : MonoBehaviour{
         Debug.Log(building_stats[0].m_height);
         */
 
-
         /*
          *      GET REQUESTS
         */
@@ -62,8 +61,6 @@ public class User_Data : MonoBehaviour{
          *      POST REQUESTS
         */
         Debug.Log("Start");
-
-        //var jsonStringData = JsonUtility.ToJson(data) ?? "";
 
         // Dev User
         UserID = System.Guid.NewGuid().ToString();
@@ -80,18 +77,27 @@ public class User_Data : MonoBehaviour{
         var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
 
         Debug.Log("Running the POST request");
-        // Create a new user
 
+        // Create a new user - OLD
         //CreateRequest("POST", "Users", data: stringUserJSONData);
+        
+        // NEW CALLING CODE
+        CreateRequest("CREATE User");
 
-        //// Create a new model
+        //// Create a new model - OLD
         //CreateRequest("POST", "Models", data: data);
 
-        //// Edit a existing user's personal details.
+        //// Edit a existing user's personal details. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
+        
+        // NEW CALLING CODE
+        CreateRequest("UPDATE User");
 
-        // Add/Remove a building from an existing user.
+        // Add/Remove a building from an existing user. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
+        
+        // NEW CALLING CODE
+        CreateRequest("UPDATE Buildings");
 
 
     }
@@ -103,37 +109,17 @@ public class User_Data : MonoBehaviour{
             Username = "BobertRoss";
             Email = "bobert@bobert.com";
             Password = "321password";
-            global_xp = 17;
+            global_xp = 2000000;
             string stringOutput = CreateUserJSON();
             Debug.Log(stringOutput);
         }
     }
 
     private void createBuildings(){
-        Building Main = new Building(100,4,0,0,4);
-        building_stats.Add(Main);
-        Building Main2 = new Building(101,5,1,0,2);
-        building_stats.Add(Main2);
-        Building Main3 = new Building(102,9,2,0,1);
-        building_stats.Add(Main3);
-        Building Main4 = new Building(103,11,3,0,3);
-        building_stats.Add(Main4);
-        Building Art = new Building(-1,-1,0,0,1);
-        building_stats.Add(Art);
-        Building Biology_Chemistry = new Building(3,5,0,0,1);
-        building_stats.Add(Biology_Chemistry);
-        Building ComputerScience = new Building(-1,-1,0,0,1);
-        building_stats.Add(ComputerScience);
-        Building Engineering = new Building(-1,-1,0,0,1);
-        building_stats.Add(Engineering);
-        Building Geography_History = new Building(-1,-1,0,0,1);
-        building_stats.Add(Geography_History);
-        Building Languages = new Building(-1,-1,0,0,1);
-        building_stats.Add(Languages);
-        Building Law_Politics = new Building(-1,-1,0,0,1);
-        building_stats.Add(Law_Politics);
-        Building Physics_Maths = new Building(-1,-1,0,0,1);
-        building_stats.Add(Physics_Maths);
+        for (int i=0; i<12; i++) {
+            Building newBuilding = new Building(-1,-1,0,40000,0);
+            building_stats.Add(newBuilding);    
+        }
     }
 
     /* 
@@ -144,22 +130,22 @@ public class User_Data : MonoBehaviour{
     public void CreateRequest(string RequestType, string id = "-1")
     {
         // Building name, User name. User -> 
-        string apiString = "http://localhost:800/api/";
+        string apiString = "http://localhost:8080/api/";
 
         // The data and any building ids will be generated in function as a means
         // of reducing the number of external function calls in other parts of the app
         // and to increase the protection of said variables
         string data;
-        int buildingid;
+        // int buildingid;
 
-        if (RequestType == "CREATE User") {
+        if (RequestType == "CREATE_User") {
             // Create a new User
             apiString = string.Concat(apiString + "Users/");
             Debug.Log(apiString);
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data));
 
-        } else if (RequestType == "GET User") {
+        } else if (RequestType == "GET_User") {
             // Get the data of the current User
             string requestedId = UserID + "/";
             // USE CASE: to get all the buildings belonging to the user at the start of the game.
@@ -168,13 +154,13 @@ public class User_Data : MonoBehaviour{
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
 
-        } else if (RequestType == "GET All Users") {
+        } else if (RequestType == "GET_All_Users") {
             // get the userid(hidden), username and xp of all users
             apiString = string.Concat(apiString + "Users/");
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Multiple"));
 
-        } else if (RequestType == "UPDATE User") {
+        } else if (RequestType == "UPDATE_User") {
             // Change the Users personal details 
             // Call CreateUserJSON
             apiString = apiString + "Users/" + UserID;
@@ -182,19 +168,25 @@ public class User_Data : MonoBehaviour{
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data, "PUT"));
 
-        } else if (RequestType == "UPDATE Buildings") {
+        } /* else if (RequestType == "UPDATE_Buildings") {
             // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
             // Call CreateBuildingJSON
-            apiString = apiString + "/" + UserID + "/" + "Buildings" + "/";
+            string targetID;
+            string targetAPI;
+            if (id != "-1") { targetID = id; } else { targetID = UserID; }
+            apiString = apiString + "/" + targetID + "/" + "Buildings" + "/";
             List<string> buildingData = CreateBuildingJSON();
             for (int i=0; i<12; i++) {
+                targetAPI = apiString;
                 buildingid = (i*10) + (building_stats[i].model);
-                apiString = apiString + buildingid.ToString();
+                targetAPI = targetAPI + buildingid.ToString();
                 data = buildingData[i];
-                Debug.Log(apiString);
+                Debug.Log(targetAPI);
                 StartCoroutine(PostRequest(apiString, data, "POST"));
             }
-        }
+        } */
+
+
 
         /* OLD CODE KEEPING UNTIL NEW CODE HAS BEEN TESTED */
         /*
@@ -271,9 +263,9 @@ public class User_Data : MonoBehaviour{
             }
         */
     
-    public List<string> CreateBuildingJSON() {
+    public List<DatabaseBuildings> CreateBuildingJSON() {
         
-        List<string> uB = new List<string>();
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
         
         for (int i=0; i<12; i++){
             int bc = (i*10) + building_stats[i].model; // The unique code for the model within the subject
@@ -285,8 +277,8 @@ public class User_Data : MonoBehaviour{
             int sc = building_stats[i].secondary_colour; // The secondary colour of the building
             
             DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bn,bx,h,mg,pc,sc);
-            string currentBuilding_string = JsonUtility.ToJson(currentBuilding);
-            uB.Add(currentBuilding_string);
+            //string currentBuilding_string = JsonUtility.ToJson(currentBuilding);
+            uB.Add(currentBuilding);
         }
         return uB;
     }
@@ -296,7 +288,7 @@ public class User_Data : MonoBehaviour{
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
         
-        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
+        List<DatabaseBuildings> uB = CreateBuildingJSON(); // new List<DatabaseBuildings>();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
         string UserJSON = JsonUtility.ToJson(putData);
 
