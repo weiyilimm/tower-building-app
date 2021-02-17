@@ -82,15 +82,19 @@ public class ChangeHeight : MonoBehaviour
     public void SelectBuilding(int num){
         if (num == 0){
             buildingDecider = num;
+            BuildingHeight.text = buildingOneHeight.ToString();
         }
         if (num == 1){
             buildingDecider = num;
+            BuildingHeight.text = buildingTwoHeight.ToString();
         }
         if (num == 2){
             buildingDecider = num;
+            BuildingHeight.text = buildingThreeHeight.ToString();
         }
         if (num == 3){
             buildingDecider = num;
+            BuildingHeight.text = buildingFourHeight.ToString();
         }
     }
 
@@ -114,8 +118,6 @@ public class ChangeHeight : MonoBehaviour
                     BuildingOneTowers[j].SetActive(false);
                 } 
             }
-            //Show the height to the screen
-            BuildingHeight.text = buildingOneHeight.ToString();
         }
         if (buildingDecider == 1){
             for (int j = 0; j<4; j++){
@@ -130,7 +132,6 @@ public class ChangeHeight : MonoBehaviour
                     BuildingTwoTowers[j].SetActive(false);
                 } 
             }
-            BuildingHeight.text = buildingTwoHeight.ToString();
         }
         if (buildingDecider == 2){
             for (int j = 0; j<4; j++){
@@ -145,7 +146,6 @@ public class ChangeHeight : MonoBehaviour
                     BuildingThreeTowers[j].SetActive(false);
                 } 
             }
-            BuildingHeight.text = buildingThreeHeight.ToString();
         }
         if (buildingDecider == 3){
             for (int j = 0; j<4; j++){
@@ -160,7 +160,6 @@ public class ChangeHeight : MonoBehaviour
                     BuildingFourTowers[j].SetActive(false);
                 } 
             }
-            BuildingHeight.text = buildingFourHeight.ToString();
         }
         if (buildingDecider == -1){
             PopUpText.text = "Please select a building to change shape.";
