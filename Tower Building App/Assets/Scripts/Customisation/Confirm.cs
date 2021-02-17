@@ -15,7 +15,8 @@ public class Confirm : MonoBehaviour{
         User_Data.data.building_stats[index].secondary_colour = User_Data.data.temp_secondary;
         User_Data.data.building_stats[index].model = User_Data.data.temp_model;
 
-        User_Data.data.CreateRequest("UPDATE Buildings");
+        // POST to User
+        User_Data.data.CreateRequest("UPDATE_User");
 
         SceneManager.LoadScene(1);
     }
