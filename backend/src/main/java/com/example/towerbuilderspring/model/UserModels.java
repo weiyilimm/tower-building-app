@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class UserModels {
 
     @EmbeddedId
-    private UserModelId userModelId = new UserModelId();
+    private UserModelId userModelId;
 
     @NotNull
     private int building_xp;
@@ -22,7 +22,7 @@ public class UserModels {
     private int secondaryColour;
 
     @NotNull
-    private int modelGroup;
+    private long modelGroup;
 
 
     public UserModels() {};
@@ -88,11 +88,11 @@ public class UserModels {
         this.secondaryColour = secondaryColour;
     }
 
-    public int getModelGroup() {
+    public long getModelGroup() {
         return modelGroup;
     }
 
-    public void setModelGroup(int modelGroup) {
+    public void setModelGroup(long modelGroup) {
         this.modelGroup = modelGroup;
     }
     //    @Embeddable
