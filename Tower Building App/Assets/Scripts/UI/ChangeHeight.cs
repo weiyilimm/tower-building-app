@@ -43,6 +43,8 @@ public class ChangeHeight : MonoBehaviour
     public GameObject PopUpHeight;
     //A text from pop up
     public TextMeshProUGUI PopUpText;
+    //Maximum height of the building
+    private int maximumHeight = 15;
     /*
     A counter to count each individual building height
     Maximum height is 7 times button pressed
@@ -180,7 +182,7 @@ public class ChangeHeight : MonoBehaviour
         To check which building has been selected and check the height
         The maximum height for the building is 7 times click 
         */
-        if (buildingDecider == 0 && buildingOneHeight<15){
+        if (buildingDecider == 0 && buildingOneHeight<maximumHeight){
             //Increase height of each individual shape of buildings 
             for(int i = 0; i<4; i++){
                 BuildingOneTowers[i].transform.localScale += new Vector3(0,0,25);
@@ -190,7 +192,7 @@ public class ChangeHeight : MonoBehaviour
             buildingOneHeight += 1;
             BuildingHeight.text = buildingOneHeight.ToString();
         }
-        if (buildingDecider == 1 && buildingTwoHeight<15){
+        if (buildingDecider == 1 && buildingTwoHeight<maximumHeight){
             for(int i = 0; i<4; i++){
                 BuildingTwoTowers[i].transform.localScale += new Vector3(0,0,25);
                 BuildingTwoRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
@@ -199,7 +201,7 @@ public class ChangeHeight : MonoBehaviour
             buildingTwoHeight += 1;
             BuildingHeight.text = buildingTwoHeight.ToString();
         }
-        if (buildingDecider == 2 && buildingThreeHeight<15){
+        if (buildingDecider == 2 && buildingThreeHeight<maximumHeight){
             for(int i = 0; i<4; i++){
                 BuildingThreeTowers[i].transform.localScale += new Vector3(0,0,25);
                 BuildingThreeRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
@@ -208,7 +210,7 @@ public class ChangeHeight : MonoBehaviour
             buildingThreeHeight += 1;
             BuildingHeight.text = buildingThreeHeight.ToString();
         }
-        if (buildingDecider == 3 && buildingFourHeight<15){
+        if (buildingDecider == 3 && buildingFourHeight<maximumHeight){
             for(int i = 0; i<4; i++){
                 BuildingFourTowers[i].transform.localScale += new Vector3(0,0,25);
                 BuildingFourRoofs[i].transform.localPosition += new Vector3(0, 0.25f, 0);
