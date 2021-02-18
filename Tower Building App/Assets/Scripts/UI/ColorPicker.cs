@@ -49,6 +49,9 @@ public class ColorPicker : MonoBehaviour
         //Get the current scene name that user in
         currentSceneName = SceneManager.GetActiveScene().name;
         
+        //Initialize the temp variables with tha data stored for the chosen building before accesing the menu
+        ApplyAtStart(currentSceneName);
+
         //Assign the localXP to be specific building's XP
         switch (currentSceneName)
         {   
@@ -244,5 +247,109 @@ public class ColorPicker : MonoBehaviour
             main_index = 3;
         }
 
+    }
+
+    public void ApplyAtStart(string currentSceneName) {
+        int subject_index = CodeConverter.codes.subject_map[currentSceneName];
+        if (currentSceneName != "Main") {
+            User_Data.data.temp_data[0][0] = User_Data.data.building_stats[subject_index].primary_colour;
+            User_Data.data.temp_data[0][1] = User_Data.data.building_stats[subject_index].secondary_colour;
+            User_Data.data.temp_data[0][2] = User_Data.data.building_stats[subject_index].model;
+            ApplyCheck(0,User_Data.data.temp_data[0][0],User_Data.data.temp_data[0][2]);
+            ApplyCheck(1,User_Data.data.temp_data[0][1],User_Data.data.temp_data[0][2]);
+        } else {
+            for (int i=0; i<4; i++) {
+                User_Data.data.temp_data[i][0] = User_Data.data.building_stats[i].primary_colour;
+                User_Data.data.temp_data[i][1] = User_Data.data.building_stats[i].secondary_colour;
+                User_Data.data.temp_data[i][2] = User_Data.data.building_stats[i].model;
+            }
+            ApplyCheckMain(0);
+            ApplyCheckMain(1);
+        } 
+    }
+    
+    public void ApplyCheck(int index, int value, int model) {
+        int colour_index;
+        if (value != -1) {
+            GameObject parent = GameObject.Find("Buildings");
+            int iterations = parent.transform.childCount;
+            for (int k=0; k<iterations; k++) {
+                if (model == k) {
+                    Transform child = parent.transform.GetChild(model);
+                    child.gameObject.SetActive(true);
+                } else {
+                    Transform child = parent.transform.GetChild(k);
+                    child.gameObject.SetActive(false);
+                }
+                if (value < 100) {
+                    colour_index = value;
+                    //do matte
+                    MatteColor(k,colour_index,index);
+                } else if (value < 200) {
+                    colour_index = value - 100;
+                    // do metallic
+                    MetallicColor(k,colour_index,index);
+                } else if (value < 300) {
+                    colour_index = value - 200;
+                    //do emmissive
+                    EmissiveColor(k,colour_index,index);
+                } else if (value < 400) {
+                    colour_index = value - 300;
+                    //do gradient
+                    GradientColor(k,colour_index,index);
+                } else if (value >= 400) {
+                    colour_index = value - 400;
+                    //do fancy
+                    FancyColor(k,colour_index,index);
+                }
+            }
+        }
+    }
+
+    public void ApplyCheckMain(int index) {
+        //apply to main buildings
+        for (int i=1; i<5; i++) {
+            string strindex = i.ToString();
+            string buildingName = "Building" + strindex;
+            GameObject parent = GameObject.Find(buildingName);
+            WhichBuildings(i);
+            int value = User_Data.data.temp_data[i-1][index];
+            int model = User_Data.data.temp_data[i-1][2];
+
+            for (int j=0; j<9; j++){
+                Transform child = parent.transform.GetChild(j);
+                if (int.Parse(child.name.Substring(child.name.Length - 1)) == model+1) {
+                    child.gameObject.SetActive(true);
+                } else if (child.name.Substring(0,4) == "Base"){
+                    child.gameObject.SetActive(true);
+                } else {
+                    child.gameObject.SetActive(false);
+                }
+                int colour_index;
+                if (value != -1) {
+                    if (value < 100) {
+                        colour_index = value;
+                        //do matte
+                        MatteColor(j,colour_index,index);
+                    } else if (value < 200) {
+                        colour_index = value - 100;
+                        // do metallic
+                        MetallicColor(j,colour_index,index);
+                    } else if (value < 300) {
+                        colour_index = value - 200;
+                        //do emmissive
+                        EmissiveColor(j,colour_index,index);
+                    } else if (value < 400) {
+                        colour_index = value - 300;
+                        //do gradient
+                        GradientColor(j,colour_index,index);
+                    } else if (value >= 400) {
+                        colour_index = value - 400;
+                        //do fancy
+                        FancyColor(j,colour_index,index);
+                    }
+                }
+            }
+        }
     }
 }
