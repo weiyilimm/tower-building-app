@@ -32,9 +32,9 @@ public class User_Data : MonoBehaviour{
 
         // Initialize the four temp_data arrays
         int[] main1 = new int[] {-1,-1,0,0};
-        int[] main2 = new int[] {-1,-1,0,0};
-        int[] main3 = new int[] {-1,-1,0,0};
-        int[] main4 = new int[] {-1,-1,0,0};
+        int[] main2 = new int[] {-1,-1,1,0};
+        int[] main3 = new int[] {-1,-1,2,0};
+        int[] main4 = new int[] {-1,-1,3,0};
         temp_data.Add(main1);
         temp_data.Add(main2);
         temp_data.Add(main3);
@@ -109,7 +109,12 @@ public class User_Data : MonoBehaviour{
     }
 
     private void createBuildings(){
-        for (int i=0; i<12; i++) {
+        for (int j=0; j<4; j++) {
+            Building newMain = new Building(-1,-1,j,40000,0);
+            building_stats.Add(newMain);
+        }
+        
+        for (int i=0; i<8; i++) {
             Building newBuilding = new Building(-1,-1,0,40000,0);
             building_stats.Add(newBuilding);    
         }
