@@ -58,7 +58,7 @@ public class ChangeHeight : MonoBehaviour
     private int buildingDecider = -1;
     void Start()
     {   
-        
+        ApplyAtStart();
         //When the user select a building, it triggger the SelectBuilding function
         MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
         MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
@@ -287,5 +287,16 @@ public class ChangeHeight : MonoBehaviour
             PopUpText.text = "Please select a building to change height.";
             PopUpHeight.SetActive(true);
         }
+    }
+
+    public void ApplyAtStart() {
+        for (int i=0; i<4; i++) {
+            buildingDecider = i;
+            User_Data.data.temp_data[i][2] = User_Data.data.building_stats[i].m_height;
+            for (int j=0; j<User_Data.data.temp_data[i][2]; j++) {
+                IncreaseBuildingHeight();
+            }
+        }
+        buildingDecider = -1;
     }
 }
