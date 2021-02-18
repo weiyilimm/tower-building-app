@@ -1166,7 +1166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpInternetFailure: {fileID: 1371275909}
-  StartButton: {fileID: 598666278}
+  StartGameObject: {fileID: 598666278}
+  StartButton: {fileID: 598666281}
+  PopUpInternetButton: {fileID: 1371275913}
 --- !u!20 &1714056751
 Camera:
   m_ObjectHideFlags: 0
