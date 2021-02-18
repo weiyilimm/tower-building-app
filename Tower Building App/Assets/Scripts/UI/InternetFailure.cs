@@ -2,35 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class InternetFailure : MonoBehaviour
 {   
     public GameObject PopUpInternetFailure;
     public GameObject StartButton;
     // Start is called before the first frame update
-    void Update()
+    void Start()
     {
-        StartCoroutine(checkInternet((isNotConnected) => 
-        {
-            if(isNotConnected){
-                PopUpInternetFailure.SetActive(true);
-                StartButton.SetActive(false);
-            }
-            else{
-                PopUpInternetFailure.SetActive(false);
-                StartButton.SetActive(true);
-            }
-        }));
+        StartCoroutine(checkInternet());
     }
 
-    IEnumerator checkInternet(Action<bool> action){
-        WWW www = new WWW("https://www.google.com/");
-        yield return www;
-        if (www.error != null){
-            action(true);
+    IEnumerator checkInternet(){
+        UnityWebRequest request = new UnityWebRequest ("http://google.com");
+        yield return request.SendWebRequest();
+        //Is not connected
+        if (request.error != null){
+            StartCoroutine(loadSceneDelay(5));
+            PopUpInternetFailure.SetActive(true);
+            StartButton.SetActive(false);
         }
+        //Is connected
         else{
-            action(false);
+            PopUpInternetFailure.SetActive(false);
+            StartButton.SetActive(true);
         }
+    }
+
+    IEnumerator loadSceneDelay(int i)
+    {
+        yield return new WaitForSeconds(i);
+        SceneManager.LoadScene(0);
     }
 }
