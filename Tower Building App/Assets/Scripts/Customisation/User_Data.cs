@@ -69,12 +69,12 @@ public class User_Data : MonoBehaviour{
         Password = "7638";
         global_xp = 500;
 
-        var stringUserJSONData = CreateUserJSON();
-        Debug.Log(stringUserJSONData);
+        //var stringUserJSONData = CreateUserJSON();
+        //Debug.Log(stringUserJSONData);
 
         // Dev Building
-        DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
-        var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
+        //DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
+        //var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
 
         Debug.Log("Running the POST request");
 
@@ -82,7 +82,7 @@ public class User_Data : MonoBehaviour{
         //CreateRequest("POST", "Users", data: stringUserJSONData);
         
         // NEW CALLING CODE
-        CreateRequest("CREATE User");
+        //CreateRequest("CREATE User");
 
         //// Create a new model - OLD
         //CreateRequest("POST", "Models", data: data);
@@ -91,13 +91,13 @@ public class User_Data : MonoBehaviour{
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
         
         // NEW CALLING CODE
-        CreateRequest("UPDATE User");
+        //CreateRequest("UPDATE User");
 
         // Add/Remove a building from an existing user. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
         
         // NEW CALLING CODE
-        CreateRequest("UPDATE Buildings");
+        //CreateRequest("UPDATE Buildings");
 
 
     }
