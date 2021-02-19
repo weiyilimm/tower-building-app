@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
 
+[System.Serializable]
 public class Leaderboard_API : MonoBehaviour {
     
     public List<leaderboard_data> LB_data = new List<leaderboard_data>();
@@ -23,23 +24,24 @@ public class Leaderboard_API : MonoBehaviour {
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
-        
-        //CreateRequest("GET_Leaderboard"); //Commented till the database functionality is added
+
+        CreateRequest("GET_Leaderboard"); //Commented till the database functionality is added
 
         //HARD CODE for testing purposes
-        TranslateToLeaderboard("Assets/Scripts/API/leaderboard.json");
+        //TranslateToLeaderboard("Assets/Scripts/API/leaderboard.json");
+        
+        // Display the data using the UI -> Put this into a coroutine.
+        //for (int index=0; index<3; index++) {
+        //    Debug.Log(LB_data[index].TotalExp);
+        //}
 
-        // Display the data using the UI
-        for (int index=0; index<5; index++) {
-            Debug.Log(LB_data[index].TotalExp);
-        }
+
     }
 
     void CreateRequest(string RequestType) {
         string apiString = "http://localhost:8080/api/Users/";
 
-        if (RequestType == "GET_Leaderboard") {
-            apiString = apiString + "Leaderboard";
+        if (RequestType == "GET_Leaderboard") { 
             StartCoroutine(GetRequest(apiString));
         } else {
             //Do this instead
@@ -68,13 +70,16 @@ public class Leaderboard_API : MonoBehaviour {
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
 
         JSONNode node;
-        using (StreamReader r = new StreamReader(rawJSON)) {
-            //read in the json
-            string json = r.ReadToEnd();
+        //using (StreamReader r = new StreamReader(rawJSON)) {
+        //    //read in the json
+        //    Debug.Log("Passed the stream reader");
+        //    string json = r.ReadToEnd();
+        //    Debug.Log("Passed the readToEnd");
+        //    //reformat the json into dictionary style convention
+        //    node = JSON.Parse(json);
+        //}
 
-            //reformat the json into dictionary style convention
-            node = JSON.Parse(json);
-        }
+        node = JSON.Parse(rawJSON);
 
         Debug.Log(node);
 
@@ -82,7 +87,7 @@ public class Leaderboard_API : MonoBehaviour {
         string username;
         int totalExp;
         
-        for (int i=0; i<50; i++) {
+        for (int i=0; i<3; i++) {
             userid = JSON.Parse(node[i]["id"].Value);
             username = JSON.Parse(node[i]["userName"].Value);
             totalExp = JSON.Parse(node[i]["totalExp"].Value);
