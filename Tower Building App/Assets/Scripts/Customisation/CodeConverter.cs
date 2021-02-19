@@ -63,7 +63,7 @@ public class CodeConverter : MonoBehaviour{
 
         // The subjects are each given a corresponding code so that they know which part of the users
         // list of buildings they must access on read and write operations
-        subject_map.Add("Main1",0);
+        subject_map.Add("Main",0);
         subject_map.Add("Main2",1);
         subject_map.Add("Main3",2);
         subject_map.Add("Main4",3);

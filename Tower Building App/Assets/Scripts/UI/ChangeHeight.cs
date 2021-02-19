@@ -58,7 +58,7 @@ public class ChangeHeight : MonoBehaviour
     private int buildingDecider = -1;
     void Start()
     {   
-        
+        ApplyAtStart();
         //When the user select a building, it triggger the SelectBuilding function
         MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
         MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
@@ -105,6 +105,7 @@ public class ChangeHeight : MonoBehaviour
     */
     public void SelectShape(int i){
         //Use the temporary stored integer to get which building been selected
+        User_Data.data.temp_data[buildingDecider][2] = i;
         if (buildingDecider == 0){
             for (int j = 0; j<4; j++){
                 //Show the specific shape of building that user select
@@ -217,6 +218,12 @@ public class ChangeHeight : MonoBehaviour
             buildingFourHeight += 1;
             BuildingHeight.text = buildingFourHeight.ToString();
         }
+
+        // Check the height of the building is below the maximum and if so increase its height
+        if (User_Data.data.temp_data[buildingDecider][3] < 7){
+            User_Data.data.temp_data[buildingDecider][3] += 1;
+        }
+
         //If the building hasn't been selected, pop up an instructions to indicate user need to select a building
         if (buildingDecider == -1){
             PopUpText.text = "Please select a building to change height.";
@@ -233,6 +240,7 @@ public class ChangeHeight : MonoBehaviour
         To check which building has been selected and check the height
         The minimum height for the building is 0 times click 
         */
+        
         if (buildingDecider == 0 && buildingOneHeight>0){
             for(int i = 0; i<4; i++){
                 BuildingOneTowers[i].transform.localScale -= new Vector3(0,0,25);
@@ -270,9 +278,25 @@ public class ChangeHeight : MonoBehaviour
             BuildingHeight.text = buildingFourHeight.ToString();
         }
 
+        // Check the height of the building is above the minimum and if so decrease its height
+        if (User_Data.data.temp_data[buildingDecider][3] > 0){
+            User_Data.data.temp_data[buildingDecider][3] -= 1;
+        }
+
         if (buildingDecider == -1){
             PopUpText.text = "Please select a building to change height.";
             PopUpHeight.SetActive(true);
         }
+    }
+
+    public void ApplyAtStart() {
+        for (int i=0; i<4; i++) {
+            buildingDecider = i;
+            User_Data.data.temp_data[i][2] = User_Data.data.building_stats[i].m_height;
+            for (int j=0; j<User_Data.data.temp_data[i][2]; j++) {
+                IncreaseBuildingHeight();
+            }
+        }
+        buildingDecider = -1;
     }
 }
