@@ -10,13 +10,15 @@ using UnityEngine.Networking;
 public class User_Data : MonoBehaviour{
     public static User_Data data;
     public GameObject UserProfile;
+
+    // The Users data
     public string UserID, Username, Email, Password;
     public int global_xp;
 
-    public int temp_primary;
-    public int temp_secondary;
-    public int temp_model;
-    public int temp_height;
+    // A list of 4 int arrays which each store Primary, Secondary, Model and Height values
+    public List<int[]> temp_data = new List<int[]>();
+
+    // A list that stores the Users building data
     public List<Building> building_stats = new List<Building>();
 
     //This script will store all of the data assigned to a single user
@@ -28,6 +30,16 @@ public class User_Data : MonoBehaviour{
         DontDestroyOnLoad(UserProfile);
         data = this;
 
+        // Initialize the four temp_data arrays
+        int[] main1 = new int[] {-1,-1,0,0};
+        int[] main2 = new int[] {-1,-1,1,0};
+        int[] main3 = new int[] {-1,-1,2,0};
+        int[] main4 = new int[] {-1,-1,3,0};
+        temp_data.Add(main1);
+        temp_data.Add(main2);
+        temp_data.Add(main3);
+        temp_data.Add(main4);
+
         //CREATE BUILDING INSTANCES HERE
         createBuildings();
 
@@ -36,17 +48,6 @@ public class User_Data : MonoBehaviour{
         // Login 
         // GetRequest("User");
         // GetRequest("Buildings");
-
-        /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA
-
-        Debug.Log("Starting translation...");
-        TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
-        Debug.Log(building_stats[0].primary_colour);
-        Debug.Log(building_stats[0].secondary_colour);
-        Debug.Log(building_stats[0].building_xp);
-        Debug.Log(building_stats[0].model);
-        Debug.Log(building_stats[0].m_height);
-        */
 
         /*
          *      GET REQUESTS
@@ -60,7 +61,6 @@ public class User_Data : MonoBehaviour{
         /*
          *      POST REQUESTS
         */
-        Debug.Log("Start");
 
         // Dev User
         UserID = System.Guid.NewGuid().ToString();
@@ -69,37 +69,21 @@ public class User_Data : MonoBehaviour{
         Password = "7638";
         global_xp = 500;
 
-        //var stringUserJSONData = CreateUserJSON();
-        //Debug.Log(stringUserJSONData);
-
         // Dev Building
         //DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
         //var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
 
-        Debug.Log("Running the POST request");
+        //// Create a new user
+        // CreateRequest("CREATE User");
 
-        // Create a new user - OLD
-        //CreateRequest("POST", "Users", data: stringUserJSONData);
-        
-        // NEW CALLING CODE
-        //CreateRequest("CREATE User");
-
-        //// Create a new model - OLD
+        //// Create a new model
         //CreateRequest("POST", "Models", data: data);
 
-        //// Edit a existing user's personal details. - OLD
-        //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", data: stringUserJSONData);
-        
-        // NEW CALLING CODE
-        //CreateRequest("UPDATE User");
+        //// Edit a existing user's details
+        // CreateRequest("UPDATE User");
 
         // Add/Remove a building from an existing user. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
-        
-        // NEW CALLING CODE
-        //CreateRequest("UPDATE Buildings");
-
-
     }
 
     public void Update() {
@@ -112,14 +96,37 @@ public class User_Data : MonoBehaviour{
             global_xp = 2000000;
             string stringOutput = CreateUserJSON();
             Debug.Log(stringOutput);
+        } else if (Input.GetKeyDown("y")) {
+            /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA */
+            Debug.Log("Starting translation...");
+            TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
+            Debug.Log(building_stats[0].primary_colour);
+            Debug.Log(building_stats[0].secondary_colour);
+            Debug.Log(building_stats[0].building_xp);
+            Debug.Log(building_stats[0].model);
+            Debug.Log(building_stats[0].m_height);
         }
     }
 
     private void createBuildings(){
-        for (int i=0; i<12; i++) {
+        for (int j=0; j<4; j++) {
+            Building newMain = new Building(-1,-1,j,40000,0);
+            building_stats.Add(newMain);
+        }
+        
+        for (int i=0; i<8; i++) {
             Building newBuilding = new Building(-1,-1,0,40000,0);
             building_stats.Add(newBuilding);    
         }
+        Scoring.MainXP = 400000;
+        Scoring.ArtsXP = 400000;
+        Scoring.BioCheXP = 400000;
+        Scoring.ComSciXP = 400000;
+        Scoring.EngXP = 400000;
+        Scoring.GeoXP = 400000;
+        Scoring.LanXP = 400000;
+        Scoring.LawPolXP = 400000;
+        Scoring.PhyMathXP = 400000;
     }
 
     /* 

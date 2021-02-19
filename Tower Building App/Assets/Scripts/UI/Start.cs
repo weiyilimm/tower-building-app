@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class Start : MonoBehaviour
 {
     public void StartGame(){
-        SceneManager.LoadScene(1);
 
         //stops intro music and starts main theme
         FindObjectOfType<SoundManager>().Play("start button click");
