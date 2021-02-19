@@ -24,8 +24,7 @@ public class Leaderboard_API : MonoBehaviour {
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
-
-        CreateRequest("GET_Leaderboard"); //Commented till the database functionality is added
+        CreateRequest("GET_Leaderboard");
 
         //HARD CODE for testing purposes
         //TranslateToLeaderboard("Assets/Scripts/API/leaderboard.json");
@@ -43,8 +42,6 @@ public class Leaderboard_API : MonoBehaviour {
 
         if (RequestType == "GET_Leaderboard") { 
             StartCoroutine(GetRequest(apiString));
-        } else {
-            //Do this instead
         }
     }
 
@@ -66,8 +63,7 @@ public class Leaderboard_API : MonoBehaviour {
         }
     }
 
-    private void TranslateToLeaderboard(string rawJSON){
-        // Reads a JSON file from the database to create / update the Users data stored in Unity 
+    private void TranslateToLeaderboard(string rawJSON){ 
 
         JSONNode node;
         //using (StreamReader r = new StreamReader(rawJSON)) {
