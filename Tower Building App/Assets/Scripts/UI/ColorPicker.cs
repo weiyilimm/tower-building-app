@@ -38,10 +38,20 @@ public class ColorPicker : MonoBehaviour
     private GameObject lockIcon;
     //Get the current scene that user in
     private string currentSceneName;
+    
+    // This index is used to determine which of the 4 temp_data arrays to store the temp data in
+    // All normal buildings will use 0, whereas the Main building will change between 0-3 based on
+    // which tower is beign customised
+    private int main_index = 0;
+
     void Start()
     {   
         //Get the current scene name that user in
         currentSceneName = SceneManager.GetActiveScene().name;
+        
+        //Initialize the temp variables with tha data stored for the chosen building before accesing the menu
+        ApplyAtStart(currentSceneName);
+
         //Assign the localXP to be specific building's XP
         switch (currentSceneName)
         {   
@@ -134,10 +144,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = j;
+            User_Data.data.temp_data[main_index][0] = j;
             materials = find_mat(Matte,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = j;
+            User_Data.data.temp_data[main_index][1] = j;
             materials = find_mat(Matte,materials,"2",j);
         }
 
@@ -149,10 +159,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 100+j;
+            User_Data.data.temp_data[main_index][0] = 100+j;
             materials = find_mat(Metallic,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 100+j;
+            User_Data.data.temp_data[main_index][1] = 100+j;
             materials = find_mat(Metallic,materials,"2",j);
         }
 
@@ -164,10 +174,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 200+j;
+            User_Data.data.temp_data[main_index][0] = 200+j;
             materials = find_mat(Emissive,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 200+j;
+            User_Data.data.temp_data[main_index][1] = 200+j;
             materials = find_mat(Emissive,materials,"2",j);
         }
 
@@ -179,10 +189,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 300+j;
+            User_Data.data.temp_data[main_index][0] = 300+j;
             materials = find_mat(Gradient,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 300+j;
+            User_Data.data.temp_data[main_index][1] = 300+j;
             materials = find_mat(Gradient,materials,"2",j);
         }
 
@@ -194,10 +204,10 @@ public class ColorPicker : MonoBehaviour
         materials = MeshRenderer[i].materials;
 
         if (k == 0){
-            User_Data.data.temp_primary = 400+j;
+            User_Data.data.temp_data[main_index][0] = 400+j;
             materials = find_mat(Fancy,materials,"1",j);
         } else {
-            User_Data.data.temp_secondary = 400+j;
+            User_Data.data.temp_data[main_index][1] = 400+j;
             materials = find_mat(Fancy,materials,"2",j);
         }
 
@@ -222,16 +232,124 @@ public class ColorPicker : MonoBehaviour
     public void WhichBuildings(int num){
         if (num == 1){
             MeshRenderer = MainBuilding1;
+            main_index = 0;
         }
         if (num == 2){
             MeshRenderer = MainBuilding2;
+            main_index = 1;
         }
         if (num == 3){
             MeshRenderer = MainBuilding3;
+            main_index = 2;
         }
         if (num == 4){
             MeshRenderer = MainBuilding4;
+            main_index = 3;
         }
 
+    }
+
+    public void ApplyAtStart(string currentSceneName) {
+        int subject_index = CodeConverter.codes.subject_map[currentSceneName];
+        if (currentSceneName != "Main") {
+            User_Data.data.temp_data[0][0] = User_Data.data.building_stats[subject_index].primary_colour;
+            User_Data.data.temp_data[0][1] = User_Data.data.building_stats[subject_index].secondary_colour;
+            User_Data.data.temp_data[0][2] = User_Data.data.building_stats[subject_index].model;
+            ApplyCheck(0,User_Data.data.temp_data[0][0],User_Data.data.temp_data[0][2]);
+            ApplyCheck(1,User_Data.data.temp_data[0][1],User_Data.data.temp_data[0][2]);
+        } else {
+            for (int i=0; i<4; i++) {
+                User_Data.data.temp_data[i][0] = User_Data.data.building_stats[i].primary_colour;
+                User_Data.data.temp_data[i][1] = User_Data.data.building_stats[i].secondary_colour;
+                User_Data.data.temp_data[i][2] = User_Data.data.building_stats[i].model;
+            }
+            ApplyCheckMain(0);
+            ApplyCheckMain(1);
+        } 
+    }
+    
+    public void ApplyCheck(int index, int value, int model) {
+        int colour_index;
+        if (value != -1) {
+            GameObject parent = GameObject.Find("Buildings");
+            int iterations = parent.transform.childCount;
+            for (int k=0; k<iterations; k++) {
+                if (model == k) {
+                    Transform child = parent.transform.GetChild(model);
+                    child.gameObject.SetActive(true);
+                } else {
+                    Transform child = parent.transform.GetChild(k);
+                    child.gameObject.SetActive(false);
+                }
+                if (value < 100) {
+                    colour_index = value;
+                    //do matte
+                    MatteColor(k,colour_index,index);
+                } else if (value < 200) {
+                    colour_index = value - 100;
+                    // do metallic
+                    MetallicColor(k,colour_index,index);
+                } else if (value < 300) {
+                    colour_index = value - 200;
+                    //do emmissive
+                    EmissiveColor(k,colour_index,index);
+                } else if (value < 400) {
+                    colour_index = value - 300;
+                    //do gradient
+                    GradientColor(k,colour_index,index);
+                } else if (value >= 400) {
+                    colour_index = value - 400;
+                    //do fancy
+                    FancyColor(k,colour_index,index);
+                }
+            }
+        }
+    }
+
+    public void ApplyCheckMain(int index) {
+        //apply to main buildings
+        for (int i=1; i<5; i++) {
+            string strindex = i.ToString();
+            string buildingName = "Building" + strindex;
+            GameObject parent = GameObject.Find(buildingName);
+            WhichBuildings(i);
+            int value = User_Data.data.temp_data[i-1][index];
+            int model = User_Data.data.temp_data[i-1][2];
+
+            for (int j=0; j<9; j++){
+                Transform child = parent.transform.GetChild(j);
+                if (int.Parse(child.name.Substring(child.name.Length - 1)) == model+1) {
+                    child.gameObject.SetActive(true);
+                } else if (child.name.Substring(0,4) == "Base"){
+                    child.gameObject.SetActive(true);
+                } else {
+                    child.gameObject.SetActive(false);
+                }
+                int colour_index;
+                if (value != -1) {
+                    if (value < 100) {
+                        colour_index = value;
+                        //do matte
+                        MatteColor(j,colour_index,index);
+                    } else if (value < 200) {
+                        colour_index = value - 100;
+                        // do metallic
+                        MetallicColor(j,colour_index,index);
+                    } else if (value < 300) {
+                        colour_index = value - 200;
+                        //do emmissive
+                        EmissiveColor(j,colour_index,index);
+                    } else if (value < 400) {
+                        colour_index = value - 300;
+                        //do gradient
+                        GradientColor(j,colour_index,index);
+                    } else if (value >= 400) {
+                        colour_index = value - 400;
+                        //do fancy
+                        FancyColor(j,colour_index,index);
+                    }
+                }
+            }
+        }
     }
 }
