@@ -70,8 +70,8 @@ public class User_Data : MonoBehaviour{
         global_xp = 500;
 
         // Dev Building
-        DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
-        var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
+        //DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
+        //var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
 
         //// Create a new user
         // CreateRequest("CREATE User");
