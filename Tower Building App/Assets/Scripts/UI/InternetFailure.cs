@@ -19,19 +19,20 @@ public class InternetFailure : MonoBehaviour
     {
         StartButton.onClick.AddListener(() => StartCoroutine(checkInternet()));
         if (!isConnected){
-            PopUpInternetButton.onClick.AddListener(() => SceneManager.LoadScene(0));
+            PopUpInternetButton.onClick.AddListener(() => StartCoroutine(checkInternet()));
         }
     }
 
     IEnumerator checkInternet(){
         StartGameObject.SetActive(false);
         LoadingText.SetActive(true);
+        PopUpInternetFailure.SetActive(false);
+
         UnityWebRequest request = new UnityWebRequest ("http://google.com");
         yield return request.SendWebRequest();
         //Is not connected
         if (request.error != null){
             PopUpInternetFailure.SetActive(true);
-            // StartGameObject.SetActive(false);
             LoadingText.SetActive(false);
             isConnected = false;
         }
