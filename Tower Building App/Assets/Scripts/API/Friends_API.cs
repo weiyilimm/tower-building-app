@@ -16,17 +16,15 @@ public class Friends_API : MonoBehaviour {
     */
 
     void Start() {
-        // GET request - get the friends list of the current User
+        // GET request - Given a userID return all entries in the FRIENDS table with that userID in the 'USER' column
 
         // Translate the data retrieved from the GET request
 
         // Display the data using the UI
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
+    // DELETE Request - Given two userIDs - delete the entry where 'MY' id is in the 'USER' column 
+    // and 'THEIR' id is in the 'FRIEND' column
 }
 
 public class Friends {
