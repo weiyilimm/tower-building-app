@@ -222,6 +222,18 @@ public class ChangeClickImage : MonoBehaviour
         //turn filter on
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
+
+    //Load other's people world
+    public void OthersWorld()
+    {
+        SceneManager.LoadScene(16);
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+
+        //turn filter off
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
+    }
 }
 
 
