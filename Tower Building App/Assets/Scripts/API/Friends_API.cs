@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//  Friend List Url 
+// "Users/{id}/Friends" 
+// "Users/{userId}/Friends/{friendId}"
+
+
 public class Friends_API : MonoBehaviour {
     
     List<Friends> friendslist = new List<Friends>();
