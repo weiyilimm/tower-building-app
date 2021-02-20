@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
@@ -25,7 +26,16 @@ public class Friends_API : MonoBehaviour {
         // GET request - Given a userID return all entries in the FRIENDS table with that userID in the 'USER' column
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
-        CreateRequest("Get_FriendIDs");
+        
+        /* CreateRequest("Get_FriendIDs"); */
+        
+        /* Code for testing getting the length of a list in JSON and looping over it */
+        Debug.Log("Starting read operation...");
+        using (StreamReader r = new StreamReader("Assets/Scripts/API/friends.json")) {
+            string json = r.ReadToEnd();
+            Debug.Log(json);
+            TranslateToStringList(json);
+        }
 
         // Display the data using the UI
     }
@@ -115,9 +125,10 @@ public class Friends_API : MonoBehaviour {
         node = JSON.Parse(rawJSON);
 
         int list_length = node.Count;
+        Debug.Log(list_length);
         
         for (int i=0; i<list_length; i++) {
-            string friendID = JSON.Parse(node[i]["id"].Value);
+            string friendID = JSON.Parse(node[i]["friendId"].Value);
             CreateRequest("Get_User", friendID);
         }
     }
