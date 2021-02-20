@@ -24,16 +24,21 @@ public class Leaderboard_API : MonoBehaviour {
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
-        CreateRequest("GET_Leaderboard");
+        
+        /* CreateRequest("GET_Leaderboard"); COMMENTED OUT FOR NOW TO TEST DISPLAYING DATA */
 
         //HARD CODE for testing purposes
-        //TranslateToLeaderboard("Assets/Scripts/API/leaderboard.json");
+        using (StreamReader r = new StreamReader("Assets/Scripts/API/leaderboard.json")) {
+            string json = r.ReadToEnd();
+            TranslateToLeaderboard(json);
+        }
+
+        //Print out the data for the five users in the leaderboard
+        foreach (leaderboard_data data in LB_data){
+            Debug.Log(data.UserName + " " + data.TotalExp);
+        }
         
         // Display the data using the UI -> Put this into a coroutine.
-        //for (int index=0; index<3; index++) {
-        //    Debug.Log(LB_data[index].TotalExp);
-        //}
-
 
     }
 
@@ -83,7 +88,7 @@ public class Leaderboard_API : MonoBehaviour {
         string username;
         int totalExp;
         
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<5; i++) {
             userid = JSON.Parse(node[i]["id"].Value);
             username = JSON.Parse(node[i]["userName"].Value);
             totalExp = JSON.Parse(node[i]["totalExp"].Value);
