@@ -79,7 +79,7 @@ public class Leaderboard_API : MonoBehaviour {
             //Create instance(user) as each data loop
             var instance = Instantiate(Participant);
             //Set their parent to leaderboardlist
-            instance.SetParent(LeaderBoardList);
+            instance.SetParent(LeaderBoardList, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textName.text = data.UserName;
