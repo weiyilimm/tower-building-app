@@ -21,6 +21,7 @@ public class Leaderboard_API : MonoBehaviour {
     private GameObject rankingText;
     private TextMeshProUGUI textXP;
     private TextMeshProUGUI textName;
+    private TextMeshProUGUI rankText;
     /*  JSON formatting - NOT YET FINAL!
         {"users": [
             {"id":sgisvi, "userName":"BobertRoss", totalExp: 25000},
@@ -82,6 +83,9 @@ public class Leaderboard_API : MonoBehaviour {
             instance.SetParent(LeaderBoardList, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
             textXP.text = data.TotalExp.ToString();
             Debug.Log(LB_data.IndexOf(data));
