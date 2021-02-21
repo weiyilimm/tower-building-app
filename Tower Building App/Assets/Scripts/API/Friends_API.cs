@@ -12,13 +12,14 @@ using SimpleJSON;
 [System.Serializable]
 public class Friends_API : MonoBehaviour {
     
+    // A list that stores the username and userid of each player the current user has marked as a friend
     List<Friends> friendslist = new List<Friends>();
 
     /*  JSON formatting
         {[
-            {"id":cbjsfd, "userName":"BobertRoss"},
+            {"userId":"e6j8g6", "friendId":"c2j2f8"},
             ...
-            {"id":jdyrit, "userName":"JumJumJr"}
+            {"userId":"e6j8g6", "friendId":"g4h5g3"}
         ]}
     */
 
