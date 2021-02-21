@@ -10,6 +10,7 @@ using TMPro;
 [System.Serializable]
 public class Leaderboard_API : MonoBehaviour {
     
+    //An ordered list which stores the username, userid and global_xp of a user
     public List<leaderboard_data> LB_data = new List<leaderboard_data>();
     //Use the prefab participant
     public Transform Participant;
@@ -22,16 +23,6 @@ public class Leaderboard_API : MonoBehaviour {
     private TextMeshProUGUI textXP;
     private TextMeshProUGUI textName;
     private TextMeshProUGUI rankText;
-    /*  JSON formatting - NOT YET FINAL!
-        {"users": [
-            {"id":sgisvi, "userName":"BobertRoss", totalExp: 25000},
-            {"id":fsiufb, "userName":"RobertBoss", totalExp: 16000},
-            {"id":oncsbd, "userName":"JimJimSr", totalExp: 12000},
-            {"id":mbcuse, "userName":"JumJumJr", totalExp: 5000},
-            ...
-            {"id":sgisvi, "userName":"user1", totalExp: 1000},
-        ]}
-    */
 
     void Start() {
         // GET Request - Top 50 users by totalExp then
