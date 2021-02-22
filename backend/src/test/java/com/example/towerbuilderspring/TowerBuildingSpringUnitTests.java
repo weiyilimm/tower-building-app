@@ -1,30 +1,76 @@
-//package com.example.towerbuilderspring;
+package com.example.towerbuilderspring;
+
+import com.example.towerbuilderspring.controller.*;
+import com.example.towerbuilderspring.model.BuildingModels;
+import com.example.towerbuilderspring.model.Users;
+
+import com.example.towerbuilderspring.repository.UserRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith({MockitoExtension.class})
+public class TowerBuildingSpringUnitTests {
+
+    /***
+     *
+     *      WORKING TEST.
+     *
+     */
+    @Mock
+    private UserRepository mockUserRepository;
+
+
+    // This tells the controller class to use the dummy repository in this setting.
+    @InjectMocks
+    private UserController mockUserController;
+
+
+    /***
+     * Notes by Vedant:
+     *
+     * The Tests are to test if the endpoints are acting as expecting, that is, if the controller is working
+     * correctly. We do not need to test if the repository functions (such as userRepository.findalL()) are working
+     * as they are built in.
+     *
+     * Currently, for the unit tests, we test if we can reach the expected endpoint scenarios (usually OK, NOT_FOUND
+     * or INTERNAL_SERVER_ERROR) depending on the request.
+     */
+    @Test
+    public void testIfGetsAllUsers() {
+
+        /***
+         * The process of mocking of a repository is as follows.
+         *  1. Create dummy value(s).
+         *  2. Create a dummy method to replace the know working repository method. This is the hardcoding the
+         *  return value of the method when it is called.
+         *  3. Checking if the return value from the controller matches the dummy value to be returned.
+         */
+        List<Users> mockedUsersPresent = Arrays.asList(new Users("Henry", "henry@email.com", "Scrafty", 10),
+                new Users("Barry", "Barry@email.com", "Hoops", 21));
+        List<Users> mockedUsersAbsent = new ArrayList<>();
+
+        // The Repository is "mocked". In here I've used a shortcut the will call the next return statement every time it's called.
+        when(mockUserRepository.findAll()).thenReturn(mockedUsersPresent).thenReturn(mockedUsersAbsent).thenReturn(null);
+
+        // Run the tests for each of the different possible scenarios.
+        assertEquals(new ResponseEntity<>(mockedUsersPresent, HttpStatus.OK), mockUserController.getAllUsers());
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockUserController.getAllUsers());
+        assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.getAllUsers());
+    }
+}
 //
-//import com.example.towerbuilderspring.controller.*;
-//import com.example.towerbuilderspring.model.BuildingModels;
-//import com.example.towerbuilderspring.model.Users;
-//import com.example.towerbuilderspring.repository.ModelRepository;
-//import com.example.towerbuilderspring.repository.UserRepository;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-//import java.util.UUID;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.mockito.AdditionalAnswers.returnsFirstArg;
-//import static org.mockito.ArgumentMatchers.*;
-//import static org.mockito.Mockito.when;
-//
-//@ExtendWith({MockitoExtension.class})
-//public class TowerBuildingSpringUnitTests {
 //
 //    // Tests for Building Controller.
 //    @Mock
@@ -156,5 +202,3 @@
 ////                new Users(1, "Dummy Updated")));
 ////
 ////    }
-//
-//}
