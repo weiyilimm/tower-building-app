@@ -35,24 +35,16 @@ public class Friends_API : MonoBehaviour {
         User_Data.data.UserID = "c5db6db8-d979-4feb-abb3-395747cd9196";
 
         /* CreateRequest("Get_FriendIDs"); */
+        Debug.Log("Finding the users friends...");
         CreateRequest("GET_FriendIDs");
-        
-        //Friends newFriend = new Friends("2gh4e", "JumJumJr", 2562);
-        //friendslist.Add(newFriend);
-        //Friends newFriend2 = new Friends("2guse", "JohnJohnSr", 462735);
-        //friendslist.Add(newFriend2);
-        //Friends newFriend3 = new Friends("8xh4e", "BobertRoss", 94);
-        //friendslist.Add(newFriend3);
-        //Friends newFriend4 = new Friends("2ms6e", "RobertBoss", 82637);
-        //friendslist.Add(newFriend4);
 
         /* Code for testing getting the length of a list in JSON and looping over it */
-        Debug.Log("Starting read operation...");
+        /* Debug.Log("Starting read operation...");
         using (StreamReader r = new StreamReader("Assets/Scripts/API/friends.json")) {
             string json = r.ReadToEnd();
             Debug.Log(json);
             TranslateToStringList(json);
-        }
+        } */
     }
 
     int CreateRequest(string RequestType, string friendID = "-1") {
@@ -76,7 +68,6 @@ public class Friends_API : MonoBehaviour {
         Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Got the data");
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError) {
@@ -87,9 +78,11 @@ public class Friends_API : MonoBehaviour {
 
             // TRANSLATION CODE HERE
             if (GET_type == "Multiple") {
-                Debug.Log("Found Multiple");
+                Debug.Log("In the Multiple flag catch");
                 TranslateToStringList(raw);
+                Debug.Log("Finshed getting all friends");
             } else if (GET_type == "Single") {
+                Debug.Log("In the single flag catch");
                 AddToFriendsList(raw);
             }
         }
@@ -107,15 +100,17 @@ public class Friends_API : MonoBehaviour {
         //    CreateRequest("Get_User", friendID);
         //    Debug.Log(friendslist[i].UserName);
         //}
-
+        Debug.Log("Starting the requestFriendData coroutine...");
         StartCoroutine(requestFriendData(node, list_length));
     }
 
     IEnumerator requestFriendData(JSONNode node, int list_length) {
         for (int i = 0; i < list_length; i++) {
             string friendID = JSON.Parse(node[i]["friendId"].Value);
+            Debug.Log(friendID);
             yield return CreateRequest("GET_User", friendID);;
         }
+        Debug.Log("Starting the displayData function...");
         displayData();
     }
 

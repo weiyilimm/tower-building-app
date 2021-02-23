@@ -38,7 +38,7 @@ public class AddDeleteFriend : MonoBehaviour {
         } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            Debug.Log("You've added a new friend");
         }
     }
 
