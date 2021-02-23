@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using UnityEngine.UI;
+using TMPro;
 
 //  Friend List Url 
 // "Users/{id}/Friends" 
@@ -13,8 +15,14 @@ using SimpleJSON;
 public class Friends_API : MonoBehaviour {
     
     // A list that stores the username and userid of each player the current user has marked as a friend
-    List<Friends> friendslist = new List<Friends>();
-
+    public List<Friends> friendslist = new List<Friends>();
+    //Use the prefab participant
+    public Transform FriendPrefab;
+    //Leaderboardlist to be able to store all instances
+    public Transform FriendListTransform;
+    private TextMeshProUGUI textXP;
+    private TextMeshProUGUI textName;
+    private TextMeshProUGUI rankText;
     /*  JSON formatting
         {[
             {"userId":"e6j8g6", "friendId":"c2j2f8"},
@@ -48,7 +56,24 @@ public class Friends_API : MonoBehaviour {
             TranslateToStringList(json);
         }
 
+
         // Display the data using the UI
+        foreach (Friends data in friendslist){
+            int index = friendslist.IndexOf(data);
+
+            //Create instance(user) as each data loop
+            var instance = Instantiate(FriendPrefab);
+            //Set their parent to FriendList
+            instance.SetParent(FriendListTransform, false);
+            textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
+            textName.text = data.UserName;
+            textXP.text = data.totalExp.ToString();
+            Debug.Log(friendslist.IndexOf(data));
+            Debug.Log(data.UserName + " " + data.totalExp);
+        }
     }
 
     void CreateRequest(string RequestType, string friendID = "-1") {
@@ -158,9 +183,9 @@ public class Friends_API : MonoBehaviour {
 }
 
 public class Friends {
-    string UserId;
-    string UserName;
-    int totalExp;
+    public string UserId;
+    public string UserName;
+    public int totalExp;
 
     public Friends(string ui, string un, int xp) {
         UserId = ui;

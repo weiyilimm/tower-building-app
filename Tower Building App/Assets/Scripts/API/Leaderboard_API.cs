@@ -74,7 +74,6 @@ public class Leaderboard_API : MonoBehaviour {
             instance.SetParent(LeaderBoardList, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
