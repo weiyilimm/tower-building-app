@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RF8M60T2SPW",
         "name": "com.CS17.UniBuilder",
-        "processId": 28060,
+        "processId": 20339,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -84,6 +84,18 @@
             "deviceId": "RF8M60T2SPW",
             "name": "com.CS17.UniBuilder",
             "processId": 28060,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 8132,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8M60T2SPW",
+            "name": "com.CS17.UniBuilder",
+            "processId": 20339,
             "exited": false
         },
         {
