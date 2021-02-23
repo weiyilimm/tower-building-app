@@ -41,7 +41,15 @@ public class ShowScore : MonoBehaviour
                     localEarnedXP = Scoring.PhyMathXP;
                     break;
             }
-            EarnedScoreText[i].text = localEarnedXP.ToString() + "XP";   
+
+            if(localEarnedXP > 999999){
+                EarnedScoreText[i].text = localEarnedXP.ToString().Substring(0,1) + "." +
+                localEarnedXP.ToString().Substring(1,2) + "M" + "XP";
+            }
+            else{
+                EarnedScoreText[i].text = localEarnedXP.ToString() + "XP";   
+            }
+            
         }
     }
 
