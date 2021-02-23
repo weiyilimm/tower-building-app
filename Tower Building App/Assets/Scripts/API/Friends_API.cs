@@ -28,8 +28,18 @@ public class Friends_API : MonoBehaviour {
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
         
+        
         /* CreateRequest("Get_FriendIDs"); */
         
+        Friend newFriend = Friends("2gh4e", "JumJumJr", 2562);
+        friendslist.Add(newFriend);
+        Friend newFriend2 = Friends("2guse", "JohnJohnSr", 462735);
+        friendslist.Add(newFriend2);
+        Friend newFriend3 = Friends("8xh4e", "BobertRoss", 94);
+        friendslist.Add(newFriend3);
+        Friend newFriend4 = Friends("2ms6e", "RobertBoss", 82637);
+        friendslist.Add(newFriend4);
+
         /* Code for testing getting the length of a list in JSON and looping over it */
         Debug.Log("Starting read operation...");
         using (StreamReader r = new StreamReader("Assets/Scripts/API/friends.json")) {
@@ -140,6 +150,7 @@ public class Friends_API : MonoBehaviour {
 
         string friendID = JSON.Parse(node["id"].Value);
         string friendUsername = JSON.Parse(node["userName"].Value);
+        int friendXP = JSON.Parse(node["totalExp"].Value);
 
         Friends newFriend = new Friends(friendID, friendUsername);
         friendslist.Add(newFriend);
@@ -149,10 +160,12 @@ public class Friends_API : MonoBehaviour {
 public class Friends {
     string UserId;
     string UserName;
+    int totalExp;
 
-    public Friends(string ui, string un) {
+    public Friends(string ui, string un, int xp) {
         UserId = ui;
         UserName = un;
+        totalExp = xp;
     }
 }
 
