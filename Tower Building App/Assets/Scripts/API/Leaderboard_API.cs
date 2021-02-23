@@ -30,9 +30,6 @@ public class Leaderboard_API : MonoBehaviour {
 
         /* CreateRequest("GET_Leaderboard"); COMMENTED OUT FOR NOW TO TEST DISPLAYING DATA */
         CreateRequest("GET_Leaderboard");
-        
-        // Display the data using the UI -> Put this into a coroutine.
-
     }
 
     void CreateRequest(string RequestType) {
@@ -74,7 +71,6 @@ public class Leaderboard_API : MonoBehaviour {
         //}
 
         node = JSON.Parse(rawJSON);
-
         Debug.Log(node);
 
         string userid;
@@ -89,13 +85,10 @@ public class Leaderboard_API : MonoBehaviour {
             leaderboard_data data = new leaderboard_data(userid, username, totalExp);
             LB_data.Add(data);
         }
-
         displayData();
-
     }
 
-    public void displayData()
-    {
+    public void displayData() {
         //Print out the data for the five users in the leaderboard
         foreach (leaderboard_data data in LB_data)
         {
@@ -146,7 +139,6 @@ public class Leaderboard_API : MonoBehaviour {
             Debug.Log(LB_data.IndexOf(data));
             Debug.Log(data.UserName + " " + data.TotalExp);
         }
-
     }
 }
 
