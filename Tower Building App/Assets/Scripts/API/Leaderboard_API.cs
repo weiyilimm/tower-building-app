@@ -27,61 +27,9 @@ public class Leaderboard_API : MonoBehaviour {
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
-        
+
         /* CreateRequest("GET_Leaderboard"); COMMENTED OUT FOR NOW TO TEST DISPLAYING DATA */
-
-        //HARD CODE for testing purposes
-        using (StreamReader r = new StreamReader("Assets/Scripts/API/leaderboard.json")) {
-            string json = r.ReadToEnd();
-            TranslateToLeaderboard(json);
-        }
-
-        //Print out the data for the five users in the leaderboard
-        foreach (leaderboard_data data in LB_data){
-            int index = LB_data.IndexOf(data);
-            firstTrophy = Participant.Find("TrophyFirst").gameObject;
-            secondTrophy = Participant.Find("TrophySecond").gameObject;
-            thirdTrophy = Participant.Find("TrophyThird").gameObject;
-            rankingText = Participant.Find("RankingText").gameObject;
-            if (index == 0){
-                firstTrophy.SetActive(true);
-                secondTrophy.SetActive(false);
-                thirdTrophy.SetActive(false);
-                rankingText.SetActive(false);
-            }
-            else if (index == 1){
-                firstTrophy.SetActive(false);
-                secondTrophy.SetActive(true);
-                thirdTrophy.SetActive(false);
-                rankingText.SetActive(false);
-            }
-            else if (index == 2){
-                firstTrophy.SetActive(false);
-                secondTrophy.SetActive(false);
-                thirdTrophy.SetActive(true);
-                rankingText.SetActive(false);
-            }
-            else{
-                firstTrophy.SetActive(false);
-                secondTrophy.SetActive(false);
-                thirdTrophy.SetActive(false);
-                rankingText.SetActive(true);
-
-            }
-            //Create instance(user) as each data loop
-            var instance = Instantiate(Participant);
-            //Set their parent to leaderboardlist
-            instance.SetParent(LeaderBoardList, false);
-            textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
-            textName.text = data.UserName;
-            textXP.text = data.TotalExp.ToString();
-            Debug.Log(LB_data.IndexOf(data));
-            Debug.Log(data.UserName + " " + data.TotalExp);
-        }
-
+        CreateRequest("GET_Leaderboard");
         
         // Display the data using the UI -> Put this into a coroutine.
 
@@ -141,6 +89,64 @@ public class Leaderboard_API : MonoBehaviour {
             leaderboard_data data = new leaderboard_data(userid, username, totalExp);
             LB_data.Add(data);
         }
+
+        displayData();
+
+    }
+
+    public void displayData()
+    {
+        //Print out the data for the five users in the leaderboard
+        foreach (leaderboard_data data in LB_data)
+        {
+            int index = LB_data.IndexOf(data);
+            firstTrophy = Participant.Find("TrophyFirst").gameObject;
+            secondTrophy = Participant.Find("TrophySecond").gameObject;
+            thirdTrophy = Participant.Find("TrophyThird").gameObject;
+            rankingText = Participant.Find("RankingText").gameObject;
+            if (index == 0)
+            {
+                firstTrophy.SetActive(true);
+                secondTrophy.SetActive(false);
+                thirdTrophy.SetActive(false);
+                rankingText.SetActive(false);
+            }
+            else if (index == 1)
+            {
+                firstTrophy.SetActive(false);
+                secondTrophy.SetActive(true);
+                thirdTrophy.SetActive(false);
+                rankingText.SetActive(false);
+            }
+            else if (index == 2)
+            {
+                firstTrophy.SetActive(false);
+                secondTrophy.SetActive(false);
+                thirdTrophy.SetActive(true);
+                rankingText.SetActive(false);
+            }
+            else
+            {
+                firstTrophy.SetActive(false);
+                secondTrophy.SetActive(false);
+                thirdTrophy.SetActive(false);
+                rankingText.SetActive(true);
+
+            }
+            //Create instance(user) as each data loop
+            var instance = Instantiate(Participant);
+            //Set their parent to leaderboardlist
+            instance.SetParent(LeaderBoardList, false);
+            textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
+            textName.text = data.UserName;
+            textXP.text = data.TotalExp.ToString();
+            Debug.Log(LB_data.IndexOf(data));
+            Debug.Log(data.UserName + " " + data.TotalExp);
+        }
+
     }
 }
 

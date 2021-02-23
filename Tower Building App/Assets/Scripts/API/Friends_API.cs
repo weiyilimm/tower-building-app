@@ -35,18 +35,20 @@ public class Friends_API : MonoBehaviour {
         // GET request - Given a userID return all entries in the FRIENDS table with that userID in the 'USER' column
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
-        
-        
+
+        User_Data.data.UserID = "c5db6db8-d979-4feb-abb3-395747cd9196";
+
         /* CreateRequest("Get_FriendIDs"); */
+        CreateRequest("GET_FriendIDs");
         
-        Friends newFriend = new Friends("2gh4e", "JumJumJr", 2562);
-        friendslist.Add(newFriend);
-        Friends newFriend2 = new Friends("2guse", "JohnJohnSr", 462735);
-        friendslist.Add(newFriend2);
-        Friends newFriend3 = new Friends("8xh4e", "BobertRoss", 94);
-        friendslist.Add(newFriend3);
-        Friends newFriend4 = new Friends("2ms6e", "RobertBoss", 82637);
-        friendslist.Add(newFriend4);
+        //Friends newFriend = new Friends("2gh4e", "JumJumJr", 2562);
+        //friendslist.Add(newFriend);
+        //Friends newFriend2 = new Friends("2guse", "JohnJohnSr", 462735);
+        //friendslist.Add(newFriend2);
+        //Friends newFriend3 = new Friends("8xh4e", "BobertRoss", 94);
+        //friendslist.Add(newFriend3);
+        //Friends newFriend4 = new Friends("2ms6e", "RobertBoss", 82637);
+        //friendslist.Add(newFriend4);
 
         /* Code for testing getting the length of a list in JSON and looping over it */
         Debug.Log("Starting read operation...");
@@ -57,26 +59,26 @@ public class Friends_API : MonoBehaviour {
         }
 
 
-        // Display the data using the UI
-        foreach (Friends data in friendslist){
-            int index = friendslist.IndexOf(data);
+        //// Display the data using the UI
+        //foreach (Friends data in friendslist){
+        //    int index = friendslist.IndexOf(data);
 
-            //Create instance(user) as each data loop
-            var instance = Instantiate(FriendPrefab);
-            //Set their parent to FriendList
-            instance.SetParent(FriendListTransform, false);
-            textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
-            textName.text = data.UserName;
-            textXP.text = data.totalExp.ToString();
-            Debug.Log(friendslist.IndexOf(data));
-            Debug.Log(data.UserName + " " + data.totalExp);
-        }
+        //    //Create instance(user) as each data loop
+        //    var instance = Instantiate(FriendPrefab);
+        //    //Set their parent to FriendList
+        //    instance.SetParent(FriendListTransform, false);
+        //    textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
+        //    textName.text = data.UserName;
+        //    textXP.text = data.totalExp.ToString();
+        //    Debug.Log(friendslist.IndexOf(data));
+        //    Debug.Log(data.UserName + " " + data.totalExp);
+        //}
     }
 
-    void CreateRequest(string RequestType, string friendID = "-1") {
+    int CreateRequest(string RequestType, string friendID = "-1") {
         string apiString = "http://localhost:8080/api/Users/";
 
         if (RequestType == "GET_FriendIDs") { 
@@ -101,6 +103,8 @@ public class Friends_API : MonoBehaviour {
             apiString = apiString + User_Data.data.UserID + "/Friends/" + friendID;
             StartCoroutine(DeleteRequest(apiString));
         }
+
+        return 1;
     }
 
     IEnumerator GetRequest(string targetAPI, string GET_type) {
@@ -118,6 +122,7 @@ public class Friends_API : MonoBehaviour {
 
             // TRANSLATION CODE HERE
             if (GET_type == "Multiple") {
+                Debug.Log("Found Multiple");
                 TranslateToStringList(raw);
             } else if (GET_type == "Single") {
                 AddToFriendsList(raw);
@@ -163,10 +168,47 @@ public class Friends_API : MonoBehaviour {
         int list_length = node.Count;
         Debug.Log(list_length);
         
-        for (int i=0; i<list_length; i++) {
+        //for (int i=0; i<list_length; i++) {
+        //    string friendID = JSON.Parse(node[i]["friendId"].Value);
+        //    CreateRequest("Get_User", friendID);
+        //    Debug.Log(friendslist[i].UserName);
+        //}
+
+        StartCoroutine(requestFriendData(node, list_length));
+
+    }
+
+    IEnumerator requestFriendData(JSONNode node, int list_length)
+    {
+        for (int i = 0; i < list_length; i++)
+        {
             string friendID = JSON.Parse(node[i]["friendId"].Value);
-            CreateRequest("Get_User", friendID);
+            yield return CreateRequest("GET_User", friendID);;
         }
+        displayData();
+    }
+
+    void displayData()
+    { 
+        // Display the data using the UI
+        foreach (Friends data in friendslist)
+        {
+            int index = friendslist.IndexOf(data);
+
+            //Create instance(user) as each data loop
+            var instance = Instantiate(FriendPrefab);
+            //Set their parent to FriendList
+            instance.SetParent(FriendListTransform, false);
+            textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
+            textName.text = data.UserName;
+            textXP.text = data.totalExp.ToString();
+            Debug.Log(friendslist.IndexOf(data));
+            Debug.Log(data.UserName + " " + data.totalExp);
+        }
+
     }
 
     public void AddToFriendsList(string rawJSON) {
@@ -179,7 +221,28 @@ public class Friends_API : MonoBehaviour {
 
         Friends newFriend = new Friends(friendID, friendUsername, friendXP);
         friendslist.Add(newFriend);
+
+        //// Display the data using the UI
+        //foreach (Friends data in friendslist)
+        //{
+        //    int index = friendslist.IndexOf(data);
+
+        //    //Create instance(user) as each data loop
+        //    var instance = Instantiate(FriendPrefab);
+        //    //Set their parent to FriendList
+        //    instance.SetParent(FriendListTransform, false);
+        //    textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        //    rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
+        //    textName.text = data.UserName;
+        //    textXP.text = data.totalExp.ToString();
+        //    Debug.Log(friendslist.IndexOf(data));
+        //    Debug.Log(data.UserName + " " + data.totalExp);
+        //}
+
     }
+
 }
 
 public class Friends {
