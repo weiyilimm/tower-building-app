@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 3314651653108279387}
   - component: {fileID: 8726479866120531683}
   - component: {fileID: 615488885067954347}
+  - component: {fileID: 6018756491473577307}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -446,6 +447,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6018756491473577307}
+        m_MethodName: AddFriend
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6018756491473577307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879475966464687543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfbc805da0f9c5419ee6d6b0d383ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherID: 
 --- !u!1 &6684599418669950584
 GameObject:
   m_ObjectHideFlags: 0

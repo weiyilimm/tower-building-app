@@ -7,10 +7,6 @@ using SimpleJSON;
 using UnityEngine.UI;
 using TMPro;
 
-//  Friend List Url 
-// "Users/{id}/Friends" 
-// "Users/{userId}/Friends/{friendId}"
-
 [System.Serializable]
 public class Friends_API : MonoBehaviour {
     
@@ -57,25 +53,6 @@ public class Friends_API : MonoBehaviour {
             Debug.Log(json);
             TranslateToStringList(json);
         }
-
-
-        //// Display the data using the UI
-        //foreach (Friends data in friendslist){
-        //    int index = friendslist.IndexOf(data);
-
-        //    //Create instance(user) as each data loop
-        //    var instance = Instantiate(FriendPrefab);
-        //    //Set their parent to FriendList
-        //    instance.SetParent(FriendListTransform, false);
-        //    textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
-        //    textName.text = data.UserName;
-        //    textXP.text = data.totalExp.ToString();
-        //    Debug.Log(friendslist.IndexOf(data));
-        //    Debug.Log(data.UserName + " " + data.totalExp);
-        //}
     }
 
     int CreateRequest(string RequestType, string friendID = "-1") {
@@ -90,18 +67,6 @@ public class Friends_API : MonoBehaviour {
             // Target API: apiString/{id}/Friends
             apiString = apiString + friendID;
             StartCoroutine(GetRequest(apiString, "Single"));
-
-        } else if (RequestType == "CREATE_Friend") {
-            // Target API: apiString/{UserId}/Friends/{FriendId}
-            apiString = apiString + User_Data.data.UserID + "/Friends/" + friendID;
-            FriendLink newFriend = new FriendLink(User_Data.data.UserID, friendID);
-            string data = JsonUtility.ToJson(newFriend);
-            StartCoroutine(PostRequest(apiString, data, "POST"));
-
-        } else if (RequestType == "DELETE_Friend") {
-            // Target API: apiString/{UserId}/Friends/{FriendId}
-            apiString = apiString + User_Data.data.UserID + "/Friends/" + friendID;
-            StartCoroutine(DeleteRequest(apiString));
         }
 
         return 1;
@@ -130,37 +95,6 @@ public class Friends_API : MonoBehaviour {
         }
     }
 
-    IEnumerator PostRequest(string targetAPI, string data, string type = "POST") {
-        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(data);
-
-        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
-        uwr.method = type;
-        uwr.SetRequestHeader("Content-Type", "application/json");
-        Debug.Log("Sending the data ");
-        Debug.Log("Data : " + data);
-        yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError) {
-            Debug.Log("An Internal Server Error Was Encountered");
-        } else {
-            // The POST request also returns the object it entered into the database.
-            string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
-        }
-    }
-
-    IEnumerator DeleteRequest(string targetAPI) {
-        Debug.Log(targetAPI);
-        // Constructs and sends a GET request to the database to retreive a JSON file
-        UnityWebRequest uwr = UnityWebRequest.Delete(targetAPI);
-        yield return uwr.SendWebRequest();
-
-        if (uwr.isNetworkError) {
-            Debug.Log("An Internal Server Error Was Encountered");
-        } else {
-            Debug.Log("Friend Deleted");
-        }
-    }
-
     private void TranslateToStringList(string rawJSON){ 
         JSONNode node;
         node = JSON.Parse(rawJSON);
@@ -175,21 +109,17 @@ public class Friends_API : MonoBehaviour {
         //}
 
         StartCoroutine(requestFriendData(node, list_length));
-
     }
 
-    IEnumerator requestFriendData(JSONNode node, int list_length)
-    {
-        for (int i = 0; i < list_length; i++)
-        {
+    IEnumerator requestFriendData(JSONNode node, int list_length) {
+        for (int i = 0; i < list_length; i++) {
             string friendID = JSON.Parse(node[i]["friendId"].Value);
             yield return CreateRequest("GET_User", friendID);;
         }
         displayData();
     }
 
-    void displayData()
-    { 
+    void displayData() { 
         // Display the data using the UI
         foreach (Friends data in friendslist)
         {
@@ -221,28 +151,7 @@ public class Friends_API : MonoBehaviour {
 
         Friends newFriend = new Friends(friendID, friendUsername, friendXP);
         friendslist.Add(newFriend);
-
-        //// Display the data using the UI
-        //foreach (Friends data in friendslist)
-        //{
-        //    int index = friendslist.IndexOf(data);
-
-        //    //Create instance(user) as each data loop
-        //    var instance = Instantiate(FriendPrefab);
-        //    //Set their parent to FriendList
-        //    instance.SetParent(FriendListTransform, false);
-        //    textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-        //    rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
-        //    textName.text = data.UserName;
-        //    textXP.text = data.totalExp.ToString();
-        //    Debug.Log(friendslist.IndexOf(data));
-        //    Debug.Log(data.UserName + " " + data.totalExp);
-        //}
-
     }
-
 }
 
 public class Friends {
