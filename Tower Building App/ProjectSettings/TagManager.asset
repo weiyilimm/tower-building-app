@@ -28,6 +28,11 @@ TagManager:
   - Polygons
   - Shuttle
   - hitSphere
+  - Main
+  - 404
+  - Observatory
+  - eisle
+  - WingMan
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,6 @@ public class CameraMovePhone : MonoBehaviour
     private Vector3 rotateOrigin;
     private Vector3 rotateCurrent;
     private float rotated = 0;
-    //GameObject camera_for_point = GameObject.FindGameObjectWithTag("MainCamera");
     public Vector3 point = Vector3.zero;
     private bool canChangePoint;
 
@@ -46,6 +45,8 @@ public class CameraMovePhone : MonoBehaviour
 
     //making a list to store the bulding names
     private List<String> buildingNames = new List<String>();
+    //making a list to store the Main Building parts
+    private List<String> mainBuildingParts = new List<String>();
     public void Start(){
         //initialising canChangePoint  to true
         canChangePoint = true;
@@ -59,6 +60,8 @@ public class CameraMovePhone : MonoBehaviour
         //on program start, save building names to rotate centre point of if in focus
         //Arts
         buildingNames.Add("louvre");
+        buildingNames.Add("eisle");
+        buildingNames.Add("WingMan");
         //BioChe
         buildingNames.Add("Helix Building 1");
         buildingNames.Add("DNA Building");
@@ -66,6 +69,7 @@ public class CameraMovePhone : MonoBehaviour
         //ComSci
         buildingNames.Add("PC Tower");
         buildingNames.Add("Sci-fi");
+        buildingNames.Add("404");
         //Eng
         buildingNames.Add("crane");
         buildingNames.Add("BigBen");
@@ -87,7 +91,16 @@ public class CameraMovePhone : MonoBehaviour
         buildingNames.Add("glitch cube");
         buildingNames.Add("Polygons");
         buildingNames.Add("Shuttle");
+        buildingNames.Add("Observatory");
 
+
+        //Main building
+        mainBuildingParts.Add("Roof");
+        mainBuildingParts.Add("Tower");
+        mainBuildingParts.Add("Base 1");
+        mainBuildingParts.Add("Base 2");
+        mainBuildingParts.Add("Base 3");
+        mainBuildingParts.Add("Base 4");
     }
 
     //change the movement/rotation setting
@@ -115,6 +128,9 @@ public class CameraMovePhone : MonoBehaviour
                 GameObject building = GameObject.FindGameObjectWithTag(hit.collider.name);
                 //Debug.Log(building.transform.position);
                 point = hit.collider.transform.position;
+            }else if (mainBuildingParts.Contains(hit.collider.name)){
+                //Debug.Log("Main");
+                point = new Vector3 (0.7f, 0.5f, -1f);
             }else{
                 point = hit.point;
             }
