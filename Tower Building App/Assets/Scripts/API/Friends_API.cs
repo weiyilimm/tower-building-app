@@ -31,13 +31,13 @@ public class Friends_API : MonoBehaviour {
         
         /* CreateRequest("Get_FriendIDs"); */
         
-        Friend newFriend = Friends("2gh4e", "JumJumJr", 2562);
+        Friends newFriend = new Friends("2gh4e", "JumJumJr", 2562);
         friendslist.Add(newFriend);
-        Friend newFriend2 = Friends("2guse", "JohnJohnSr", 462735);
+        Friends newFriend2 = new Friends("2guse", "JohnJohnSr", 462735);
         friendslist.Add(newFriend2);
-        Friend newFriend3 = Friends("8xh4e", "BobertRoss", 94);
+        Friends newFriend3 = new Friends("8xh4e", "BobertRoss", 94);
         friendslist.Add(newFriend3);
-        Friend newFriend4 = Friends("2ms6e", "RobertBoss", 82637);
+        Friends newFriend4 = new Friends("2ms6e", "RobertBoss", 82637);
         friendslist.Add(newFriend4);
 
         /* Code for testing getting the length of a list in JSON and looping over it */
@@ -152,7 +152,7 @@ public class Friends_API : MonoBehaviour {
         string friendUsername = JSON.Parse(node["userName"].Value);
         int friendXP = JSON.Parse(node["totalExp"].Value);
 
-        Friends newFriend = new Friends(friendID, friendUsername);
+        Friends newFriend = new Friends(friendID, friendUsername, friendXP);
         friendslist.Add(newFriend);
     }
 }
