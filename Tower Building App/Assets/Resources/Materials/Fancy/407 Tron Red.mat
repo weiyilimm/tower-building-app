@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Tower Building App/Assets/Resources/Materials/Fancy/405 Tron Red.mat
-  m_Name: 405 Tron Red
-=======
   m_Name: 407 Tron Red
->>>>>>> master:Tower Building App/Assets/Resources/Materials/Fancy/407 Tron Red.mat
   m_Shader: {fileID: -6465566751694194690, guid: 9d47f68746fff1e4ab96fa5cbc0873c4,
     type: 3}
   m_ShaderKeywords: 

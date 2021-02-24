@@ -20,11 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Tower Building App/Assets/Resources/Materials/Fancy/403 Hazard.mat
-  m_Name: 403 Hazard
-=======
   m_Name: 405 Hazard
->>>>>>> master:Tower Building App/Assets/Resources/Materials/Fancy/405 Hazard.mat
   m_Shader: {fileID: -6465566751694194690, guid: bca3230480bd1664e90888515be6adb4,
     type: 3}
   m_ShaderKeywords: 

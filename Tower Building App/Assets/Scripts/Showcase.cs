@@ -11,7 +11,7 @@ public class Showcase : MonoBehaviour{
     IEnumerator materials_showcase(){
         int prim_counter = 1; //primary
         int sec_counter = 0; //secondary
-        int[] mat_len = { 14, 8, 6, 7, 8 };
+        int[] mat_len = { 14, 8, 6, 7, 10 };
         while (true){
          
             //matte and metallic
@@ -45,6 +45,7 @@ public class Showcase : MonoBehaviour{
                 GetComponent<Renderer>().materials = mats;
             }
             //gradients
+            
             for (int j = 0; j < mat_len[3]; j++)
             {
                 yield return new WaitForSeconds(1);
@@ -60,8 +61,9 @@ public class Showcase : MonoBehaviour{
                 mats[1] = CodeConverter.codes.materials_map[sec_counter];
                 GetComponent<Renderer>().materials = mats;
             }
-
+            
             //fancy
+            
             
             for (int j = 0; j < mat_len[4]; j++)
             {
@@ -71,12 +73,17 @@ public class Showcase : MonoBehaviour{
 
                 prim_counter = j + 400;
 
+                if (j + 1 < mat_len[4])
+                    sec_counter = j + 401;
+                else
+                    sec_counter = 400;
+
                 Material[] mats = GetComponent<Renderer>().materials; //object materials
                 mats[0] = CodeConverter.codes.materials_map[prim_counter];
-                mats[1] = CodeConverter.codes.materials_map[prim_counter];
+                mats[1] = CodeConverter.codes.materials_map[sec_counter];
                 GetComponent<Renderer>().materials = mats;
 
-                if (j == 2 || j == 5 || j == 6 || j == 7)
+                if (j == 4 || j == 8 || j == 7 || j == 8 || j==9)
                     yield return new WaitForSeconds(3);
 
             }

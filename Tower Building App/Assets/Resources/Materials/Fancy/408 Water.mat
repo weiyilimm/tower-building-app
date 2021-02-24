@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Tower Building App/Assets/Resources/Materials/Fancy/406 Water.mat
-  m_Name: 406 Water
-=======
   m_Name: 408 Water
->>>>>>> master:Tower Building App/Assets/Resources/Materials/Fancy/408 Water.mat
   m_Shader: {fileID: -6465566751694194690, guid: d389060b4d7975049b4eb887c07f036a,
     type: 3}
   m_ShaderKeywords: 

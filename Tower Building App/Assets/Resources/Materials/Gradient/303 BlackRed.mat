@@ -49,13 +49,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-<<<<<<< HEAD:Tower Building App/Assets/Resources/Materials/Gradient/303 BlackRed.mat
-    - Vector1_3B8947AA: 9
-    - Vector1_F802C08A: 0.02
-=======
     - Vector1_3B8947AA: 10
     - Vector1_F802C08A: 0
->>>>>>> master:Tower Building App/Assets/Resources/Materials/Gradient/BlackRed.mat
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -20,11 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Tower Building App/Assets/Resources/Materials/Fancy/407 Lava.mat
-  m_Name: 407 Lava
-=======
   m_Name: 409 Lava
->>>>>>> master:Tower Building App/Assets/Resources/Materials/Fancy/409 Lava.mat
   m_Shader: {fileID: -6465566751694194690, guid: 10e1fb2ecbfe5ab4398fb21ba87bfd3a,
     type: 3}
   m_ShaderKeywords: 
