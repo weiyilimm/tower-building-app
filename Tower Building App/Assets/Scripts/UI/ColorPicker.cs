@@ -58,7 +58,6 @@ public class ColorPicker : MonoBehaviour
             case "Main":
                 MeshRenderer = new MeshRenderer[9];
                 localXP = Scoring.MainXP;
-                Debug.Log("got past case with MAIN  " + localXP);
                 MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
                 MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
                 MainBuildings[2].onClick.AddListener(() => WhichBuildings(3));
@@ -252,7 +251,6 @@ public class ColorPicker : MonoBehaviour
 
     public void ApplyAtStart(string currentSceneName) {
         int subject_index = CodeConverter.codes.subject_map[currentSceneName];
-        Debug.Log(currentSceneName);
         if (currentSceneName != "Main") {
             User_Data.data.temp_data[0][0] = User_Data.data.building_stats[subject_index].primary_colour;
             User_Data.data.temp_data[0][1] = User_Data.data.building_stats[subject_index].secondary_colour;
@@ -312,7 +310,7 @@ public class ColorPicker : MonoBehaviour
         //apply to main buildings
         for (int i=1; i<5; i++) {
             string strindex = i.ToString();
-            string buildingName = "Building" + strindex;
+            string buildingName = "BuildingModel" + strindex;
             GameObject parent = GameObject.Find(buildingName);
             WhichBuildings(i);
             int value = User_Data.data.temp_data[i-1][index];
