@@ -3,7 +3,36 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CameraObject
+  - louvre
+  - Helix Building 1
+  - DNA Building
+  - Microscope
+  - PC Tower
+  - Sci-fi
+  - crane
+  - BigBen
+  - BurjKhalifa
+  - Parthenon
+  - Parthenon-Destroyed2
+  - JapaneseTemple
+  - Globe
+  - pagoda
+  - pisa
+  - EiffelTower
+  - Chess
+  - mi6
+  - CourtHouse
+  - glitch cube
+  - Polygons
+  - Shuttle
+  - hitSphere
+  - Main
+  - 404
+  - Observatory
+  - eisle
+  - WingMan
   layers:
   - Default
   - TransparentFX
@@ -36,7 +65,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Buildings
   m_SortingLayers:
   - name: Default
     uniqueID: 0
