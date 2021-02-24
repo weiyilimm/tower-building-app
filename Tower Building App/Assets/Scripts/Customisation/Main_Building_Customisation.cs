@@ -53,8 +53,8 @@ public class Main_Building_Customisation : MonoBehaviour{
 
                     // Get and apply the height changes to the tower and roof components
                     int height = User_Data.data.building_stats[index].m_height;
-                    var ScaleChange = new Vector3(0,0,(100*height));
-                    float pos_height = (float)(1.5*height);
+                    var ScaleChange = new Vector3(0,0,(float)(100*(height*0.7)));
+                    float pos_height = (float)(1.5*(height*0.7));
                     var PosChange = new Vector3(0,pos_height,0);
 
                     Block.transform.localScale += ScaleChange;
