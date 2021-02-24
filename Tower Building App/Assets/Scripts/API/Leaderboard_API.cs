@@ -33,7 +33,7 @@ public class Leaderboard_API : MonoBehaviour {
     }
 
     void CreateRequest(string RequestType) {
-        string apiString = "http://localhost:8080/api/Users/";
+        string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
 
         if (RequestType == "GET_Leaderboard") { 
             StartCoroutine(GetRequest(apiString));

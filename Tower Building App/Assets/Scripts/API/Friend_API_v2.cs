@@ -8,8 +8,9 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-public class Friends_API : MonoBehaviour {
-    
+public class Friend_API_v2 : MonoBehaviour
+{
+
     // A list that stores the username and userid of each player the current user has marked as a friend
     public List<Friends> friendslist = new List<Friends>();
     //Use the prefab participant
@@ -27,7 +28,8 @@ public class Friends_API : MonoBehaviour {
         ]}
     */
 
-    void Start() {
+    void Start()
+    {
         // GET request - Given a userID return all entries in the FRIENDS table with that userID in the 'USER' column
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
@@ -47,72 +49,78 @@ public class Friends_API : MonoBehaviour {
         } */
     }
 
-    IEnumerator CreateRequest(string RequestType, string friendID = "-1") {
+    private void CreateRequest(string RequestType, string friendID = "-1")
+    {
         string apiString = "http://localhost:8080/api/Users/";
+        // Needs refactoring
+        apiString = apiString + User_Data.data.UserID + "/Friends/";
 
-        if (RequestType == "GET_FriendIDs") { 
-            // Target API: apiString/{id}/Friends
-            apiString = apiString + User_Data.data.UserID + "/Friends/";
-            StartCoroutine(GetRequest(apiString, "Multiple"));
+        StartCoroutine(GetRequest(apiString));
 
-        } else if (RequestType == "GET_User") {
-            // Target API: apiString/{id}/Friends
-            apiString = apiString + friendID;
-            StartCoroutine(GetRequest(apiString, "Single"));
-        }
+        //if (RequestType == "GET_FriendIDs")
+        //{
+        //    // Target API: apiString/{id}/Friends
+        //    apiString = apiString + User_Data.data.UserID + "/Friends/";
+        //    StartCoroutine(GetRequest(apiString, "Multiple"));
 
-        yield return 1;
+        //}
+        //else if (RequestType == "GET_User")
+        //{
+        //    // Target API: apiString/{id}/Friends
+        //    apiString = apiString + friendID;
+        //    StartCoroutine(GetRequest(apiString, "Single"));
+        //}
+
+        //yield return 1;
     }
 
-    IEnumerator GetRequest(string targetAPI, string GET_type) {
+    IEnumerator GetRequest(string targetAPI)
+    {
         Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
         yield return uwr.SendWebRequest();
 
-        if (uwr.isNetworkError) {
+        if (uwr.isNetworkError)
+        {
             Debug.Log("An Internal Server Error Was Encountered");
-        } else {
+        }
+        else
+        {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
 
-            // TRANSLATION CODE HERE
-            if (GET_type == "Multiple") {
-                Debug.Log("In the Multiple flag catch");
-
-                StartCoroutine(TranslateToStringList(raw));
-
-                Debug.Log("Finshed getting all friends");
-            } else if (GET_type == "Single") {
-                Debug.Log("In the single flag catch");
-                AddToFriendsList(raw);
-            }
+            AddToFriendsList(raw);
         }
     }
 
     // private void
-    IEnumerator TranslateToStringList(string rawJSON){ 
-        JSONNode node;
-        node = JSON.Parse(rawJSON);
+    //IEnumerator TranslateToStringList(string rawJSON)
+    //{
+    //    JSONNode node;
+    //    node = JSON.Parse(rawJSON);
 
-        int list_length = node.Count;
-        Debug.Log(list_length);
-        
-        Debug.Log("Starting the requestFriendData coroutine...");
-        yield return StartCoroutine(requestFriendData(node, list_length));
-        displayData();
-    }
+    //    int list_length = node.Count;
+    //    Debug.Log(list_length);
 
-    IEnumerator requestFriendData(JSONNode node, int list_length) {
-        for (int i = 0; i < list_length; i++) {
-            string friendID = JSON.Parse(node[i]["friendId"].Value);
-            Debug.Log(friendID);
-            yield return StartCoroutine(CreateRequest("GET_User", friendID));
-        }
-        Debug.Log("Starting the displayData function...");
-    }
+    //    Debug.Log("Starting the requestFriendData coroutine...");
+    //    yield return StartCoroutine(requestFriendData(node, list_length));
+    //    displayData();
+    //}
 
-    public void displayData() { 
+    //IEnumerator requestFriendData(JSONNode node, int list_length)
+    //{
+    //    for (int i = 0; i < list_length; i++)
+    //    {
+    //        string friendID = JSON.Parse(node[i]["friendId"].Value);
+    //        Debug.Log(friendID);
+    //        yield return StartCoroutine(CreateRequest("GET_User", friendID));
+    //    }
+    //    Debug.Log("Starting the displayData function...");
+    //}
+
+    public void displayData()
+    {
         // Display the data using the UI
         foreach (Friends data in friendslist)
         {
@@ -134,41 +142,55 @@ public class Friends_API : MonoBehaviour {
 
     }
 
-    private void AddToFriendsList(string rawJSON) {
+    private void AddToFriendsList(string rawJSON)
+    {
         JSONNode node;
         node = JSON.Parse(rawJSON);
 
+        int list_length = node.Count;
+        Debug.Log(list_length);
+
+
+
         Debug.Log("Adding to friends list");
+        for (int i = 0; i < list_length; i++)
+        {
+            string friendID = JSON.Parse(node[i]["id"].Value);
+            string friendUsername = JSON.Parse(node[i]["userName"].Value);
+            int friendXP = JSON.Parse(node[i]["totalExp"].Value);
 
-        string friendID = JSON.Parse(node["id"].Value);
-        string friendUsername = JSON.Parse(node["userName"].Value);
-        int friendXP = JSON.Parse(node["totalExp"].Value);
+            Friends newFriend = new Friends(friendID, friendUsername, friendXP);
+            friendslist.Add(newFriend);
+        }
 
-        Friends newFriend = new Friends(friendID, friendUsername, friendXP);
-        friendslist.Add(newFriend);
+        displayData();
 
     }
 }
 
-//public class Friends {
-//    public string UserId;
-//    public string UserName;
-//    public int totalExp;
+public class Friends
+{
+    public string UserId;
+    public string UserName;
+    public int totalExp;
 
-//    public Friends(string ui, string un, int xp) {
-//        UserId = ui;
-//        UserName = un;
-//        totalExp = xp;
-//    }
-//}
+    public Friends(string ui, string un, int xp)
+    {
+        UserId = ui;
+        UserName = un;
+        totalExp = xp;
+    }
+}
 
-//[System.Serializable]
-//public class FriendLink {
-//    string userID;
-//    string friendID;
+[System.Serializable]
+public class FriendLink
+{
+    string userID;
+    string friendID;
 
-//    public FriendLink(string ui, string fi) {
-//        userID = ui;
-//        friendID = fi;
-//    }
-//}
+    public FriendLink(string ui, string fi)
+    {
+        userID = ui;
+        friendID = fi;
+    }
+}
