@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,10 +25,21 @@ public class FriendController {
     UserRepository userRepository;
 
     @GetMapping("Users/{id}/Friends")
-    public ResponseEntity<List<Friend>> getFriends(@PathVariable("id") UUID id) {
+    public ResponseEntity<List<Users>> getFriends(@PathVariable("id") UUID id) {
         List<Friend> friends = friendRepository.findByUserId(id);
+        List<Users> users = new ArrayList<>();
+
+        for (Friend friend : friends) {
+            Optional<Users> new_friend = userRepository.findById(friend.getFriendId());
+            if (new_friend.isPresent()) {
+                users.add(new_friend.get());
+            }
+        }
+
+        System.out.println(users);
+
         if (!friends.isEmpty()) {
-            return new ResponseEntity<>(friends, HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

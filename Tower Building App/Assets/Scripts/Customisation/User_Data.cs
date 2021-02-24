@@ -306,19 +306,20 @@ public class User_Data : MonoBehaviour{
         // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
         
         JSONNode node;
-        using (StreamReader r = new StreamReader(rawJSON)) {
-            //read in the json
-            string json = r.ReadToEnd();
+        node = JSON.Parse(rawJSON);
+        //using (StreamReader r = new StreamReader(rawJSON)) {
+           //read in the json
+        //    string json = r.ReadToEnd();
 
             //reformat the json into dictionary style convention
-            node = JSON.Parse(json);
-        }
+        //    node = JSON.Parse(json);
+        //}
 
         //Clears the Unity building list representation so it can be created fresh with the correct data
         building_stats.Clear();
 
         // Loop through the buildings to create their Unity representations 
-        for (int j=0; j<2; j++){
+        for (int j=0; j<12; j++){
             // Might need to get the modelGroup as well if the buildings are not sent in order
             
             int primary_colour = int.Parse(node["userBuildings"][j]["primaryColour"].Value);
@@ -342,18 +343,14 @@ public class User_Data : MonoBehaviour{
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
 
         JSONNode node;
-        using (StreamReader r = new StreamReader(rawJSON)) {
-            //read in the json
-            string json = r.ReadToEnd();
+        node = JSON.Parse(rawJSON);
 
-            //reformat the json into dictionary style convention
-            node = JSON.Parse(json);
-        }
         string userid = JSON.Parse(node["id"].Value);
         string username = JSON.Parse(node["userName"].Value);
         string email = JSON.Parse(node["email"].Value);
         string password = JSON.Parse(node["password"].Value);
         int totalExp = int.Parse(node["totalExp"].Value);
+
         UserID = userid;
         Username = username;
         Email = email;
