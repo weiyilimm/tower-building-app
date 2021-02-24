@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345380958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1410104fb1e8a8f43a765bf65ec079c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 756ae9a68d5aa4b43ba9e622397b6c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   FriendPrefab: {fileID: 2185705502191234223, guid: 1ab7c416fe8148a4795b49365d7598b5,

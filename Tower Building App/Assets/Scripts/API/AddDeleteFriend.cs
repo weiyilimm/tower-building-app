@@ -6,15 +6,17 @@ using SimpleJSON;
 
 public class AddDeleteFriend : MonoBehaviour {
     
-    public string otherID;
+    // Hardcoded Friend (till UUID can be pulled from button).
+    public string otherID = "53aa0679-4a23-4287-ae97-1b0cdac376d7";
 
     public void AddFriend() {
         //Friends_API.CreateRequest("CREATE_Friend", thisFriendID);
         string apiString = "http://localhost:8080/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
-        FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
-        string data = JsonUtility.ToJson(newFriend);
-        StartCoroutine(PostRequest(apiString, data, "POST"));
+
+        //FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
+        //string data = JsonUtility.ToJson(newFriend);
+        //StartCoroutine(PostRequest(apiString, data, "POST"));
     }
 
     public void DeleteFriend() {
