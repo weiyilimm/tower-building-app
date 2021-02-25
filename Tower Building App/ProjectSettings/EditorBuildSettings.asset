@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Buildings/PhyMath.unity
     guid: f93125fd32a2f1c43975ae3ca6865402
+  - enabled: 1
+    path: Assets/Scenes/OthersWorld.unity
+    guid: 51568aed44ecd2d40bfc47ddc9c79e86
   m_configObjects: {}
