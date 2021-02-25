@@ -97,7 +97,7 @@ public class CodeConverter : MonoBehaviour{
         buildingName_map.Add(41,"Basic Shapes");
         buildingName_map.Add(42,"Glitch Cube");
         buildingName_map.Add(43,"Space Shuttle");
-        buildingName_map.Add(50,"UNK COMPSCI");
+        buildingName_map.Add(50,"404");
         buildingName_map.Add(51,"Sci-Fi Building");
         buildingName_map.Add(52,"PC Tower");
         buildingName_map.Add(60,"Helix Building");
@@ -116,8 +116,8 @@ public class CodeConverter : MonoBehaviour{
         buildingName_map.Add(100,"Court House");
         buildingName_map.Add(101,"MI6");
         buildingName_map.Add(102,"Chess Set");
-        buildingName_map.Add(110,"UNK ART 1");
-        buildingName_map.Add(111,"Louvre");
-        buildingName_map.Add(112,"UNK ART 2");
+        buildingName_map.Add(110,"Louvre");
+        buildingName_map.Add(111,"Easel");
+        buildingName_map.Add(112,"Winged Man");
     }
 }

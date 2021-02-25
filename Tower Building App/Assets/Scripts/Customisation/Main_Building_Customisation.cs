@@ -35,7 +35,14 @@ public class Main_Building_Customisation : MonoBehaviour{
                     Transform Cap = model.transform.Find("Roof");
                     
                     // Resets the starting positions of the Tower and Roof components so that they will always display correctly
+                    // (100,100,100) is the standard staring scale for the main building models
                     Block.transform.localScale = new Vector3(100,100,100);
+                    // For each tower you need to reset their starting positions
+                    // The float values in the Vector3 declarations represent the starting local position coordinates of each tower
+                    // that is - each towers relative position to the central parent object they all belong too.
+                    // the values take different positive or negative values since they are at different rotational points around
+                    // the centre parent object. The values are different for the fourth tower (location_counter = 3) as the model has
+                    // a different origin point than the rest
                     if (location_counter == 0){
                         Block.transform.localPosition = new Vector3(0.5f,0.6f,0.5f);
                         Cap.transform.localPosition = new Vector3(0.5f,1.1f,0.5f);
@@ -51,10 +58,21 @@ public class Main_Building_Customisation : MonoBehaviour{
                     }
                     location_counter += 1;
 
-                    // Get and apply the height changes to the tower and roof components
+                    // Get the value for the tower height as chosen by the user in the menu
                     int height = User_Data.data.building_stats[index].m_height;
-                    var ScaleChange = new Vector3(0,0,(100*height));
-                    float pos_height = (float)(1.5*height);
+                    
+                    // The scale factor is used to change the integer step heights decided by the user
+                    // into a floating point number so that it better scales to the main scene proportions
+                    float scale_factor = 0.7f;
+                    
+                    // here the height is multiplied by 100 as this represents what a standard scale increase would be
+                    // and the further multiplication by the height and scale factor fits it to the main scene proportions
+                    float scaledHeight = (float)(100 * (height*scale_factor));
+                    var ScaleChange = new Vector3(0,0,scaledHeight);
+                    
+                    // Because the main building models start at scale 1.5 that needs to be accounted for
+                    // when the new positions are applied to the tower and roof
+                    float pos_height = (float)(1.5*(height*scale_factor));
                     var PosChange = new Vector3(0,pos_height,0);
 
                     Block.transform.localScale += ScaleChange;
@@ -92,35 +110,6 @@ public class Main_Building_Customisation : MonoBehaviour{
 
                 index += 1;
             }
-    }
-
-    // This function will probably be pulled into a seperate script once the UI for the MB has been implemented
-    public void change_height(Transform Stack, string direction){
-        Transform Block = Stack.transform.Find("Tower");
-        Transform Cap = Stack.transform.Find("Roof");
-            
-        if (direction == "up") {
-            if (Block.transform.localScale == new Vector3(100,100,500)){
-                //These messages will change to a pop up message once we are able to do so
-                Debug.Log("Can't get any taller than this!");
-            } else {
-                var ScaleChange = new Vector3(0,0,100);
-                var PosChange = new Vector3(0,1.5f,0);
-                Block.transform.localScale += ScaleChange;
-                Block.transform.position += (PosChange/2);
-                Cap.transform.position += PosChange;
-            }
-        } else if (direction == "down") {
-            if (Block.transform.localScale == new Vector3(100,100,100)){
-                Debug.Log("Can't get any shorter than this!");
-            } else {
-                var ScaleChange = new Vector3(0,0,-100);
-                var PosChange = new Vector3(0,-1.5f,0);
-                Block.transform.localScale += ScaleChange;
-                Block.transform.position += (PosChange/2);
-                Cap.transform.position += PosChange;
-            }
-        }    
     }
 }
 
