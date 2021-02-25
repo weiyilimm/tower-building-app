@@ -2,18 +2,37 @@ stages:
   - test
   - build
   - deploy
+
 unit-test: 
-  script: "echo 'Testing...'"
+  tags: 
+    - docker
   stage: test
-  tags: 
-    - unity
+  services:
+    - postgres
+  variables:
+    POSTGRES_DB: d4a57vb2rb4ft3
+    POSTGRES_HOST: ec2-54-72-155-238.eu-west-1.compute.amazonaws.com
+    POSTGRES_USER: xvghidrpszsjsy
+    POSTGRES_PASSWORD: f52fa2f40788a62878688833ba549af2436a78333f6a95632f43aa7a17fbc9e0
+    POSTGRES_HOST_AUTH_METHOD: trust
+  script:
+    - apt-get update
+    - apt install -y postgresql postgresql-contrib
+    - PGPASSWORD=${POSTGRES_PASSWORD} psql -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c "SELECT 'OK' AS status;" 
+
 unity-build: 
-  script: "echo 'Building...'"
+  tags: 
+    - unity
   stage: build
+  script: "echo 'Building...'"
+
+backend-deploy: 
   tags: 
-    - unity
-playstore: 
-  script: "echo 'Deploying...'"
+    - docker
   stage: deploy
-  tags: 
-    - unity
+  script: 
+    - cd backend
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=uni-builder-database --api-key=$HEROKU_API_KEY
