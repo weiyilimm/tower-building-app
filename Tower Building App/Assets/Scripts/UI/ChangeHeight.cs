@@ -222,7 +222,7 @@ public class ChangeHeight : MonoBehaviour
         }
 
         // Check the height of the building is below the maximum and if so increase its height
-        if (User_Data.data.temp_data[buildingDecider][3] < 15){
+        if (User_Data.data.temp_data[buildingDecider][3] < maximumHeight){
             User_Data.data.temp_data[buildingDecider][3] += 1;
         }
 
