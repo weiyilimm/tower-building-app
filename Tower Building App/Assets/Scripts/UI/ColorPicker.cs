@@ -271,7 +271,7 @@ public class ColorPicker : MonoBehaviour
     public void ApplyCheck(int index, int value, int model) {
         int colour_index;
         if (value != -1) {
-            GameObject parent = GameObject.Find("Buildings");
+            GameObject parent = GameObject.Find("BuildingModels");
             int iterations = parent.transform.childCount;
             for (int k=0; k<iterations; k++) {
                 if (model == k) {
@@ -310,7 +310,7 @@ public class ColorPicker : MonoBehaviour
         //apply to main buildings
         for (int i=1; i<5; i++) {
             string strindex = i.ToString();
-            string buildingName = "Building" + strindex;
+            string buildingName = "BuildingModel" + strindex;
             GameObject parent = GameObject.Find(buildingName);
             WhichBuildings(i);
             int value = User_Data.data.temp_data[i-1][index];
