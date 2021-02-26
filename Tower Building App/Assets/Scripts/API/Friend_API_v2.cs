@@ -12,7 +12,7 @@ public class Friend_API_v2 : MonoBehaviour
 {
 
     // A list that stores the username and userid of each player the current user has marked as a friend
-    public List<Friends> friendslist = new List<Friends>();
+    public static List<Friends> friendslist = new List<Friends>();
     //Use the prefab participant
     public Transform FriendPrefab;
     //Leaderboardlist to be able to store all instances
@@ -95,6 +95,7 @@ public class Friend_API_v2 : MonoBehaviour
         int list_length = node.Count;
         Debug.Log(list_length);
 
+        friendslist.Clear();
         Debug.Log("Adding to friends list");
         for (int i = 0; i < list_length; i++) {
             string friendID = JSON.Parse(node[i]["id"].Value);
