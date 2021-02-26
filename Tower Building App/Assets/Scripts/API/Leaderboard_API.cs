@@ -44,8 +44,9 @@ public class Leaderboard_API : MonoBehaviour {
         Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Got the data");
+        Debug.Log("Sending Request");
         yield return uwr.SendWebRequest();
+        Debug.Log("Reuqest returned");
 
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
@@ -71,7 +72,6 @@ public class Leaderboard_API : MonoBehaviour {
         //}
 
         node = JSON.Parse(rawJSON);
-        Debug.Log(node);
 
         string userid;
         string username;
@@ -136,8 +136,8 @@ public class Leaderboard_API : MonoBehaviour {
             rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
             textXP.text = data.TotalExp.ToString();
-            Debug.Log(LB_data.IndexOf(data));
-            Debug.Log(data.UserName + " " + data.TotalExp);
+            // Debug.Log(LB_data.IndexOf(data));
+            // Debug.Log(data.UserName + " " + data.TotalExp);
         }
     }
 }
