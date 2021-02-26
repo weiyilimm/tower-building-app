@@ -139,8 +139,23 @@ public class Leaderboard_API : MonoBehaviour {
             textName.text = data.UserName;
             textId.text = data.UserId;
             textXP.text = data.TotalExp.ToString();
+
+            checkForFriend(instance, data);
             // Debug.Log(LB_data.IndexOf(data));
             // Debug.Log(data.UserName + " " + data.TotalExp);
+        }
+    }
+
+    public void checkForFriend(Transform instance, leaderboard_data data) {
+        //check if the data is in the friends list or not
+        foreach (Friends friend_data in Friend_API_v2.friendslist) {
+            if (friend_data.UserName == data.UserName) {
+                Debug.Log("Player was in your friends list");
+                GameObject plus = instance.Find("RawImage").gameObject;
+                GameObject tick = instance.Find("RawImage (1)").gameObject;
+                plus.SetActive(false);
+                tick.SetActive(true);
+            }
         }
     }
 }
