@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using TMPro;
 
 public class AddDeleteFriend : MonoBehaviour {
     
     public GameObject addFriend, removeFriend;
+    public TextMeshProUGUI friendId;
     public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
-
-    // Hardcoded Friend (till UUID can be pulled from button).
-    public string otherID = "ae078722-790a-4f5a-a2dc-ec2bbb2df560";
+    public string otherID;
 
     public void typeCheck() {
+        otherID = friendId.text;
         if (removeFriend.activeSelf) {
-            Debug.Log("Deleting this friend");
             DeleteFriend();
             removeFriend.SetActive(false);
             addFriend.SetActive(true);
         } else if (addFriend.activeSelf) {
-            Debug.Log("Creating friend");
             AddFriend();
             addFriend.SetActive(false);
             removeFriend.SetActive(true);
@@ -31,8 +30,10 @@ public class AddDeleteFriend : MonoBehaviour {
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
         Debug.Log("POST Request at: " + apiString);
 
+        // Creates dummy data since the request requires some to be built
         FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
         string data = JsonUtility.ToJson(newFriend);
+
         StartCoroutine(PostRequest(apiString, data, "POST"));
     }
 
@@ -50,8 +51,8 @@ public class AddDeleteFriend : MonoBehaviour {
         uwr.method = type;
         uwr.SetRequestHeader("Content-Type", "application/json");
         Debug.Log("Sending the data ");
-        Debug.Log("Data : " + data);
         yield return uwr.SendWebRequest();
+
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
