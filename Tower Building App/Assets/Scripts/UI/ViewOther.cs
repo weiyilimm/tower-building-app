@@ -15,11 +15,6 @@ public class ViewOther : MonoBehaviour
         FriendName.onClick.AddListener(() => OthersWorld());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OthersWorld()
     {   
         LoadingText.SetActive(true);

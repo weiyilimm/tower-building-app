@@ -22,6 +22,7 @@ public class Leaderboard_API : MonoBehaviour {
     private GameObject rankingText;
     private TextMeshProUGUI textXP;
     private TextMeshProUGUI textName;
+    private TextMeshProUGUI textId;
     private TextMeshProUGUI rankText;
 
     void Start() {
@@ -131,10 +132,12 @@ public class Leaderboard_API : MonoBehaviour {
             //Set their parent to leaderboardlist
             instance.SetParent(LeaderBoardList, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textId = instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
+            textId.text = data.UserId;
             textXP.text = data.TotalExp.ToString();
             // Debug.Log(LB_data.IndexOf(data));
             // Debug.Log(data.UserName + " " + data.TotalExp);
