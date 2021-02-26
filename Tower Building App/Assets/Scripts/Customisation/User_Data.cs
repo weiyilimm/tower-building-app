@@ -86,28 +86,6 @@ public class User_Data : MonoBehaviour{
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
     }
 
-    public void Update() {
-        if (Input.GetKeyDown("t")){
-            /* CODE FOR TESTING JSON CREATION */
-            UserID = "abc";
-            Username = "BobertRoss";
-            Email = "bobert@bobert.com";
-            Password = "321password";
-            global_xp = 2000000;
-            string stringOutput = CreateUserJSON();
-            Debug.Log(stringOutput);
-        } else if (Input.GetKeyDown("y")) {
-            /* CODE FOR TESTING THE TRANSLATION OF BUILDING DATA */
-            Debug.Log("Starting translation...");
-            TranslateBuildingJSON("Assets/Scripts/Customisation/test.json");
-            Debug.Log(building_stats[0].primary_colour);
-            Debug.Log(building_stats[0].secondary_colour);
-            Debug.Log(building_stats[0].building_xp);
-            Debug.Log(building_stats[0].model);
-            Debug.Log(building_stats[0].m_height);
-        }
-    }
-
     private void createBuildings(){
         for (int j=0; j<4; j++) {
             Building newMain = new Building(-1,-1,j,40000,0);
@@ -175,81 +153,7 @@ public class User_Data : MonoBehaviour{
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data, "PUT"));
 
-        } /* else if (RequestType == "UPDATE_Buildings") {
-            // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
-            // Call CreateBuildingJSON
-            string targetID;
-            string targetAPI;
-            if (id != "-1") { targetID = id; } else { targetID = UserID; }
-            apiString = apiString + "/" + targetID + "/" + "Buildings" + "/";
-            List<string> buildingData = CreateBuildingJSON();
-            for (int i=0; i<12; i++) {
-                targetAPI = apiString;
-                buildingid = (i*10) + (building_stats[i].model);
-                targetAPI = targetAPI + buildingid.ToString();
-                data = buildingData[i];
-                Debug.Log(targetAPI);
-                StartCoroutine(PostRequest(apiString, data, "POST"));
-            }
-        } */
-
-
-
-        /* OLD CODE KEEPING UNTIL NEW CODE HAS BEEN TESTED */
-        /*
-        if (RequestType == "GET")
-        {
-            // Want to get a specfic User/Building.
-            if (id != "-1")
-            {
-                string requestedId = "";
-                // Want to get all the attributes of a particular user (USE CASE: to get all the buildings belonging to the user at the start of the game).
-                requestedId = "/" + id;
-                apiString = string.Concat(apiString, requestedId);
-                apiString = string.Concat("http://localhost:8080/", apiString);
-                Debug.Log(apiString);
-                StartCoroutine(GetRequest(apiString, "Single"));
-            } 
-            // Get all the Users/Buildings
-            else
-            {
-                apiString = string.Concat(apiString + "/");
-                apiString = string.Concat("http://localhost:8080/", apiString);
-                Debug.Log(apiString);
-                StartCoroutine(GetRequest(apiString, "Multiple"));
-            }
         }
-        else
-        {
-            // POST 
-            if (id == "-1")
-            {
-                // Create a new User
-                apiString = string.Concat(apiString + "/");
-                apiString = string.Concat("http://localhost:8080/", apiString);
-                Debug.Log(apiString);
-                StartCoroutine(PostRequest(apiString, data));
-            }
-            else
-            {
-                if (buildingid == -1)
-                {
-                    // Change the Users personal details 
-                    apiString = apiString + "/" + id;
-                    apiString = "http://localhost:8080/" + apiString;
-                    Debug.Log(apiString);
-                    StartCoroutine(PostRequest(apiString, data, "PUT"));
-                }
-                else
-                {
-                    // Update the property of one of the buildings belonging to the user, e.g. increasing the EXP.
-                    apiString = apiString + "/" + id + "/" + "Buildings" + "/" + buildingid;
-                    apiString = "http://localhost:8080/" + apiString;
-                    Debug.Log(apiString);
-                    StartCoroutine(PostRequest(apiString, data, "POST"));
-                }
-            }
-        } */
     }
 
     /*
@@ -302,7 +206,7 @@ public class User_Data : MonoBehaviour{
         return UserJSON;
     }
 
-    private void TranslateBuildingJSON(string rawJSON){
+    public void TranslateBuildingJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
         
         JSONNode node;
@@ -367,12 +271,9 @@ public class User_Data : MonoBehaviour{
         Debug.Log("Got the data");
         yield return uwr.SendWebRequest();
 
-        if (uwr.isNetworkError)
-        {
+        if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
-        } 
-        else
-        {
+        } else {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
 
