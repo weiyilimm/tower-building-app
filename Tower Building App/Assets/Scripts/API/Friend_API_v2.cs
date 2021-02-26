@@ -19,8 +19,9 @@ public class Friend_API_v2 : MonoBehaviour
     public Transform FriendListTransform;
     private TextMeshProUGUI textXP;
     private TextMeshProUGUI textName;
+    private TextMeshProUGUI textId;
     private TextMeshProUGUI rankText;
-    
+
     /*  JSON formatting
         {[
             {"userId":"e6j8g6", "friendId":"c2j2f8"},
@@ -76,12 +77,14 @@ public class Friend_API_v2 : MonoBehaviour
             instance.SetParent(FriendListTransform, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textId = instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
+            textId.text = data.UserId;
             textXP.text = data.totalExp.ToString();
-            Debug.Log(friendslist.IndexOf(data));
-            Debug.Log(data.UserName + " " + data.totalExp);
+            //Debug.Log(friendslist.IndexOf(data));
+            //Debug.Log(data.UserName + " " + data.totalExp);
         }
     }
 
