@@ -46,52 +46,21 @@ public class User_Data : MonoBehaviour{
         // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
 
         // Login 
-        // GetRequest("User");
-        // GetRequest("Buildings");
-
-        /*
-         *      GET REQUESTS
-        */
-        //Debug.Log("Running the GET requests");
-        //// Get a saved user
-        //CreateRequest("GET", "Users", "bce13125-3d7f-4452-8428-efaecb8be59e");
-        //// Get all saved users
-        //CreateRequest("GET", "Users");
-
-        /*
-         *      POST REQUESTS
-        */
+        // CreateRequest("GET_User");
+        // CreateRequest("GET_Friends");
 
         // Dev User
         // UserID = System.Guid.NewGuid().ToString();
-        //{"id":"","userName":"XXStudyL0RDXX","email":"2395521M@student.gla.ac.uk","password":"Nah","totalExp":0}
-        UserID = "f6ce29cf-ea47-4688-9813-2324621e0a82";
-        Username = "XXStudyL0RDXX";
-        Email = "2395521M@student.gla.ac.uk";
-        Password = "Nah";
-        global_xp = 5000000;
+        UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188";
+        Username = "JoeSubbi";
+        Email = "2377990S@student.gla.ac.uk";
+        Password = "HeyWhyNot";
+        global_xp = 75287;
 
-        // Dev Building
-        //DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
-        //var stringBuildingJsonData = JsonUtility.ToJson(currentBuilding);
-
-        //// Create a new user
-        // CreateRequest("CREATE User");
+        CreateRequest("GET_Friends");
 
         //// Create a new model
         //CreateRequest("POST", "Models", data: data);
-
-        //// Edit a existing user's details
-        //CreateRequest("UPDATE_User");
-
-        // Add/Remove a building from an existing user. - OLD
-        //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
-    }
-
-    public void Update() {
-        if (Input.GetKeyDown("t")) {
-            CreateRequest("UPDATE_User");
-        }
     }
 
     private void createBuildings(){
@@ -147,9 +116,9 @@ public class User_Data : MonoBehaviour{
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
 
-        } else if (RequestType == "GET_All_Users") {
+        } else if (RequestType == "GET_Friends") {
             // get the userid(hidden), username and xp of all users
-            apiString = string.Concat(apiString + "Users/");
+            apiString = apiString + "Users/" + UserID + "/Friends/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Multiple"));
 
@@ -262,6 +231,24 @@ public class User_Data : MonoBehaviour{
         global_xp = totalExp;
     }
 
+    private void TranslateFriendsJSON(string rawJSON) {
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+
+        int list_length = node.Count;
+
+        Friend_API_v2.friendslist.Clear();
+
+        for (int i = 0; i < list_length; i++) {
+            string friendID = JSON.Parse(node[i]["id"].Value);
+            string friendUsername = JSON.Parse(node[i]["userName"].Value);
+            int friendXP = JSON.Parse(node[i]["totalExp"].Value);
+
+            Friends newFriend = new Friends(friendID, friendUsername, friendXP);
+            Friend_API_v2.friendslist.Add(newFriend);
+        }
+    }
+
 
     IEnumerator GetRequest(string targetAPI, string translationType){
 
@@ -284,9 +271,10 @@ public class User_Data : MonoBehaviour{
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
                 TranslateUserJSON(raw);
                 TranslateBuildingJSON(raw);
-            } else if (translationType == "Multiple Users") {
-                // This will be used for the leaderboard
-                // New translation function will be written for this
+            } else if (translationType == "Multiple") {
+                // If the translation type is multiple then we are getting the list of friends
+                // which need to be added to the friendslist in the friends scene
+                TranslateFriendsJSON(raw);
             }
         }
     }
@@ -313,29 +301,7 @@ public class User_Data : MonoBehaviour{
 
             // TRANSLATION CODE HERE (to check if data was correctly entered).
 
-        }
-        
-    }
-
-    IEnumerator PutRequest(string targetAPI, string json){
-        // Constructs and sends a PUT request to the database to update it with the given JSON file
-
-        Debug.Log(targetAPI);
-        
-        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(json);
-        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
-        uwr.SetRequestHeader("Content-Type", "application/json"); 
-        yield return uwr.SendWebRequest();
-
-        if (uwr.isNetworkError)
-        {
-            Debug.Log("Error while sending " + uwr.error);
-        } 
-        else
-        {
-            string raw = uwr.downloadHandler.text;
-            Debug.Log("Message Recieved - data updated");
-        }
+        }   
     }
 }
 
