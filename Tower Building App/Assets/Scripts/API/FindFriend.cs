@@ -30,7 +30,7 @@ public class FindFriend : MonoBehaviour
         As the leaderboard is getting all users, thus we can loop through all users
         Might expect Leaderboard_API.LB_data only store 50 users in the future
         */
-        foreach (leaderboard_data data in Leaderboard_API.LB_data){
+        foreach (leaderboard_data data in Leaderboard_API.LB_data_InOrder){
             //Check if the username same as the input field
             if (data.UserName.ToLower() == FindFriendInputField.text.ToLower()){
                 TextName.text = data.UserName;
