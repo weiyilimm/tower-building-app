@@ -136,14 +136,16 @@ public class Leaderboard_API : MonoBehaviour {
     }
 
     public void displayData() {
-        LB_data_InOrder  = LB_data.OrderBy (x => x.UserName).ToList();
+        //Create another list which sort based on the total XP
+        LB_data_InOrder  = LB_data.OrderByDescending(x => x.TotalExp).ToList();
         foreach (leaderboard_data data in LB_data_InOrder)
         {   
-            int index = LB_data.IndexOf(data);
+            int index = LB_data_InOrder.IndexOf(data);
             firstTrophy = Participant.Find("TrophyFirst").gameObject;
             secondTrophy = Participant.Find("TrophySecond").gameObject;
             thirdTrophy = Participant.Find("TrophyThird").gameObject;
             rankingText = Participant.Find("RankingText").gameObject;
+            //If user is the champion
             if (index == 0)
             {
                 firstTrophy.SetActive(true);
@@ -151,6 +153,7 @@ public class Leaderboard_API : MonoBehaviour {
                 thirdTrophy.SetActive(false);
                 rankingText.SetActive(false);
             }
+            //If user is second place
             else if (index == 1)
             {
                 firstTrophy.SetActive(false);
@@ -158,6 +161,7 @@ public class Leaderboard_API : MonoBehaviour {
                 thirdTrophy.SetActive(false);
                 rankingText.SetActive(false);
             }
+            //If user is third place
             else if (index == 2)
             {
                 firstTrophy.SetActive(false);
@@ -180,7 +184,7 @@ public class Leaderboard_API : MonoBehaviour {
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
+            rankText.text = (LB_data_InOrder.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
             textXP.text = data.TotalExp.ToString();
             // Debug.Log(LB_data.IndexOf(data));
