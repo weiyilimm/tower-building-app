@@ -46,21 +46,13 @@ public class User_Data : MonoBehaviour{
         // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
 
         // Login 
-        // CreateRequest("GET_User");
-        // CreateRequest("GET_Friends");
 
         // Dev User
         // UserID = System.Guid.NewGuid().ToString();
         UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188";
-        Username = "JoeSubbi";
-        Email = "2377990S@student.gla.ac.uk";
-        Password = "HeyWhyNot";
-        global_xp = 75287;
-
+        
+        CreateRequest("GET_User");
         CreateRequest("GET_Friends");
-
-        //// Create a new model
-        //CreateRequest("POST", "Models", data: data);
     }
 
     private void createBuildings(){
@@ -132,25 +124,18 @@ public class User_Data : MonoBehaviour{
 
         }
     }
-
-    /*
-            JSON will be formatted as such:
-            {"id":???, 
-                "userName":"example", 
-                "email":email@email.com,
-                "password":aifbreiu,
-                "userBuildings":
-                    [{buildingCode:12, 
-                        buildingName:"Tower1",
-                        building_xp:1454, 
-                        "height":1, 
-                        "primaryColour":104, 
-                        "secondaryColour":201, 
-                        "modelGroup":2}, ... , ],
-                "totalExp":27353
-            }
-        */
     
+    private string CreateUserJSON() {
+        // Create the JSON file storing the User login data for writing to the database
+        // id, userName, email, password, userBuidlings, totalExp
+        
+        List<DatabaseBuildings> uB = CreateBuildingJSON();
+        DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
+        string UserJSON = JsonUtility.ToJson(putData);
+
+        return UserJSON;
+    }
+
     public List<DatabaseBuildings> CreateBuildingJSON() {
         
         List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
@@ -170,47 +155,6 @@ public class User_Data : MonoBehaviour{
         }
         return uB;
     }
-    
-    // WRITE
-    private string CreateUserJSON() {
-        // Create the JSON file storing the User login data for writing to the database
-        // id, userName, email, password, userBuidlings, totalExp
-        
-        List<DatabaseBuildings> uB = CreateBuildingJSON(); // new List<DatabaseBuildings>();
-        DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
-        string UserJSON = JsonUtility.ToJson(putData);
-
-        return UserJSON;
-    }
-
-    public void TranslateBuildingJSON(string rawJSON){
-        // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
-        
-        JSONNode node;
-        node = JSON.Parse(rawJSON);
-
-        //Clears the Unity building list representation so it can be created fresh with the correct data
-        building_stats.Clear();
-
-        // Loop through the buildings to create their Unity representations 
-        for (int j=0; j<12; j++){
-            // Might need to get the modelGroup as well if the buildings are not sent in order
-            
-            int primary_colour = int.Parse(node["userBuildings"][j]["primaryColour"].Value);
-            int secondary_colour = int.Parse(node["userBuildings"][j]["secondaryColour"].Value);
-            // Model integer is the final digit in the buildingCode
-            string model_code = JSON.Parse(node["userBuildings"][j]["buildingCode"].Value);
-            model_code = model_code.Substring(model_code.Length - 1);
-            int model = int.Parse(model_code);
-
-            int building_xp = int.Parse(node["userBuildings"][j]["building_xp"].Value);
-
-            int m_height = int.Parse(node["userBuildings"][j]["height"].Value);
-
-            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
-            building_stats.Add(newBuilding);
-        }
-    }
 
     private void TranslateUserJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
@@ -229,6 +173,34 @@ public class User_Data : MonoBehaviour{
         Email = email;
         Password = password;
         global_xp = totalExp;
+    }
+
+    public void TranslateBuildingJSON(string rawJSON){
+        // Reads a JSON file from the database to create / update the Building_Stats list stored in Unity
+        
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+
+        //Clears the Unity building list representation so it can be created fresh with the correct data
+        building_stats.Clear();
+
+        // Loop through the buildings to create their Unity representations 
+        for (int j=0; j<12; j++){
+            // Might need to get the modelGroup as well if the buildings are not sent in order
+            int primary_colour = int.Parse(node["userBuildings"][j]["primaryColour"].Value);
+            int secondary_colour = int.Parse(node["userBuildings"][j]["secondaryColour"].Value);
+            // Model integer is the final digit in the buildingCode
+            string model_code = JSON.Parse(node["userBuildings"][j]["buildingCode"].Value);
+            model_code = model_code.Substring(model_code.Length - 1);
+            int model = int.Parse(model_code);
+
+            int building_xp = int.Parse(node["userBuildings"][j]["building_xp"].Value);
+
+            int m_height = int.Parse(node["userBuildings"][j]["height"].Value);
+
+            Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
+            building_stats.Add(newBuilding);
+        }
     }
 
     private void TranslateFriendsJSON(string rawJSON) {
@@ -270,7 +242,7 @@ public class User_Data : MonoBehaviour{
                 // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
                 TranslateUserJSON(raw);
-                TranslateBuildingJSON(raw);
+                //TranslateBuildingJSON(raw);
             } else if (translationType == "Multiple") {
                 // If the translation type is multiple then we are getting the list of friends
                 // which need to be added to the friendslist in the friends scene
@@ -303,6 +275,24 @@ public class User_Data : MonoBehaviour{
 
         }   
     }
+
+    /*
+        JSON will be formatted as such:
+        {"id":???, 
+            "userName":"example", 
+            "email":email@email.com,
+            "password":aifbreiu,
+            "userBuildings":
+                [{buildingCode:12, 
+                    buildingName:"Tower1",
+                    building_xp:1454, 
+                    "height":1, 
+                    "primaryColour":104, 
+                    "secondaryColour":201, 
+                    "modelGroup":2}, ... , ],
+            "totalExp":27353
+        }
+    */
 }
 
 public class Building{
