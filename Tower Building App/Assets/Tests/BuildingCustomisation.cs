@@ -11,6 +11,14 @@ namespace Tests
 
     public class BuildingCustomisation
     {
+        [SetUp]
+        public void Setup(){
+            GameObject.Find(CodeConverter);
+
+            
+
+            //SortedDictionary<int, Material> matte = CodeConverter.material_map;
+        }
         // A Test behaves as an ordinary method
         [Test]
         public void ExpectedMaterials_MaterialCallGetsMaterial_True()
