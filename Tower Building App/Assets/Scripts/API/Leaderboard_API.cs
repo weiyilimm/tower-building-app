@@ -157,6 +157,12 @@ public class Leaderboard_API : MonoBehaviour {
                 tick.SetActive(true);
             }
         }
+        if (data.UserName == User_Data.data.Username) {
+            GameObject plus = instance.Find("RawImage").gameObject;
+            GameObject tick = instance.Find("RawImage (1)").gameObject;
+            plus.SetActive(false);
+            tick.SetActive(false);
+        }
     }
 }
 
