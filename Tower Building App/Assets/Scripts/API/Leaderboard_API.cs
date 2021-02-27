@@ -6,30 +6,77 @@ using UnityEngine.Networking;
 using SimpleJSON;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 [System.Serializable]
 public class Leaderboard_API : MonoBehaviour {
     
     //An ordered list which stores the username, userid and global_xp of a user
-    public List<leaderboard_data> LB_data = new List<leaderboard_data>();
+    public static List<leaderboard_data> LB_data = new List<leaderboard_data>();
+    private List<leaderboard_data> LB_data_InOrder = new List<leaderboard_data>();        
     //Use the prefab participant
     public Transform Participant;
     //Leaderboardlist to be able to store all instances
+    //Input field from search
+    public TMP_InputField SearchInputField;
+    //Leaderboard transform to get the children objects
     public Transform LeaderBoardList;
     private GameObject firstTrophy;
     private GameObject secondTrophy;
     private GameObject thirdTrophy;
     private GameObject rankingText;
+    //User XP for each instances 
     private TextMeshProUGUI textXP;
+    //User name for each instances
     private TextMeshProUGUI textName;
+    //User rank for each instances
     private TextMeshProUGUI rankText;
-
+    
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
 
         /* CreateRequest("GET_Leaderboard"); COMMENTED OUT FOR NOW TO TEST DISPLAYING DATA */
         CreateRequest("GET_Leaderboard");
+        /* 
+        If the user type something on the search bar 
+        Trigger the FilterUser function
+        */
+        SearchInputField.onValueChanged.AddListener(delegate {FilterUser(); });
+    }
+    public void FilterUser() {
+        // Loop through each single user in the leaderboard list
+        for (int i = 0; i < LeaderBoardList.childCount; i++)
+        {   
+            //Use child as temporary variable for each user
+            Transform child = LeaderBoardList.GetChild(i);
+            //If the user input is empty then show every player
+            if(SearchInputField.text == "" ){
+                child.gameObject.SetActive(true);
+            }
+            else{
+                //If the user input is not empty, then get the username
+                TextMeshProUGUI userName = child.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+                /*
+                As the default are case sensitive
+                Change username to lower and user input to lower
+                e.g. If user type "richard", the leader will still show "Richard" user
+                */
+                string userInputLower = SearchInputField.text.ToLower();
+                string userNameLower = userName.text.ToLower();
+                //If the username contains the user input
+                if (userNameLower.Contains(userInputLower)){
+                    //Show the specific user according to the user input
+                    child.gameObject.SetActive(true);
+                }
+                //If the username does not contains the user input
+                else{
+                    //Hide it
+                    child.gameObject.SetActive(false);
+                }
+                
+            }
+        }
     }
 
     void CreateRequest(string RequestType) {
@@ -89,14 +136,16 @@ public class Leaderboard_API : MonoBehaviour {
     }
 
     public void displayData() {
-        //Print out the data for the five users in the leaderboard
-        foreach (leaderboard_data data in LB_data)
-        {
-            int index = LB_data.IndexOf(data);
+        //Create another list which sort based on the total XP
+        LB_data_InOrder  = LB_data.OrderByDescending(x => x.TotalExp).ToList();
+        foreach (leaderboard_data data in LB_data_InOrder)
+        {   
+            int index = LB_data_InOrder.IndexOf(data);
             firstTrophy = Participant.Find("TrophyFirst").gameObject;
             secondTrophy = Participant.Find("TrophySecond").gameObject;
             thirdTrophy = Participant.Find("TrophyThird").gameObject;
             rankingText = Participant.Find("RankingText").gameObject;
+            //If user is the champion
             if (index == 0)
             {
                 firstTrophy.SetActive(true);
@@ -104,6 +153,7 @@ public class Leaderboard_API : MonoBehaviour {
                 thirdTrophy.SetActive(false);
                 rankingText.SetActive(false);
             }
+            //If user is second place
             else if (index == 1)
             {
                 firstTrophy.SetActive(false);
@@ -111,6 +161,7 @@ public class Leaderboard_API : MonoBehaviour {
                 thirdTrophy.SetActive(false);
                 rankingText.SetActive(false);
             }
+            //If user is third place
             else if (index == 2)
             {
                 firstTrophy.SetActive(false);
@@ -133,11 +184,11 @@ public class Leaderboard_API : MonoBehaviour {
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText.text = (LB_data.IndexOf(data) + 1).ToString() + ".";
+            rankText.text = (LB_data_InOrder.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
             textXP.text = data.TotalExp.ToString();
-            Debug.Log(LB_data.IndexOf(data));
-            Debug.Log(data.UserName + " " + data.TotalExp);
+            // Debug.Log(LB_data.IndexOf(data));
+            // Debug.Log(data.UserName + " " + data.TotalExp);
         }
     }
 }
