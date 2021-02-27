@@ -63,11 +63,13 @@ public class User_Data : MonoBehaviour{
         */
 
         // Dev User
-        UserID = System.Guid.NewGuid().ToString();
-        Username = "Jim";
-        Email = "Jim@email.com";
-        Password = "7638";
-        global_xp = 500;
+        // UserID = System.Guid.NewGuid().ToString();
+        //{"id":"","userName":"XXStudyL0RDXX","email":"2395521M@student.gla.ac.uk","password":"Nah","totalExp":0}
+        UserID = "f6ce29cf-ea47-4688-9813-2324621e0a82";
+        Username = "XXStudyL0RDXX";
+        Email = "2395521M@student.gla.ac.uk";
+        Password = "Nah";
+        global_xp = 5000000;
 
         // Dev Building
         //DatabaseBuildings currentBuilding = new DatabaseBuildings(140, "Effiel Tower", 0, -1, 4, -1, -1);
@@ -80,10 +82,16 @@ public class User_Data : MonoBehaviour{
         //CreateRequest("POST", "Models", data: data);
 
         //// Edit a existing user's details
-        // CreateRequest("UPDATE User");
+        //CreateRequest("UPDATE_User");
 
         // Add/Remove a building from an existing user. - OLD
         //CreateRequest("POST", "Users", "5d1841f8-8049-44a0-9fbf-992de0240e07", 140, stringBuildingJsonData);
+    }
+
+    public void Update() {
+        if (Input.GetKeyDown("t")) {
+            CreateRequest("UPDATE_User");
+        }
     }
 
     private void createBuildings(){
@@ -93,7 +101,7 @@ public class User_Data : MonoBehaviour{
         }
         
         for (int i=0; i<8; i++) {
-            Building newBuilding = new Building(-1,-1,0,40000,0);
+            Building newBuilding = new Building(-1,-1,1,40000,0);
             building_stats.Add(newBuilding);    
         }
         Scoring.MainXP = 400000;
@@ -115,7 +123,7 @@ public class User_Data : MonoBehaviour{
     public void CreateRequest(string RequestType, string id = "-1")
     {
         // Building name, User name. User -> 
-        string apiString = "http://localhost:8080/api/";
+        string apiString = "https://uni-builder-database.herokuapp.com/api/";
 
         // The data and any building ids will be generated in function as a means
         // of reducing the number of external function calls in other parts of the app
@@ -211,13 +219,6 @@ public class User_Data : MonoBehaviour{
         
         JSONNode node;
         node = JSON.Parse(rawJSON);
-        //using (StreamReader r = new StreamReader(rawJSON)) {
-           //read in the json
-        //    string json = r.ReadToEnd();
-
-            //reformat the json into dictionary style convention
-        //    node = JSON.Parse(json);
-        //}
 
         //Clears the Unity building list representation so it can be created fresh with the correct data
         building_stats.Clear();
@@ -230,7 +231,6 @@ public class User_Data : MonoBehaviour{
             int secondary_colour = int.Parse(node["userBuildings"][j]["secondaryColour"].Value);
             // Model integer is the final digit in the buildingCode
             string model_code = JSON.Parse(node["userBuildings"][j]["buildingCode"].Value);
-            //string model_string = model_code.ToString();
             model_code = model_code.Substring(model_code.Length - 1);
             int model = int.Parse(model_code);
 

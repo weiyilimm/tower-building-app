@@ -8,8 +8,9 @@ using TMPro;
 
 public class ViewOther : MonoBehaviour
 {   
-    public GameObject FriendList;
-    public GameObject LoadingText;
+    public GameObject FriendEntry;
+    //public GameObject FriendList;
+    //public GameObject LoadingText;
     public Button FriendName; 
     public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
     public TextMeshProUGUI friendId;
@@ -17,13 +18,15 @@ public class ViewOther : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FriendName.onClick.AddListener(() => OthersWorld());
+        Transform FriendList = FriendEntry.transform.parent;
+        //LoadingText = gameObject.Find("LoadingText");
+        FriendName.onClick.AddListener(() => OthersWorld(FriendList));
     }
 
-    public void OthersWorld()
+    public void OthersWorld(Transform FriendList)
     {   
-        LoadingText.SetActive(true);
-        FriendList.SetActive(false);
+        //LoadingText.SetActive(true);
+        //FriendList.gameObject.SetActive(false);
 
         CreateRequest();
     }
