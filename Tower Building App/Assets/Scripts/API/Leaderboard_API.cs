@@ -12,8 +12,8 @@ using System.Linq;
 public class Leaderboard_API : MonoBehaviour {
     
     //An ordered list which stores the username, userid and global_xp of a user
-    public static List<leaderboard_data> LB_data = new List<leaderboard_data>();
-    private List<leaderboard_data> LB_data_InOrder = new List<leaderboard_data>();        
+    public List<leaderboard_data> LB_data = new List<leaderboard_data>();
+    public static List<leaderboard_data> LB_data_InOrder = new List<leaderboard_data>();        
     //Use the prefab participant
     public Transform Participant;
     //Leaderboardlist to be able to store all instances
