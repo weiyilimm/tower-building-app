@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
@@ -12,13 +11,11 @@ public class InternetFailure : MonoBehaviour
     
     public Button StartButton;
     public Button PopUpInternetButton;
-    public Slider Slider;
     public GameObject PopUpInternetFailure;
-    public GameObject LoadingBarPanel;
     public GameObject LoginPanel;
     public GameObject NavBar;
-    private bool isConnected = false;
-    private AsyncOperation operation;
+    private bool isConnected = true;
+    
     
     void Start()
     {
@@ -30,32 +27,26 @@ public class InternetFailure : MonoBehaviour
     
     IEnumerator checkInternet(){
         PopUpInternetFailure.SetActive(false);
-        LoginPanel.SetActive(false);
-        NavBar.SetActive(false);
         UnityWebRequest request = new UnityWebRequest ("http://google.com");
         yield return request.SendWebRequest();
         //Is not connected
         if (request.error != null){
             PopUpInternetFailure.SetActive(true);
             LoginPanel.SetActive(false);
+            NavBar.SetActive(false);
             isConnected = false;
         }
         //Is connected
-        else{
-            LoadingBarPanel.SetActive(true);
+        else
+        {   
+            PopUpInternetFailure.SetActive(false);
             isConnected = true;
-            StartCoroutine(LoadProgress());
+            LoginPanel.SetActive(true);
+            NavBar.SetActive(true);
         }
     }
 
 
-    IEnumerator LoadProgress(){
-        operation = SceneManager.LoadSceneAsync(1);
-        while (!operation.isDone){
-            float progress = Mathf.Clamp01(operation.progress/.9f);
-            Slider.value = progress;
-            yield return null;
-        }
-    }
+    
 
 }
