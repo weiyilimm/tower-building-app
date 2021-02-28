@@ -95,19 +95,4 @@ public class UserModels {
     public void setModelGroup(long modelGroup) {
         this.modelGroup = modelGroup;
     }
-    //    @Embeddable
-//    public static class userModelId implements Serializable {
-//        private static final long serialVersionUID = 1l;
-//
-//        private UUID userId;
-//        private long modelCode;
-//
-//        public userModelId() {};
-//
-//        public userModelId(UUID userId, long modelCode) {
-//            super();
-//            this.userId = userId;
-//            this.modelCode = modelCode;
-//        }
-//    }
 }
