@@ -5040,7 +5040,6 @@ MonoBehaviour:
   PopUpInternetButton: {fileID: 1371275913}
   Slider: {fileID: 1861642646}
   PopUpInternetFailure: {fileID: 1371275909}
-  StartGameObject: {fileID: 598666278}
   LoadingBarPanel: {fileID: 647326414}
   LoginPanel: {fileID: 2044045997}
   NavBar: {fileID: 500719055}
