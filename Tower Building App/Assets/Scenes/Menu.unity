@@ -5114,10 +5114,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoginRegisterNav: {fileID: 500719055}
   LoginPanel: {fileID: 2044045997}
-  Email: {fileID: 455173471}
-  Username: {fileID: 958819506}
+  RegisterEmail: {fileID: 455173471}
+  RegisterUsername: {fileID: 958819506}
+  LoginUsername: {fileID: 2018150863}
+  LoginPassword: {fileID: 1779093124}
   InvalidUsernamePopUP: {fileID: 59473273}
   InvalidEmailPopUP: {fileID: 349700229}
+  LoginButton: {fileID: 598666281}
   RegisterButton: {fileID: 697064988}
 --- !u!114 &1714056754
 MonoBehaviour:
