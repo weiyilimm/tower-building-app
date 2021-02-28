@@ -136,15 +136,6 @@ public class UserController {
             for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
                 UserModels currentModel = it.next();
 
-                /* TESTING
-                System.out.println(currentModel.getUserModelId().getFk_building().getBuildingCode());
-                System.out.println(currentModel.getUserModelId().getFk_building().getBuildingName());
-                System.out.println(currentModel.getUserModelId().getFk_building().getModelGroup());
-                System.out.println(currentModel.getBuilding_xp());
-                System.out.println(currentModel.getPrimaryColour());
-                System.out.println(currentModel.getSecondaryColour());
-                System.out.println(currentModel.getHeight());
-                 */
 
                 // Don't use clear() apparently.
                 HashMap<String, Object> tempModelData = new HashMap<>();
@@ -188,6 +179,13 @@ public class UserController {
         if (buildingId != fetched_model.get().getBuildingCode()) {
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
+
+        System.out.println(userId.toString());
+        System.out.println("cake");
+        System.out.println(fetched_user.isPresent());
+        System.out.println(fetched_model.isPresent());
+
+        System.out.println(userRepository.findAll());
 
         // Make sure that both the user and the building exist.
         if (fetched_user.isPresent() && fetched_model.isPresent()) {
