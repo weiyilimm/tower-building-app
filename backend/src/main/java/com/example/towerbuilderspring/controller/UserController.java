@@ -70,7 +70,8 @@ public class UserController {
             newUser.setUserName(userName);
             newUser.setEmail(email);
             newUser.setTotalExp(totalexp);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+            userRepository.save(newUser);
+            return new ResponseEntity<>(newUser, HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
