@@ -14,7 +14,6 @@ public class InternetFailure : MonoBehaviour
     public Button PopUpInternetButton;
     public Slider Slider;
     public GameObject PopUpInternetFailure;
-    public GameObject StartGameObject;
     public GameObject LoadingBarPanel;
     public GameObject LoginPanel;
     public GameObject NavBar;
@@ -30,7 +29,6 @@ public class InternetFailure : MonoBehaviour
     }
     
     IEnumerator checkInternet(){
-        StartGameObject.SetActive(false);
         PopUpInternetFailure.SetActive(false);
         LoginPanel.SetActive(false);
         NavBar.SetActive(false);
@@ -39,6 +37,7 @@ public class InternetFailure : MonoBehaviour
         //Is not connected
         if (request.error != null){
             PopUpInternetFailure.SetActive(true);
+            LoginPanel.SetActive(false);
             isConnected = false;
         }
         //Is connected
