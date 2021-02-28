@@ -6,6 +6,7 @@ using TMPro;
 using System.Text.RegularExpressions;
 using SimpleJSON;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {   
@@ -19,11 +20,16 @@ public class Login : MonoBehaviour
     public TMP_InputField LoginPassword;
     public GameObject InvalidUsernamePopUP;
     public GameObject InvalidEmailPopUP;
+    public GameObject LoadingBarPanel;
+    public GameObject LoginPopUp;
+    public GameObject NavBarPanel;
     public Button LoginButton;
     public Button RegisterButton;
     public List<User> AllUsers = new List<User>();    
     private bool usernameIsValid = true;
     private bool isAuthenticated = false;
+    public Slider Slider;
+    private AsyncOperation operation;
     void Start()
     {   
         CreateRequest("GET_Users");
@@ -31,6 +37,15 @@ public class Login : MonoBehaviour
         LoginButton.onClick.AddListener(() => Authenticate());
     }
 
+    IEnumerator LoadProgress(){
+        operation = SceneManager.LoadSceneAsync(1);
+        while (!operation.isDone){
+            float progress = Mathf.Clamp01(operation.progress/.9f);
+            Slider.value = progress;
+            yield return null;
+        }
+    }
+    
     //Email format using regex 
     public const string EmailFormat =
             @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
@@ -49,6 +64,7 @@ public class Login : MonoBehaviour
                 return false;
             }
         }
+    
 
     public void Authenticate(){
         foreach (User data in AllUsers){
@@ -59,9 +75,15 @@ public class Login : MonoBehaviour
             }
         }
         if (isAuthenticated){
+            LoginPopUp.SetActive(false);
+            NavBarPanel.SetActive(false);
+            LoadingBarPanel.SetActive(true);
             Debug.Log("correct credentials");
+            StartCoroutine(LoadProgress());
         }
         else{
+            LoginPopUp.SetActive(true);
+            NavBarPanel.SetActive(true);
             Debug.Log("Either username or password is wrong");
         }
     }

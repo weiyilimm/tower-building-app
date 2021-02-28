@@ -5038,9 +5038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartButton: {fileID: 598666281}
   PopUpInternetButton: {fileID: 1371275913}
-  Slider: {fileID: 1861642646}
   PopUpInternetFailure: {fileID: 1371275909}
-  LoadingBarPanel: {fileID: 647326414}
   LoginPanel: {fileID: 2044045997}
   NavBar: {fileID: 500719055}
 --- !u!20 &1714056751
@@ -5120,8 +5118,12 @@ MonoBehaviour:
   LoginPassword: {fileID: 1779093124}
   InvalidUsernamePopUP: {fileID: 59473273}
   InvalidEmailPopUP: {fileID: 349700229}
+  LoadingBarPanel: {fileID: 647326414}
+  LoginPopUp: {fileID: 2044045997}
+  NavBarPanel: {fileID: 500719055}
   LoginButton: {fileID: 598666281}
   RegisterButton: {fileID: 697064988}
+  Slider: {fileID: 1861642646}
 --- !u!114 &1714056754
 MonoBehaviour:
   m_ObjectHideFlags: 0
