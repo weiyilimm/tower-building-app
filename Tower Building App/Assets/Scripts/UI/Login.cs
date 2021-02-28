@@ -13,17 +13,22 @@ public class Login : MonoBehaviour
     public GameObject LoginRegisterNav;
     //Login panel 
     public GameObject LoginPanel;
-    public TMP_InputField Email;
-    public TMP_InputField Username;
+    public TMP_InputField RegisterEmail;
+    public TMP_InputField RegisterUsername;
+    public TMP_InputField LoginUsername;
+    public TMP_InputField LoginPassword;
     public GameObject InvalidUsernamePopUP;
     public GameObject InvalidEmailPopUP;
+    public Button LoginButton;
     public Button RegisterButton;
-    public List<leaderboard_data> AllUsers = new List<leaderboard_data>();    
+    public List<User> AllUsers = new List<User>();    
     private bool usernameIsValid = true;
+    private bool isAuthenticated = false;
     void Start()
     {   
         CreateRequest("GET_Users");
         RegisterButton.onClick.AddListener(() => Register());
+        LoginButton.onClick.AddListener(() => Authenticate());
     }
 
     //Email format using regex 
@@ -45,10 +50,26 @@ public class Login : MonoBehaviour
             }
         }
 
+    public void Authenticate(){
+        foreach (User data in AllUsers){
+            if(LoginUsername.text.ToLower() == data.Username.ToLower()){
+                if(LoginPassword.text == data.Password){
+                    isAuthenticated = true;
+                }
+            }
+        }
+        if (isAuthenticated){
+            Debug.Log("correct credentials");
+        }
+        else{
+            Debug.Log("Either username or password is wrong");
+        }
+    }
+
     public void Register(){
-        foreach (leaderboard_data data in AllUsers){
+        foreach (User data in AllUsers){
             //Check if the username already exist
-            if (data.UserName.ToLower() == Username.text.ToLower()){
+            if (data.Username.ToLower() == RegisterUsername.text.ToLower()){
                 Debug.Log("Username has been taken");
                 usernameIsValid = false;
             }
@@ -63,7 +84,7 @@ public class Login : MonoBehaviour
             usernameIsValid = true;
         }
         //If the email syntax is correct
-        if(IsEmail(Email.text)){
+        if(IsEmail(RegisterEmail.text)){
             InvalidEmailPopUP.SetActive(false);
         }
         //If the emeail syntax is not correct
@@ -100,16 +121,25 @@ public class Login : MonoBehaviour
 
         JSONNode node;
         node = JSON.Parse(rawJSON);
-        string userid;
-        string username;
-        int totalExp;
+        string Username;
+        string Password;
         
         for (int i=0; i<5; i++) {
-            userid = JSON.Parse(node[i]["id"].Value);
-            username = JSON.Parse(node[i]["userName"].Value);
-            totalExp = JSON.Parse(node[i]["totalExp"].Value);
-            leaderboard_data data = new leaderboard_data(userid, username, totalExp);
+            Username = JSON.Parse(node[i]["userName"].Value);
+            Password = JSON.Parse(node[i]["password"].Value);
+            User data = new User(Username, Password);
             AllUsers.Add(data);
         }
+    }
+
+}
+
+public class User {
+    public string Username;
+    public string Password;
+
+    public User(string username, string password) {
+        Username = username;
+        Password = password;
     }
 }
