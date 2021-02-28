@@ -5114,6 +5114,7 @@ MonoBehaviour:
   LoginPanel: {fileID: 2044045997}
   RegisterEmail: {fileID: 455173471}
   RegisterUsername: {fileID: 958819506}
+  RegisterPassword: {fileID: 1968978262}
   LoginUsername: {fileID: 2018150863}
   LoginPassword: {fileID: 1779093124}
   InvalidUsernamePopUP: {fileID: 59473273}

@@ -60,10 +60,16 @@ public class UserController {
 
 
     @PostMapping("/Users/")
-    public ResponseEntity<Users> createUser(@RequestBody Users user) {
+    public ResponseEntity<Users> createUser(@PathVariable("userName") String userName,
+                                            @PathVariable("email") String email,
+                                            @PathVariable("password") String password,
+                                            @PathVariable("totalexp") int totalexp) {
         try {
-            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp());
-            userRepository.save(newUser);
+            Users newUser = new Users();
+            newUser.setId();
+            newUser.setUserName(userName);
+            newUser.setEmail(email);
+            newUser.setTotalExp(totalexp);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
         catch (Exception e) {

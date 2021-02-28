@@ -7,7 +7,8 @@ using System.Text.RegularExpressions;
 using SimpleJSON;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-
+// using System.Diagnostics;
+using System;
 public class Login : MonoBehaviour
 {   
     //Login and register navigation bar
@@ -16,6 +17,7 @@ public class Login : MonoBehaviour
     public GameObject LoginPanel;
     public TMP_InputField RegisterEmail;
     public TMP_InputField RegisterUsername;
+    public TMP_InputField RegisterPassword;
     public TMP_InputField LoginUsername;
     public TMP_InputField LoginPassword;
     public GameObject InvalidUsernamePopUP;
@@ -30,11 +32,13 @@ public class Login : MonoBehaviour
     private bool isAuthenticated = false;
     public Slider Slider;
     private AsyncOperation operation;
+    private string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
     void Start()
     {   
         CreateRequest("GET_Users");
         RegisterButton.onClick.AddListener(() => Register());
         LoginButton.onClick.AddListener(() => Authenticate());
+        RegisterButton.onClick.AddListener(() => SignUp());
     }
 
     IEnumerator LoadProgress(){
@@ -139,6 +143,36 @@ public class Login : MonoBehaviour
         }
     }
 
+    public void SignUp() {
+        // Guid myuuid = Guid.NewGuid();
+        // string uuidstr = myuuid.ToString();
+        //Friends_API.CreateRequest("CREATE_Friend", thisFriendID);
+        Debug.Log("POST Request at: " + apiString);
+
+        // Creates dummy data since the request requires some to be built
+        newUser user = new newUser(RegisterUsername.text,RegisterEmail.text,RegisterPassword.text,0);
+        string data = JsonUtility.ToJson(user);
+        StartCoroutine(PostRequest(apiString, data, "POST"));
+        Debug.Log("Successfully registered");
+    }
+
+    IEnumerator PostRequest(string targetAPI, string data, string type = "POST") {
+        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(data);
+
+        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
+        uwr.method = type;
+        uwr.SetRequestHeader("Content-Type", "application/json");
+        Debug.Log("Sending the data ");
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError) {
+            Debug.Log("An Internal Server Error Was Encountered");
+        } else {
+            // The POST request also returns the object it entered into the database.
+            string raw = uwr.downloadHandler.text;
+        }
+    }
+
     private void TranslateToLeaderboard(string rawJSON){ 
 
         JSONNode node;
@@ -163,5 +197,20 @@ public class User {
     public User(string username, string password) {
         Username = username;
         Password = password;
+    }
+}
+
+public class newUser
+{
+
+    public string Username;
+    public string EmailAddress;
+    public string Password;
+    public int TotalXP;
+    public newUser(string username, string emailaddress, string password,int totalXP ){
+        Username = username;
+        EmailAddress = emailaddress;
+        Password = password;
+        TotalXP = totalXP;
     }
 }
