@@ -40,8 +40,8 @@ public class Users {
         return id;
     }
 
-    public void setId() {
-        this.id = UUID.randomUUID();
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getUserName() {

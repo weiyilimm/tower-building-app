@@ -22,9 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1dd5c276-46ef-48cb-9c75-d5256328e89f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserController.java" afterDir="false" />
-    </list>
+    <list default="true" id="1dd5c276-46ef-48cb-9c75-d5256328e89f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +194,6 @@
       <workItem from="1611927040129" duration="5219000" />
       <workItem from="1612150877584" duration="8368000" />
       <workItem from="1614261513336" duration="199000" />
-      <workItem from="1614534126077" duration="1671000" />
     </task>
     <servers />
   </component>
