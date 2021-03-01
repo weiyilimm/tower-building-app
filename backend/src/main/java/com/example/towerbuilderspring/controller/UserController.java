@@ -60,18 +60,11 @@ public class UserController {
 
 
     @PostMapping("/Users/")
-    public ResponseEntity<Users> createUser(@PathVariable("userName") String userName,
-                                            @PathVariable("email") String email,
-                                            @PathVariable("password") String password,
-                                            @PathVariable("totalexp") int totalexp) {
+    public ResponseEntity<Users> createUser(@RequestBody Users user) {
         try {
-            Users newUser = new Users();
-            newUser.setId();
-            newUser.setUserName(userName);
-            newUser.setEmail(email);
-            newUser.setTotalExp(totalexp);
+            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp());
             userRepository.save(newUser);
-            return new ResponseEntity<>(newUser, HttpStatus.OK);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
