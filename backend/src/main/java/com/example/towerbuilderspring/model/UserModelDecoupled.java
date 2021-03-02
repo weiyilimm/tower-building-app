@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class UserModelDecoupled  {
@@ -28,6 +31,7 @@ public class UserModelDecoupled  {
     @NotNull
     private long modelGroup;
 
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public UserModelDecoupled() {};
 
@@ -98,5 +102,13 @@ public class UserModelDecoupled  {
 
     public void setModelGroup(long modelGroup) {
         this.modelGroup = modelGroup;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
