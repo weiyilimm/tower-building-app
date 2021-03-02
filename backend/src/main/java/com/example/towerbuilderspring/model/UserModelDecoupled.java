@@ -31,8 +31,6 @@ public class UserModelDecoupled  {
     @NotNull
     private long modelGroup;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
-
     public UserModelDecoupled() {};
 
     public UserModelDecoupled(UserModelIdDecoupled userModelId, int building_xp, int height,int primaryColour, int secondaryColour, int modelGroup) {

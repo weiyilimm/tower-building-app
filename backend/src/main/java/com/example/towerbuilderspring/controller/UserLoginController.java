@@ -40,7 +40,6 @@ public class UserLoginController {
 
             if (user != null) {
                 System.out.println("The user was found");
-
                 System.out.println(encoder.matches(password, user.getPassword()));
                 return new ResponseEntity<>(user,HttpStatus.OK);
             }

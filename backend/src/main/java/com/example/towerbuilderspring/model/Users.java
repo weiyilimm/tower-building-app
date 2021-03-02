@@ -3,6 +3,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -22,6 +23,8 @@ public class Users {
     private String password;
 
     private int totalexp = 0;        // Default Values
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public Users() {};
 
