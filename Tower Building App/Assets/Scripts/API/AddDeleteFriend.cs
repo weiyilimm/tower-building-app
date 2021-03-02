@@ -16,12 +16,12 @@ public class AddDeleteFriend : MonoBehaviour {
         otherID = friendId.text;
         if (removeFriend.activeSelf) {
             DeleteFriend();
-            removeFriend.SetActive(false);
-            addFriend.SetActive(true);
+            //removeFriend.SetActive(false);
+            //addFriend.SetActive(true);
         } else if (addFriend.activeSelf) {
             AddFriend();
-            addFriend.SetActive(false);
-            removeFriend.SetActive(true);
+            //addFriend.SetActive(false);
+            //removeFriend.SetActive(true);
         }
     }
 
@@ -59,6 +59,8 @@ public class AddDeleteFriend : MonoBehaviour {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
             Debug.Log("You've added a new friend");
+            addFriend.SetActive(false);
+            removeFriend.SetActive(true);
         }
     }
 
@@ -71,6 +73,8 @@ public class AddDeleteFriend : MonoBehaviour {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             Debug.Log("Friend Deleted");
+            removeFriend.SetActive(false);
+            addFriend.SetActive(true);
         }
     }
 }
