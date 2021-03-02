@@ -36,3 +36,6 @@ backend-deploy:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=uni-builder-database --api-key=$HEROKU_API_KEY
+  only:
+    - master@tp3-2020-CS17/cs17-main
+
