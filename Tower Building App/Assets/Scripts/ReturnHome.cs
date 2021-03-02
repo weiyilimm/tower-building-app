@@ -24,7 +24,10 @@ public class ReturnHome : MonoBehaviour {
         }
         else{
             icon.image.overrideSprite = clickedImage;
-            User_Data.data.CreateRequest("GET_User");
+            //User_Data.data.CreateRequest("GET_User");
+            for (int s=0; s<12; s++) {
+                User_Data.data.building_stats[s].model = 0;
+            }
             SceneManager.LoadScene(1);
         }
 
