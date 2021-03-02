@@ -105,6 +105,7 @@ public class User_Data : MonoBehaviour{
             // USE CASE: to get all the buildings belonging to the user at the start of the game.
             apiString = string.Concat(apiString, "Users/");
             apiString = string.Concat(apiString, requestedId);
+            apiString = apiString + "/Buildings/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
 
