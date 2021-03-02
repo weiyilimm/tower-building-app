@@ -49,8 +49,8 @@ public class User_Data : MonoBehaviour{
 
         // Dev User
         // UserID = System.Guid.NewGuid().ToString();
-        UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188";
-        
+        // UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188"; // JOE
+        UserID = "4c419cf7-b65c-4e10-b971-b63907b229a4"; // WEI
         CreateRequest("GET_User");
         CreateRequest("GET_Friends");
     }

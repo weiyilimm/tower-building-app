@@ -35,8 +35,6 @@ public class Friend_API_v2 : MonoBehaviour
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
 
-        User_Data.data.UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188";
-
         /* CreateRequest("Get_FriendIDs"); */
         Debug.Log("Finding the users friends...");
         CreateRequest("GET_FriendIDs");
