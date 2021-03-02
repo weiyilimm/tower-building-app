@@ -2,6 +2,7 @@ package com.example.towerbuilderspring.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 public class UserModels {
@@ -23,6 +24,8 @@ public class UserModels {
 
     @NotNull
     private long modelGroup;
+
+    private LocalDateTime createdAt;
 
 
     public UserModels() {};
@@ -94,5 +97,13 @@ public class UserModels {
 
     public void setModelGroup(long modelGroup) {
         this.modelGroup = modelGroup;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
