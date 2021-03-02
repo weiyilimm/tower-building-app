@@ -29,6 +29,7 @@ public class Leaderboard_API : MonoBehaviour {
     private TextMeshProUGUI textXP;
     //User name for each instances
     private TextMeshProUGUI textName;
+    private TextMeshProUGUI textId;
     //User rank for each instances
     private TextMeshProUGUI rankText;
     

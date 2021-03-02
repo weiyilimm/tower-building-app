@@ -73,8 +73,20 @@ public class AddDeleteFriend : MonoBehaviour {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             Debug.Log("Friend Deleted");
+            DeleteFromFriendsList();
             removeFriend.SetActive(false);
             addFriend.SetActive(true);
+        }
+    }
+
+    public void DeleteFromFriendsList() {
+        int NumFriends = Friend_API_v2.friendslist.Count;
+        Debug.Log("Num friends" + NumFriends);
+        for (int i=0;i<NumFriends;i++) {
+            Debug.Log(i);
+            if (otherID == Friend_API_v2.friendslist[i].UserId) {
+                Friend_API_v2.friendslist.RemoveAt(i);
+            }
         }
     }
 }
