@@ -1,6 +1,5 @@
 package com.example.towerbuilderspring.repository;
 
-import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.Friend;
 import com.example.towerbuilderspring.model.FriendId;
 import org.springframework.data.jpa.repository.JpaRepository;
