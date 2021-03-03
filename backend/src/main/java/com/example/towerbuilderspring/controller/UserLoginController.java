@@ -3,20 +3,17 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
-import com.example.towerbuilderspring.service.Hashing;
-import org.apache.coyote.Response;
-import org.junit.experimental.theories.internal.ParameterizedAssertionError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/Auth/")
@@ -65,6 +62,25 @@ public class UserLoginController {
         }
         catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Todo Once Roles have been successfully implemented make sure only the admin can delete a user.
+    @DeleteMapping("Delete/{username}/")
+    public ResponseEntity<Users> deleteUser(@PathVariable("username") String username) {
+        try {
+            Users userToDelete = userRepository.findByUserName(username);
+
+            System.out.println(userToDelete.toString());
+            if (userToDelete != null) {
+                userRepository.delete(userToDelete);
+                return new ResponseEntity<>(userToDelete, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
