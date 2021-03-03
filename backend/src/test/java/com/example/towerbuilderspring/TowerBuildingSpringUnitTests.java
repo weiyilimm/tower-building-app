@@ -4,6 +4,8 @@ import com.example.towerbuilderspring.controller.*;
 import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.Users;
 
+import com.example.towerbuilderspring.repository.FriendRepository;
+import com.example.towerbuilderspring.repository.ModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,7 +56,7 @@ public class TowerBuildingSpringUnitTests {
      */
 
     @Test
-    public void GetAllUsers_HttpResponseGetUsersFromList_IfSameOkIfEmptyNoContentElseNull() {
+    public void GetAllUsers_HttpResponseGetUsersFromList_IfSameOkIfEmptyNoContentElseISE() {
 
         /*
          * The process of mocking of a repository is as follows.
@@ -63,7 +65,8 @@ public class TowerBuildingSpringUnitTests {
          *  return value of the method when it is called.
          *  3. Checking if the return value from the controller matches the dummy value to be returned.
          */
-        List<Users> mockedUsersPresent = Arrays.asList(new Users("Henry", "henry@email.com", "Scrafty", 10),
+        List<Users> mockedUsersPresent = Arrays.asList(
+                new Users("Henry", "henry@email.com", "Scrafty", 10),
                 new Users("Barry", "Barry@email.com", "Hoops", 21));
         List<Users> mockedUsersAbsent = new ArrayList<>();
 
@@ -123,6 +126,15 @@ public class TowerBuildingSpringUnitTests {
         Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
         Users user1 = new Users("Harriet", "henry@email.com", "Scrafty", 10);
         Users user2 = new Users("Henry", "harriet@email.com", "Scrafty", 10);
+        Users user3 = new Users("Harriet", "harriet@gmail.com", "Scrafty", 10);
+
+        /*
+        mockUserRepository.save(user);
+        mockUserRepository.save(user1);
+        mockUserRepository.save(user2);
+        mockUserRepository.save(user3);*/
+
+        //when(mockUserRepository.save(any(Users.class))).thenReturn(user);
 
         //Create The first user
         mockUserController.createUser(user);
@@ -133,6 +145,7 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user));
         assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user1));
         assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user2));
+        assertEquals(HttpStatus.CREATED, mockUserController.createUser(user3).getStatusCode());
     }
 
     @Test
@@ -207,11 +220,78 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(originalName, mockUser.getUserName()); //check username isn't updated
         assertEquals(originalPass, mockUser.getPassword()); //check password isn't updated
     }
-    
+
     //======================================================
 
-    //@Mock
-    //private ModelRepository mockModelRepository;
+    @Mock
+    private ModelRepository mockModelRepository;
+
+    @InjectMocks
+    private ModelController mockModelController;
+
+    @Test
+    public void getAllModels_HttpResponseGetModelsFromList_IfSameOkIfEmptyNoContentElseISE(){
+        List<BuildingModels> mockedModelsPresent = Arrays.asList(
+                new BuildingModels(3, "Shuttle", 4),
+                new BuildingModels(2, "PC Tower", 5));
+        List<BuildingModels> mockedModelsAbsent = new ArrayList<>();
+
+        // The Repository is "mocked". In here I've used a shortcut that will call the next return statement every time it's called.
+        when(mockModelRepository.findAll()).thenReturn(mockedModelsPresent).thenReturn(mockedModelsAbsent).thenReturn(null);
+
+        // Run the tests for each of the different possible scenarios.
+        assertEquals(new ResponseEntity<>(mockedModelsPresent, HttpStatus.OK), mockModelController.getAllModels());
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockModelController.getAllModels());
+        assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockModelController.getAllModels());
+    }
+
+    @Test
+    public void getModel_HttpResponseGetModelByID_IfCorrectOkElseNotFound(){
+        BuildingModels mockModel = new BuildingModels(3, "Shuttle", 4);
+
+        when(mockModelRepository.findById(3L)).thenReturn(java.util.Optional.of(mockModel));
+
+        assertEquals(new ResponseEntity<>(mockModel, HttpStatus.OK), mockModelController.getModel(3));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockModelController.getModel(0));
+    }
+
+    @Test
+    public void createModel__(){
+
+    }
+
+    @Test
+    public void updateUser__(){
+
+    }
+
+    @Test
+    public void deleteUser__(){
+
+    }
+
+    //======================================================
+
+    @Mock
+    private FriendRepository mockFriendRepository;
+
+    @InjectMocks
+    private FriendController mockFriendController;
+
+    @Test
+    public void getFriends(){
+
+    }
+
+    @Test
+    public void makeFriends(){
+
+    }
+
+    @Test
+    public void deleteFriends(){
+
+    }
 
     /*
 
