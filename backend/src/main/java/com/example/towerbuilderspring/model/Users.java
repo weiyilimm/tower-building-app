@@ -3,9 +3,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -25,6 +23,8 @@ public class Users {
     private String password;
 
     private int totalexp = 0;        // Default Values
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public Users() {};
 
@@ -75,49 +75,6 @@ public class Users {
     public void setTotalExp(int totalexp) {
         this.totalexp = totalexp;
     }
-
-    /*
-    CURRENTLY REQUIRED: THE FUNCTIONS TO BE TRANSFERRED INTO THE CURRENT FRAMEWORK.
-     */
-
-//    public Set<BuildingModels> getUserBuildings() {
-//        return userBuildings;
-//    }
-//
-//    public BuildingModels getUserBuilding(BuildingModels buildingModel) {
-//        if (userBuildings.contains(buildingModel)) {
-//            return buildingModel;
-//        }
-//        else{
-//            return null;
-//        }
-//    }
-//
-//    public BuildingModels deleteUserBuilding(long id) {
-//        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
-//            BuildingModels buildingByGroup = it.next();
-//            if (buildingByGroup.getBuildingCode() == id) {
-//                this.userBuildings.remove(buildingByGroup);
-//                return buildingByGroup;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public BuildingModels findByBuildingGroup(long group) {
-//        for (Iterator<BuildingModels> it = this.userBuildings.iterator(); it.hasNext();) {
-//            BuildingModels buildingByGroup = it.next();
-//            if (buildingByGroup.getModelGroup() == group ){
-//                return buildingByGroup;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public void addUserBuilding(BuildingModels building) {
-//        this.userBuildings.add(building);
-//    }
-
 
     @Override
     public String toString() {
