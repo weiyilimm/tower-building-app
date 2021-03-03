@@ -2,7 +2,6 @@ package com.example.towerbuilderspring.controller;
 
 import com.example.towerbuilderspring.model.*;
 import com.example.towerbuilderspring.repository.UserModelRepository;
-import com.example.towerbuilderspring.repository.UserModelRepositoryDecoupled;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -244,43 +243,19 @@ public class UserController {
 //    }
 //
 
-
-
-
-
-
-
-//    @GetMapping("/Users/Test/Name/{name}")
-//    public ResponseEntity<Users> userNameTest(@PathVariable("name") String name) {
-//        Users check = userRepository.findByUserName(name);
-//        return new ResponseEntity<>(check, HttpStatus.OK);
-//    }
-
-//    @GetMapping("Users/Test/User/{name}/Model/{id}")
-//    public ResponseEntity<UserModels> userModelTest(@PathVariable("name") String name,
-//                                                    @PathVariable("id") long id) {
-//        if (userRepository.findByUserName(name) != null) {
-//            return new ResponseEntity<>(userModelRepository.findByUserModelIdAndAndModelGroup())
-//        }
-//    }
-
-
-    @Autowired
-    UserModelRepositoryDecoupled userModelRepositoryDecoupled;
-
     @GetMapping("Users/{id}/Buildings")
     public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
 
         Optional<Users> fetched_user = userRepository.findById(id);
-        List<UserModelDecoupled> all_models = userModelRepositoryDecoupled.findAll();
-        Set<UserModelDecoupled> userModels = new HashSet<>();
+        List<UserModels> all_models = userModelRepository.findAll();
+        Set<UserModels> userModels = new HashSet<>();
 
         if (fetched_user.isPresent()) {
             Users requestedUser = fetched_user.get();
 
             // Currently manually going through the list as the key UserModels is mapped to a composite key.
-            for (Iterator<UserModelDecoupled> it = all_models.iterator(); it.hasNext();) {
-                UserModelDecoupled currentModel = it.next();
+            for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
+                UserModels currentModel = it.next();
                 // TODO clean this up.
                 if (currentModel.getUserModelId().getFk_user().getId() == id) {
                     userModels.add(currentModel);
@@ -302,8 +277,8 @@ public class UserController {
             formattedUserModels.put("password", requestedUser.getPassword());
             formattedUserModels.put("totalExp", requestedUser.getTotalExp());
             // Their current models
-            for (Iterator<UserModelDecoupled> it = userModels.iterator(); it.hasNext();) {
-                UserModelDecoupled currentModel = it.next();
+            for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
+                UserModels currentModel = it.next();
 
 
                 // Don't use clear() apparently.
@@ -335,19 +310,19 @@ public class UserController {
      within the user repository rather then a user (which would be directly modifiable through the
      repository interface) itself.
 
-     Note the check if the model belongs to the correct model group will be done in the front end.
+     Note the check if the model belongs to the correct model group is done in the front end.
      **/
-    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
-    public ResponseEntity<UserModelDecoupled> updateUserBuilding(@PathVariable("userId") UUID userId,
+    @PostMapping("/Users/{userId}/Buildings/{buildingId}/{group}")
+    public ResponseEntity<UserModels> updateUserBuilding(@PathVariable("userId") UUID userId,
                                                          @PathVariable("buildingId") long buildingId,
                                                          @PathVariable("group") long group,
                                                          @RequestBody String newUserModel) throws ParseException {
 
         Optional<Users> fetched_user = userRepository.findById(userId);
-        List<UserModelDecoupled> all_models = userModelRepositoryDecoupled.findAll();
+        List<UserModels> all_models = userModelRepository.findAll();
 
-        UserModelDecoupled modelToAdd = new UserModelDecoupled();
-        UserModelIdDecoupled modelId = new UserModelIdDecoupled();
+        UserModels modelToAdd = new UserModels();
+        UserModelId modelId = new UserModelId();
 
         // Make sure that both the user and the building exist.
         if (fetched_user.isPresent()) {
@@ -372,7 +347,7 @@ public class UserController {
             System.out.println("search started");
 
             // Search variables
-            UserModelDecoupled currentModel;
+            UserModels currentModel;
             Users currentUser;
             long currentBuildingGroup;
             // TODO See if you can make a method in the User Models Repository to do this instead.
@@ -386,15 +361,15 @@ public class UserController {
                 if (currentUser.getId() == userId &&
                         currentBuildingGroup == group) {
                     System.out.println();
-                    UserModelIdDecoupled modelToDelete = new UserModelIdDecoupled(currentUser, currentModel.getUserModelId().getModel());
+                    UserModelId modelToDelete = new UserModelId(currentUser, currentModel.getUserModelId().getModel());
                     System.out.println("Going to delete a model");
 
                     System.out.println(currentUser);
                     System.out.println(currentBuildingGroup);
                     System.out.println(modelToAdd);
 
-                    userModelRepositoryDecoupled.deleteById(modelToDelete);
-                    userModelRepositoryDecoupled.save(modelToAdd);
+                    userModelRepository.deleteById(modelToDelete);
+                    userModelRepository.save(modelToAdd);
 
                     return new ResponseEntity<>(modelToAdd, HttpStatus.OK);
                 }
@@ -402,7 +377,7 @@ public class UserController {
 
             System.out.println("Creating a new model");
             // The user doesn't have any models belonging to that group yet (i.e. initialising the user).
-            userModelRepositoryDecoupled.save(modelToAdd);
+            userModelRepository.save(modelToAdd);
             return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(modelToAdd, HttpStatus.INTERNAL_SERVER_ERROR);
