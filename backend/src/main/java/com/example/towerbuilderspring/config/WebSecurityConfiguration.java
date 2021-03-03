@@ -1,12 +1,10 @@
 package com.example.towerbuilderspring.config;
 
-import com.example.towerbuilderspring.service.ProductServiceInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+
 
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -17,11 +15,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/**").permitAll()
-//                .antMatchers(HttpMethod.POST,"/").permitAll()
-//                .antMatchers(HttpMethod.POST, "/login").permitAll()
-//                .antMatchers(HttpMethod.POST,"/newuser/*").permitAll()
-//                .antMatchers(HttpMethod.GET,"/master/*").permitAll()
-//                .antMatchers(HttpMethod.GET,"/exploreCourse").permitAll()
                 .anyRequest().authenticated();
     }
 
