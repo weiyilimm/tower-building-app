@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -122,19 +123,13 @@ public class TowerBuildingSpringUnitTests {
     }
 
     @Test
-    public void CreateUser_DontAllowSameUsernameOrEmail_(){
+    public void CreateUser_DontAllowSameUsernameOrEmail_IfUserHasSameNameOrEmailReturnISE(){
         Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
         Users user1 = new Users("Harriet", "henry@email.com", "Scrafty", 10);
         Users user2 = new Users("Henry", "harriet@email.com", "Scrafty", 10);
         Users user3 = new Users("Harriet", "harriet@gmail.com", "Scrafty", 10);
 
-        /*
-        mockUserRepository.save(user);
-        mockUserRepository.save(user1);
-        mockUserRepository.save(user2);
-        mockUserRepository.save(user3);*/
-
-        //when(mockUserRepository.save(any(Users.class))).thenReturn(user);
+        //when(mockUserRepository.save(any(Users.class))).thenReturn(user).thenReturn(user).thenReturn(user1).then(user2).thenReturn(user3);
 
         //Create The first user
         mockUserController.createUser(user);
@@ -149,9 +144,11 @@ public class TowerBuildingSpringUnitTests {
     }
 
     @Test
-    public void DeleteUser_HTTPResponseDeleteUserByID_ifExistsOkElseNotFound() {
+    public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
         Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
         UUID uuid = mockUser.getId();
+
+        mockUserController.createUser(mockUser);
 
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(uuid));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
@@ -160,6 +157,16 @@ public class TowerBuildingSpringUnitTests {
         //Doesnt really matter if you 'delete' a non existent user
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(UUID.randomUUID()));
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(null));
+    }
+
+    @Test
+    public void DeleteUser_UserIsSuccessfullyDeleted_GetUserNotFound() {
+        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UUID uuid = mockUserController.createUser(user).getBody().getId();
+
+        mockUserController.deleteUser(uuid);
+
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(uuid));
     }
 
     @Test
@@ -222,7 +229,7 @@ public class TowerBuildingSpringUnitTests {
     }
 
     //======================================================
-
+    /*
     @Mock
     private ModelRepository mockModelRepository;
 
@@ -256,19 +263,51 @@ public class TowerBuildingSpringUnitTests {
     }
 
     @Test
-    public void createModel__(){
+    public void createModel_HttpResponseCreateUser_IfOkReturnCreatedElseInternalServerError(){
+        BuildingModels mockModel = new BuildingModels(3, "Shuttle", 4);
+
+        assertEquals(HttpStatus.CREATED, mockModelController.createModel(mockModel).getStatusCode());
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockModelController.createModel(null));
+    }
+
+    @Test
+    public void createModel_CorrectValuesForEachField_EachFieldInCreatedBuildModelEqualsInputBuildingModel(){
+        BuildingModels model = new BuildingModels(3, "Shuttle", 4);
+
+        BuildingModels mockModel = mockModelController.createModel(model).getBody();
+
+        //Compare the expected input user with the produced output user
+        assertEquals(model.getBuildingCode(), mockModel.getBuildingCode());
+        assertEquals(model.getBuildingName(), mockModel.getBuildingName());
+        assertEquals(model.getModelGroup(), mockModel.getModelGroup());
+    }
+
+    @Test
+    public void updateModel__(){
 
     }
 
     @Test
-    public void updateUser__(){
+    public void deleteModel_HTTPResponseDeleteUserByID_NoUnexpectedISE(){
+        BuildingModels mockModel = new BuildingModels(3, "Shuttle", 4);
 
+        mockModelController.createModel(mockModel);
+
+        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockModelController.deleteUser(3L));
+        //Doesnt really matter if you 'delete' a non existent model
+        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockModelController.deleteUser(2L));
     }
-
+    /*
     @Test
-    public void deleteUser__(){
+    public void DeleteUser_ModelIsSuccessfullyDeleted_GetModelNotFound() {
+        BuildingModels model = new BuildingModels(3, "Shuttle", 4);
 
+        BuildingModels mockModel = mockModelController.createModel(model).getBody();
+
+        mockModelController.deleteUser(1L);
+        assertEquals(HttpStatus.NOT_FOUND, mockModelController.getModel(1L).getStatusCode());
     }
+    */
 
     //======================================================
 
