@@ -13,8 +13,26 @@ public class StopWatch : MonoBehaviour {
     //The variable will be used in scoring.cs 
     public static float TimeCounted;
     //Used lower case character to indicate private field
-    private bool playing;
-    
+    private static bool playing;
+    private DateTime gamePausedTime;
+    public GameObject PauseButton;
+    public GameObject PlayButton;
+    private bool isWorking;
+    //The dont destory object is canvas, it must be a parentless gameobject 
+    // public GameObject TimerDontDestory;
+    // public static StopWatch Instance;
+
+    // //Avoid multiple instances
+    // void Awake(){
+    //     if (Instance == null){
+    //         Instance = this;
+    //         DontDestroyOnLoad(TimerDontDestory);
+    //     }
+    //     else{
+    //         Destroy(TimerDontDestory);
+    //     }
+    // }
+
 
     void Update () {
         if (playing == true)
@@ -27,9 +45,34 @@ public class StopWatch : MonoBehaviour {
         }
     }
 
+    void OnApplicationPause (bool isGamePause)
+    {   
+        //Store the current time when the app is paused
+        if (isGamePause) {
+            gamePausedTime = DateTime.Now;
+        }
+        Debug.Log(gamePausedTime);
+        Debug.Log("Is the game being paused?" + isGamePause);
+    }
+
+    void OnApplicationFocus  (bool isGameFocus)
+    {
+        if (isGameFocus && playing == true ) {
+            BackgroundTimer();
+        }
+        // Debug.Log(TimeCounted);
+    }
+
+    void BackgroundTimer(){
+        TimeCounted += ((float)(DateTime.Now - gamePausedTime).TotalSeconds);
+        isWorking = false;
+    }
+
     public void ClickPlay ()
     {
         playing = true;
+        PauseButton.SetActive(true);
+        PlayButton.SetActive(false);
     }
 
     public void ClickStop()
@@ -39,5 +82,7 @@ public class StopWatch : MonoBehaviour {
         TimeCounted = 0;
         //Replace the timer text to 00:00:00
         TimerText.text = "00:00:00";
+        PauseButton.SetActive(false);
+        PlayButton.SetActive(true);
     }
 }
