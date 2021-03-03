@@ -26,19 +26,19 @@ public class ViewOther : MonoBehaviour
     public void OthersWorld(Transform FriendList)
     {   
         //LoadingText.SetActive(true);
-        FriendList.gameObject.SetActive(false);
+        //FriendList.gameObject.SetActive(false);
 
-        //CreateRequest();
-        for (int s=0; s<12; s++) {
-            User_Data.data.building_stats[s].model = 2;
-        }
+        CreateRequest();
+        //for (int s=0; s<12; s++) {
+          //  User_Data.data.building_stats[s].model = 2;
+        //}
 
-        SceneManager.LoadScene(16);
+        //SceneManager.LoadScene(16);
     }
 
     public void CreateRequest() {
         string friendID = friendId.text;
-        apiString = apiString + friendID;
+        apiString = apiString + friendID + "/Buildings/";
         Debug.Log(apiString);
         StartCoroutine(GetRequest(apiString));
     }

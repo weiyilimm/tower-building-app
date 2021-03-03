@@ -51,8 +51,20 @@ public class User_Data : MonoBehaviour{
         // UserID = System.Guid.NewGuid().ToString();
         // UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188"; // JOE
         UserID = "4c419cf7-b65c-4e10-b971-b63907b229a4"; // WEI
+        Debug.Log("Getting the users data...");
         CreateRequest("GET_User");
         CreateRequest("GET_Friends");
+    }
+
+    public void Update() {
+        if (Input.GetKeyDown("t")) {
+            Debug.Log(UserID);
+            Debug.Log(Username);
+            for (int i=0;i<12;i++) {
+                Debug.Log("Building " + i);
+                Debug.Log("Model chosen " + building_stats[i].model);
+            }
+        }
     }
 
     private void createBuildings(){
@@ -81,7 +93,7 @@ public class User_Data : MonoBehaviour{
         Table = "Users" or "Models"
         id = URI of either an User or Building.
      */
-    public void CreateRequest(string RequestType, string id = "-1")
+    public void CreateRequest(string RequestType, int subjectIndex = -1)
     {
         // Building name, User name. User -> 
         string apiString = "https://uni-builder-database.herokuapp.com/api/";
@@ -105,7 +117,7 @@ public class User_Data : MonoBehaviour{
             // USE CASE: to get all the buildings belonging to the user at the start of the game.
             apiString = string.Concat(apiString, "Users/");
             apiString = string.Concat(apiString, requestedId);
-            apiString = apiString + "/Buildings/";
+            apiString = apiString + "Buildings/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
 
@@ -122,7 +134,15 @@ public class User_Data : MonoBehaviour{
             Debug.Log(apiString);
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data, "PUT"));
-
+        } else if (RequestType == "UPDATE_User_Building") {
+            apiString = apiString + "Users/" + UserID + "/Buildings/";
+            int bc = (subjectIndex*10) + building_stats[subjectIndex].model;
+            string buildingCode = bc.ToString();
+            string buildingGroup = subjectIndex.ToString();
+            apiString = apiString + buildingCode + "/" + buildingGroup  + "/";
+            Debug.Log(apiString);
+            data = CreateBuildingJSON(subjectIndex);
+            StartCoroutine(PostRequest(apiString, data, "POST"));
         }
     }
     
@@ -130,31 +150,25 @@ public class User_Data : MonoBehaviour{
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
         
-        List<DatabaseBuildings> uB = CreateBuildingJSON();
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>(); //CreateBuildingJSON();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
         string UserJSON = JsonUtility.ToJson(putData);
 
         return UserJSON;
     }
 
-    public List<DatabaseBuildings> CreateBuildingJSON() {
-        
-        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
-        
-        for (int i=0; i<12; i++){
-            int bc = (i*10) + building_stats[i].model; // The unique code for the model within the subject
-            string bn = CodeConverter.codes.buildingName_map[bc]; // The name of the building
-            int bx = building_stats[i].building_xp; // The specific xp of the building
-            int h = building_stats[i].m_height; // The height of the building (only differs for the Main)
-            int mg = i; // The subject index
-            int pc = building_stats[i].primary_colour; // The primary colour of the building
-            int sc = building_stats[i].secondary_colour; // The secondary colour of the building
+    public string CreateBuildingJSON(int subjectIndex) {
+        int bc = (subjectIndex*10) + building_stats[subjectIndex].model; // The unique code for the model within the subject
+        int bx = building_stats[subjectIndex].building_xp; // The specific xp of the building
+        int h = building_stats[subjectIndex].m_height; // The height of the building (only differs for the Main)
+        int bg = subjectIndex; // The subject index
+        int pc = building_stats[subjectIndex].primary_colour; // The primary colour of the building
+        int sc = building_stats[subjectIndex].secondary_colour; // The secondary colour of the building
             
-            DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bn,bx,h,mg,pc,sc);
-            //string currentBuilding_string = JsonUtility.ToJson(currentBuilding);
-            uB.Add(currentBuilding);
-        }
-        return uB;
+        DatabaseBuildings currentBuilding = new DatabaseBuildings(bc,bx,h,bg,pc,sc);
+        string currentBuilding_string = JsonUtility.ToJson(currentBuilding);
+
+        return currentBuilding_string;
     }
 
     private void TranslateUserJSON(string rawJSON){
@@ -183,7 +197,7 @@ public class User_Data : MonoBehaviour{
         node = JSON.Parse(rawJSON);
 
         //Clears the Unity building list representation so it can be created fresh with the correct data
-        building_stats.Clear();
+        //building_stats.Clear();
 
         // Loop through the buildings to create their Unity representations 
         for (int j=0; j<12; j++){
@@ -199,8 +213,10 @@ public class User_Data : MonoBehaviour{
 
             int m_height = int.Parse(node["userBuildings"][j]["height"].Value);
 
+            int subjectID = int.Parse(node["userBuildings"][j]["buildingGroup"].Value);
+
             Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
-            building_stats.Add(newBuilding);
+            building_stats[subjectID] = newBuilding;
         }
     }
 
@@ -243,7 +259,7 @@ public class User_Data : MonoBehaviour{
                 // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
                 TranslateUserJSON(raw);
-                //TranslateBuildingJSON(raw);
+                TranslateBuildingJSON(raw);
             } else if (translationType == "Multiple") {
                 // If the translation type is multiple then we are getting the list of friends
                 // which need to be added to the friendslist in the friends scene
@@ -335,20 +351,18 @@ public class DatabaseUser {
 public class DatabaseBuildings
 {
     public long buildingCode;
-    public string buildingName;
     public int building_xp;
     public int height;
-    public long modelGroup;
+    public long buildingGroup;
     public int primaryColour;
     public int secondaryColour;
 
-    public DatabaseBuildings(long bc, string bn, int bx, int h, long mg, int pc, int sc)
+    public DatabaseBuildings(long bc, int bx, int h, long bg, int pc, int sc)
     {
         buildingCode = bc;
-        buildingName = bn;
         building_xp = bx;
         height = h;
-        modelGroup = mg;
+        buildingGroup = bg;
         primaryColour = pc;
         secondaryColour = sc;
     }
