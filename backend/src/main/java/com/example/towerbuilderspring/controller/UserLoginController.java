@@ -38,6 +38,7 @@ public class UserLoginController {
             Users user = userRepository.findByUserName(userName);
             System.out.println(user);
 
+            // Todo Make sure it checks the encoder before sending the data.
             if (user != null) {
                 System.out.println("The user was found");
                 System.out.println(encoder.matches(password, user.getPassword()));
@@ -53,7 +54,7 @@ public class UserLoginController {
         }
     }
 
-    @PostMapping("SignUp/Users/")
+    @PostMapping("SignUp/")
     public ResponseEntity<Object> createUser(@RequestBody Users user) {
         try {
 

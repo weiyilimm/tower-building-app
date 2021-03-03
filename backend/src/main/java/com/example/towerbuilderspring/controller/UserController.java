@@ -269,7 +269,7 @@ public class UserController {
     UserModelRepositoryDecoupled userModelRepositoryDecoupled;
 
     @GetMapping("Users/{id}/Buildings")
-    public ResponseEntity<HashMap<String, Object>> getUserBuildingsTest(@PathVariable("id") UUID id) {
+    public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
 
         Optional<Users> fetched_user = userRepository.findById(id);
         List<UserModelDecoupled> all_models = userModelRepositoryDecoupled.findAll();
@@ -338,7 +338,7 @@ public class UserController {
      Note the check if the model belongs to the correct model group will be done in the front end.
      **/
     @PostMapping("/Users/{userId}/Buildings/{buildingId}")
-    public ResponseEntity<UserModelDecoupled> updateUserBuildingDecoupled(@PathVariable("userId") UUID userId,
+    public ResponseEntity<UserModelDecoupled> updateUserBuilding(@PathVariable("userId") UUID userId,
                                                          @PathVariable("buildingId") long buildingId,
                                                          @PathVariable("group") long group,
                                                          @RequestBody String newUserModel) throws ParseException {
