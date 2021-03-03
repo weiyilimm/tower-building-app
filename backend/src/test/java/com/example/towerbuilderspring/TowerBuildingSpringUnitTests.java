@@ -1,12 +1,10 @@
 package com.example.towerbuilderspring;
 
 import com.example.towerbuilderspring.controller.*;
-import com.example.towerbuilderspring.model.BuildingModels;
 import com.example.towerbuilderspring.model.Friend;
 import com.example.towerbuilderspring.model.Users;
 
 import com.example.towerbuilderspring.repository.FriendRepository;
-import com.example.towerbuilderspring.repository.ModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -81,6 +79,10 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.getAllUsers());
     }
 
+    /***
+     *  The createUsers now belongs to the UserLoginController. The methods will have to be changed
+     *  accordingly.
+     *
     @Test
     public void GetUser_HttpResponseGetUserByUserID_IfCorrectOkElseNotFound() {
 
@@ -170,6 +172,7 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(uuid));
     }
 
+***/
     @Test
     public void UpdateUser_HttpResponseUpdateUserEmailXP_ifExistsOkElseNotFound() {
 

@@ -250,6 +250,8 @@ public class UserController {
         List<UserModels> all_models = userModelRepository.findAll();
         Set<UserModels> userModels = new HashSet<>();
 
+        System.out.println("Passed fetched_user");
+
         if (fetched_user.isPresent()) {
             Users requestedUser = fetched_user.get();
 
