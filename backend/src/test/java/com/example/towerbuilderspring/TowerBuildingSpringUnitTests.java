@@ -31,11 +31,6 @@ public class TowerBuildingSpringUnitTests {
         MethodName_StateUnderTest_ExpectedBehavior
      */
 
-    /*
-     *
-     *      WORKING TEST.
-     *
-     */
     @Mock
     private UserRepository mockUserRepository;
 
@@ -314,11 +309,6 @@ public class TowerBuildingSpringUnitTests {
     */
 
     //======================================================
-
-    /*
-        Roy Osherove's naming strategy:
-        MethodName_StateUnderTest_ExpectedBehavior
-     */
 
     @Mock
     private FriendRepository mockFriendRepository;
