@@ -17,20 +17,21 @@ public class StopWatch : MonoBehaviour {
     private DateTime gamePausedTime;
     public GameObject PauseButton;
     public GameObject PlayButton;
+    private bool isWorking;
     //The dont destory object is canvas, it must be a parentless gameobject 
-    public GameObject TimerDontDestory;
-    public static StopWatch Instance;
+    // public GameObject TimerDontDestory;
+    // public static StopWatch Instance;
 
-    //Avoid multiple instances
-    void Awake(){
-        if (Instance == null){
-            Instance = this;
-            DontDestroyOnLoad(TimerDontDestory);
-        }
-        else{
-            Destroy(TimerDontDestory);
-        }
-    }
+    // //Avoid multiple instances
+    // void Awake(){
+    //     if (Instance == null){
+    //         Instance = this;
+    //         DontDestroyOnLoad(TimerDontDestory);
+    //     }
+    //     else{
+    //         Destroy(TimerDontDestory);
+    //     }
+    // }
 
 
     void Update () {
@@ -42,29 +43,30 @@ public class StopWatch : MonoBehaviour {
             string seconds = (TimeCounted % 60).ToString("00");
             TimerText.text = hours + ":" + minutes + ":" + seconds;
         }
-        Debug.Log(gamePausedTime);
-        // Debug.Log((float)(DateTime.Now - gamePausedTime).TotalSeconds);
     }
 
-    // void OnApplicationPause (bool isGamePause)
-    // {   
-    //     //Store the current time when the app is paused
-    //     if (isGamePause) {
-    //         gamePausedTime = DateTime.Now;
-    //     }
-    // }
+    void OnApplicationPause (bool isGamePause)
+    {   
+        //Store the current time when the app is paused
+        if (isGamePause) {
+            gamePausedTime = DateTime.Now;
+        }
+        Debug.Log(gamePausedTime);
+        Debug.Log("Is the game being paused?" + isGamePause);
+    }
 
-    // void OnApplicationFocus  (bool isGameFocus)
-    // {
-    //     if (isGameFocus) {
-    //         BackgroundTimer();
-    //     }
-    //     // Debug.Log(TimeCounted);
-    // }
+    void OnApplicationFocus  (bool isGameFocus)
+    {
+        if (isGameFocus && playing == true ) {
+            BackgroundTimer();
+        }
+        // Debug.Log(TimeCounted);
+    }
 
-    // void BackgroundTimer(){
-    //     TimeCounted += ((float)(DateTime.Now - gamePausedTime).TotalSeconds);
-    // }
+    void BackgroundTimer(){
+        TimeCounted += ((float)(DateTime.Now - gamePausedTime).TotalSeconds);
+        isWorking = false;
+    }
 
     public void ClickPlay ()
     {
