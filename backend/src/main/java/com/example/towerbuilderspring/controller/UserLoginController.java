@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/Auth/")
 public class UserLoginController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class UserLoginController {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @GetMapping("Test/login/{userName}/{password}")
+    @GetMapping("Login/{userName}/{password}")
     public ResponseEntity<Users>  authenticateUser(@PathVariable String userName,
                                                    @PathVariable String password)  throws AssertionError {
         try
@@ -53,7 +53,7 @@ public class UserLoginController {
         }
     }
 
-    @PostMapping("Test/SignUp/Users/")
+    @PostMapping("SignUp/Users/")
     public ResponseEntity<Object> createUser(@RequestBody Users user) {
         try {
 

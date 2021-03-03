@@ -46,28 +46,28 @@ public class UserController {
         }
     }
 
-    @GetMapping("/Users/{id}")
-    public ResponseEntity<Users> getUser(@PathVariable UUID id) {
-        try {
-            Users user = userRepository.findById(id).get();
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    @PostMapping("/Users/")
-    public ResponseEntity<Users> createUser(@RequestBody Users user) {
-        try {
-            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp());
-            userRepository.save(newUser);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/Users/{id}")
+//    public ResponseEntity<Users> getUser(@PathVariable UUID id) {
+//        try {
+//            Users user = userRepository.findById(id).get();
+//            return new ResponseEntity<>(user, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//
+//    @PostMapping("/Users/")
+//    public ResponseEntity<Users> createUser(@RequestBody Users user) {
+//        try {
+//            Users newUser = new Users(user.getUserName(), user.getEmail(), user.getPassword(), user.getTotalExp());
+//            userRepository.save(newUser);
+//            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+//        }
+//        catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @PutMapping("/Users/{id}")
     public ResponseEntity<Users> updateUser(@PathVariable("id") UUID id, @RequestBody Users user) {
