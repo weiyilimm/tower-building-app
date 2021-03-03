@@ -94,153 +94,155 @@ public class UserController {
         }
     }
 
-
-    @GetMapping("Users/{id}/Buildings")
-    public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
-
-        Optional<Users> fetched_user = userRepository.findById(id);
-        List<UserModels> all_models = userModelRepository.findAll();
-        Set<UserModels> userModels = new HashSet<>();
-
-        if (fetched_user.isPresent()) {
-            Users requestedUser = fetched_user.get();
-
-            // Currently manually going through the list as the key UserModels is mapped to a composite key.
-            for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
-                UserModels currentModel = it.next();
-                // TODO clean this up.
-                if (currentModel.getUserModelId().getFk_user().getId() == id) {
-                    userModels.add(currentModel);
-                }
-            }
-
-            /**
-            Formatting the values to match the frontend model.
-             **/
-
-            // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
-            HashMap<String, Object> formattedUserModels = new HashMap<>();
-            List<HashMap<String, Object>> modelsList = new ArrayList<HashMap<String, Object>>();
-
-
-                // User Details
-            formattedUserModels.put("id", id.toString());
-            formattedUserModels.put("userName", requestedUser.getUserName());
-            formattedUserModels.put("password", requestedUser.getPassword());
-            formattedUserModels.put("totalExp", requestedUser.getTotalExp());
-                // Their current models
-            for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
-                UserModels currentModel = it.next();
-
-
-                // Don't use clear() apparently.
-                HashMap<String, Object> tempModelData = new HashMap<>();
-
-                tempModelData.put("buildingCode", currentModel.getUserModelId().getFk_building().getBuildingCode());
-                tempModelData.put("buildingName", currentModel.getUserModelId().getFk_building().getBuildingName());
-                tempModelData.put("buildingGroup", currentModel.getUserModelId().getFk_building().getModelGroup());
-                tempModelData.put("building_xp", currentModel.getBuilding_xp());
-                tempModelData.put("primaryColour", currentModel.getPrimaryColour());
-                tempModelData.put("secondaryColour", currentModel.getSecondaryColour());
-                tempModelData.put("height", currentModel.getHeight());
-
-                // Add the data to the list.
-                modelsList.add(tempModelData);
-            }
-
-            formattedUserModels.put("userBuildings", modelsList);
-            return new ResponseEntity<>(formattedUserModels, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-    }
-
-    /**
-     Implemented updating a User's building as a Post instead of a Put because we're updating a set
-     within the user repository rather then a user (which would be directly modifiable through the
-     repository interface) itself.
-    **/
-    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
-    public ResponseEntity<UserModels> updateUserBuilding(@PathVariable("userId") UUID userId,
-                                                           @PathVariable("buildingId") long buildingId,
-                                                           @RequestBody String newUserModel) throws ParseException {
-
-        Optional<Users> fetched_user = userRepository.findById(userId);
-        Optional<BuildingModels> fetched_model = modelRepository.findById(buildingId);
-        List<UserModels> all_models = userModelRepository.findAll();
-
-        UserModels modelToAdd = new UserModels();
-        UserModelId modelId = new UserModelId();
-
-        // Make sure the model id given is matches the model id in the body.
-        if (buildingId != fetched_model.get().getBuildingCode()) {
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-        }
-
-        System.out.println(userId.toString());
-        System.out.println("cake");
-        System.out.println(fetched_user.isPresent());
-        System.out.println(fetched_model.isPresent());
-
-        System.out.println(userRepository.findAll());
-
-        // Make sure that both the user and the building exist.
-        if (fetched_user.isPresent() && fetched_model.isPresent()) {
-
-            // Manually parsing Json.
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(newUserModel);
-
-            // Create the Composite key
-            modelId.setFk_building(fetched_model.get());
-            modelId.setFk_user(fetched_user.get());
-
-            modelToAdd.setUserModelId(modelId);
-
-            // Set the rest of the attributes.
-            modelToAdd.setBuilding_xp((((Long) json.get("building_xp")).intValue()));
-            modelToAdd.setHeight((((Long) json.get("height")).intValue()));
-            modelToAdd.setModelGroup((Long) json.get("modelGroup"));
-            modelToAdd.setPrimaryColour((((Long) json.get("primaryColour")).intValue()));
-            modelToAdd.setSecondaryColour((((Long) json.get("secondaryColour")).intValue()));
-
-            Users user = fetched_user.get();
-            BuildingModels newModel = fetched_model.get();
-            // Get the group to be updated.
-            long modelGroup = modelToAdd.getModelGroup();
-
-            System.out.println("search started");
-
-            // Search variables
-            UserModels currentModel;
-            Users currentUser;
-            BuildingModels currentBuilding;
-            // TODO See if you can make a method in the User Models Repository to do this instead.
-            // Go through all the global models and find the one belonging both to the same group and the same user.
-            for (int i = 0; i < all_models.size(); i++) {
-                currentModel = all_models.get(i);
-                currentUser = currentModel.getUserModelId().getFk_user();
-                currentBuilding = currentModel.getUserModelId().getFk_building();
-
-
-                if (currentUser.getId() == userId &&
-                        currentBuilding.getModelGroup() == modelGroup) {
-                    System.out.println();
-                    UserModelId modelToDelete = new UserModelId(currentUser, currentBuilding);
-                    System.out.println(modelToAdd.toString());
-                    System.out.println();
-
-                    userModelRepository.deleteById(modelToDelete);
-                    userModelRepository.save(modelToAdd);
-
-                    return new ResponseEntity<>(modelToAdd, HttpStatus.OK);
-                }
-            }
-            // The user doesn't have any models belonging to that group yet (i.e. initialising the user).
-            userModelRepository.save(modelToAdd);
-            return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(modelToAdd, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @GetMapping("Users/{id}/Buildings")
+//    public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
+//
+//        Optional<Users> fetched_user = userRepository.findById(id);
+//        List<UserModels> all_models = userModelRepository.findAll();
+//        Set<UserModels> userModels = new HashSet<>();
+//
+//        if (fetched_user.isPresent()) {
+//            Users requestedUser = fetched_user.get();
+//
+//            // Currently manually going through the list as the key UserModels is mapped to a composite key.
+//            for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
+//                UserModels currentModel = it.next();
+//                // TODO clean this up.
+//                if (currentModel.getUserModelId().getFk_user().getId() == id) {
+//                    userModels.add(currentModel);
+//                }
+//            }
+//
+//            /**
+//            Formatting the values to match the frontend model.
+//             **/
+//
+//            // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
+//            HashMap<String, Object> formattedUserModels = new HashMap<>();
+//            List<HashMap<String, Object>> modelsList = new ArrayList<HashMap<String, Object>>();
+//
+//
+//                // User Details
+//            formattedUserModels.put("id", id.toString());
+//            formattedUserModels.put("userName", requestedUser.getUserName());
+//            formattedUserModels.put("password", requestedUser.getPassword());
+//            formattedUserModels.put("totalExp", requestedUser.getTotalExp());
+//                // Their current models
+//            for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
+//                UserModels currentModel = it.next();
+//
+//
+//                // Don't use clear() apparently.
+//                HashMap<String, Object> tempModelData = new HashMap<>();
+//
+//                tempModelData.put("buildingCode", currentModel.getUserModelId().getFk_building().getBuildingCode());
+//                tempModelData.put("buildingName", currentModel.getUserModelId().getFk_building().getBuildingName());
+//                tempModelData.put("buildingGroup", currentModel.getUserModelId().getFk_building().getModelGroup());
+//                tempModelData.put("building_xp", currentModel.getBuilding_xp());
+//                tempModelData.put("primaryColour", currentModel.getPrimaryColour());
+//                tempModelData.put("secondaryColour", currentModel.getSecondaryColour());
+//                tempModelData.put("height", currentModel.getHeight());
+//
+//
+//
+//                // Add the data to the list.
+//                modelsList.add(tempModelData);
+//            }
+//
+//            formattedUserModels.put("userBuildings", modelsList);
+//            return new ResponseEntity<>(formattedUserModels, HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+//    }
+//
+//    /**
+//     Implemented updating a User's building as a Post instead of a Put because we're updating a set
+//     within the user repository rather then a user (which would be directly modifiable through the
+//     repository interface) itself.
+//    **/
+//    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
+//    public ResponseEntity<UserModels> updateUserBuilding(@PathVariable("userId") UUID userId,
+//                                                           @PathVariable("buildingId") long buildingId,
+//                                                           @RequestBody String newUserModel) throws ParseException {
+//
+//        Optional<Users> fetched_user = userRepository.findById(userId);
+//        Optional<BuildingModels> fetched_model = modelRepository.findById(buildingId);
+//        List<UserModels> all_models = userModelRepository.findAll();
+//
+//        UserModels modelToAdd = new UserModels();
+//        UserModelId modelId = new UserModelId();
+//
+//        // Make sure the model id given is matches the model id in the body.
+//        if (buildingId != fetched_model.get().getBuildingCode()) {
+//            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+//        }
+//
+//        System.out.println(userId.toString());
+//        System.out.println("cake");
+//        System.out.println(fetched_user.isPresent());
+//        System.out.println(fetched_model.isPresent());
+//
+//        System.out.println(userRepository.findAll());
+//
+//        // Make sure that both the user and the building exist.
+//        if (fetched_user.isPresent() && fetched_model.isPresent()) {
+//
+//            // Manually parsing Json.
+//            JSONParser parser = new JSONParser();
+//            JSONObject json = (JSONObject) parser.parse(newUserModel);
+//
+//            // Create the Composite key
+//            modelId.setFk_building(fetched_model.get());
+//            modelId.setFk_user(fetched_user.get());
+//
+//            modelToAdd.setUserModelId(modelId);
+//
+//            // Set the rest of the attributes.
+//            modelToAdd.setBuilding_xp((((Long) json.get("building_xp")).intValue()));
+//            modelToAdd.setHeight((((Long) json.get("height")).intValue()));
+//            modelToAdd.setModelGroup((Long) json.get("modelGroup"));
+//            modelToAdd.setPrimaryColour((((Long) json.get("primaryColour")).intValue()));
+//            modelToAdd.setSecondaryColour((((Long) json.get("secondaryColour")).intValue()));
+//
+//            Users user = fetched_user.get();
+//            BuildingModels newModel = fetched_model.get();
+//            // Get the group to be updated.
+//            long modelGroup = modelToAdd.getModelGroup();
+//
+//            System.out.println("search started");
+//
+//            // Search variables
+//            UserModels currentModel;
+//            Users currentUser;
+//            BuildingModels currentBuilding;
+//            // TODO See if you can make a method in the User Models Repository to do this instead.
+//            // Go through all the global models and find the one belonging both to the same group and the same user.
+//            for (int i = 0; i < all_models.size(); i++) {
+//                currentModel = all_models.get(i);
+//                currentUser = currentModel.getUserModelId().getFk_user();
+//                currentBuilding = currentModel.getUserModelId().getFk_building();
+//
+//
+//                if (currentUser.getId() == userId &&
+//                        currentBuilding.getModelGroup() == modelGroup) {
+//                    System.out.println();
+//                    UserModelId modelToDelete = new UserModelId(currentUser, currentBuilding);
+//                    System.out.println(modelToAdd.toString());
+//                    System.out.println();
+//
+//                    userModelRepository.deleteById(modelToDelete);
+//                    userModelRepository.save(modelToAdd);
+//
+//                    return new ResponseEntity<>(modelToAdd, HttpStatus.OK);
+//                }
+//            }
+//            // The user doesn't have any models belonging to that group yet (i.e. initialising the user).
+//            userModelRepository.save(modelToAdd);
+//            return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
+//        }
+//        return new ResponseEntity<>(modelToAdd, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//
 
 
 
@@ -266,7 +268,7 @@ public class UserController {
     @Autowired
     UserModelRepositoryDecoupled userModelRepositoryDecoupled;
 
-    @GetMapping("Test/Users/{id}/Buildings")
+    @GetMapping("Users/{id}/Buildings")
     public ResponseEntity<HashMap<String, Object>> getUserBuildingsTest(@PathVariable("id") UUID id) {
 
         Optional<Users> fetched_user = userRepository.findById(id);
@@ -335,7 +337,7 @@ public class UserController {
 
      Note the check if the model belongs to the correct model group will be done in the front end.
      **/
-    @PostMapping("/Test/Users/{userId}/Buildings/{buildingId}/{group}")
+    @PostMapping("/Users/{userId}/Buildings/{buildingId}")
     public ResponseEntity<UserModelDecoupled> updateUserBuildingDecoupled(@PathVariable("userId") UUID userId,
                                                          @PathVariable("buildingId") long buildingId,
                                                          @PathVariable("group") long group,
