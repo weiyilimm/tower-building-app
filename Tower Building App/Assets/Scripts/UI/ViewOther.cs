@@ -29,11 +29,6 @@ public class ViewOther : MonoBehaviour
         //FriendList.gameObject.SetActive(false);
 
         CreateRequest();
-        //for (int s=0; s<12; s++) {
-          //  User_Data.data.building_stats[s].model = 2;
-        //}
-
-        //SceneManager.LoadScene(16);
     }
 
     public void CreateRequest() {

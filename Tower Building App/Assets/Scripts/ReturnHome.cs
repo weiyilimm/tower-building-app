@@ -13,22 +13,17 @@ public class ReturnHome : MonoBehaviour {
     public CameraMovePhone movement;
 
 
-    void Start()
-    {
+    void Start() {
         icon = GetComponent<Button>();
     }
-    public void LoadPersonalBuildingData()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 1){
+
+    public void Building() {
+        if (SceneManager.GetActiveScene().buildIndex == 1) {
             icon.image.overrideSprite = clickedImage;
-        }
-        else{
-            icon.image.overrideSprite = clickedImage;
-            //User_Data.data.CreateRequest("GET_User");
-            for (int s=0; s<12; s++) {
-                User_Data.data.building_stats[s].model = 0;
-            }
+        } else {
+            User_Data.data.CreateRequest("GET_User");
             SceneManager.LoadScene(1);
+            icon.image.overrideSprite = clickedImage;
         }
 
         //plays standard button click sound
@@ -36,5 +31,54 @@ public class ReturnHome : MonoBehaviour {
 
         //turn filter off
         FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
+    }
+
+    //Timing Clock Footer
+    public void TimingClock() {
+        if (SceneManager.GetActiveScene().buildIndex == 2) {
+            icon.image.overrideSprite = clickedImage;
+        } else{
+            User_Data.data.CreateRequest("GET_User");
+            SceneManager.LoadScene(2);
+            icon.image.overrideSprite = clickedImage;
+        }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    //FriendList Footer
+    public void FriendList() {
+        if (SceneManager.GetActiveScene().buildIndex == 3) {
+            icon.image.overrideSprite = clickedImage;
+        } else {
+            User_Data.data.CreateRequest("GET_User");
+            SceneManager.LoadScene(3);
+            icon.image.overrideSprite = clickedImage;
+        }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    //LeaderBoard Footer
+    public void LeaderBoard() {
+        if (SceneManager.GetActiveScene().buildIndex == 4) {
+            icon.image.overrideSprite = clickedImage;
+        } else {
+            User_Data.data.CreateRequest("GET_User");
+            SceneManager.LoadScene(4);
+            icon.image.overrideSprite = clickedImage;
+        }
+
+        //plays standard button click sound
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turn filter on
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
     }
 }

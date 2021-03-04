@@ -16,12 +16,8 @@ public class AddDeleteFriend : MonoBehaviour {
         otherID = friendId.text;
         if (removeFriend.activeSelf) {
             DeleteFriend();
-            //removeFriend.SetActive(false);
-            //addFriend.SetActive(true);
         } else if (addFriend.activeSelf) {
             AddFriend();
-            //addFriend.SetActive(false);
-            //removeFriend.SetActive(true);
         }
     }
 
@@ -81,12 +77,12 @@ public class AddDeleteFriend : MonoBehaviour {
 
     public void DeleteFromFriendsList() {
         int NumFriends = Friend_API_v2.friendslist.Count;
-        Debug.Log("Num friends" + NumFriends);
+        int indexToRemove = 0;
         for (int i=0;i<NumFriends;i++) {
-            Debug.Log(i);
             if (otherID == Friend_API_v2.friendslist[i].UserId) {
-                Friend_API_v2.friendslist.RemoveAt(i);
+                indexToRemove = i;
             }
         }
+        Friend_API_v2.friendslist.RemoveAt(indexToRemove);
     }
 }
