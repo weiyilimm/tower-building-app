@@ -40,7 +40,7 @@ public class User_Data : MonoBehaviour{
         temp_data.Add(main3);
         temp_data.Add(main4);
 
-        //CREATE BUILDING INSTANCES HERE
+        //Creates a set of default buildings that are then overwritten by any data retrieved from the database
         createBuildings();
 
         // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
@@ -69,32 +69,27 @@ public class User_Data : MonoBehaviour{
 
     private void createBuildings(){
         for (int j=0; j<4; j++) {
-            Building newMain = new Building(-1,-1,j,40000,0);
+            Building newMain = new Building(-1,-1,j,0,0);
             building_stats.Add(newMain);
         }
         
         for (int i=0; i<8; i++) {
-            Building newBuilding = new Building(-1,-1,1,40000,0);
+            Building newBuilding = new Building(-1,-1,1,0,0);
             building_stats.Add(newBuilding);    
         }
-        Scoring.MainXP = 400000;
-        Scoring.ArtsXP = 400000;
-        Scoring.BioCheXP = 400000;
-        Scoring.ComSciXP = 400000;
-        Scoring.EngXP = 400000;
-        Scoring.GeoXP = 400000;
-        Scoring.LanXP = 400000;
-        Scoring.LawPolXP = 400000;
-        Scoring.PhyMathXP = 400000;
+
+        Scoring.MainXP = 0;
+        Scoring.ArtsXP = 0;
+        Scoring.BioCheXP = 0;
+        Scoring.ComSciXP = 0;
+        Scoring.EngXP = 0;
+        Scoring.GeoXP = 0;
+        Scoring.LanXP = 0;
+        Scoring.LawPolXP = 0;
+        Scoring.PhyMathXP = 0;
     }
 
-    /* 
-        RequestType = "GET" or "Update"
-        Table = "Users" or "Models"
-        id = URI of either an User or Building.
-     */
-    public void CreateRequest(string RequestType, int subjectIndex = -1)
-    {
+    public void CreateRequest(string RequestType, int subjectIndex = -1) {
         // Building name, User name. User -> 
         string apiString = "https://uni-builder-database.herokuapp.com/api/";
 
@@ -134,6 +129,7 @@ public class User_Data : MonoBehaviour{
             Debug.Log(apiString);
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data, "PUT"));
+
         } else if (RequestType == "UPDATE_User_Building") {
             apiString = apiString + "Users/" + UserID + "/Buildings/";
             int bc = (subjectIndex*10) + building_stats[subjectIndex].model;
@@ -196,12 +192,9 @@ public class User_Data : MonoBehaviour{
         JSONNode node;
         node = JSON.Parse(rawJSON);
 
-        //Clears the Unity building list representation so it can be created fresh with the correct data
-        //building_stats.Clear();
-
         // Loop through the buildings to create their Unity representations 
         for (int j=0; j<12; j++){
-            // Might need to get the modelGroup as well if the buildings are not sent in order
+            
             int primary_colour = int.Parse(node["userBuildings"][j]["primaryColour"].Value);
             int secondary_colour = int.Parse(node["userBuildings"][j]["secondaryColour"].Value);
             // Model integer is the final digit in the buildingCode
@@ -217,6 +210,27 @@ public class User_Data : MonoBehaviour{
 
             Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats[subjectID] = newBuilding;
+
+            if (subjectID == 0) {
+                Scoring.MainXP = building_xp;
+            } else if (subjectID == 4) {
+                Scoring.PhyMathXP = building_xp;
+            } else if (subjectID == 5) {
+                Scoring.ComSciXP = building_xp;
+            } else if (subjectID == 6) {
+                Scoring.BioCheXP = building_xp;
+            } else if (subjectID == 7) {
+                Scoring.GeoXP = building_xp;
+            } else if (subjectID == 8) {
+                Scoring.LanXP = building_xp;
+            } else if (subjectID == 9) {
+                Scoring.EngXP = building_xp;
+            } else if (subjectID == 10) {
+                Scoring.LawPolXP = building_xp;
+            } else if (subjectID == 11) {
+                Scoring.ArtsXP = building_xp;
+            }
+            
         }
     }
 
@@ -268,8 +282,7 @@ public class User_Data : MonoBehaviour{
         }
     }
 
-    IEnumerator PostRequest(string targetAPI, string data, string type = "POST")
-    {
+    IEnumerator PostRequest(string targetAPI, string data, string type = "POST") {
         byte[] rawData = System.Text.Encoding.UTF8.GetBytes(data);
 
         UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
@@ -278,15 +291,12 @@ public class User_Data : MonoBehaviour{
         Debug.Log("Sending the data ");
         Debug.Log("Data : " + data);
         yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError)
-        {
+        if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
-        }
-        else
-        {
+        } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            Debug.Log("POST Received: " + raw);
 
             // TRANSLATION CODE HERE (to check if data was correctly entered).
 

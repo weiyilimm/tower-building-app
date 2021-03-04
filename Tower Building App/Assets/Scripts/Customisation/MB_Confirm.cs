@@ -21,8 +21,10 @@ public class MB_Confirm : MonoBehaviour{
             model_offset += 1;
         }
         
-        // POST to User
-        //User_Data.data.CreateRequest("UPDATE_User");
+        // Update all 4 main building towers in the database
+        for (int j=0; j<4; j++) {
+            User_Data.data.CreateRequest("UPDATE_User_Building", j);
+        }
 
         SceneManager.LoadScene(1);
     }
