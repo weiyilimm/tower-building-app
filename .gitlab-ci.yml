@@ -1,3 +1,7 @@
+cache:
+  paths:
+    - .m2/repository
+
 stages: 
   - test
   - build
@@ -20,11 +24,14 @@ unit-test:
     - apt install -y postgresql postgresql-contrib
     - PGPASSWORD=${POSTGRES_PASSWORD} psql -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c "SELECT 'OK' AS status;" 
 
-unity-build: 
+maven-build: 
+  image: maven:3.6.3-jdk-11
   tags: 
-    - unity
+    - docker
   stage: build
-  script: "echo 'Building...'"
+  script: 
+    - cd backend
+    - mvn clean test -Dtest=TowerBuildingSpringUnitTests
 
 backend-deploy: 
   tags: 
@@ -38,4 +45,3 @@ backend-deploy:
     - dpl --provider=heroku --app=uni-builder-database --api-key=$HEROKU_API_KEY
   only:
     - master@tp3-2020-CS17/cs17-main
-
