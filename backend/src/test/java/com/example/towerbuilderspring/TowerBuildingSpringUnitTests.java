@@ -2,10 +2,14 @@ package com.example.towerbuilderspring;
 
 import com.example.towerbuilderspring.controller.*;
 import com.example.towerbuilderspring.model.Friend;
+import com.example.towerbuilderspring.model.UserModelId;
+import com.example.towerbuilderspring.model.UserModels;
 import com.example.towerbuilderspring.model.Users;
 
 import com.example.towerbuilderspring.repository.FriendRepository;
+import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,14 +17,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({MockitoExtension.class})
@@ -34,10 +39,11 @@ public class TowerBuildingSpringUnitTests {
     @Mock
     private UserRepository mockUserRepository;
 
-
     // This tells the controller class to use the dummy repository in this setting.
     @InjectMocks
     private UserController mockUserController;
+    @InjectMocks
+    private UserLoginController mockUserLoginController;
 
     /*
      * Notes by Vedant:
@@ -74,100 +80,6 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.getAllUsers());
     }
 
-    /***
-     *  The createUsers now belongs to the UserLoginController. The methods will have to be changed
-     *  accordingly.
-     *
-    @Test
-    public void GetUser_HttpResponseGetUserByUserID_IfCorrectOkElseNotFound() {
-
-        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
-        UUID uuid = mockUser.getId();
-
-        // make sure mock repository has the user acessible by ID
-        when(mockUserRepository.findById(uuid)).thenReturn(java.util.Optional.of(mockUser));
-
-        // Check an existing user can be found
-        // Check a non existing user is not found
-        // Check for a null input
-        assertEquals(new ResponseEntity<>(mockUser, HttpStatus.OK), mockUserController.getUser(uuid));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(UUID.randomUUID()));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(null));
-    }
-
-    @Test
-    public void CreateUser_HttpResponseCreateUser_IfOkReturnCreatedElseInternalServerError() {
-
-        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
-
-        // Don't test response entity as you cannot test the user created is correct as
-        // we do not know the user ID of the created user
-        // Another method tests if the fields are all created correctly
-        assertEquals(HttpStatus.CREATED, mockUserController.createUser(user).getStatusCode());
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(null));
-    }
-
-    @Test
-    public void CreateUser_CorrectValuesForEachField_EachFieldInCreatedUserEqualsInputUser(){
-        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
-
-        Users mockUser = mockUserController.createUser(user).getBody();
-
-        //Compare the expected input user with the produced output user
-        assertEquals(user.getUserName(), mockUser.getUserName());
-        assertEquals(user.getEmail(), mockUser.getEmail());
-        assertEquals(user.getTotalExp(), mockUser.getTotalExp());
-        assertEquals(user.getPassword(), mockUser.getPassword());
-    }
-
-    @Test
-    public void CreateUser_DontAllowSameUsernameOrEmail_IfUserHasSameNameOrEmailReturnISE(){
-        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
-        Users user1 = new Users("Harriet", "henry@email.com", "Scrafty", 10);
-        Users user2 = new Users("Henry", "harriet@email.com", "Scrafty", 10);
-        Users user3 = new Users("Harriet", "harriet@gmail.com", "Scrafty", 10);
-
-        //when(mockUserRepository.save(any(Users.class))).thenReturn(user).thenReturn(user).thenReturn(user1).then(user2).thenReturn(user3);
-
-        //Create The first user
-        mockUserController.createUser(user);
-
-        //not same email and username
-        //not same email
-        //not same username
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user));
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user1));
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.createUser(user2));
-        assertEquals(HttpStatus.CREATED, mockUserController.createUser(user3).getStatusCode());
-    }
-
-    @Test
-    public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
-        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
-        UUID uuid = mockUser.getId();
-
-        mockUserController.createUser(mockUser);
-
-        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(uuid));
-        //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
-        //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(null));
-
-        //Doesnt really matter if you 'delete' a non existent user
-        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(UUID.randomUUID()));
-        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(null));
-    }
-
-    @Test
-    public void DeleteUser_UserIsSuccessfullyDeleted_GetUserNotFound() {
-        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
-        UUID uuid = mockUserController.createUser(user).getBody().getId();
-
-        mockUserController.deleteUser(uuid);
-
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(uuid));
-    }
-
-***/
     @Test
     public void UpdateUser_HttpResponseUpdateUserEmailXP_ifExistsOkElseNotFound() {
 
@@ -227,7 +139,198 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(originalPass, mockUser.getPassword()); //check password isn't updated
     }
 
+    @Test
+    public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+
+        //when(mockUserRepository.save(any(Users.class)).thenReturn(mockUser);
+
+        mockUserRepository.save(mockUser);
+
+        System.out.println(mockUserController.getAllUsers());
+
+        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(mockUser.getId()));
+        //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
+        //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(null));
+
+        //Doesnt really matter if you 'delete' a non existent user
+        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(UUID.randomUUID()));
+        assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(null));
+    }
+
+    /*
+    @Test
+    public void DeleteUser_UserIsSuccessfullyDeleted_GetUserFoundThenDeletedThenNotFound() {
+        Users mockUser = (Users) mockUserLoginController.createUser(
+                new Users("Henry", "henry@email.com", "Scrafty", 10)).getBody();
+
+        assertEquals(mockUser, mockUserRepository.findByUserName("Henry"));
+        mockUserController.deleteUser(mockUser.getId());
+        assertEquals(null, mockUserRepository.findByUserName("Henry"));
+    }*/
+
+    @Mock
+    private UserModelRepository mockUserModelRepository;
+
+    @Test
+    public void getUserBuildings_HttpResponseGetUserBuildings_CorrectAmmountReturnedOkIfBuildingsISEIfNull (){
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UserModelId modelId1 = new UserModelId(mockUser, 43);
+        UserModelId modelId2 = new UserModelId(mockUser, 21);
+        List<UserModels> mockModels = Arrays.asList(
+                new UserModels(modelId1, 102, 1,303, 206, 4),
+                new UserModels(modelId2, 85, 1,11, 405, 2)
+                );
+
+        when(mockUserModelRepository.findAll()).thenReturn(mockModels).thenReturn(mockModels).thenReturn(new ArrayList<>()).thenReturn(null);
+        when(mockUserRepository.findById(mockUser.getId())).thenReturn(Optional.of(mockUser));
+
+        assertEquals(HttpStatus.OK, mockUserController.getUserBuildings(mockUser.getId()).getStatusCode());
+        assertEquals(2, ((ArrayList)(mockUserController.getUserBuildings(mockUser.getId()).getBody().get("userBuildings"))).size());
+        assertEquals(0, ((ArrayList)(mockUserController.getUserBuildings(mockUser.getId()).getBody().get("userBuildings"))).size());
+        //assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockUserController.getUserBuildings(mockUser.getId()));
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserController.getUserBuildings(mockUser.getId()));
+
+    }
+
+    @Test
+    public void getUserBuildings_HttpResponseGetBuildingsWithID_NonExistentIDReturnsNoContent (){
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UserModelId modelId1 = new UserModelId(mockUser, 43);
+        UserModelId modelId2 = new UserModelId(mockUser, 21);
+        List<UserModels> mockModels = Arrays.asList(
+                new UserModels(modelId1, 102, 1,303, 206, 4),
+                new UserModels(modelId2, 85, 1,11, 405, 2)
+        );
+
+        when(mockUserModelRepository.findAll()).thenReturn(mockModels);
+        when(mockUserRepository.findById(mockUser.getId())).thenReturn(Optional.of(mockUser));
+
+        assertEquals(HttpStatus.OK, mockUserController.getUserBuildings(mockUser.getId()).getStatusCode());
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockUserController.getUserBuildings(UUID.randomUUID()));
+        //Returns NO_CONTENT which is true, but should also probably be an Internal Server Error
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockUserController.getUserBuildings(null));
+
+    }
+
+    @Test
+    public void updateUserBuilding_ (){
+        //Ok;
+        //Created;
+        //ISE;
+    }
+
+    /*
+    @Test
+    public void GetUser_HttpResponseGetUserByUserID_IfCorrectOkElseNotFound() {
+
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UUID uuid = mockUser.getId();
+
+        // make sure mock repository has the user acessible by ID
+        when(mockUserRepository.findById(uuid)).thenReturn(java.util.Optional.of(mockUser));
+
+        // Check an existing user can be found
+        // Check a non existing user is not found
+        // Check for a null input
+        assertEquals(new ResponseEntity<>(mockUser, HttpStatus.OK), mockUserController.getUser(uuid));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(UUID.randomUUID()));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.getUser(null));
+    }
+    */
+
     //======================================================
+
+    @Test
+    public void authenticateUser_HttpResponseAuthenticatesUserReturnsUser_IfCorrectPasswordOkIfWrongPasswordNotFoundIfNoUserNotFound(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        String password = encoder.encode("Scrafty");
+        Users user = new Users("Henry", "henry@email.com", password, 10);
+
+        when(mockUserRepository.findByUserName("Henry")).thenReturn(user);
+        when(mockUserRepository.findByUserName("Harriet")).thenReturn(null);
+
+        assertEquals(new ResponseEntity<>(user, HttpStatus.OK), mockUserLoginController.authenticateUser("Henry", "Scrafty"));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser("Harriet", "Scrafty"));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser("Henry", "ytfarcS"));
+    }
+
+    @Test
+    public void CreateUser_HttpResponseCreateUser_IfOkReturnCreatedElseInternalServerError() {
+
+        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
+
+        // Don't test response entity as you cannot test the user created is correct as
+        // we do not know the user ID of the created user
+        // Another method tests if the fields are all created correctly
+        assertEquals(HttpStatus.CREATED, mockUserLoginController.createUser(user).getStatusCode());
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.createUser(null));
+    }
+
+    @Test
+    public void CreateUser_CorrectValuesForEachField_EachFieldInCreatedUserEqualsInputUser(){
+        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
+
+        Users mockUser = (Users) mockUserLoginController.createUser(user).getBody();
+
+        //Compare the expected input user with the produced output user
+        assertEquals(user.getUserName(), mockUser.getUserName());
+        assertEquals(user.getEmail(), mockUser.getEmail());
+        assertEquals(user.getTotalExp(), mockUser.getTotalExp());
+        assertEquals(user.getPassword(), mockUser.getPassword());
+    }
+
+    /*
+    @Test
+    public void CreateUser_DontAllowSameUsernameOrEmail_IfUserHasSameNameOrEmailReturnISE(){
+        Users user = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        Users user1 = new Users("Harriet", "henry@email.com", "Scrafty", 10);
+        Users user2 = new Users("Henry", "harriet@email.com", "Scrafty", 10);
+        Users user3 = new Users("Harriet", "harriet@gmail.com", "Scrafty", 10);
+
+        //when(mockUserRepository.save(any(Users.class))).thenReturn(user).thenReturn(user).thenReturn(user1).then(user2).thenReturn(user3);
+        //when(mockUserRepository.save(any(Users.class))).thenReturn(user);
+
+        //Create The first user
+        when(mockUserRepository.findByUserName("Henry")).thenReturn(user);
+
+        //not same email and username
+        //not same email
+        //not same username
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.createUser(user));
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.createUser(user1));
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.createUser(user2));
+        assertEquals(HttpStatus.CREATED, mockUserLoginController.createUser(user3).getStatusCode());
+    }
+    */
+
+
+    @Test
+    public void LoginDeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
+
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+
+        when(mockUserRepository.findByUserName("Henry")).thenReturn(mockUser);
+
+        assertEquals(new ResponseEntity<>(mockUser, HttpStatus.OK), mockUserLoginController.deleteUser("Henry"));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.deleteUser("Harriet"));
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.deleteUser(null));
+    }
+
+    /*
+    @Test
+    public void LoginDeleteUser_UserIsSuccessfullyDeleted_GetUserNotFound() {
+        Users mockUser = (Users) mockUserLoginController.createUser(
+                new Users("Henry", "henry@email.com", "Scrafty", 10)).getBody();
+
+        assertEquals(mockUser, mockUserRepository.findByUserName("Henry"));
+        mockUserLoginController.deleteUser("Henry");
+        assertEquals(null, mockUserRepository.findByUserName("Henry"));
+    }
+    */
+
+    //======================================================
+
     /*
     @Mock
     private ModelRepository mockModelRepository;
