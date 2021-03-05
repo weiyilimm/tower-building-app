@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
+import javax.validation.constraints.Null;
 import java.util.*;
 
 import static org.hamcrest.Matchers.any;
@@ -143,11 +144,7 @@ public class TowerBuildingSpringUnitTests {
     public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
         Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
 
-        //when(mockUserRepository.save(any(Users.class)).thenReturn(mockUser);
-
         mockUserRepository.save(mockUser);
-
-        System.out.println(mockUserController.getAllUsers());
 
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(mockUser.getId()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
@@ -419,55 +416,110 @@ public class TowerBuildingSpringUnitTests {
     @InjectMocks
     private FriendController mockFriendController;
 
-    @Test
-    public void getFriends(){
-        /*
-         * The process of mocking of a repository is as follows.
-         *  1. Create dummy value(s).
-         *  2. Create a dummy method to replace the know working repository method. This is the hardcoding the
-         *  return value of the method when it is called.
-         *  3. Checking if the return value from the controller matches the dummy value to be returned.
-         */
 
+
+    @Test
+    public void getFriends_HttpResponseGetsFriendsList_FriendsListIsTheSameAsExpectedNoContentIfEmpty(){
         //main guy we're testing for friends
         Users mockedUserMain =  new Users("Fraser", "fraser@email.com", "Password", 4);
 
-        //mockedUsers contains 3 users
+        //contains 2 users
         List<Users> mockedUsersFriends = Arrays.asList(
                 new Users("Henry", "henry@email.com", "Scrafty", 10),
                 new Users("Barry", "Barry@email.com", "Hoops", 21));
 
-        //when he has 2 friends
+        //when he has 2 friends (from mockedUsersFriends)
         List<Friend> mockedFriends2 = Arrays.asList(
                 new Friend(mockedUserMain.getId(),mockedUsersFriends.get(0).getId()),
                 new Friend(mockedUserMain.getId(),mockedUsersFriends.get(1).getId()));
 
-        //when he has 1 friend
-        List<Friend> mockedFriends1 = Arrays.asList(
-                new Friend(mockedUserMain.getId(),mockedUsersFriends.get(0).getId()));
-
         //when he has no friends lmao
         List<Friend> mockedFriendsNone = Arrays.asList();
 
-        when(mockFriendRepository.findByUserId(mockedUserMain.getId())).thenReturn(mockedFriends2).thenReturn(mockedFriends1).thenReturn(mockedFriendsNone);
+        //When we look for the main users friends, then we return these different friends lists
+        when(mockFriendRepository.findByUserId(mockedUserMain.getId())).thenReturn(mockedFriends2).thenReturn(mockedFriendsNone).thenReturn(null);
 
+        //When we look for other users (in the main guys friends list) return that user
+        when(mockUserRepository.findById(mockedUsersFriends.get(0).getId())).thenReturn(Optional.ofNullable(mockedUsersFriends.get(0)));
+        when(mockUserRepository.findById(mockedUsersFriends.get(1).getId())).thenReturn(Optional.ofNullable(mockedUsersFriends.get(1)));
 
-        //mockFriendController.getFriends(mockedUserMain.getId())
         // Run the tests for each of the different possible scenarios.
-        assertEquals(new ResponseEntity<>(mockedFriends2, HttpStatus.OK), mockFriendController.getFriends(mockedUserMain.getId()));
-        assertEquals(new ResponseEntity<>(mockedFriends1, HttpStatus.OK), mockFriendController.getFriends(mockedUserMain.getId()));
+        assertEquals(new ResponseEntity<>(mockedUsersFriends, HttpStatus.OK), mockFriendController.getFriends(mockedUserMain.getId()));
         assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.getFriends(mockedUserMain.getId()));
         assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockFriendController.getFriends(mockedUserMain.getId()));
     }
 
     @Test
-    public void makeFriends(){
+    public void makeFriends_HttpResponseMakingFriends_ifUsersExistOkElseNoContent() {
+        //main guy we're testing for friends
+        Users mockedUserMain =  new Users("Fraser", "fraser@email.com", "Password", 4);
+
+        //friend we're trying to add
+        Users mockedUserFriend = new Users("Barry", "Barry@email.com", "Hoops", 21);
+
+        when(mockUserRepository.findById(mockedUserMain.getId())).thenReturn(Optional.of(mockedUserMain));
+        when(mockUserRepository.findById(mockedUserFriend.getId())).thenReturn(Optional.of(mockedUserFriend));
+
+        //checks status code
+        assertEquals(HttpStatus.OK, mockFriendController.makeFriends(mockedUserMain.getId(),mockedUserFriend.getId()).getStatusCode());
+
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.makeFriends(null,mockedUserFriend.getId()));
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.makeFriends(mockedUserMain.getId(),null));
+        assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.makeFriends(null, null));
+    }
+
+    @Test
+    public void makeFriends_ExpectedContentReturned_ReturnsCorrectMainUserIDandFriendID() {
+        //main guy we're testing for friends
+        Users mockedUserMain =  new Users("Fraser", "fraser@email.com", "Password", 4);
+
+        //friend we're trying to add
+        Users mockedUserFriend = new Users("Barry", "Barry@email.com", "Hoops", 21);
+
+        when(mockUserRepository.findById(mockedUserMain.getId())).thenReturn(Optional.of(mockedUserMain));
+        when(mockUserRepository.findById(mockedUserFriend.getId())).thenReturn(Optional.of(mockedUserFriend));
+
+        //check the friend is the expected user
+        assertEquals((mockedUserFriend.getId()), mockFriendController.makeFriends(mockedUserMain.getId(),mockedUserFriend.getId()).getBody().getFriendId());
+        //check that the Main user is the expected user
+        assertEquals((mockedUserMain.getId()), mockFriendController.makeFriends(mockedUserMain.getId(),mockedUserFriend.getId()).getBody().getUserId());
+    }
+
+    @Test
+    public void deleteFriends_HttpResponseDeletingFriends_ifFriendAndUserExistOkElseNoContent(){
+        Users mockedUserMain =  new Users("Fraser", "fraser@email.com", "Password", 4);
+        Users mockedUserFriend = new Users("Barry", "Barry@email.com", "Hoops", 21);
+        Users mockedUserNotFriend = new Users("Clive", "Clive@email.com", "Cheetos", 2);
+
+        when(mockUserRepository.findById(mockedUserMain.getId())).thenReturn(Optional.of(mockedUserMain));
+        when(mockUserRepository.findById(mockedUserFriend.getId())).thenReturn(Optional.of(mockedUserFriend));
+
+        //checks correct response for deleting a friend, for a user that is a friend
+        assertEquals(HttpStatus.OK, mockFriendController.deleteFriends(mockedUserMain.getId(), mockedUserFriend.getId()).getStatusCode());
+        //checks correct response for deleting a friend, for a user that is not a friend
+        assertEquals(HttpStatus.NO_CONTENT, mockFriendController.deleteFriends(mockedUserMain.getId(), mockedUserNotFriend.getId()).getStatusCode());
+        //checks correct response for deleting a friend, for a null value as friend
+        assertEquals(HttpStatus.NO_CONTENT, mockFriendController.deleteFriends(mockedUserMain.getId(), null).getStatusCode());
+        //checks correct response for deleting a friend, for a null value as mainUser
+        assertEquals(HttpStatus.NO_CONTENT, mockFriendController.deleteFriends(null, mockedUserFriend.getId()).getStatusCode());
+        //checks correct response for deleting a friend, for two null users
+        assertEquals(HttpStatus.NO_CONTENT, mockFriendController.deleteFriends(null, null).getStatusCode());
 
     }
 
     @Test
-    public void deleteFriends(){
+    public void deleteFriends_ExpectedContentReturned_ReturnsFriendshipDeletedFromFriendRepo(){
 
+        Users mockedUserMain =  new Users("Fraser", "fraser@email.com", "Password", 4);
+        Users mockedUserFriend = new Users("Barry", "Barry@email.com", "Hoops", 21);
+        Users mockedUserNotFriend = new Users("Clive", "Clive@email.com", "Cheetos", 2);
+
+        Friend mockedFriendship = new Friend(mockedUserMain.getId(), mockedUserFriend.getId());
+
+        when(mockUserRepository.findById(mockedUserMain.getId())).thenReturn(Optional.of(mockedUserMain));
+        when(mockUserRepository.findById(mockedUserFriend.getId())).thenReturn(Optional.of(mockedUserFriend));
+
+        assertEquals((mockedFriendship.toString()), mockFriendController.deleteFriends(mockedUserMain.getId(),mockedUserFriend.getId()).getBody().toString());
     }
 
     /*
@@ -537,7 +589,7 @@ public class TowerBuildingSpringUnitTests {
     /*
 
 
-    // Currently think I'll require an application database to test delete functionality (due to need of actual database
+    // Currently think I'll require an application database to test Flo functionality (due to need of actual database
     // to delete from).
 
 
