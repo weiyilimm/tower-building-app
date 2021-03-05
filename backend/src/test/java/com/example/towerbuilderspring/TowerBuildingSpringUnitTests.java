@@ -9,6 +9,7 @@ import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.FriendRepository;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -143,12 +146,6 @@ public class TowerBuildingSpringUnitTests {
     public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
         Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
 
-        //when(mockUserRepository.save(any(Users.class)).thenReturn(mockUser);
-
-        mockUserRepository.save(mockUser);
-
-        System.out.println(mockUserController.getAllUsers());
-
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(mockUser.getId()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(null));
@@ -214,12 +211,76 @@ public class TowerBuildingSpringUnitTests {
     }
 
     @Test
-    public void updateUserBuilding_ (){
-        //Ok;
-        //Created;
-        //ISE;
+    public void updateUserBuilding_HttpResponseUpdateBuildingsWithIDandJSONData_ModelExistOkElseCreatedIfNoUserOrBadInputISE () throws ParseException {
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UserModelId modelId1 = new UserModelId(mockUser, 43);
+        UserModels mockModel = new UserModels(modelId1, 102, 0,303, 206, 4);
+
+        when(mockUserRepository.findById(mockUser.getId())).thenReturn(Optional.of(mockUser));
+        when(mockUserModelRepository.findAll()).thenReturn(Arrays.asList(mockModel)).thenReturn(Arrays.asList());
+
+        //Modify an existing model
+        assertEquals(HttpStatus.OK,
+                    mockUserController.updateUserBuilding(mockUser.getId(),
+                                                          mockModel.getUserModelId().getModel(),
+                                                          mockModel.getModelGroup(),
+
+                                              "{\"buildingCode\":43,\"building_xp\":102," +
+                                                          "\"height\":0,\"buildingGroup\":4," +
+                                                          "\"primaryColour\":4,\"secondaryColour\":206}"
+                                                         ).getStatusCode()
+                    );
+        //Creating a New model
+        assertEquals(HttpStatus.CREATED,
+                     mockUserController.updateUserBuilding(mockUser.getId(),
+                                                           mockModel.getUserModelId().getModel(),
+                                                           mockModel.getModelGroup(),
+                                               "{\"buildingCode\":43,\"building_xp\":102," +
+                                                           "\"height\":0,\"buildingGroup\":4," +
+                                                           "\"primaryColour\":102,\"secondaryColour\":206}"
+                                                          ).getStatusCode()
+                    );
+        //User doesn't exist
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
+                mockUserController.updateUserBuilding(UUID.randomUUID(),
+                        mockModel.getUserModelId().getModel(),
+                        mockModel.getModelGroup(),
+                        "{\"buildingCode\":43,\"building_xp\":102," +
+                                "\"height\":0,\"buildingGroup\":4," +
+                                "\"primaryColour\":102,\"secondaryColour\":206}"
+                ).getStatusCode());
+        //bad inputs
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR),
+                    mockUserController.updateUserBuilding(mockUser.getId(),
+                                                          mockModel.getUserModelId().getModel(),
+                                                          mockModel.getModelGroup(),
+                                                          "{building_xp}"
+                                                         ).getStatusCode()
+        );
     }
 
+    @Test
+    public void updateUserBuilding_CorrectContentUpdated_CorrectItemsAreUpdatedButCodeRemainsSame() throws ParseException {
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        UserModelId modelId1 = new UserModelId(mockUser, 43);
+        UserModels mockModel = new UserModels(modelId1, 102, 0,303, 206, 4);
+
+        when(mockUserRepository.findById(mockUser.getId())).thenReturn(Optional.of(mockUser));
+        when(mockUserModelRepository.findAll()).thenReturn(Arrays.asList(mockModel)).thenReturn(Arrays.asList());
+
+        UserModels updatedModel = mockUserController.updateUserBuilding(mockUser.getId(),
+                        mockModel.getUserModelId().getModel(),
+                        mockModel.getModelGroup(),
+            "{\"buildingCode\":43,\"building_xp\":102," +
+                        "\"height\":0,\"buildingGroup\":4," +
+                        "\"primaryColour\":4,\"secondaryColour\":301}"
+                ).getBody();
+
+        assertEquals(4, updatedModel.getPrimaryColour() );
+        assertEquals(301, updatedModel.getSecondaryColour());
+        assertEquals(mockModel.getUserModelId(), updatedModel.getUserModelId());
+
+    }
     /*
     @Test
     public void GetUser_HttpResponseGetUserByUserID_IfCorrectOkElseNotFound() {
@@ -303,7 +364,6 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(HttpStatus.CREATED, mockUserLoginController.createUser(user3).getStatusCode());
     }
     */
-
 
     @Test
     public void LoginDeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
