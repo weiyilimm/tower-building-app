@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class ReturnHome : MonoBehaviour {
     
@@ -11,8 +12,11 @@ public class ReturnHome : MonoBehaviour {
     public Button icon;
 
     public CameraMovePhone movement;
+    public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
 
-
+    //When one of the navigation buttons is clicked the code will generate a GET
+    // request from the database so that the current users data is loaded once again
+    // then the screen will switch to the desired scene
     void Start() {
         icon = GetComponent<Button>();
     }
@@ -21,8 +25,7 @@ public class ReturnHome : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == 1) {
             icon.image.overrideSprite = clickedImage;
         } else {
-            User_Data.data.CreateRequest("GET_User");
-            SceneManager.LoadScene(1);
+            CreateRequest(1);
             icon.image.overrideSprite = clickedImage;
         }
 
@@ -38,8 +41,7 @@ public class ReturnHome : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == 2) {
             icon.image.overrideSprite = clickedImage;
         } else{
-            User_Data.data.CreateRequest("GET_User");
-            SceneManager.LoadScene(2);
+            CreateRequest(2);
             icon.image.overrideSprite = clickedImage;
         }
 
@@ -55,8 +57,7 @@ public class ReturnHome : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == 3) {
             icon.image.overrideSprite = clickedImage;
         } else {
-            User_Data.data.CreateRequest("GET_User");
-            SceneManager.LoadScene(3);
+            CreateRequest(3);
             icon.image.overrideSprite = clickedImage;
         }
 
@@ -71,8 +72,7 @@ public class ReturnHome : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == 4) {
             icon.image.overrideSprite = clickedImage;
         } else {
-            User_Data.data.CreateRequest("GET_User");
-            SceneManager.LoadScene(4);
+            CreateRequest(4);
             icon.image.overrideSprite = clickedImage;
         }
 
@@ -80,5 +80,28 @@ public class ReturnHome : MonoBehaviour {
         FindObjectOfType<SoundManager>().Play("standard button click");
         //turn filter on
         FindObjectOfType<ListenerPersist>().toggleFilterOn(true);
+    }
+
+    public void CreateRequest(int sceneID) {
+        apiString = apiString + User_Data.data.UserID + "/Buildings/";
+        Debug.Log("Returning to home: " + apiString);
+        StartCoroutine(GetRequest(apiString, sceneID));
+    }
+
+    IEnumerator GetRequest(string targetAPI, int sceneID) {
+        // Constructs and sends a GET request to the database to retreive a JSON file
+        UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
+        Debug.Log("Sending request...");
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError) {
+            Debug.Log("An Internal Server Error Was Encountered");
+        } else {
+            string raw = uwr.downloadHandler.text;
+            Debug.Log("Received: " + raw);
+
+            User_Data.data.TranslateBuildingJSON(raw);
+            SceneManager.LoadScene(sceneID);
+        }
     }
 }

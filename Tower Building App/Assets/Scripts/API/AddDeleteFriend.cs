@@ -75,6 +75,9 @@ public class AddDeleteFriend : MonoBehaviour {
         }
     }
 
+    /* A method which removes a given player from the users friendslist - this is a QOL method which 
+    lets the user immediately see that they have unfriended someone when they next visit the leaderboard as
+    without it the friends list would not update until the next time the user accessed the friends scene */
     public void DeleteFromFriendsList() {
         int NumFriends = Friend_API_v2.friendslist.Count;
         int indexToRemove = 0;
