@@ -93,6 +93,16 @@ public class Scoring : MonoBehaviour
             User_Data.data.building_stats[k].building_xp += (int)globalEarnedXP;
         }
 
+        //Main building XP is global so it should get the full amount earned every time
+        MainXP += localEarnedXP;
+        for (int l=0; l<4; l++) {
+            User_Data.data.building_stats[l].building_xp += (int)localEarnedXP;
+        }
+
+        //Update the User_Data variable that stores the global xp (global XP is the max_amount of XP earned for
+        // every study session combined)
+        User_Data.data.global_xp = (int)MainXP;
+
         //Get the current value of the dropdown, when the stop button is clicked
         switch (DropDown.options[DropDown.value].text){
             case "ARTS":
@@ -128,7 +138,12 @@ public class Scoring : MonoBehaviour
                 User_Data.data.building_stats[4].building_xp += (int)localEarnedXP;
                 break;
         }
-        // POST to User
-        //User_Data.data.CreateRequest("UPDATE_User");
+        
+        // Create and send an update request to the database for the Users new info then
+        // Loop over the users buildings and send update requests for each one
+        User_Data.data.CreateRequest("UPDATE_User");
+        for (int s=0; s<12; s++) {
+            User_Data.data.CreateRequest("UPDATE_User_Building", s);
+        }
     }
 }

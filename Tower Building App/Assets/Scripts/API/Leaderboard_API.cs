@@ -29,6 +29,7 @@ public class Leaderboard_API : MonoBehaviour {
     private TextMeshProUGUI textXP;
     //User name for each instances
     private TextMeshProUGUI textName;
+    private TextMeshProUGUI textId;
     //User rank for each instances
     private TextMeshProUGUI rankText;
     
@@ -91,8 +92,9 @@ public class Leaderboard_API : MonoBehaviour {
         Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Got the data");
+        Debug.Log("Sending Request");
         yield return uwr.SendWebRequest();
+        Debug.Log("Reuqest returned");
 
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
@@ -118,7 +120,6 @@ public class Leaderboard_API : MonoBehaviour {
         //}
 
         node = JSON.Parse(rawJSON);
-        Debug.Log(node);
 
         string userid;
         string username;
@@ -182,13 +183,36 @@ public class Leaderboard_API : MonoBehaviour {
             //Set their parent to leaderboardlist
             instance.SetParent(LeaderBoardList, false);
             textName = instance.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+            textId = instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText.text = (LB_data_InOrder.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
+            textId.text = data.UserId;
             textXP.text = data.TotalExp.ToString();
+
+            checkForFriend(instance, data);
             // Debug.Log(LB_data.IndexOf(data));
             // Debug.Log(data.UserName + " " + data.TotalExp);
+        }
+    }
+
+    public void checkForFriend(Transform instance, leaderboard_data data) {
+        //check if the data is in the friends list or not
+        foreach (Friends friend_data in Friend_API_v2.friendslist) {
+            if (friend_data.UserName == data.UserName) {
+                Debug.Log("Player was in your friends list");
+                GameObject plus = instance.Find("RawImage").gameObject;
+                GameObject tick = instance.Find("RawImage (1)").gameObject;
+                plus.SetActive(false);
+                tick.SetActive(true);
+            }
+        }
+        if (data.UserName == User_Data.data.Username) {
+            GameObject plus = instance.Find("RawImage").gameObject;
+            GameObject tick = instance.Find("RawImage (1)").gameObject;
+            plus.SetActive(false);
+            tick.SetActive(false);
         }
     }
 }

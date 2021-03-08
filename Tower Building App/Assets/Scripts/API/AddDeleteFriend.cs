@@ -3,26 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using TMPro;
 
 public class AddDeleteFriend : MonoBehaviour {
     
-    // Hardcoded Friend (till UUID can be pulled from button).
-    public string otherID = "53aa0679-4a23-4287-ae97-1b0cdac376d7";
+    public GameObject addFriend, removeFriend;
+    public TextMeshProUGUI friendId;
+    public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
+    public string otherID;
+
+    public void typeCheck() {
+        otherID = friendId.text;
+        if (removeFriend.activeSelf) {
+            DeleteFriend();
+        } else if (addFriend.activeSelf) {
+            AddFriend();
+        }
+    }
 
     public void AddFriend() {
         //Friends_API.CreateRequest("CREATE_Friend", thisFriendID);
-        string apiString = "http://localhost:8080/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
+        Debug.Log("POST Request at: " + apiString);
 
-        //FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
-        //string data = JsonUtility.ToJson(newFriend);
-        //StartCoroutine(PostRequest(apiString, data, "POST"));
+        // Creates dummy data since the request requires some to be built
+        FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
+        string data = JsonUtility.ToJson(newFriend);
+
+        StartCoroutine(PostRequest(apiString, data, "POST"));
     }
 
     public void DeleteFriend() {
         //Friends_API.CreateRequest("DELETE_Friend", thisFriendID);
-        string apiString = "http://localhost:8080/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
+        Debug.Log("DELETE Request at: " + apiString);
         StartCoroutine(DeleteRequest(apiString));
     }
 
@@ -33,19 +47,20 @@ public class AddDeleteFriend : MonoBehaviour {
         uwr.method = type;
         uwr.SetRequestHeader("Content-Type", "application/json");
         Debug.Log("Sending the data ");
-        Debug.Log("Data : " + data);
         yield return uwr.SendWebRequest();
+
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
             Debug.Log("You've added a new friend");
+            addFriend.SetActive(false);
+            removeFriend.SetActive(true);
         }
     }
 
     IEnumerator DeleteRequest(string targetAPI) {
-        Debug.Log(targetAPI);
         // Constructs and sends a DELETE request to the database to remove data
         UnityWebRequest uwr = UnityWebRequest.Delete(targetAPI);
         yield return uwr.SendWebRequest();
@@ -54,6 +69,23 @@ public class AddDeleteFriend : MonoBehaviour {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             Debug.Log("Friend Deleted");
+            DeleteFromFriendsList();
+            removeFriend.SetActive(false);
+            addFriend.SetActive(true);
         }
+    }
+
+    /* A method which removes a given player from the users friendslist - this is a QOL method which 
+    lets the user immediately see that they have unfriended someone when they next visit the leaderboard as
+    without it the friends list would not update until the next time the user accessed the friends scene */
+    public void DeleteFromFriendsList() {
+        int NumFriends = Friend_API_v2.friendslist.Count;
+        int indexToRemove = 0;
+        for (int i=0;i<NumFriends;i++) {
+            if (otherID == Friend_API_v2.friendslist[i].UserId) {
+                indexToRemove = i;
+            }
+        }
+        Friend_API_v2.friendslist.RemoveAt(indexToRemove);
     }
 }
