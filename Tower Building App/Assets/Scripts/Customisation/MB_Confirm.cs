@@ -21,7 +21,7 @@ public class MB_Confirm : MonoBehaviour{
             model_offset += 1;
         }
         
-        // Update all 4 main building towers in the database
+        // Loop over the 4 main building towers and generate an update request to send to the database
         for (int j=0; j<4; j++) {
             User_Data.data.CreateRequest("UPDATE_User_Building", j);
         }

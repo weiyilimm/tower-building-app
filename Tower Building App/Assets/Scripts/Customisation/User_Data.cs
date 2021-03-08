@@ -211,6 +211,8 @@ public class User_Data : MonoBehaviour{
             Building newBuilding = new Building(primary_colour,secondary_colour,model,building_xp, m_height);
             building_stats[subjectID] = newBuilding;
 
+            // Because the subjects are given a known id we can then update the corresponding
+            // XP counter in the Scoring code
             if (subjectID == 0) {
                 Scoring.MainXP = building_xp;
             } else if (subjectID == 4) {
@@ -230,7 +232,6 @@ public class User_Data : MonoBehaviour{
             } else if (subjectID == 11) {
                 Scoring.ArtsXP = building_xp;
             }
-            
         }
     }
 
@@ -344,7 +345,7 @@ public class DatabaseUser {
     public string userName;
     public string email;
     public string password;
-    public List<DatabaseBuildings> userBuildings;
+    //public List<DatabaseBuildings> userBuildings;
     public long totalExp;
 
     public DatabaseUser(string userid, string un, string e, string p, List<DatabaseBuildings> uB, long xp) {
@@ -352,7 +353,7 @@ public class DatabaseUser {
         userName = un;
         email = e;
         password = p;
-        userBuildings = uB;
+        //userBuildings = uB;
         totalExp = xp;
     }
 }

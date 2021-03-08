@@ -12,7 +12,7 @@ public class CodeConverter : MonoBehaviour{
 
     public SortedDictionary<int,Material> materials_map = new SortedDictionary<int,Material>();
     public SortedDictionary<string,int> subject_map = new SortedDictionary<string,int>();
-    public SortedDictionary<int, string> buildingName_map = new SortedDictionary<int,string>();
+    /* public SortedDictionary<int, string> buildingName_map = new SortedDictionary<int,string>(); */
 
     // Start is called before the first frame update
     void Start(){
@@ -77,6 +77,7 @@ public class CodeConverter : MonoBehaviour{
         subject_map.Add("Arts",11);
 
         // Need a dictionary to map the a known building code to the names of each individual model
+        /*
         buildingName_map.Add(0,"Main1A");
         buildingName_map.Add(1,"Main1B");
         buildingName_map.Add(2,"Main1C");
@@ -118,6 +119,6 @@ public class CodeConverter : MonoBehaviour{
         buildingName_map.Add(102,"Chess Set");
         buildingName_map.Add(110,"Louvre");
         buildingName_map.Add(111,"Easel");
-        buildingName_map.Add(112,"Winged Man");
+        buildingName_map.Add(112,"Winged Man"); */
     }
 }

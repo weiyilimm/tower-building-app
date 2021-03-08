@@ -99,6 +99,8 @@ public class Scoring : MonoBehaviour
             User_Data.data.building_stats[l].building_xp += (int)localEarnedXP;
         }
 
+        //Update the User_Data variable that stores the global xp (global XP is the max_amount of XP earned for
+        // every study session combined)
         User_Data.data.global_xp = (int)MainXP;
 
         //Get the current value of the dropdown, when the stop button is clicked
@@ -137,7 +139,8 @@ public class Scoring : MonoBehaviour
                 break;
         }
         
-        // Loop though the users building data to update their globalXP and then also each building
+        // Create and send an update request to the database for the Users new info then
+        // Loop over the users buildings and send update requests for each one
         User_Data.data.CreateRequest("UPDATE_User");
         for (int s=0; s<12; s++) {
             User_Data.data.CreateRequest("UPDATE_User_Building", s);

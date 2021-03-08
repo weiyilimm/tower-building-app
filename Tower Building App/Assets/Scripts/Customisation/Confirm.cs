@@ -19,7 +19,7 @@ public class Confirm : MonoBehaviour{
         User_Data.data.temp_data[0][1] = -1;
         User_Data.data.temp_data[0][2] = 0;
 
-        // POST to User
+        // Send a singular update request for the building that has just been customised
         User_Data.data.CreateRequest("UPDATE_User_Building", index);
 
         SceneManager.LoadScene(1);
