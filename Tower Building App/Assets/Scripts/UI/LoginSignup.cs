@@ -33,7 +33,7 @@ public class LoginSignup : MonoBehaviour
     public Slider Slider;
     private AsyncOperation operation;
     //To check whether the user is authenticated or not
-    private bool isAuthenticated;
+    private bool isAuthenticated = true;
     void Start()
     {   
         LoginButton.onClick.AddListener(() => Login());
