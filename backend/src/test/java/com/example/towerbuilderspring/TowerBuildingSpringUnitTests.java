@@ -6,6 +6,7 @@ import com.example.towerbuilderspring.model.Users;
 
 import com.example.towerbuilderspring.repository.FriendRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import com.example.towerbuilderspring.service.Roles;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -66,8 +67,8 @@ public class TowerBuildingSpringUnitTests {
          *  3. Checking if the return value from the controller matches the dummy value to be returned.
          */
         List<Users> mockedUsersPresent = Arrays.asList(
-                new Users("Henry", "henry@email.com", "Scrafty", 10),
-                new Users("Barry", "Barry@email.com", "Hoops", 21));
+                new Users("Henry", "henry@email.com", "Scrafty", 10, Roles.USER),
+                new Users("Barry", "Barry@email.com", "Hoops", 21, Roles.USER));
         List<Users> mockedUsersAbsent = new ArrayList<>();
 
         // The Repository is "mocked". In here I've used a shortcut that will call the next return statement every time it's called.
@@ -180,9 +181,9 @@ public class TowerBuildingSpringUnitTests {
         int updateXP = 130;
 
         //Original User
-        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10, Roles.USER);
         //Updates to by applied to user
-        Users updateUser = new Users("Henry", updateEmail, "Scrafty", updateXP);
+        Users updateUser = new Users("Henry", updateEmail, "Scrafty", updateXP, Roles.USER);
 
         //Makesure mock user can be accessed by finding its ID. Do this by storing in mock repository
         when(mockUserRepository.findById(mockUser.getId())).thenReturn(java.util.Optional.of(mockUser));
@@ -197,8 +198,8 @@ public class TowerBuildingSpringUnitTests {
         String updateEmail = "hhh@gmail.com";
         int updateXP = 130;
 
-        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
-        Users updateUser = new Users("Harriet", updateEmail, "ytfarcS", updateXP);
+        Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10, Roles.USER);
+        Users updateUser = new Users("Harriet", updateEmail, "ytfarcS", updateXP, Roles.USER);
 
         when(mockUserRepository.findById(mockUser.getId())).thenReturn(java.util.Optional.of(mockUser));
 
@@ -215,8 +216,8 @@ public class TowerBuildingSpringUnitTests {
         String originalName = "Henry";
         String originalPass = "Scrafty";
 
-        Users mockUser = new Users(originalName, "henry@email.com", originalPass, 10);
-        Users updateUser = new Users("Harriet", "henry@email.com", "ytfarcS", 10);
+        Users mockUser = new Users(originalName, "henry@email.com", originalPass, 10, Roles.USER);
+        Users updateUser = new Users("Harriet", "henry@email.com", "ytfarcS", 10, Roles.USER);
 
         UUID originalUUID = mockUser.getId();
         //store original name, password and ID to compare after update is applied
