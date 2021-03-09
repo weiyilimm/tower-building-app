@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using SimpleJSON;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 [System.Serializable]
 public class Friend_API_v2 : MonoBehaviour
@@ -13,6 +14,7 @@ public class Friend_API_v2 : MonoBehaviour
 
     // A list that stores the username and userid of each player the current user has marked as a friend
     public static List<Friends> friendslist = new List<Friends>();
+    public List<Friends> friendslist_InOrder = new List<Friends>();
     //Use the prefab participant
     public Transform FriendPrefab;
     //Leaderboardlist to be able to store all instances
@@ -65,8 +67,9 @@ public class Friend_API_v2 : MonoBehaviour
     }
 
     public void displayData() {
+        friendslist_InOrder  = friendslist.OrderByDescending(x => x.totalExp).ToList();
         // Display the data using the UI
-        foreach (Friends data in friendslist) {
+        foreach (Friends data in friendslist_InOrder) {
             int index = friendslist.IndexOf(data);
 
             //Create instance(user) as each data loop
