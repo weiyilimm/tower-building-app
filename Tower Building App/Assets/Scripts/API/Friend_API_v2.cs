@@ -14,7 +14,7 @@ public class Friend_API_v2 : MonoBehaviour
 
     // A list that stores the username and userid of each player the current user has marked as a friend
     public static List<Friends> friendslist = new List<Friends>();
-    public List<Friends> friendslist_InOrder = new List<Friends>();
+    private List<Friends> friendslist_InOrder = new List<Friends>();
     //Use the prefab participant
     public Transform FriendPrefab;
     //Input field from search
