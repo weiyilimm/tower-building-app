@@ -17,7 +17,9 @@ public class Friend_API_v2 : MonoBehaviour
     public List<Friends> friendslist_InOrder = new List<Friends>();
     //Use the prefab participant
     public Transform FriendPrefab;
-    //Leaderboardlist to be able to store all instances
+    //Input field from search
+    public TMP_InputField SearchInputField;
+    //FriendListTransform to be able to store all instances
     public Transform FriendListTransform;
     private TextMeshProUGUI textXP;
     private TextMeshProUGUI textName;
@@ -40,8 +42,44 @@ public class Friend_API_v2 : MonoBehaviour
         /* CreateRequest("Get_FriendIDs"); */
         Debug.Log("Finding the users friends...");
         CreateRequest("GET_FriendIDs");
+        SearchInputField.onValueChanged.AddListener(delegate {FilterUser(); });
     }
 
+    public void FilterUser() {
+        // Loop through each single user in the leaderboard list
+        for (int i = 0; i < FriendListTransform.childCount; i++)
+        {   
+            //Use child as temporary variable for each user
+            Transform child = FriendListTransform.GetChild(i);
+            //If the user input is empty then show every player
+            if(SearchInputField.text == "" ){
+                child.gameObject.SetActive(true);
+            }
+            else{
+                //If the user input is not empty, then get the username
+                TextMeshProUGUI userName = child.Find("NameText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+                /*
+                As the default are case sensitive
+                Change username to lower and user input to lower
+                e.g. If user type "richard", the leader will still show "Richard" user
+                */
+                string userInputLower = SearchInputField.text.ToLower();
+                string userNameLower = userName.text.ToLower();
+                //If the username contains the user input
+                if (userNameLower.Contains(userInputLower)){
+                    //Show the specific user according to the user input
+                    child.gameObject.SetActive(true);
+                }
+                //If the username does not contains the user input
+                else{
+                    //Hide it
+                    child.gameObject.SetActive(false);
+                }
+                
+            }
+        }
+    }
+    
     private void CreateRequest(string RequestType) {
         string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
         // Needs refactoring
@@ -71,7 +109,6 @@ public class Friend_API_v2 : MonoBehaviour
         // Display the data using the UI
         foreach (Friends data in friendslist_InOrder) {
             int index = friendslist.IndexOf(data);
-
             //Create instance(user) as each data loop
             var instance = Instantiate(FriendPrefab);
             //Set their parent to FriendList
@@ -80,12 +117,10 @@ public class Friend_API_v2 : MonoBehaviour
             textXP = instance.Find("XPText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             textId = instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
             rankText = instance.Find("RankingText").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
-            rankText.text = (friendslist.IndexOf(data) + 1).ToString() + ".";
+            rankText.text = (friendslist_InOrder.IndexOf(data) + 1).ToString() + ".";
             textName.text = data.UserName;
             textId.text = data.UserId;
             textXP.text = data.totalExp.ToString();
-            //Debug.Log(friendslist.IndexOf(data));
-            //Debug.Log(data.UserName + " " + data.totalExp);
         }
     }
 
