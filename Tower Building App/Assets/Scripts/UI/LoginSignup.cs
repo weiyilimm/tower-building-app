@@ -33,7 +33,7 @@ public class LoginSignup : MonoBehaviour
     public Slider Slider;
     private AsyncOperation operation;
     //To check whether the user is authenticated or not
-    private bool isAuthenticated = true;
+    private bool isAuthenticated = false;
     void Start()
     {   
         LoginButton.onClick.AddListener(() => Login());
@@ -165,7 +165,7 @@ public class LoginSignup : MonoBehaviour
                     isAuthenticated = false;
                 }
                 //Status code 201 = authenticated
-                if(uwr.responseCode == 201){
+                if(uwr.responseCode == 200){
                     Debug.Log("Correct credentials");
                     isAuthenticated = true;
                 }
