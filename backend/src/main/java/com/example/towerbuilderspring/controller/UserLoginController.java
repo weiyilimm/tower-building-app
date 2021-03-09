@@ -3,6 +3,7 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import com.example.towerbuilderspring.service.Roles;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -81,7 +82,7 @@ public class UserLoginController {
         try {
 
             String encryptedPassword = encoder.encode(user.getPassword());
-            Users newUser = new Users(user.getUserName(), user.getEmail(), encryptedPassword, user.getTotalExp());
+            Users newUser = new Users(user.getUserName(), user.getEmail(), encryptedPassword, user.getTotalExp(), Roles.USER);
             userRepository.save(newUser);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         }

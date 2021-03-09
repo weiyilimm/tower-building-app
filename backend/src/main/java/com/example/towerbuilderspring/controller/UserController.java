@@ -3,6 +3,8 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.*;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import com.example.towerbuilderspring.service.Roles;
+import org.apache.coyote.Response;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,29 @@ public class UserController {
         }
         else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/Users/Admin")
+    public ResponseEntity<Users> createAdmin(@RequestBody String user) {
+        try {
+            // Manually parsing Json.
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(user);
+            String name = (String) json.get("username");
+
+            Users admin = userRepository.findByUserName(name);
+            if (admin != null) {
+                admin.setUserType(Roles.ADMIN);
+                userRepository.save(admin);
+                return new ResponseEntity<>(admin, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
