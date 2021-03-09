@@ -1,4 +1,5 @@
 package com.example.towerbuilderspring.model;
+import com.example.towerbuilderspring.service.Roles;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -26,14 +27,48 @@ public class Users {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @NotNull
+    private Roles userType;
+
     public Users() {};
 
-    public Users(String userName, String email, String password, int totalexp) {
+    public Users(String userName, String email, String password, int totalexp, Roles userType) {
         this.id = UUID.randomUUID();
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.totalexp = totalexp;
+        this.userType = userType;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", totalexp=" + totalexp +
+                ", createdAt=" + createdAt +
+                ", userType=" + userType +
+                '}';
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Roles getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Roles userType) {
+        this.userType = userType;
     }
 
     public UUID getId() {
@@ -76,14 +111,4 @@ public class Users {
         this.totalexp = totalexp;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", totalexp=" + totalexp +
-                '}';
-    }
 }
