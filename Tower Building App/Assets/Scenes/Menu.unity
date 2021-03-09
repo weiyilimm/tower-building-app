@@ -5112,17 +5112,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoginRegisterNav: {fileID: 500719055}
   LoginPanel: {fileID: 2044045997}
-  RegisterEmail: {fileID: 455173471}
-  RegisterUsername: {fileID: 958819506}
   LoginUsername: {fileID: 2018150863}
   LoginPassword: {fileID: 1779093124}
+  RegisterEmail: {fileID: 455173471}
+  RegisterUsername: {fileID: 958819506}
+  RegisterPassword: {fileID: 1968978262}
   InvalidUsernamePopUP: {fileID: 59473273}
   InvalidEmailPopUP: {fileID: 349700229}
-  LoadingBarPanel: {fileID: 647326414}
-  LoginPopUp: {fileID: 2044045997}
-  NavBarPanel: {fileID: 500719055}
   LoginButton: {fileID: 598666281}
   RegisterButton: {fileID: 697064988}
+  LoadingBarPanel: {fileID: 647326414}
   Slider: {fileID: 1861642646}
 --- !u!114 &1714056754
 MonoBehaviour:
