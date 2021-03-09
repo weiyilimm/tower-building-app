@@ -1,15 +1,13 @@
 package com.example.towerbuilderspring.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long id;
+    private UUID id;
 
     private String roleName;
 
@@ -19,11 +17,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
