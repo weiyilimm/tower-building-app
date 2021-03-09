@@ -3,6 +3,9 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -24,28 +27,53 @@ public class UserLoginController {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @GetMapping("Login/{userName}/{password}")
-    public ResponseEntity<Users>  authenticateUser(@PathVariable String userName,
-                                                   @PathVariable String password)  throws AssertionError {
-        try
-        {
-            Users user = userRepository.findByUserName(userName);
-            System.out.println(user);
+//    @GetMapping("Login/{userName}/{password}")
+//    public ResponseEntity<Users>  authenticateUser(@PathVariable String userName,
+//                                                   @PathVariable String password)  throws AssertionError {
+//        try
+//        {
+//            Users user = userRepository.findByUserName(userName);
+//            System.out.println(user);
+//
+//            // Todo Make sure it checks the encoder before sending the data.
+//            if (user != null) {
+//                System.out.println("The user was found");
+//                System.out.println(encoder.matches(password, user.getPassword()));
+//                return new ResponseEntity<>(user,HttpStatus.OK);
+//            }
+//            throw new AssertionError("The username or password is incorrect");
+//        }
+//        catch (AssertionError e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//        catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
-            // Todo Make sure it checks the encoder before sending the data.
-            if (user != null) {
-                System.out.println("The user was found");
-                System.out.println(encoder.matches(password, user.getPassword()));
-                return new ResponseEntity<>(user,HttpStatus.OK);
-            }
-            throw new AssertionError("The username or password is incorrect");
-        }
-        catch (AssertionError e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping("Login/")
+    public ResponseEntity<Users> authenticateUser(@RequestBody String details) throws ParseException {
+
+       try {
+           // Manually parsing Json.
+           JSONParser parser = new JSONParser();
+           JSONObject json = (JSONObject) parser.parse(details);
+           String password = (String) json.get("password");
+           String username = (String) json.get("username");
+
+           Users user = userRepository.findByUserName(username);
+
+           if (user != null && encoder.matches(password, user.getPassword())) {
+               System.out.println("User was found");
+               return new ResponseEntity<Users>(user, HttpStatus.OK);
+           } else {
+               return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+           }
+       } catch(Exception e) {
+           System.out.println("There is a error with the data sent");
+           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+
     }
 
     @PostMapping("SignUp/")
