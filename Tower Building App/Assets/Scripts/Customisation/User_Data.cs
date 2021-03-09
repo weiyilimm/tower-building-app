@@ -167,7 +167,7 @@ public class User_Data : MonoBehaviour{
         return currentBuilding_string;
     }
 
-    private void TranslateUserJSON(string rawJSON){
+    public void TranslateUserJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
 
         JSONNode node;
@@ -183,6 +183,16 @@ public class User_Data : MonoBehaviour{
         Username = username;
         Email = email;
         Password = password;
+        global_xp = totalExp;
+    }
+
+    public void TranslateUserProfileJSON(string rawJSON){
+        // Reads a JSON file from the database to create / update the Users data stored in Unity 
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+        string username = JSON.Parse(node["userName"].Value);
+        int totalExp = int.Parse(node["totalExp"].Value);
+        Username = username;
         global_xp = totalExp;
     }
 

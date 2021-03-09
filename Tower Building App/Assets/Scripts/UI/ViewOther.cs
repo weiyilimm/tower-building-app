@@ -49,7 +49,7 @@ public class ViewOther : MonoBehaviour
         } else {
             string raw = uwr.downloadHandler.text;
             Debug.Log("Received: " + raw);
-
+            User_Data.data.TranslateUserProfileJSON(raw);
             User_Data.data.TranslateBuildingJSON(raw);
             SceneManager.LoadScene(16);
         }
