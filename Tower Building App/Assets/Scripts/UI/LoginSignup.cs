@@ -75,25 +75,6 @@ public class LoginSignup : MonoBehaviour
     public void Login(){
         //Trigger post request method for Login
         postRequest("Login");
-        /*
-        If the user is authenticated,
-        hide the Login Panel and Login/SignUp navigation bar
-        show the loading bar and start loading to main scene
-        */
-        if (isAuthenticated){
-            LoginPanel.SetActive(false);
-            LoginRegisterNav.SetActive(false);
-            LoadingBarPanel.SetActive(true);
-            StartCoroutine(LoadProgress());
-        }
-        /*
-        If the user is not authenticated
-        show both Login Panel and Login/SignUp navigation bar
-        */
-        else{
-            LoginPanel.SetActive(true);
-            LoginRegisterNav.SetActive(true);
-        }
     }
 
     public void Register(){
@@ -168,6 +149,25 @@ public class LoginSignup : MonoBehaviour
                 if(uwr.responseCode == 200){
                     Debug.Log("Correct credentials");
                     isAuthenticated = true;
+                }
+                /*
+                If the user is authenticated,
+                hide the Login Panel and Login/SignUp navigation bar
+                show the loading bar and start loading to main scene
+                */
+                if (isAuthenticated){
+                    LoginPanel.SetActive(false);
+                    LoginRegisterNav.SetActive(false);
+                    LoadingBarPanel.SetActive(true);
+                    StartCoroutine(LoadProgress());
+                }
+                /*
+                If the user is not authenticated
+                show both Login Panel and Login/SignUp navigation bar
+                */
+                else{
+                    LoginPanel.SetActive(true);
+                    LoginRegisterNav.SetActive(true);
                 }
             }
             if (type == "Register"){
