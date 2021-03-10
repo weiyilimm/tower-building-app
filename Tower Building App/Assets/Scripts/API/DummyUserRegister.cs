@@ -10,8 +10,7 @@ public class DummyUserRegister : MonoBehaviour
     private List<string> DummyLoginJsonString = new List<string>();
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         postDummyUser();
     }
 
@@ -20,13 +19,10 @@ public class DummyUserRegister : MonoBehaviour
         string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/SignUp/";
         createDummyRegisterJSON();
         createDummyLoginJSON();
+        int counter_index = 0;
         foreach (string dummy in DummyJsonString){
-            StartCoroutine(DummyUserPostRequest(apiString, dummy));
-        }
-
-        apiString = "https://uni-builder-database.herokuapp.com/api/Auth/Login/";
-        foreach (string dummylogin in DummyLoginJsonString) {
-            StartCoroutine(DummyUserLoginRequest(apiString, dummylogin));
+            StartCoroutine(DummyUserPostRequest(apiString, dummy, counter_index));
+            counter_index += 1;
         }
     }
 
@@ -56,7 +52,7 @@ public class DummyUserRegister : MonoBehaviour
         DummyLoginJsonString.Add(JsonUtility.ToJson(dummy5));
     }
 
-    IEnumerator DummyUserPostRequest(string URL, string json) {
+    IEnumerator DummyUserPostRequest(string URL, string json, int index) {
         byte[] rawJson = System.Text.Encoding.UTF8.GetBytes(json);
         UnityWebRequest uwr = UnityWebRequest.Put(URL, rawJson);
         uwr.method = "POST";
@@ -71,15 +67,17 @@ public class DummyUserRegister : MonoBehaviour
             }
             else{
                 Debug.Log("Dummy users have been created successfully");
+                StartCoroutine(DummyUserLoginRequest(DummyLoginJsonString[index]));
             }
         }
     }
 
-    IEnumerator DummyUserLoginRequest(string targetAPI, string json) {
+    IEnumerator DummyUserLoginRequest(string json) {
         yield return new WaitForSeconds(3);
         
+        string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/Login/";
         byte[] rawJson = System.Text.Encoding.UTF8.GetBytes(json);
-        UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawJson);
+        UnityWebRequest uwr = UnityWebRequest.Put(apiString, rawJson);
         uwr.method = "POST";
         uwr.SetRequestHeader("Content-Type", "application/json");
         yield return uwr.SendWebRequest();
