@@ -54,7 +54,7 @@ public class User_Data : MonoBehaviour{
         }
         
         for (int i=0; i<8; i++) {
-            Building newBuilding = new Building(-1,-1,1,0,0);
+            Building newBuilding = new Building(-1,-1,0,0,0);
             building_stats.Add(newBuilding);    
         }
 
