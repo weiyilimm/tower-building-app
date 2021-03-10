@@ -89,6 +89,11 @@ public class LoginSignup : MonoBehaviour
             string jsonString = createLoginUserJSON();
             StartCoroutine(PostRequest(apiString, jsonString, RequestType));
         }
+        if (RequestType == "First_Login"){
+            string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/Login/";
+            string jsonString = createLoginUserJSON();
+            StartCoroutine(PostRequest(apiString, jsonString, RequestType));
+        }
         if (RequestType == "Register"){ 
             if(IsEmail(RegisterEmail.text)){
                 InvalidEmailPopUP.SetActive(false);
@@ -139,6 +144,8 @@ public class LoginSignup : MonoBehaviour
             Debug.Log("An Internal Server Error Was Encountered");
         } 
         else {
+            string raw = uwr.downloadHandler.text;
+            Debug.Log(raw);
             if (type == "Login"){
                 //Status code 404 = not found
                 if (uwr.responseCode == 404){
@@ -149,26 +156,9 @@ public class LoginSignup : MonoBehaviour
                 if(uwr.responseCode == 200){
                     Debug.Log("Correct credentials");
                     isAuthenticated = true;
+                    Initialise_UserData(raw);
                 }
-                /*
-                If the user is authenticated,
-                hide the Login Panel and Login/SignUp navigation bar
-                show the loading bar and start loading to main scene
-                */
-                if (isAuthenticated){
-                    LoginPanel.SetActive(false);
-                    LoginRegisterNav.SetActive(false);
-                    LoadingBarPanel.SetActive(true);
-                    StartCoroutine(LoadProgress());
-                }
-                /*
-                If the user is not authenticated
-                show both Login Panel and Login/SignUp navigation bar
-                */
-                else{
-                    LoginPanel.SetActive(true);
-                    LoginRegisterNav.SetActive(true);
-                }
+                checkAuthentication();
             }
             if (type == "Register"){
                 //Status 500 code = email or username has already been taken
@@ -178,9 +168,66 @@ public class LoginSignup : MonoBehaviour
                 //Status 201 code = created successfully
                 if(uwr.responseCode == 201){
                     Debug.Log("Sign up successfully");
+                    FirstTimeLogin();
                 }
             }
+            if (type == "First_Login") {
+                yield return StartCoroutine(Populate_UserBuildings(raw));
+                Initialise_UserData(raw);
+                //isAuthenticated = true;
+                //checkAuthentication();
+            }
         }   
+    }
+
+    public void checkAuthentication() {
+        /*
+        If the user is authenticated,
+        hide the Login Panel and Login/SignUp navigation bar
+        show the loading bar and start loading to main scene
+        */
+        if (isAuthenticated){
+            LoginPanel.SetActive(false);
+            LoginRegisterNav.SetActive(false);
+            LoadingBarPanel.SetActive(true);
+            StartCoroutine(LoadProgress());
+        }
+        /*
+        If the user is not authenticated
+        show both Login Panel and Login/SignUp navigation bar
+        */
+        else{
+            LoginPanel.SetActive(true);
+            LoginRegisterNav.SetActive(true);
+        }
+    }
+
+    public void FirstTimeLogin() {
+        LoginUsername.text = RegisterUsername.text;
+        LoginPassword.text = RegisterPassword.text;
+        postRequest("First_Login");
+    }
+
+    IEnumerator Populate_UserBuildings(string rawJSON) {
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+        string userId = JSON.Parse(node["id"].Value);
+        User_Data.data.UserID = userId;
+
+        for (int index=0; index<12; index++) {
+            User_Data.data.CreateRequest("UPDATE_User_Building", index);
+        }
+        yield return new WaitForSeconds(1);
+        yield return null;
+    }
+
+    public void Initialise_UserData(string rawJSON) {
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+        string userId = JSON.Parse(node["id"].Value);
+        User_Data.data.UserID = userId;
+        User_Data.data.CreateRequest("GET_User");
+        User_Data.data.CreateRequest("GET_Friends");
     }
 
 }

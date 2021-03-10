@@ -95,7 +95,7 @@ public class User_Data : MonoBehaviour{
             apiString = apiString + "Buildings/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
-
+    
         } else if (RequestType == "GET_Friends") {
             // get the userid(hidden), username and xp of all users
             apiString = apiString + "Users/" + UserID + "/Friends/";
@@ -287,10 +287,7 @@ public class User_Data : MonoBehaviour{
         } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
-            Debug.Log("POST Received: " + raw);
-
-            // TRANSLATION CODE HERE (to check if data was correctly entered).
-
+            //Debug.Log("POST Received: " + raw);
         }   
     }
 
