@@ -147,11 +147,8 @@ public class TowerBuildingSpringUnitTests {
     public void DeleteUser_HTTPResponseDeleteUserByID_NoUnexpectedISE() {
         Users mockUser = new Users("Henry", "henry@email.com", "Scrafty", 10);
 
-<<<<<<< HEAD
-=======
         mockUserRepository.save(mockUser);
 
->>>>>>> 4837db9c16b1f53d6cc567ef0744ea406fc72857
         assertEquals(new ResponseEntity<>(HttpStatus.ACCEPTED), mockUserController.deleteUser(mockUser.getId()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(UUID.randomUUID()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserController.deleteUser(null));
@@ -260,7 +257,7 @@ public class TowerBuildingSpringUnitTests {
                     mockUserController.updateUserBuilding(mockUser.getId(),
                                                           mockModel.getUserModelId().getModel(),
                                                           mockModel.getModelGroup(),
-                                                          "{building_xp}"
+                                                          "{abc=3}"
                                                          ).getStatusCode()
         );
     }
@@ -516,6 +513,31 @@ public class TowerBuildingSpringUnitTests {
         assertEquals(new ResponseEntity<>(mockedUsersFriends, HttpStatus.OK), mockFriendController.getFriends(mockedUserMain.getId()));
         assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.getFriends(mockedUserMain.getId()));
         assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockFriendController.getFriends(mockedUserMain.getId()));
+    }
+
+    @Test
+    public void getFriends_HttpResponseGetFriendsWithNoUser_IfUserOkIfNoUserNotFoundIfNullISE(){
+        Users mockedUser =  new Users("Fraser", "fraser@email.com", "Password", 4);
+        //contains 2 users
+        List<Users> mockedUsersFriends = Arrays.asList(
+                new Users("Henry", "henry@email.com", "Scrafty", 10),
+                new Users("Barry", "Barry@email.com", "Hoops", 21));
+
+        //when he has 2 friends (from mockedUsersFriends)
+        List<Friend> mockedFriends2 = Arrays.asList(
+                new Friend(mockedUser.getId(),mockedUsersFriends.get(0).getId()),
+                new Friend(mockedUser.getId(),mockedUsersFriends.get(1).getId()));
+
+        when(mockFriendRepository.findByUserId(mockedUser.getId())).thenReturn(mockedFriends2);
+        //When we look for other users (in the main guys friends list) return that user
+        when(mockUserRepository.findById(mockedUsersFriends.get(0).getId())).thenReturn(Optional.ofNullable(mockedUsersFriends.get(0)));
+        when(mockUserRepository.findById(mockedUsersFriends.get(1).getId())).thenReturn(Optional.ofNullable(mockedUsersFriends.get(1)));
+
+
+        assertEquals(new ResponseEntity<>(mockedUsersFriends, HttpStatus.OK), mockFriendController.getFriends(mockedUser.getId()));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockFriendController.getFriends(UUID.randomUUID()));
+        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockFriendController.getFriends(null));
+
     }
 
     @Test
