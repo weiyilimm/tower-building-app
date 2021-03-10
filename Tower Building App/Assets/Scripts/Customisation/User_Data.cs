@@ -43,28 +43,8 @@ public class User_Data : MonoBehaviour{
         //Creates a set of default buildings that are then overwritten by any data retrieved from the database
         createBuildings();
 
-        // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
-
-        // Login 
-
         // Dev User
         // UserID = System.Guid.NewGuid().ToString();
-        // UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188"; // JOE
-        UserID = "4c419cf7-b65c-4e10-b971-b63907b229a4"; // WEI
-        Debug.Log("Getting the users data...");
-        CreateRequest("GET_User");
-        CreateRequest("GET_Friends");
-    }
-
-    public void Update() {
-        if (Input.GetKeyDown("t")) {
-            Debug.Log(UserID);
-            Debug.Log(Username);
-            for (int i=0;i<12;i++) {
-                Debug.Log("Building " + i);
-                Debug.Log("Model chosen " + building_stats[i].model);
-            }
-        }
     }
 
     private void createBuildings(){
