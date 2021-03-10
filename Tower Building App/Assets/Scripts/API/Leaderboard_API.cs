@@ -120,12 +120,13 @@ public class Leaderboard_API : MonoBehaviour {
         //}
 
         node = JSON.Parse(rawJSON);
-
+        int NUM_USERS = node.Count;
+        
         string userid;
         string username;
         int totalExp;
         
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<NUM_USERS; i++) {
             userid = JSON.Parse(node[i]["id"].Value);
             username = JSON.Parse(node[i]["userName"].Value);
             totalExp = JSON.Parse(node[i]["totalExp"].Value);
