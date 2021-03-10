@@ -174,8 +174,6 @@ public class LoginSignup : MonoBehaviour
             if (type == "First_Login") {
                 yield return StartCoroutine(Populate_UserBuildings(raw));
                 Initialise_UserData(raw);
-                //isAuthenticated = true;
-                //checkAuthentication();
             }
         }   
     }
@@ -202,12 +200,15 @@ public class LoginSignup : MonoBehaviour
         }
     }
 
+    // If the user is registering then proceed with generating their default buildings
     public void FirstTimeLogin() {
         LoginUsername.text = RegisterUsername.text;
         LoginPassword.text = RegisterPassword.text;
         postRequest("First_Login");
     }
 
+    // Loops over the 12 default buildings in Unity and sends an 'instance' of them to the database
+    // so that the newly registered user ha a list of their 12 buildings
     IEnumerator Populate_UserBuildings(string rawJSON) {
         JSONNode node;
         node = JSON.Parse(rawJSON);
@@ -221,6 +222,8 @@ public class LoginSignup : MonoBehaviour
         yield return null;
     }
 
+    //Once the database has recognised the login attempt is the UUID of the user is sent
+    // in a request to get the rest of the users profile data and their building data
     public void Initialise_UserData(string rawJSON) {
         JSONNode node;
         node = JSON.Parse(rawJSON);
