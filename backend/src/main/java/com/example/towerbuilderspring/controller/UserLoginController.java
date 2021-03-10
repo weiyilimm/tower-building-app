@@ -27,30 +27,6 @@ public class UserLoginController {
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-//    @GetMapping("Login/{userName}/{password}")
-//    public ResponseEntity<Users>  authenticateUser(@PathVariable String userName,
-//                                                   @PathVariable String password)  throws AssertionError {
-//        try
-//        {
-//            Users user = userRepository.findByUserName(userName);
-//            System.out.println(user);
-//
-//            // Todo Make sure it checks the encoder before sending the data.
-//            if (user != null) {
-//                System.out.println("The user was found");
-//                System.out.println(encoder.matches(password, user.getPassword()));
-//                return new ResponseEntity<>(user,HttpStatus.OK);
-//            }
-//            throw new AssertionError("The username or password is incorrect");
-//        }
-//        catch (AssertionError e) {
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//        }
-//        catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
     @PostMapping("Login/")
     public ResponseEntity<Users> authenticateUser(@RequestBody String details) throws ParseException {
 
