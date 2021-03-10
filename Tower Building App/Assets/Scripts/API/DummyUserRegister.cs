@@ -19,6 +19,8 @@ public class DummyUserRegister : MonoBehaviour
         string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/SignUp/";
         createDummyRegisterJSON();
         createDummyLoginJSON();
+        // Counter for identifing which index of DummyJsonString we are on so we 
+        // can retrive the matching entry in DummyLoginJsonString
         int counter_index = 0;
         foreach (string dummy in DummyJsonString){
             StartCoroutine(DummyUserPostRequest(apiString, dummy, counter_index));
@@ -67,6 +69,8 @@ public class DummyUserRegister : MonoBehaviour
             }
             else{
                 Debug.Log("Dummy users have been created successfully");
+                // If this is the first time these users have been added to the database then
+                // we need to generate a set of default buildings for each user
                 StartCoroutine(DummyUserLoginRequest(DummyLoginJsonString[index]));
             }
         }
@@ -91,6 +95,9 @@ public class DummyUserRegister : MonoBehaviour
             else{
                 Debug.Log("Dummy user found");
                 string raw = uwr.downloadHandler.text;
+                //The user was found in the database so proceed with generating the default buildings like in
+                // the login/sign up scene wher each user loops over the 12 default buildings in Unity and adds an
+                // 'instance' of it to their own list of buildings
                 yield return StartCoroutine(Populate_UserBuildings(raw));
             }
         }
