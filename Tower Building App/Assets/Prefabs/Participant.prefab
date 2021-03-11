@@ -689,6 +689,8 @@ MonoBehaviour:
   addFriend: {fileID: 5879475966464687543}
   removeFriend: {fileID: 6684599418669950584}
   friendId: {fileID: 7582919400532591527}
+  friendUserName: {fileID: 4910855610022993371}
+  friendExp: {fileID: 8838953106653822262}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: ae078722-790a-4f5a-a2dc-ec2bbb2df560
 --- !u!1 &6684599418669950584
@@ -855,6 +857,8 @@ MonoBehaviour:
   addFriend: {fileID: 5879475966464687543}
   removeFriend: {fileID: 6684599418669950584}
   friendId: {fileID: 7582919400532591527}
+  friendUserName: {fileID: 4910855610022993371}
+  friendExp: {fileID: 8838953106653822262}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: ae078722-790a-4f5a-a2dc-ec2bbb2df560
 --- !u!1 &6904883873535698932
