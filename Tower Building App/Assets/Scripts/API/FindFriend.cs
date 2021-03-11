@@ -46,6 +46,10 @@ public class FindFriend : MonoBehaviour
                 found = true;
             }
         }
+        if(User_Data.data.Username.ToLower() == FindFriendInputField.text.ToLower()){
+            found = false;
+        }
+
         if (found){
             found = false;
             Friend.SetActive(true);

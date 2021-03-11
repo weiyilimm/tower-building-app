@@ -33,9 +33,15 @@ public class ViewOther : MonoBehaviour
 
     public void CreateRequest() {
         string friendID = friendId.text;
-        apiString = apiString + friendID + "/Buildings/";
-        Debug.Log(apiString);
-        StartCoroutine(GetRequest(apiString));
+        /*
+        If the friendID is empty which means is the user himself
+        User can only visit other people world not his world
+        */
+        if(friendID != ""){
+            apiString = apiString + friendID + "/Buildings/";
+            Debug.Log(apiString);
+            StartCoroutine(GetRequest(apiString));
+        }
     }
 
     IEnumerator GetRequest(string targetAPI) {
