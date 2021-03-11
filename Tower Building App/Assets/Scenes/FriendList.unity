@@ -1262,6 +1262,8 @@ MonoBehaviour:
   Search: {fileID: 408016539}
   Friend: {fileID: 652718093}
   PopUp: {fileID: 1649771254}
+  tick: {fileID: 652718095}
+  plus: {fileID: 652718094}
   textXP: {fileID: 652718090}
   textName: {fileID: 652718092}
   textId: {fileID: 652718091}
@@ -1787,6 +1789,18 @@ MonoBehaviour:
 --- !u!1 &652718093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 582770320911166104, guid: 1ab7c416fe8148a4795b49365d7598b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 652718087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &652718094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5522272871294535865, guid: 1ab7c416fe8148a4795b49365d7598b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 652718087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &652718095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4755627585256395638, guid: 1ab7c416fe8148a4795b49365d7598b5,
     type: 3}
   m_PrefabInstance: {fileID: 652718087}
   m_PrefabAsset: {fileID: 0}
