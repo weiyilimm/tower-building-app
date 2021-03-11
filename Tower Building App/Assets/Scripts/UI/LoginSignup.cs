@@ -231,6 +231,7 @@ public class LoginSignup : MonoBehaviour
         User_Data.data.UserID = userId;
         User_Data.data.CreateRequest("GET_User");
         User_Data.data.CreateRequest("GET_Friends");
+        User_Data.data.CreateRequest("GET_Leaderboard");
     }
 
 }

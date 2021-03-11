@@ -102,6 +102,10 @@ public class User_Data : MonoBehaviour{
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Multiple"));
 
+        } else if (RequestType == "GET_Leaderboard") {
+            apiString = apiString + "Users/";
+            StartCoroutine(GetRequest(apiString, "leaderboard"));
+
         } else if (RequestType == "UPDATE_User") {
             // Change the Users personal details 
             // Call CreateUserJSON
@@ -243,6 +247,26 @@ public class User_Data : MonoBehaviour{
         }
     }
 
+    public void TranslateLeaderboadJSON(string rawJSON) {
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+
+        int NUM_USERS = node.Count;
+        
+        string userid;
+        string username;
+        int totalExp;
+        
+        for (int i=0; i<NUM_USERS; i++) {
+            userid = JSON.Parse(node[i]["id"].Value);
+            username = JSON.Parse(node[i]["userName"].Value);
+            totalExp = JSON.Parse(node[i]["totalExp"].Value);
+
+            leaderboard_data data = new leaderboard_data(userid, username, totalExp);
+            Leaderboard_API.LB_data.Add(data);
+        }
+    }
+
 
     IEnumerator GetRequest(string targetAPI, string translationType){
 
@@ -269,6 +293,8 @@ public class User_Data : MonoBehaviour{
                 // If the translation type is multiple then we are getting the list of friends
                 // which need to be added to the friendslist in the friends scene
                 TranslateFriendsJSON(raw);
+            } else if (translationType == "leaderboard") {
+                TranslateLeaderboadJSON(raw);
             }
         }
     }

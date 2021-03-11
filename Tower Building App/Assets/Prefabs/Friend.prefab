@@ -56,8 +56,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FriendEntry: {fileID: 582770320911166104}
-  FriendList: {fileID: 0}
-  LoadingText: {fileID: 0}
   FriendName: {fileID: 5380078823626474545}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   friendId: {fileID: 3310748297361142112}
@@ -555,6 +553,8 @@ MonoBehaviour:
   addFriend: {fileID: 5522272871294535865}
   removeFriend: {fileID: 4755627585256395638}
   friendId: {fileID: 3310748297361142112}
+  friendUserName: {fileID: 6421509636989184213}
+  friendExp: {fileID: 7462834927327037496}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: 
 --- !u!1 &4821110660428485370
@@ -854,6 +854,8 @@ MonoBehaviour:
   addFriend: {fileID: 5522272871294535865}
   removeFriend: {fileID: 4755627585256395638}
   friendId: {fileID: 3310748297361142112}
+  friendUserName: {fileID: 6421509636989184213}
+  friendExp: {fileID: 7462834927327037496}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: 
 --- !u!1 &5962969687243641276

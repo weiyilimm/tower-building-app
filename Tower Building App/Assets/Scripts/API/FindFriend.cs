@@ -13,6 +13,8 @@ public class FindFriend : MonoBehaviour
     public GameObject Friend;
     //Friend not found pop up
     public GameObject PopUp;
+    public GameObject tick;
+    public GameObject plus;
     public TextMeshProUGUI textXP;
     public TextMeshProUGUI textName;
     public TextMeshProUGUI textId;
@@ -32,13 +34,15 @@ public class FindFriend : MonoBehaviour
         Might expect Leaderboard_API.LB_data only store 50 users in the future
         */
         
-        foreach (leaderboard_data data in Leaderboard_API.LB_data_InOrder){
+        foreach (leaderboard_data data in Leaderboard_API.LB_data){
             //Check if the username same as the input field
             if (data.UserName.ToLower() == FindFriendInputField.text.ToLower()){
                 rankText.text = "1";
                 textName.text = data.UserName;
                 textId.text = data.UserId;
                 textXP.text = data.TotalExp.ToString();
+                tick.SetActive(false);
+                plus.SetActive(true);
                 found = true;
             }
         }
