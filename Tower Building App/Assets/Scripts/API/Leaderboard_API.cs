@@ -211,6 +211,12 @@ public class Leaderboard_API : MonoBehaviour {
             }
         }
         if (data.UserName == User_Data.data.Username) {
+            /*
+            if the leaderboard showing the current user
+            assign their IdText to be empty
+            so the current wont be able to visit his/her own world
+            */
+            instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             GameObject plus = instance.Find("RawImage").gameObject;
             GameObject tick = instance.Find("RawImage (1)").gameObject;
             plus.SetActive(false);
