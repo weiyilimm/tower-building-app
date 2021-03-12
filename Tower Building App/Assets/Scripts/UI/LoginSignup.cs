@@ -84,12 +84,15 @@ public class LoginSignup : MonoBehaviour
         postRequest("Register");
     }
 
-    //Post request for either Login or register
+    //To decide which post request 
     void postRequest(string RequestType) {
-        
+        //If the post request is for login
         if (RequestType == "Login"){ 
+            //The API URL for sending login username and password
             string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/Login/";
+            //Call a method which convert username and password into json format
             string jsonString = createLoginUserJSON();
+            //Post the specific json file to the URL
             StartCoroutine(PostRequest(apiString, jsonString, RequestType));
         }
         if (RequestType == "First_Login"){
@@ -97,14 +100,23 @@ public class LoginSignup : MonoBehaviour
             string jsonString = createLoginUserJSON();
             StartCoroutine(PostRequest(apiString, jsonString, RequestType));
         }
+        //If the post request is for register
         if (RequestType == "Register"){ 
+            //Check if the email is in valid syntax 
             if(IsEmail(RegisterEmail.text)){
+                //Hide the invalid email pop up 
                 InvalidEmailPopUP.SetActive(false);
                 string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/SignUp/";
+                /*
+                Convert the input to json
+                e.g. username, email, password, totalXP(default)
+                */
                 string jsonString = createRegisterUserJSON();
+                //Post the converted json to the URL
                 StartCoroutine(PostRequest(apiString, jsonString, RequestType));
             }
             else{
+                //If the email is invalid, show the pop up
                 InvalidEmailPopUP.SetActive(true);
             }
         }
@@ -138,7 +150,9 @@ public class LoginSignup : MonoBehaviour
     type = to decide whether this method is for Login or register, only accept "Login" or "Register"
     */
     IEnumerator PostRequest(string URL, string json, string type) {
+        //Convert json file to byte format inorder to be sent
         byte[] rawJson = System.Text.Encoding.UTF8.GetBytes(json);
+        //Use unity put request to send the data to the URL
         UnityWebRequest uwr = UnityWebRequest.Put(URL, rawJson);
         uwr.method = "POST";
         uwr.SetRequestHeader("Content-Type", "application/json");

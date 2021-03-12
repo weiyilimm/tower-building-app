@@ -22,12 +22,18 @@ public class DummyUserRegister : MonoBehaviour
         // Counter for identifing which index of DummyJsonString we are on so we 
         // can retrive the matching entry in DummyLoginJsonString
         int counter_index = 0;
+        //To post every dummy user to the database
         foreach (string dummy in DummyJsonString){
             StartCoroutine(DummyUserPostRequest(apiString, dummy, counter_index));
             counter_index += 1;
         }
     }
 
+    /*
+    Create dummy user objects,
+    convert it to Json String,
+    store it to DummyJsonString list
+    */
     private void createDummyRegisterJSON() {
         RegisterUser dummy1 = new RegisterUser("Rueben", "2383199M@student.gla.ac.uk", "ReallySafe", 0);
         RegisterUser dummy2 = new RegisterUser("Joe", "2377990S@student.gla.ac.uk", "HeyWhyNot", 1000);
@@ -40,7 +46,11 @@ public class DummyUserRegister : MonoBehaviour
         DummyJsonString.Add(JsonUtility.ToJson(dummy4));
         DummyJsonString.Add(JsonUtility.ToJson(dummy5));
     }
-
+    
+    /*
+    Create dummy user's username and password,
+    store it into DummyLoginJsonString
+    */
     private void createDummyLoginJSON() {
         LoginUser dummy1 = new LoginUser("Rueben", "ReallySafe");
         LoginUser dummy2 = new LoginUser("Joe", "HeyWhyNot");
@@ -54,6 +64,12 @@ public class DummyUserRegister : MonoBehaviour
         DummyLoginJsonString.Add(JsonUtility.ToJson(dummy5));
     }
 
+    /*
+    Post registered dummy user credentials to database
+    URL is the specific API call
+    json is the json string of the credentials
+    index is the index of DummyLoginJsonString, i.e. a specific user
+    */
     IEnumerator DummyUserPostRequest(string URL, string json, int index) {
         byte[] rawJson = System.Text.Encoding.UTF8.GetBytes(json);
         UnityWebRequest uwr = UnityWebRequest.Put(URL, rawJson);
@@ -76,6 +92,11 @@ public class DummyUserRegister : MonoBehaviour
         }
     }
 
+    /*
+    Send a json string to the API as a post request
+    Json string is login credentials
+    e.g. username and password
+    */
     IEnumerator DummyUserLoginRequest(string json) {
         yield return new WaitForSeconds(3);
         
@@ -103,6 +124,9 @@ public class DummyUserRegister : MonoBehaviour
         }
     }
 
+    /*
+    Send default building to the database
+    */
     IEnumerator Populate_UserBuildings(string rawJSON) {
         JSONNode node;
         node = JSON.Parse(rawJSON);
