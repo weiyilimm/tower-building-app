@@ -93,9 +93,7 @@ public class UserController {
                 }
             }
 
-            /**
-             Formatting the values to match the frontend model.
-             **/
+            //Formatting the values to match the frontend model.
 
             // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
             HashMap<String, Object> formattedUserModels = new HashMap<>();
