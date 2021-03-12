@@ -28,7 +28,7 @@ public class UserLoginController {
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostMapping("Login/")
-    public ResponseEntity<Users> authenticateUser(@RequestBody String details) throws ParseException {
+    public ResponseEntity<Users> authenticateUser(@RequestBody String details){
 
        try {
            // Manually parsing Json.
@@ -45,8 +45,12 @@ public class UserLoginController {
            } else {
                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
            }
-       } catch(Exception e) {
-           System.out.println("There is a error with the data sent");
+       } catch(ParseException e) {
+           System.out.println("Data parse error");
+           e.printStackTrace();
+           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+       } catch (Exception e) {
+           e.printStackTrace();
            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
        }
 
