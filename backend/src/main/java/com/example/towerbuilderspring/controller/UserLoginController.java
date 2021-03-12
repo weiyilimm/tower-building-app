@@ -26,6 +26,9 @@ public class UserLoginController {
     @Autowired
     UserModelRepository userModelRepository;
 
+    @Autowired
+    EmailServiceImpl emailService;
+
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostMapping("Login/")
@@ -37,6 +40,8 @@ public class UserLoginController {
            JSONObject json = (JSONObject) parser.parse(details);
            String password = (String) json.get("password");
            String username = (String) json.get("username");
+
+           System.out.println("Inside the method");
 
            Users user = userRepository.findByUserName(username);
 
@@ -87,11 +92,12 @@ public class UserLoginController {
     }
 
 
-//    // Testing email function
-//    @GetMapping("Test/Email")
-//    public ResponseEntity<Users> checkEmailSent() {
-//        @Autowired
-//        EmailServiceImpl emailService;
-//    }
+    // Testing email function
+    @GetMapping("Test/Email")
+    public ResponseEntity<Users> checkEmailSent() {
+        emailService.sendSimpleMessage("pseudolabs.org@gmail.com", "This is from Tower Builder",
+                                        "Looks like someone forgot their password");
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
 }

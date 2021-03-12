@@ -14,6 +14,7 @@ public class Users {
     private UUID id;
 
     @Column(unique = true)
+    @NotNull
     private String userName;
 
     @Column(unique = true)

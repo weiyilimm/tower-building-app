@@ -23,8 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dd5c276-46ef-48cb-9c75-d5256328e89f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_jakarta_mail_1_6_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_mail_2_3_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_2_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/config/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/repository/ModelRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cs17-main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs17-main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/mail/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/mail/EmailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/controller/UserLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/controller/UserLoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/misc/TestRunner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/service/mail/EmailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/service/mail/EmailServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +49,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,15 +96,13 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Spring Boot.TowerbuilderspringApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -255,41 +265,41 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="412" y="210" width="458" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1614514059192" />
-    <state width="1237" height="523" key="GridCell.Tab.0.bottom" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.0.bottom" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.0.center" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.0.center" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.0.left" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.0.left" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.0.right" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.0.right" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.1.bottom" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.1.bottom" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.1.center" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.1.center" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.1.left" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.1.left" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state width="1237" height="523" key="GridCell.Tab.1.right" timestamp="1614572061791">
+    <state width="1237" height="521" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.1.right" timestamp="1615542589591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="523" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1614572061791" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1614514133718">
+    <state width="1237" height="521" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1615539576172">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1614514133718" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1615539576172" />
   </component>
 </project>

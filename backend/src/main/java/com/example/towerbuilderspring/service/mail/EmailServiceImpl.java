@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-
+@Component
 public class EmailServiceImpl {
 
     @Autowired
@@ -21,7 +21,7 @@ public class EmailServiceImpl {
         message.setFrom("pseudolabsrobota@gmail.com");
         message.setTo(to);
 
-        message.setSubject(subject);
+        message.    setSubject(subject);
         message.setText(text);
 
         System.out.println("Created email " + message.toString());
