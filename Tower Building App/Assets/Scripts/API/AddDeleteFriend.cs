@@ -9,6 +9,8 @@ public class AddDeleteFriend : MonoBehaviour {
     
     public GameObject addFriend, removeFriend;
     public TextMeshProUGUI friendId;
+    public TextMeshProUGUI friendUserName;
+    public TextMeshProUGUI friendExp;
     public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
     public string otherID;
 
@@ -23,6 +25,7 @@ public class AddDeleteFriend : MonoBehaviour {
 
     public void AddFriend() {
         //Friends_API.CreateRequest("CREATE_Friend", thisFriendID);
+        apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
         Debug.Log("POST Request at: " + apiString);
 
@@ -35,6 +38,7 @@ public class AddDeleteFriend : MonoBehaviour {
 
     public void DeleteFriend() {
         //Friends_API.CreateRequest("DELETE_Friend", thisFriendID);
+        apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
         Debug.Log("DELETE Request at: " + apiString);
         StartCoroutine(DeleteRequest(apiString));
@@ -55,6 +59,7 @@ public class AddDeleteFriend : MonoBehaviour {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
             Debug.Log("You've added a new friend");
+            AddToFriendsList(friendId.text, friendUserName.text, int.Parse(friendExp.text));
             addFriend.SetActive(false);
             removeFriend.SetActive(true);
         }
@@ -87,5 +92,10 @@ public class AddDeleteFriend : MonoBehaviour {
             }
         }
         Friend_API_v2.friendslist.RemoveAt(indexToRemove);
+    }
+
+    public void AddToFriendsList(string friendID, string friendUsername, int friendXP) {
+        Friends newFriend = new Friends(friendID, friendUsername, friendXP);
+        Friend_API_v2.friendslist.Add(newFriend);
     }
 }

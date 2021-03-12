@@ -17,22 +17,6 @@ public class StopWatch : MonoBehaviour {
     private DateTime gamePausedTime;
     public GameObject PauseButton;
     public GameObject PlayButton;
-    private bool isWorking;
-    //The dont destory object is canvas, it must be a parentless gameobject 
-    // public GameObject TimerDontDestory;
-    // public static StopWatch Instance;
-
-    // //Avoid multiple instances
-    // void Awake(){
-    //     if (Instance == null){
-    //         Instance = this;
-    //         DontDestroyOnLoad(TimerDontDestory);
-    //     }
-    //     else{
-    //         Destroy(TimerDontDestory);
-    //     }
-    // }
-
 
     void Update () {
         if (playing == true)
@@ -45,27 +29,32 @@ public class StopWatch : MonoBehaviour {
         }
     }
 
+    
+    //Unity built-in method to detect when the user left the app
     void OnApplicationPause (bool isGamePause)
     {   
         //Store the current time when the app is paused
         if (isGamePause) {
             gamePausedTime = DateTime.Now;
         }
-        Debug.Log(gamePausedTime);
-        Debug.Log("Is the game being paused?" + isGamePause);
     }
 
+    
+    //Unity built-in method to detect when the user is come back
     void OnApplicationFocus  (bool isGameFocus)
-    {
+    {   
+        //Trigger BackgroundTimer method when user come back 
         if (isGameFocus && playing == true ) {
             BackgroundTimer();
         }
-        // Debug.Log(TimeCounted);
     }
 
+    /*
+    Calculate the total time difference between 
+    time when user left and time when user come back
+    */
     void BackgroundTimer(){
         TimeCounted += ((float)(DateTime.Now - gamePausedTime).TotalSeconds);
-        isWorking = false;
     }
 
     public void ClickPlay ()
