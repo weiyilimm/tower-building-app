@@ -130,7 +130,7 @@ public class User_Data : MonoBehaviour{
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
         
-        List<DatabaseBuildings> uB = new List<DatabaseBuildings>(); //CreateBuildingJSON();
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
         string UserJSON = JsonUtility.ToJson(putData);
 
@@ -156,7 +156,6 @@ public class User_Data : MonoBehaviour{
 
         JSONNode node;
         node = JSON.Parse(rawJSON);
-
         string userid = JSON.Parse(node["id"].Value);
         string username = JSON.Parse(node["userName"].Value);
         string email = JSON.Parse(node["email"].Value);
@@ -166,6 +165,7 @@ public class User_Data : MonoBehaviour{
         UserID = userid;
         Username = username;
         Email = email;
+        Debug.Log("email after saving in Unity = " + Email);
         Password = password;
         global_xp = totalExp;
     }
@@ -287,7 +287,8 @@ public class User_Data : MonoBehaviour{
                 // If the translation type is Single then we know that the database is sending all of the Users data
                 // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
-                TranslateUserJSON(raw);
+                
+                //TranslateUserJSON(raw); //NOT TRANSALTING HERE ANYMORE WILL BE DONE IN LOGIN
                 TranslateBuildingJSON(raw);
             } else if (translationType == "Multiple") {
                 // If the translation type is multiple then we are getting the list of friends
@@ -313,7 +314,7 @@ public class User_Data : MonoBehaviour{
         } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
-            //Debug.Log("POST Received: " + raw);
+            Debug.Log("POST Received: " + raw);
         }   
     }
 
@@ -358,15 +359,15 @@ public class DatabaseUser {
     public string userName;
     public string email;
     public string password;
-    //public List<DatabaseBuildings> userBuildings;
+    public List<DatabaseBuildings> userBuildings;
     public long totalExp;
 
-    public DatabaseUser(string userid, string un, string e, string p, List<DatabaseBuildings> uB, long xp) {
+    public DatabaseUser(string userid, string un, string eMail, string p, List<DatabaseBuildings> uB, long xp) {
         id = userid;
         userName = un;
-        email = e;
+        email = eMail;
         password = p;
-        //userBuildings = uB;
+        userBuildings = uB;
         totalExp = xp;
     }
 }
