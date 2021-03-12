@@ -69,6 +69,9 @@ public class User_Data : MonoBehaviour{
         Scoring.PhyMathXP = 0;
     }
 
+    /*
+    To decide which API to be called
+    */
     public void CreateRequest(string RequestType, int subjectIndex = -1) {
         // Building name, User name. User -> 
         string apiString = "https://uni-builder-database.herokuapp.com/api/";
@@ -247,6 +250,10 @@ public class User_Data : MonoBehaviour{
         }
     }
 
+    /*
+    rawJson is the file storing all users in bytes
+    Convert it to Json file and assign it to every user to be shown on leaderboard
+    */
     public void TranslateLeaderboadJSON(string rawJSON) {
         JSONNode node;
         node = JSON.Parse(rawJSON);
