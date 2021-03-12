@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequestMapping("api/Auth/")
@@ -76,7 +77,8 @@ public class UserLoginController {
         try {
             Users userToDelete = userRepository.findByUserName(username);
 
-            System.out.println(userToDelete.toString());
+            // Make a check if null was sent.
+
             if (userToDelete != null) {
                 userRepository.delete(userToDelete);
                 return new ResponseEntity<>(userToDelete, HttpStatus.OK);

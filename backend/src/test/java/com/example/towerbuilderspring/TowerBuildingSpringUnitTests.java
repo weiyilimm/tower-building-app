@@ -504,7 +504,6 @@ public class TowerBuildingSpringUnitTests {
                 new Friend(mockedUserMain.getId(),mockedUsersFriends.get(0).getId()),
                 new Friend(mockedUserMain.getId(),mockedUsersFriends.get(1).getId()));
 
-        //when he has no friends lmao
         List<Friend> mockedFriendsNone = Arrays.asList();
 
         //When we look for the main users friends, then we return these different friends lists
