@@ -3,6 +3,7 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import com.example.towerbuilderspring.service.mail.EmailServiceImpl;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -84,5 +85,13 @@ public class UserLoginController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+//    // Testing email function
+//    @GetMapping("Test/Email")
+//    public ResponseEntity<Users> checkEmailSent() {
+//        @Autowired
+//        EmailServiceImpl emailService;
+//    }
 
 }
