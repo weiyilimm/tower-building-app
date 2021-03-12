@@ -74,64 +74,70 @@ public class UserController {
 
     @GetMapping("Users/{id}/Buildings")
     public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
+        
+        try {
+            Optional<Users> fetched_user = userRepository.findById(id);
+            List<UserModels> all_models = userModelRepository.findAll();
+            Set<UserModels> userModels = new HashSet<>();
 
-        Optional<Users> fetched_user = userRepository.findById(id);
-        List<UserModels> all_models = userModelRepository.findAll();
-        Set<UserModels> userModels = new HashSet<>();
+            System.out.println("Passed fetched_user");
 
-        System.out.println("Passed fetched_user");
+            if (fetched_user.isPresent()) {
+                Users requestedUser = fetched_user.get();
 
-        if (fetched_user.isPresent()) {
-            Users requestedUser = fetched_user.get();
-
-            // Currently manually going through the list as the key UserModels is mapped to a composite key.
-            for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
-                UserModels currentModel = it.next();
-                // TODO clean this up.
-                if (currentModel.getUserModelId().getFk_user().getId() == id) {
-                    userModels.add(currentModel);
+                // Currently manually going through the list as the key UserModels is mapped to a composite key.
+                for (Iterator<UserModels> it = all_models.iterator(); it.hasNext();) {
+                    UserModels currentModel = it.next();
+                    // TODO clean this up.
+                    if (currentModel.getUserModelId().getFk_user().getId() == id) {
+                        userModels.add(currentModel);
+                    }
                 }
-            }
 
-            //Formatting the values to match the frontend model.
+                //Formatting the values to match the frontend model.
 
-            // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
-            HashMap<String, Object> formattedUserModels = new HashMap<>();
-            List<HashMap<String, Object>> modelsList = new ArrayList<HashMap<String, Object>>();
-
-
-            // User Details
-            formattedUserModels.put("id", id.toString());
-            formattedUserModels.put("userName", requestedUser.getUserName());
-            formattedUserModels.put("password", requestedUser.getPassword());
-            formattedUserModels.put("totalExp", requestedUser.getTotalExp());
-            // Their current models
-            for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
-                UserModels currentModel = it.next();
+                // TODO look if you can pass only strings i.e. HashMap<String, String> instead of HashMap<String, Object>.
+                HashMap<String, Object> formattedUserModels = new HashMap<>();
+                List<HashMap<String, Object>> modelsList = new ArrayList<HashMap<String, Object>>();
 
 
-                // Don't use clear() apparently.
-                HashMap<String, Object> tempModelData = new HashMap<>();
+                // User Details
+                formattedUserModels.put("id", id.toString());
+                formattedUserModels.put("userName", requestedUser.getUserName());
+                formattedUserModels.put("password", requestedUser.getPassword());
+                formattedUserModels.put("totalExp", requestedUser.getTotalExp());
+                // Their current models
+                for (Iterator<UserModels> it = userModels.iterator(); it.hasNext();) {
+                    UserModels currentModel = it.next();
 
-                tempModelData.put("buildingCode", currentModel.getUserModelId().getModel());
 
-                // As we're decoupling we won't store the name in the database, that relation can be made in Unity.
+                    // Don't use clear() apparently.
+                    HashMap<String, Object> tempModelData = new HashMap<>();
+
+                    tempModelData.put("buildingCode", currentModel.getUserModelId().getModel());
+
+                    // As we're decoupling we won't store the name in the database, that relation can be made in Unity.
 //                tempModelData.put("buildingName", currentModel);
 
-                tempModelData.put("buildingGroup", currentModel.getModelGroup());
-                tempModelData.put("building_xp", currentModel.getBuilding_xp());
-                tempModelData.put("primaryColour", currentModel.getPrimaryColour());
-                tempModelData.put("secondaryColour", currentModel.getSecondaryColour());
-                tempModelData.put("height", currentModel.getHeight());
+                    tempModelData.put("buildingGroup", currentModel.getModelGroup());
+                    tempModelData.put("building_xp", currentModel.getBuilding_xp());
+                    tempModelData.put("primaryColour", currentModel.getPrimaryColour());
+                    tempModelData.put("secondaryColour", currentModel.getSecondaryColour());
+                    tempModelData.put("height", currentModel.getHeight());
 
-                // Add the data to the list.
-                modelsList.add(tempModelData);
+                    // Add the data to the list.
+                    modelsList.add(tempModelData);
+                }
+
+                formattedUserModels.put("userBuildings", modelsList);
+                return new ResponseEntity<>(formattedUserModels, HttpStatus.OK);
             }
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 
-            formattedUserModels.put("userBuildings", modelsList);
-            return new ResponseEntity<>(formattedUserModels, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
     /**
