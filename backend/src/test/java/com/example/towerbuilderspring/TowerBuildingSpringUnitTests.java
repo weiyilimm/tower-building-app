@@ -306,7 +306,7 @@ public class TowerBuildingSpringUnitTests {
     //======================================================
 
     @Test
-    public void authenticateUser_HttpResponseAuthenticatesUserReturnsUser_IfCorrectPasswordOkIfWrongPasswordNotFoundIfNoUserNotFound(){
+    public void authenticateUser_HttpResponseAuthenticatesUserReturnsUser_IfCorrectPasswordOkIfWrongPasswordNotFoundIfNoUserNotFound() throws ParseException {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         String password = encoder.encode("Scrafty");
         Users user = new Users("Henry", "henry@email.com", password, 10);
@@ -314,9 +314,14 @@ public class TowerBuildingSpringUnitTests {
         when(mockUserRepository.findByUserName("Henry")).thenReturn(user);
         when(mockUserRepository.findByUserName("Harriet")).thenReturn(null);
 
-        assertEquals(new ResponseEntity<>(user, HttpStatus.OK), mockUserLoginController.authenticateUser("Henry", "Scrafty"));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser("Harriet", "Scrafty"));
-        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser("Henry", "ytfarcS"));
+        String correctDataFromAPi = "{ \"username\":\"Henry\", \"password\":\"Scrafty\" }";
+        String userNotFoundDataFromAPI = "{ \"username\":\"Harriet\", \"password\":\"Scrafty\" }";
+        String passwordIncorrectDataFromAPI = "{ \"username\":\"Henry\", \"password\":\"Scrafty\" }";
+
+
+        assertEquals(new ResponseEntity<>(user, HttpStatus.OK), mockUserLoginController.authenticateUser(correctDataFromAPi));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser(userNotFoundDataFromAPI));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.authenticateUser(passwordIncorrectDataFromAPI));
     }
 
     @Test
