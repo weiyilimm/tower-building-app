@@ -316,7 +316,7 @@ public class TowerBuildingSpringUnitTests {
 
         String correctDataFromAPi = "{ \"username\":\"Henry\", \"password\":\"Scrafty\" }";
         String userNotFoundDataFromAPI = "{ \"username\":\"Harriet\", \"password\":\"Scrafty\" }";
-        String passwordIncorrectDataFromAPI = "{ \"username\":\"Henry\", \"password\":\"Scrafty\" }";
+        String passwordIncorrectDataFromAPI = "{ \"username\":\"Henry\", \"password\":\"1234rfqewr32\" }";
 
 
         assertEquals(new ResponseEntity<>(user, HttpStatus.OK), mockUserLoginController.authenticateUser(correctDataFromAPi));
