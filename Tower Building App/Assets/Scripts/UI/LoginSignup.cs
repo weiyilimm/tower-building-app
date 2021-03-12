@@ -229,6 +229,9 @@ public class LoginSignup : MonoBehaviour
         node = JSON.Parse(rawJSON);
         string userId = JSON.Parse(node["id"].Value);
         User_Data.data.UserID = userId;
+
+        User_Data.data.TranslateUserJSON(rawJSON);
+
         User_Data.data.CreateRequest("GET_User");
         User_Data.data.CreateRequest("GET_Friends");
         User_Data.data.CreateRequest("GET_Leaderboard");
