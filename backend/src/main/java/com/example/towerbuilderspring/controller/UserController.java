@@ -151,71 +151,83 @@ public class UserController {
     public ResponseEntity<UserModels> updateUserBuilding(@PathVariable("userId") UUID userId,
                                                          @PathVariable("buildingId") long buildingId,
                                                          @PathVariable("group") long group,
-                                                         @RequestBody String newUserModel) throws ParseException {
+                                                         @RequestBody String newUserModel) {
+        try {
+            Optional<Users> fetched_user = userRepository.findById(userId);
+            List<UserModels> all_models = userModelRepository.findAll();
 
-        Optional<Users> fetched_user = userRepository.findById(userId);
-        List<UserModels> all_models = userModelRepository.findAll();
+            UserModels modelToAdd = new UserModels();
+            UserModelId modelId = new UserModelId();
 
-        UserModels modelToAdd = new UserModels();
-        UserModelId modelId = new UserModelId();
+            // Make sure that both the user and the building exist.
+            if (fetched_user.isPresent()) {
 
-        // Make sure that both the user and the building exist.
-        if (fetched_user.isPresent()) {
+                // Manually parsing Json.
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(newUserModel);
 
-            // Manually parsing Json.
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(newUserModel);
+                // Create the Composite key
+                modelId.setModel(buildingId);
+                modelId.setFk_user(fetched_user.get());
 
-            // Create the Composite key
-            modelId.setModel(buildingId);
-            modelId.setFk_user(fetched_user.get());
+                modelToAdd.setUserModelId(modelId);
 
-            modelToAdd.setUserModelId(modelId);
+                // Set the rest of the attributes.
+                modelToAdd.setBuilding_xp((((Long) json.get("building_xp")).intValue()));
+                modelToAdd.setHeight((((Long) json.get("height")).intValue()));
+                modelToAdd.setModelGroup(group);
+                modelToAdd.setPrimaryColour((((Long) json.get("primaryColour")).intValue()));
+                modelToAdd.setSecondaryColour((((Long) json.get("secondaryColour")).intValue()));
 
-            // Set the rest of the attributes.
-            modelToAdd.setBuilding_xp((((Long) json.get("building_xp")).intValue()));
-            modelToAdd.setHeight((((Long) json.get("height")).intValue()));
-            modelToAdd.setModelGroup(group);
-            modelToAdd.setPrimaryColour((((Long) json.get("primaryColour")).intValue()));
-            modelToAdd.setSecondaryColour((((Long) json.get("secondaryColour")).intValue()));
+                System.out.println("search started");
 
-            System.out.println("search started");
+                // Search variables
+                UserModels currentModel;
+                Users currentUser;
+                long currentBuildingGroup;
+                // TODO See if you can make a method in the User Models Repository to do this instead.
+                // Go through all the global models and find the one belonging both to the same group and the same user.
+                for (int i = 0; i < all_models.size(); i++) {
+                    currentModel = all_models.get(i);
+                    currentUser = currentModel.getUserModelId().getFk_user();
+                    currentBuildingGroup = currentModel.getModelGroup();
 
-            // Search variables
-            UserModels currentModel;
-            Users currentUser;
-            long currentBuildingGroup;
-            // TODO See if you can make a method in the User Models Repository to do this instead.
-            // Go through all the global models and find the one belonging both to the same group and the same user.
-            for (int i = 0; i < all_models.size(); i++) {
-                currentModel = all_models.get(i);
-                currentUser = currentModel.getUserModelId().getFk_user();
-                currentBuildingGroup = currentModel.getModelGroup();
+                    System.out.println("Inside the loop");
+                    if (currentUser.getId() == userId &&
+                            currentBuildingGroup == group) {
+                        System.out.println();
+                        UserModelId modelToDelete = new UserModelId(currentUser, currentModel.getUserModelId().getModel());
+                        System.out.println("Going to delete a model");
 
-                System.out.println("Inside the loop");
-                if (currentUser.getId() == userId &&
-                        currentBuildingGroup == group) {
-                    System.out.println();
-                    UserModelId modelToDelete = new UserModelId(currentUser, currentModel.getUserModelId().getModel());
-                    System.out.println("Going to delete a model");
+                        System.out.println(currentUser);
+                        System.out.println(currentBuildingGroup);
+                        System.out.println(modelToAdd);
 
-                    System.out.println(currentUser);
-                    System.out.println(currentBuildingGroup);
-                    System.out.println(modelToAdd);
+                        userModelRepository.deleteById(modelToDelete);
+                        userModelRepository.save(modelToAdd);
 
-                    userModelRepository.deleteById(modelToDelete);
-                    userModelRepository.save(modelToAdd);
-
-                    return new ResponseEntity<>(modelToAdd, HttpStatus.OK);
+                        return new ResponseEntity<>(modelToAdd, HttpStatus.OK);
+                    }
                 }
-            }
 
-            System.out.println("Creating a new model");
-            // The user doesn't have any models belonging to that group yet (i.e. initialising the user).
-            userModelRepository.save(modelToAdd);
-            return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
+                System.out.println("Creating a new model");
+                // The user doesn't have any models belonging to that group yet (i.e. initialising the user).
+                userModelRepository.save(modelToAdd);
+                return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(modelToAdd, HttpStatus.NO_CONTENT);
+
+        } catch (ParseException p) {
+            System.out.println("The Json is inputted incorrectly");
+            p.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(modelToAdd, HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
+
+        
 
 }
