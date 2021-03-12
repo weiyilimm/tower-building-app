@@ -167,10 +167,12 @@ public class LoginSignup : MonoBehaviour
                 //Status 500 code = email or username has already been taken
                 if (uwr.responseCode == 500){
                     Debug.Log("Either email or username has already been taken");
+                    InvalidUsernamePopUP.SetActive(true);
                 }
                 //Status 201 code = created successfully
                 if(uwr.responseCode == 201){
                     Debug.Log("Sign up successfully");
+                    InvalidUsernamePopUP.SetActive(false);
                     LoginPanel.SetActive(true);
                     RegisterPanel.SetActive(false);
                     LoginButtonObject.SetActive(false);
