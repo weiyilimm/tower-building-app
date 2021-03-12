@@ -70,7 +70,7 @@ public class Scoring : MonoBehaviour
         //Pop up appears to show how much XP user has earned
         PopUp.SetActive(true);
         //Pop up text
-        EarnedScoreText.text = "You've just earned" + " " + (localEarnedXP + globalEarnedXP).ToString() +"XP in" + " " + (DropDown.options[DropDown.value].text)
+        EarnedScoreText.text = "You've just earned" + " " + (localEarnedXP).ToString() +"XP in" + " " + (DropDown.options[DropDown.value].text)
                                 + " " + (globalEarnedXP).ToString() + "XP in other buildings";
         
         Random rand = new Random();  
@@ -107,34 +107,42 @@ public class Scoring : MonoBehaviour
         switch (DropDown.options[DropDown.value].text){
             case "ARTS":
                 ArtsXP += localEarnedXP;
+                ArtsXP -= globalEarnedXP;
                 User_Data.data.building_stats[11].building_xp += (int)localEarnedXP;
                 break;
             case "BIOLOGY CHEMISTRY":
                 BioCheXP += localEarnedXP;
+                BioCheXP -= globalEarnedXP;
                 User_Data.data.building_stats[6].building_xp += (int)localEarnedXP;
                 break;
             case "COMPUTER SCIENCE":
                 ComSciXP += localEarnedXP;
+                ComSciXP -= globalEarnedXP;
                 User_Data.data.building_stats[5].building_xp += (int)localEarnedXP;
                 break;
             case "ENGINEERING":
                 EngXP += localEarnedXP;
+                EngXP -= globalEarnedXP;
                 User_Data.data.building_stats[9].building_xp += (int)localEarnedXP;
                 break;
             case "GEOGRAPHY":
                 GeoXP += localEarnedXP;
+                GeoXP -= globalEarnedXP;
                 User_Data.data.building_stats[7].building_xp += (int)localEarnedXP;
                 break;
             case "LANGUAGES":
                 LanXP += localEarnedXP;
+                LanXP -= globalEarnedXP;
                 User_Data.data.building_stats[8].building_xp += (int)localEarnedXP;
                 break;
             case "LAW POLITICS":
                 LawPolXP += localEarnedXP;
+                LawPolXP -= globalEarnedXP;
                 User_Data.data.building_stats[10].building_xp += (int)localEarnedXP;
                 break;
             case "PHYSICS MATH":
                 PhyMathXP += localEarnedXP;
+                PhyMathXP -= globalEarnedXP;
                 User_Data.data.building_stats[4].building_xp += (int)localEarnedXP;
                 break;
         }

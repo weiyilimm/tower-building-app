@@ -12,7 +12,7 @@ using System.Linq;
 public class Leaderboard_API : MonoBehaviour {
     
     //An ordered list which stores the username, userid and global_xp of a user
-    public List<leaderboard_data> LB_data = new List<leaderboard_data>();
+    public static List<leaderboard_data> LB_data = new List<leaderboard_data>();
     public static List<leaderboard_data> LB_data_InOrder = new List<leaderboard_data>();        
     //Use the prefab participant
     public Transform Participant;
@@ -37,7 +37,6 @@ public class Leaderboard_API : MonoBehaviour {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
 
-        /* CreateRequest("GET_Leaderboard"); COMMENTED OUT FOR NOW TO TEST DISPLAYING DATA */
         CreateRequest("GET_Leaderboard");
         /* 
         If the user type something on the search bar 
@@ -80,7 +79,7 @@ public class Leaderboard_API : MonoBehaviour {
         }
     }
 
-    void CreateRequest(string RequestType) {
+    public void CreateRequest(string RequestType) {
         string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
 
         if (RequestType == "GET_Leaderboard") { 
@@ -120,12 +119,15 @@ public class Leaderboard_API : MonoBehaviour {
         //}
 
         node = JSON.Parse(rawJSON);
-
+        int NUM_USERS = node.Count;
+        
         string userid;
         string username;
         int totalExp;
         
-        for (int i=0; i<5; i++) {
+        LB_data.Clear();
+
+        for (int i=0; i<NUM_USERS; i++) {
             userid = JSON.Parse(node[i]["id"].Value);
             username = JSON.Parse(node[i]["userName"].Value);
             totalExp = JSON.Parse(node[i]["totalExp"].Value);
@@ -209,6 +211,12 @@ public class Leaderboard_API : MonoBehaviour {
             }
         }
         if (data.UserName == User_Data.data.Username) {
+            /*
+            if the leaderboard showing the current user
+            assign their IdText to be empty
+            so the current wont be able to visit his/her own world
+            */
+            instance.Find("IdText").gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             GameObject plus = instance.Find("RawImage").gameObject;
             GameObject tick = instance.Find("RawImage (1)").gameObject;
             plus.SetActive(false);

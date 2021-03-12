@@ -43,28 +43,8 @@ public class User_Data : MonoBehaviour{
         //Creates a set of default buildings that are then overwritten by any data retrieved from the database
         createBuildings();
 
-        // The stages of starting the game; authenticate user, get users data (username, XP), get that users building data
-
-        // Login 
-
         // Dev User
         // UserID = System.Guid.NewGuid().ToString();
-        // UserID = "1da1b562-7f05-401d-9e69-70e82a1bf188"; // JOE
-        UserID = "4c419cf7-b65c-4e10-b971-b63907b229a4"; // WEI
-        Debug.Log("Getting the users data...");
-        CreateRequest("GET_User");
-        CreateRequest("GET_Friends");
-    }
-
-    public void Update() {
-        if (Input.GetKeyDown("t")) {
-            Debug.Log(UserID);
-            Debug.Log(Username);
-            for (int i=0;i<12;i++) {
-                Debug.Log("Building " + i);
-                Debug.Log("Model chosen " + building_stats[i].model);
-            }
-        }
     }
 
     private void createBuildings(){
@@ -74,7 +54,7 @@ public class User_Data : MonoBehaviour{
         }
         
         for (int i=0; i<8; i++) {
-            Building newBuilding = new Building(-1,-1,1,0,0);
+            Building newBuilding = new Building(-1,-1,0,0,0);
             building_stats.Add(newBuilding);    
         }
 
@@ -89,6 +69,9 @@ public class User_Data : MonoBehaviour{
         Scoring.PhyMathXP = 0;
     }
 
+    /*
+    To decide which API to be called
+    */
     public void CreateRequest(string RequestType, int subjectIndex = -1) {
         // Building name, User name. User -> 
         string apiString = "https://uni-builder-database.herokuapp.com/api/";
@@ -115,12 +98,16 @@ public class User_Data : MonoBehaviour{
             apiString = apiString + "Buildings/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Single"));
-
+    
         } else if (RequestType == "GET_Friends") {
             // get the userid(hidden), username and xp of all users
             apiString = apiString + "Users/" + UserID + "/Friends/";
             Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString, "Multiple"));
+
+        } else if (RequestType == "GET_Leaderboard") {
+            apiString = apiString + "Users/";
+            StartCoroutine(GetRequest(apiString, "leaderboard"));
 
         } else if (RequestType == "UPDATE_User") {
             // Change the Users personal details 
@@ -146,7 +133,7 @@ public class User_Data : MonoBehaviour{
         // Create the JSON file storing the User login data for writing to the database
         // id, userName, email, password, userBuidlings, totalExp
         
-        List<DatabaseBuildings> uB = new List<DatabaseBuildings>(); //CreateBuildingJSON();
+        List<DatabaseBuildings> uB = new List<DatabaseBuildings>();
         DatabaseUser putData = new DatabaseUser(UserID, Username, Email, Password, uB, global_xp);
         string UserJSON = JsonUtility.ToJson(putData);
 
@@ -167,12 +154,11 @@ public class User_Data : MonoBehaviour{
         return currentBuilding_string;
     }
 
-    private void TranslateUserJSON(string rawJSON){
+    public void TranslateUserJSON(string rawJSON){
         // Reads a JSON file from the database to create / update the Users data stored in Unity 
 
         JSONNode node;
         node = JSON.Parse(rawJSON);
-
         string userid = JSON.Parse(node["id"].Value);
         string username = JSON.Parse(node["userName"].Value);
         string email = JSON.Parse(node["email"].Value);
@@ -182,7 +168,18 @@ public class User_Data : MonoBehaviour{
         UserID = userid;
         Username = username;
         Email = email;
+        Debug.Log("email after saving in Unity = " + Email);
         Password = password;
+        global_xp = totalExp;
+    }
+
+    public void TranslateUserProfileJSON(string rawJSON){
+        // Reads a JSON file from the database to create / update the Users data stored in Unity 
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+        string username = JSON.Parse(node["userName"].Value);
+        int totalExp = int.Parse(node["totalExp"].Value);
+        Username = username;
         global_xp = totalExp;
     }
 
@@ -253,6 +250,30 @@ public class User_Data : MonoBehaviour{
         }
     }
 
+    /*
+    rawJson is the file storing all users in bytes
+    Convert it to Json file and assign it to every user to be shown on leaderboard
+    */
+    public void TranslateLeaderboadJSON(string rawJSON) {
+        JSONNode node;
+        node = JSON.Parse(rawJSON);
+
+        int NUM_USERS = node.Count;
+        
+        string userid;
+        string username;
+        int totalExp;
+        
+        for (int i=0; i<NUM_USERS; i++) {
+            userid = JSON.Parse(node[i]["id"].Value);
+            username = JSON.Parse(node[i]["userName"].Value);
+            totalExp = JSON.Parse(node[i]["totalExp"].Value);
+
+            leaderboard_data data = new leaderboard_data(userid, username, totalExp);
+            Leaderboard_API.LB_data.Add(data);
+        }
+    }
+
 
     IEnumerator GetRequest(string targetAPI, string translationType){
 
@@ -273,12 +294,15 @@ public class User_Data : MonoBehaviour{
                 // If the translation type is Single then we know that the database is sending all of the Users data
                 // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
-                TranslateUserJSON(raw);
+                
+                //TranslateUserJSON(raw); //NOT TRANSALTING HERE ANYMORE WILL BE DONE IN LOGIN
                 TranslateBuildingJSON(raw);
             } else if (translationType == "Multiple") {
                 // If the translation type is multiple then we are getting the list of friends
                 // which need to be added to the friendslist in the friends scene
                 TranslateFriendsJSON(raw);
+            } else if (translationType == "leaderboard") {
+                TranslateLeaderboadJSON(raw);
             }
         }
     }
@@ -298,9 +322,6 @@ public class User_Data : MonoBehaviour{
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
             Debug.Log("POST Received: " + raw);
-
-            // TRANSLATION CODE HERE (to check if data was correctly entered).
-
         }   
     }
 
@@ -345,15 +366,15 @@ public class DatabaseUser {
     public string userName;
     public string email;
     public string password;
-    //public List<DatabaseBuildings> userBuildings;
+    public List<DatabaseBuildings> userBuildings;
     public long totalExp;
 
-    public DatabaseUser(string userid, string un, string e, string p, List<DatabaseBuildings> uB, long xp) {
+    public DatabaseUser(string userid, string un, string eMail, string p, List<DatabaseBuildings> uB, long xp) {
         id = userid;
         userName = un;
-        email = e;
+        email = eMail;
         password = p;
-        //userBuildings = uB;
+        userBuildings = uB;
         totalExp = xp;
     }
 }
