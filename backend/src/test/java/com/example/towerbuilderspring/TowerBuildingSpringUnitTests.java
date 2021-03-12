@@ -244,7 +244,7 @@ public class TowerBuildingSpringUnitTests {
                                                           ).getStatusCode()
                     );
         //User doesn't exist
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
+        assertEquals(HttpStatus.NOT_FOUND,
                 mockUserController.updateUserBuilding(UUID.randomUUID(),
                         mockModel.getUserModelId().getModel(),
                         mockModel.getModelGroup(),
@@ -253,7 +253,7 @@ public class TowerBuildingSpringUnitTests {
                                 "\"primaryColour\":102,\"secondaryColour\":206}"
                 ).getStatusCode());
         //bad inputs
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR),
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
                     mockUserController.updateUserBuilding(mockUser.getId(),
                                                           mockModel.getUserModelId().getModel(),
                                                           mockModel.getModelGroup(),
@@ -382,7 +382,7 @@ public class TowerBuildingSpringUnitTests {
 
         assertEquals(new ResponseEntity<>(mockUser, HttpStatus.OK), mockUserLoginController.deleteUser("Henry"));
         assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.deleteUser("Harriet"));
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockUserLoginController.deleteUser(null));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockUserLoginController.deleteUser(null));
     }
 
     /*
@@ -516,7 +516,7 @@ public class TowerBuildingSpringUnitTests {
         // Run the tests for each of the different possible scenarios.
         assertEquals(new ResponseEntity<>(mockedUsersFriends, HttpStatus.OK), mockFriendController.getFriends(mockedUserMain.getId()));
         //assertEquals(new ResponseEntity<>(HttpStatus.NO_CONTENT), mockFriendController.getFriends(mockedUserMain.getId()));
-        assertEquals(new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR), mockFriendController.getFriends(mockedUserMain.getId()));
+        assertEquals(new ResponseEntity<>(null, HttpStatus.NOT_FOUND), mockFriendController.getFriends(mockedUserMain.getId()));
     }
 
     @Test
@@ -540,7 +540,7 @@ public class TowerBuildingSpringUnitTests {
 
         assertEquals(new ResponseEntity<>(mockedUsersFriends, HttpStatus.OK), mockFriendController.getFriends(mockedUser.getId()));
         assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockFriendController.getFriends(UUID.randomUUID()));
-        assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), mockFriendController.getFriends(null));
+        assertEquals(new ResponseEntity<>(HttpStatus.NOT_FOUND), mockFriendController.getFriends(null));
 
     }
 

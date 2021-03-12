@@ -26,22 +26,29 @@ public class FriendController {
 
     @GetMapping("Users/{id}/Friends")
     public ResponseEntity<List<Users>> getFriends(@PathVariable("id") UUID id) {
-        List<Friend> friends = friendRepository.findByUserId(id);
-        List<Users> users = new ArrayList<>();
+        try {
+            List<Friend> friends = friendRepository.findByUserId(id);
+            List<Users> users = new ArrayList<>();
 
-        for (Friend friend : friends) {
-            Optional<Users> new_friend = userRepository.findById(friend.getFriendId());
-            if (new_friend.isPresent()) {
-                users.add(new_friend.get());
+            for (Friend friend : friends) {
+                Optional<Users> new_friend = userRepository.findById(friend.getFriendId());
+                if (new_friend.isPresent()) {
+                    users.add(new_friend.get());
+                }
             }
-        }
 
-        System.out.println(users);
+            System.out.println(users);
 
-        if (!friends.isEmpty()) {
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            if (!friends.isEmpty()) {
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("Users/{userId}/Friends/{friendId}")
