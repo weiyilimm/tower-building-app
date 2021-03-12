@@ -74,7 +74,7 @@ public class UserController {
 
     @GetMapping("Users/{id}/Buildings")
     public ResponseEntity<HashMap<String, Object>> getUserBuildings(@PathVariable("id") UUID id) {
-        
+
         try {
             Optional<Users> fetched_user = userRepository.findById(id);
             List<UserModels> all_models = userModelRepository.findAll();
