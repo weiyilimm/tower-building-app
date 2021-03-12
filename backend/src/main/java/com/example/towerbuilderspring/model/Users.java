@@ -22,7 +22,7 @@ public class Users {
     @NotNull
     private String password;
 
-    private int totalexp = 0;        // Default Values
+    private int totalexp;        // Default Values
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
