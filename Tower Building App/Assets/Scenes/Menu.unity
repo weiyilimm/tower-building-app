@@ -4625,6 +4625,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoginRegisterNav: {fileID: 1688254389}
   LoginPanel: {fileID: 2044045997}
+  RegisterPanel: {fileID: 539637322}
+  LoginButtonObject: {fileID: 569008251}
+  RegisterButtonObject: {fileID: 1508037241}
   LoginUsername: {fileID: 2018150863}
   LoginPassword: {fileID: 1779093124}
   RegisterEmail: {fileID: 455173471}

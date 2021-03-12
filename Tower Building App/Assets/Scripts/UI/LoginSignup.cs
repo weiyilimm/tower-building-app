@@ -14,6 +14,9 @@ public class LoginSignup : MonoBehaviour
     public GameObject LoginRegisterNav;
     //Login panel 
     public GameObject LoginPanel;
+    public GameObject RegisterPanel;
+    public GameObject LoginButtonObject;
+    public GameObject RegisterButtonObject; 
     public TMP_InputField LoginUsername;
     public TMP_InputField LoginPassword;
     public TMP_InputField RegisterEmail;
@@ -168,6 +171,10 @@ public class LoginSignup : MonoBehaviour
                 //Status 201 code = created successfully
                 if(uwr.responseCode == 201){
                     Debug.Log("Sign up successfully");
+                    LoginPanel.SetActive(true);
+                    RegisterPanel.SetActive(false);
+                    LoginButtonObject.SetActive(false);
+                    RegisterButtonObject.SetActive(true);
                     FirstTimeLogin();
                 }
             }
