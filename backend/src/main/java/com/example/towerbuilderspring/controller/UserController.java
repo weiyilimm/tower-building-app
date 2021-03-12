@@ -215,7 +215,7 @@ public class UserController {
                 userModelRepository.save(modelToAdd);
                 return new ResponseEntity<>(modelToAdd, HttpStatus.CREATED);
             }
-            return new ResponseEntity<>(modelToAdd, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(modelToAdd, HttpStatus.NOT_FOUND);
 
         } catch (ParseException p) {
             System.out.println("The Json is inputted incorrectly");
