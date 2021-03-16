@@ -26,9 +26,9 @@ public class Users {
 
     private int totalexp = 0;  // Default Values
 
-    private String otp;           // This is a one-time-code sent to the user's registered email to reset their password.
+    private String otp = null;         // This is a one-time-code sent to the user's registered email to reset their password.
                                   // It is stored as a string as we are hashing it for security.
-
+    
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public Users() {};
