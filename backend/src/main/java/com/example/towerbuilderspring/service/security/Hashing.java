@@ -1,4 +1,4 @@
-package com.example.towerbuilderspring.service;
+package com.example.towerbuilderspring.service.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
