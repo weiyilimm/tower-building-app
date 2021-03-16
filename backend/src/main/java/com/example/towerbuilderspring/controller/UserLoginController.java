@@ -5,6 +5,9 @@ import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import com.example.towerbuilderspring.service.mail.EmailServiceImpl;
 import com.example.towerbuilderspring.service.security.GenerateOTP;
+import com.example.towerbuilderspring.service.security.OTPHandler;
+import javassist.NotFoundException;
+import org.apache.coyote.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,6 +19,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.naming.AuthenticationException;
+import java.io.StringReader;
 
 @RestController
 @RequestMapping("api/Auth/")
@@ -31,7 +37,7 @@ public class UserLoginController {
     EmailServiceImpl emailService;
 
     @Autowired
-    GenerateOTP generateOTP;
+    OTPHandler otpHandler;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -98,15 +104,20 @@ public class UserLoginController {
 
     // Testing email function
     @PostMapping("Test/Email")
-    public ResponseEntity<Users> checkEmailSent(@RequestBody String data) {
+    public ResponseEntity<Users> emailOTP(@RequestBody String data) {
 
         try {
 
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(data);
             String email = (String) json.get("email");
+            String username = (String) json.get("username");
 
-            String OTP = generateOTP.generateOTP();
+            // Generate the OTP
+            String OTP = otpHandler.generateOTP();
+            otpHandler.saveOTP(username, OTP);
+
+            // Store
             String message = String.format("Enter this OTP: %s  to reset your password", OTP);
             emailService.sendSimpleMessage(email, "This is from Tower Builder", message);
             return new ResponseEntity<>(null , HttpStatus.OK);
@@ -124,5 +135,35 @@ public class UserLoginController {
     }
 
 
+    @PostMapping("Test/validateOTP")
+    public ResponseEntity<Users> validateOTP(@RequestBody String data) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+
+            String username = (String) json.get("username");
+            String OTP = (String) json.get("OTP");
+
+            Users user = otpHandler.validateOTP(username, OTP);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
+        } catch (ParseException p) {
+            p.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        } catch (NotFoundException n) {
+            n.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+
+        } catch(AuthenticationException a) {
+            a.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
 
 }
