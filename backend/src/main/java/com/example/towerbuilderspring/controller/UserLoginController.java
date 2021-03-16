@@ -4,10 +4,8 @@ import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import com.example.towerbuilderspring.service.mail.EmailServiceImpl;
-import com.example.towerbuilderspring.service.security.GenerateOTP;
 import com.example.towerbuilderspring.service.security.OTPHandler;
 import javassist.NotFoundException;
-import org.apache.coyote.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
-import java.io.StringReader;
 
 @RestController
 @RequestMapping("api/Auth/")
