@@ -13,10 +13,5 @@ public class GenerateOTP {
         String otp  = String.valueOf(randomPin);
         return otp; //returning value of otp
     }
-//    public static void main(String args[])//method to call and print otp
-//    {
-//        String otpSting  =generateOTP();//function calling
-//        System.out.println("OTP : "+otpSting);
-//    }
 }
 

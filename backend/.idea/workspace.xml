@@ -23,20 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dd5c276-46ef-48cb-9c75-d5256328e89f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_jakarta_mail_1_6_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_mail_2_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_2_8_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/config/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cs17-main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs17-main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/controller/UserLoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/mail/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/mail/EmailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/controller/UserLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/controller/UserLoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/misc/TestRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/service/mail/EmailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/towerbuilderspring/service/mail/EmailServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/GenerateOTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/GenerateOTP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/Hashing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/Hashing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/OTPHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/towerbuilderspring/service/security/OTPHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +88,19 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Spring Boot.TowerbuilderspringApplication">
+    <configuration name="GenerateOTP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.towerbuilderspring.service.security.GenerateOTP" />
+      <module name="cs17-main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.towerbuilderspring.service.security.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -118,22 +123,6 @@
       <option name="PACKAGE_NAME" value="com.example.towerbuilderspring" />
       <option name="MAIN_CLASS_NAME" value="com.example.towerbuilderspring.TowerBuildingSpringUnitTests" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TowerBuildingSpringUnitTests.createPaneInRepository" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs17-main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.towerbuilderspring.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.towerbuilderspring" />
-      <option name="MAIN_CLASS_NAME" value="com.example.towerbuilderspring.TowerBuildingSpringUnitTests" />
-      <option name="METHOD_NAME" value="createPaneInRepository" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -195,11 +184,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GenerateOTP" />
         <item itemvalue="JUnit.TowerBuildingSpringUnitTests" />
         <item itemvalue="JUnit.TowerBuildingSpringUnitTests.updateBuildingModelInRepository" />
         <item itemvalue="JUnit.TowerBuildingSpringUnitTests.getBuildingModels" />
         <item itemvalue="JUnit.TowerBuildingSpringUnitTests.updatePaneInRepository" />
-        <item itemvalue="JUnit.TowerBuildingSpringUnitTests.createPaneInRepository" />
       </list>
     </recent_temporary>
   </component>
@@ -257,46 +246,50 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="446" y="25" key="#com.intellij.ide.util.MemberChooser" timestamp="1614526104273">
+    <state x="446" y="25" key="#com.intellij.ide.util.MemberChooser" timestamp="1615874698256">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="446" y="25" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1614526104273" />
+    <state x="446" y="25" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1615874698256" />
     <state x="412" y="210" width="458" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1614514059192">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="412" y="210" width="458" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1614514059192" />
-    <state width="1237" height="521" key="GridCell.Tab.0.bottom" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.0.bottom" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.0.center" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.0.center" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.0.left" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.0.left" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.0.right" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.0.right" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.1.bottom" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.1.bottom" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.1.center" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.1.center" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.1.left" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.1.left" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
-    <state width="1237" height="521" key="GridCell.Tab.1.right" timestamp="1615542589591">
+    <state width="1237" height="521" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state width="1237" height="521" key="GridCell.Tab.1.right" timestamp="1615873123319">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="521" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1615542589591" />
+    <state width="1237" height="521" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1615873123319" />
+    <state x="371" y="102" key="extract.method.dialog" timestamp="1615879125631">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="102" key="extract.method.dialog/0.0.1280.680@0.0.1280.680" timestamp="1615879125631" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1615539576172">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

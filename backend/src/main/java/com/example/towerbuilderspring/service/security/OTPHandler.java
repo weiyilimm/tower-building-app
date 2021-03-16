@@ -45,7 +45,7 @@ public class OTPHandler {
     public Users validateOTP(String username, String OTP) throws NotFoundException, AuthenticationException {
         Users user = userRepository.findByUserName(username);
 
-        if (OTP.equals("0")) {
+        if (OTP == null) {
             throw new AuthenticationException("Reset Password Request not made");
         }
 

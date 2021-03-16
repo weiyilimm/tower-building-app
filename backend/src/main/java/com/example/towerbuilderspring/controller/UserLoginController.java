@@ -164,6 +164,30 @@ public class UserLoginController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    @PostMapping("Test/resetPassword")
+    public ResponseEntity<Users> resetOTP(@RequestBody String data) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+
+            String username = (String) json.get("username");
+            String OTP = (String) json.get("OTP");
+            String password = (String) json.get("password");
+
+            Users user = otpHandler.validateOTP(username, OTP);
+            if (user != null) {
+                user.setPassword(encoder.encode(password));
+                // Make sure the OTP is now wiped
+                user.setOtp(null);
+            }
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
