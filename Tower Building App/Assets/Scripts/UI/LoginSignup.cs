@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class LoginSignup : MonoBehaviour
 {   
-    //Login and register navigation bar
-    public GameObject LoginRegisterNav;
     //Login panel 
     public GameObject LoginPanel;
     public GameObject RegisterPanel;
@@ -209,7 +207,6 @@ public class LoginSignup : MonoBehaviour
         */
         if (isAuthenticated){
             LoginPanel.SetActive(false);
-            LoginRegisterNav.SetActive(false);
             LoadingBarPanel.SetActive(true);
             StartCoroutine(LoadProgress());
         }
@@ -219,7 +216,6 @@ public class LoginSignup : MonoBehaviour
         */
         else{
             LoginPanel.SetActive(true);
-            LoginRegisterNav.SetActive(true);
         }
     }
 
