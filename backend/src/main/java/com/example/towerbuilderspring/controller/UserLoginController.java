@@ -178,8 +178,9 @@ public class UserLoginController {
             Users user = otpHandler.validateOTP(username, OTP);
             if (user != null) {
                 user.setPassword(encoder.encode(password));
+                userRepository.save(user);
                 // Make sure the OTP is now wiped
-                user.setOtp(null);
+                user.setOtp("-1");
             }
             return new ResponseEntity<>(user, HttpStatus.OK);
 
