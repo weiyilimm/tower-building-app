@@ -4,6 +4,7 @@ import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
 import com.example.towerbuilderspring.service.mail.EmailServiceImpl;
+import com.example.towerbuilderspring.service.security.GenerateOTP;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -28,6 +29,9 @@ public class UserLoginController {
 
     @Autowired
     EmailServiceImpl emailService;
+
+    @Autowired
+    GenerateOTP generateOTP;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -93,11 +97,32 @@ public class UserLoginController {
 
 
     // Testing email function
-    @GetMapping("Test/Email")
-    public ResponseEntity<Users> checkEmailSent() {
-        emailService.sendSimpleMessage("pseudolabs.org@gmail.com", "This is from Tower Builder",
-                                        "Looks like someone forgot their password");
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @PostMapping("Test/Email")
+    public ResponseEntity<Users> checkEmailSent(@RequestBody String data) {
+
+        try {
+
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+            String email = (String) json.get("email");
+
+            String OTP = generateOTP.generateOTP();
+            String message = String.format("Enter this OTP: %s  to reset your password", OTP);
+            emailService.sendSimpleMessage(email, "This is from Tower Builder", message);
+            return new ResponseEntity<>(null , HttpStatus.OK);
+
+        } catch (ParseException p) {
+            System.out.println("The JSON was incorrectly formatted");
+            p.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
+
+
 
 }
