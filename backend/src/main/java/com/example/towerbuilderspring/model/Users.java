@@ -1,4 +1,5 @@
 package com.example.towerbuilderspring.model;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -18,12 +19,14 @@ public class Users {
     private String userName;
 
     @Column(unique = true)
-    private String email;    // The email address can be null
+    private String email;      // The email address can be null
 
     @NotNull
     private String password;
 
-    private int totalexp = 0;        // Default Values
+    private int totalexp = 0;  // Default Values
+
+    private int otp;           // This is a one-time-code sent to the user's registered email to reset their password.
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
