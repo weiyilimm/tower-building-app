@@ -31,21 +31,24 @@ public class OTPHandler {
     }
 
     public void saveOTP(String username, String OTP) throws NotFoundException {
+        System.out.print("Username passed in" + username);
         Users user = userRepository.findByUserName(username);
+        System.out.println(user);
         if (user != null) {
             // Encode the OTP to make sure it cannot be used.
             String encodedOTP = encoder.encode(OTP);
             user.setOtp(encodedOTP);
+            userRepository.save(user);
         }
         else {
-            throw new NotFoundException("The user is now found");
+            throw new NotFoundException("The user is not found");
         }
     }
 
     public Users validateOTP(String username, String OTP) throws NotFoundException, AuthenticationException {
         Users user = userRepository.findByUserName(username);
 
-        if (OTP == null) {
+        if (OTP.equals("-1")) {
             throw new AuthenticationException("Reset Password Request not made");
         }
 
