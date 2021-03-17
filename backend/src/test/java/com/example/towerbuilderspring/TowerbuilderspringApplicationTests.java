@@ -12,9 +12,4 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class TowerbuilderspringApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
-
-
 }
