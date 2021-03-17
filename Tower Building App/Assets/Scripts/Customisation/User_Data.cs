@@ -49,12 +49,12 @@ public class User_Data : MonoBehaviour{
 
     private void createBuildings(){
         for (int j=0; j<4; j++) {
-            Building newMain = new Building(-1,-1,j,0,0);
+            Building newMain = new Building(0,0,j,0,0);
             building_stats.Add(newMain);
         }
         
         for (int i=0; i<8; i++) {
-            Building newBuilding = new Building(-1,-1,0,0,0);
+            Building newBuilding = new Building(0,0,0,0,0);
             building_stats.Add(newBuilding);    
         }
 
