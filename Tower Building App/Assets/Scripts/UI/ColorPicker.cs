@@ -95,9 +95,22 @@ public class ColorPicker : MonoBehaviour
             for (int j=0; j<MeshRenderer.Length; j++){
                 // we need a copy of the current index, in order to change color
                 var x = j;
-                //take the third and fourth digit of the button name
+                //take the second and third digit of the button name which indicate which color
                 int colours = int.Parse(Buttons[i].name.Substring(1,2));
+                /* 
+                get the fourth digit which indicate primary or secondary color
+                0 = primary, 1 = secondary 
+                */
                 int elements = int.Parse(Buttons[i].name[3].ToString());
+                // allow the first 4 matte colors to be used for new player
+                if(Buttons[i].name[0].ToString() == "0"){
+                    if(colours == 0 || colours == 1 || colours == 2 || colours == 3){
+                        matteXP = 0;
+                    }
+                    else{
+                        matteXP = 15000;
+                    }
+                }
 
                 if (localXP >= colours * matteXP){
                     if (Buttons[i].name[0].ToString() == "0"){
