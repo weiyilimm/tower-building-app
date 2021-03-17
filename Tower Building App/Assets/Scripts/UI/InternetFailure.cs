@@ -13,7 +13,6 @@ public class InternetFailure : MonoBehaviour
     public Button PopUpInternetButton;
     public GameObject PopUpInternetFailure;
     public GameObject LoginPanel;
-    public GameObject NavBar;
     private bool isConnected = true;
     
     
@@ -33,7 +32,6 @@ public class InternetFailure : MonoBehaviour
         if (request.error != null){
             PopUpInternetFailure.SetActive(true);
             LoginPanel.SetActive(false);
-            NavBar.SetActive(false);
             isConnected = false;
         }
         //Is connected
@@ -42,7 +40,6 @@ public class InternetFailure : MonoBehaviour
             PopUpInternetFailure.SetActive(false);
             isConnected = true;
             LoginPanel.SetActive(true);
-            NavBar.SetActive(true);
         }
     }
 
