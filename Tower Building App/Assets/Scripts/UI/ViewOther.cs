@@ -14,13 +14,42 @@ public class ViewOther : MonoBehaviour
     public Button FriendName; 
     public string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
     public TextMeshProUGUI friendId;
-
+    // Loading bar slider
+    public Slider Slider;
+    private AsyncOperation operation;
+    public GameObject LoadingBarPanel;
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if(currentSceneName == "LeaderBoard"){
+            // Get the main panel which just under canvas
+            Transform Panel = FriendEntry.transform.parent.parent.parent.parent;
+            // Get the loading panel
+            LoadingBarPanel = Panel.Find("LoadingPanel").gameObject;
+            // Get the slider inside loading panel
+            Slider = LoadingBarPanel.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        }
+        // Because the hierarychy is different from leaderboard scene
+        else if(currentSceneName == "FriendList"){
+            Transform Panel = FriendEntry.transform.parent.parent.parent.parent.parent;
+            LoadingBarPanel = Panel.Find("LoadingPanel").gameObject;
+            Slider = LoadingBarPanel.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        }
+
         Transform FriendList = FriendEntry.transform.parent;
         //LoadingText = gameObject.Find("LoadingText");
         FriendName.onClick.AddListener(() => OthersWorld(FriendList));
+    }
+
+    IEnumerator LoadProgress(){
+        operation = SceneManager.LoadSceneAsync(16);
+        while (!operation.isDone){
+            float progress = Mathf.Clamp01(operation.progress/.9f);
+            Slider.value = progress;
+            yield return null;
+        }
     }
 
     public void OthersWorld(Transform FriendList)
@@ -57,7 +86,8 @@ public class ViewOther : MonoBehaviour
             Debug.Log("Received: " + raw);
             User_Data.data.TranslateUserProfileJSON(raw);
             User_Data.data.TranslateBuildingJSON(raw);
-            SceneManager.LoadScene(16);
+            LoadingBarPanel.SetActive(true);
+            StartCoroutine(LoadProgress());
         }
     }
 }
