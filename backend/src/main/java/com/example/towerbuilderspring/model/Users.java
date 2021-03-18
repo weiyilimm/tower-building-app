@@ -23,8 +23,6 @@ public class Users {
 
     @NotNull
     private String password;
-    
-    private int totalexp;        // Default Values
 
     private int totalexp = 0;  // Default Values
 
