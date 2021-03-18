@@ -100,7 +100,7 @@ public class UserLoginController {
 
 
     // Testing email function
-    @PostMapping("Test/Email")
+    @PostMapping("Email")
     public ResponseEntity<Users> emailOTP(@RequestBody String data) {
 
         try {
@@ -108,11 +108,10 @@ public class UserLoginController {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(data);
             String email = (String) json.get("email");
-            String username = (String) json.get("username");
 
             // Generate the OTP
             String OTP = otpHandler.generateOTP();
-            otpHandler.saveOTP(username, OTP);
+            otpHandler.saveOTP(email, OTP);
 
             // Store
             String message = String.format("Enter this OTP: %s  to reset your password", OTP);
@@ -132,8 +131,8 @@ public class UserLoginController {
     }
 
 
-    @PostMapping("Test/validateOTP")
-    public ResponseEntity<Users> validateOTP(@RequestBody String data) {
+    @PostMapping("validateOTP")
+    public ResponseEntity<String> validateOTP(@RequestBody String data) {
         try {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(data);
@@ -142,7 +141,7 @@ public class UserLoginController {
             String OTP = (String) json.get("OTP");
 
             Users user = otpHandler.validateOTP(username, OTP);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user.getUserName(), HttpStatus.OK);
 
         } catch (ParseException p) {
             p.printStackTrace();
@@ -162,7 +161,7 @@ public class UserLoginController {
         }
     }
 
-    @PostMapping("Test/resetPassword")
+    @PostMapping("resetPassword")
     public ResponseEntity<Users> resetOTP(@RequestBody String data) {
         try {
             JSONParser parser = new JSONParser();
@@ -174,12 +173,15 @@ public class UserLoginController {
 
             Users user = otpHandler.validateOTP(username, OTP);
             if (user != null) {
+                System.out.println("Wiping OTP");
+                System.out.println(user.toString());
                 user.setPassword(encoder.encode(password));
-                userRepository.save(user);
                 // Make sure the OTP is now wiped
                 user.setOtp("-1");
+                userRepository.save(user);
+                return new ResponseEntity<>(user, HttpStatus.OK);
             }
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
         } catch (Exception e) {
             e.printStackTrace();

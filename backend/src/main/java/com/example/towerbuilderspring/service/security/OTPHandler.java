@@ -30,9 +30,9 @@ public class OTPHandler {
         return otp; //returning value of otp
     }
 
-    public void saveOTP(String username, String OTP) throws NotFoundException {
-        System.out.print("Username passed in" + username);
-        Users user = userRepository.findByUserName(username);
+    public void saveOTP(String email, String OTP) throws NotFoundException {
+        System.out.print("email passed in" + email);
+        Users user = userRepository.findByEmail(email);
         System.out.println(user);
         if (user != null) {
             // Encode the OTP to make sure it cannot be used.
@@ -53,6 +53,8 @@ public class OTPHandler {
         }
 
         if (user != null && encoder.matches(OTP, user.getOtp())) {
+            System.out.println(user.getOtp());
+            System.out.println(OTP);
             return user;
         } else if (user != null) {
             throw new NotFoundException("Password was incorrect");
