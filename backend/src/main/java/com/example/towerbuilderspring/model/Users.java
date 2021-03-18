@@ -23,15 +23,13 @@ public class Users {
 
     @NotNull
     private String password;
-
-<<<<<<< HEAD
+    
     private int totalexp;        // Default Values
-=======
+
     private int totalexp = 0;  // Default Values
 
     private String otp = "-1";         // This is a one-time-code sent to the user's registered email to reset their password.
                                   // It is stored as a string as we are hashing it for security.
->>>>>>> forgot_password
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
