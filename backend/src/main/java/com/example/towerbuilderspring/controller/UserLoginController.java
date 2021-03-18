@@ -101,7 +101,7 @@ public class UserLoginController {
 
     // Testing email function
     @PostMapping("Email/")
-    public ResponseEntity<Users> emailOTP(@RequestBody String data) {
+    public ResponseEntity<String> emailOTP(@RequestBody String data) {
 
         try {
 
@@ -137,11 +137,11 @@ public class UserLoginController {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(data);
 
-            String username = (String) json.get("username");
+            String email = (String) json.get("email");
             String OTP = (String) json.get("OTP");
 
-            Users user = otpHandler.validateOTP(username, OTP);
-            return new ResponseEntity<>(user.getUserName(), HttpStatus.OK);
+            Users user = otpHandler.validateOTP(email, OTP);
+            return new ResponseEntity<>(null, HttpStatus.OK);
 
         } catch (ParseException p) {
             p.printStackTrace();
@@ -167,14 +167,12 @@ public class UserLoginController {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(data);
 
-            String username = (String) json.get("username");
+            String email = (String) json.get("email");
             String OTP = (String) json.get("OTP");
             String password = (String) json.get("password");
 
-            Users user = otpHandler.validateOTP(username, OTP);
+            Users user = otpHandler.validateOTP(email, OTP);
             if (user != null) {
-                System.out.println("Wiping OTP");
-                System.out.println(user.toString());
                 user.setPassword(encoder.encode(password));
                 // Make sure the OTP is now wiped
                 user.setOtp("-1");
