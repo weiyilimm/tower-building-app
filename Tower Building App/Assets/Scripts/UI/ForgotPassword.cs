@@ -34,14 +34,18 @@ public class ForgotPassword : MonoBehaviour
         GoBackButton.onClick.AddListener(() => GoBackEmail());
     }
 
+    // Return to enter email page
     public void GoBackEmail(){
         EmailPanel.SetActive(true);
         OTPPanel.SetActive(false);
     }
 
+    // Send email to the server
     public void PostEmail(){
         string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/Email/";
+        // Create Email Json String to be posted to server
         string jsonString = createEmailJson();
+        // Taking the method from Login Sign Up to check whether the email is in correct syntax
         if(LoginSignup.IsEmail(EmailInput.text)){
             StartCoroutine(PostRequest(apiString, jsonString, "Email"));
         }
@@ -51,15 +55,20 @@ public class ForgotPassword : MonoBehaviour
         }
     }
 
+    // Send OTP to the server
     public void PostOTP(){
         string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/validateOTP/";
+        // Create OTP Json String to be posted to server
         string jsonString = createOTPJson();
         StartCoroutine(PostRequest(apiString, jsonString, "OTP"));
     }
 
+    // Send new password to the server
     public void PostPassword(){
         string apiString = "https://uni-builder-database.herokuapp.com/api/Auth/resetPassword/";
+        // Create Password Json String to be posted to server
         string jsonString = createPasswordJSON();
+        // Check if both keyed in password are identical
         if (PasswordInput1.text == PasswordInput2.text){
             StartCoroutine(PostRequest(apiString, jsonString, "Password"));
         }
@@ -73,6 +82,7 @@ public class ForgotPassword : MonoBehaviour
     Convert it into Json String format and return it 
     */
     private string createEmailJson() {
+        // Create EmailUser object which has email string to be posted 
         EmailUser EmailData = new EmailUser(EmailInput.text);
         string EmailDataJson = JsonUtility.ToJson(EmailData);
         return EmailDataJson;
@@ -83,6 +93,7 @@ public class ForgotPassword : MonoBehaviour
     Convert it into Json String format and return it 
     */
     private string createOTPJson() {
+        // Create OTPUser object which has both email and otp strings to be posted 
         OTPUser OTPData = new OTPUser(EmailInput.text, OTPInput.text);
         string OTPDataJson = JsonUtility.ToJson(OTPData);
         return OTPDataJson;
@@ -93,6 +104,7 @@ public class ForgotPassword : MonoBehaviour
     Convert it into Json String format and return it 
     */
     private string createPasswordJSON() {
+        // Create PasswordUser object which has email, OTP and password string to be posted 
         PasswordUser PasswordData = new PasswordUser(EmailInput.text, OTPInput.text, PasswordInput1.text);
         string PasswordDataJson = JsonUtility.ToJson(PasswordData);
         return PasswordDataJson;
@@ -121,9 +133,12 @@ public class ForgotPassword : MonoBehaviour
         } 
         else {
             if (type == "Email"){
-                //Status code 200 = ok
+                //Status code 200 = found email successfully 
                 if(uwr.responseCode == 200){
                     Debug.Log("OTP has been sent to email");
+                    /*
+                    Hide everythign and show OTPpanel which require user to enter OTP code
+                    */
                     EmailPanel.SetActive(false);
                     OTPPanel.SetActive(true);
                     InvalidOTPPopUp.SetActive(false);
@@ -133,6 +148,7 @@ public class ForgotPassword : MonoBehaviour
                 //Status code 500 = user associated with the email not found
                 if (uwr.responseCode == 500){
                     Debug.Log("Email not found");
+                    // If the account cannot be found, show the popup to indicate user
                     NoAccountFoundPopUp.SetActive(true);
                     InvalidEmailPopUp.SetActive(false);
                 }
@@ -140,19 +156,22 @@ public class ForgotPassword : MonoBehaviour
             if (type == "OTP"){
                 //Status 200 code = correct OTP
                 if (uwr.responseCode == 200){
+                    // Show the password panel which require user to key in new password
                     Debug.Log("Correct OTP");
                     OTPPanel.SetActive(false);
                     PasswordPanel.SetActive(true);
                 }
                 //Status 401 code = wrong OTP
                 if(uwr.responseCode == 401){
+                    // Show the pop up indicate user the OTP is incorrect
                     Debug.Log("Wrong OTP"); 
                     InvalidOTPPopUp.SetActive(true);
                 }
             }
             if (type == "Password"){
-                //Status 500 code = email or username has already been taken
+                //Status 200 code = changed password successfully
                 if (uwr.responseCode == 200){
+                    // Hide the whole forgot password panel and show login panel for user to login
                     WholeForgotPasswordPanel.SetActive(false);
                     LoginPanel.SetActive(true);
                     Debug.Log("Changed password successfully");
