@@ -31,9 +31,7 @@ public class OTPHandler {
     }
 
     public void saveOTP(String email, String OTP) throws NotFoundException {
-        System.out.print("email passed in" + email);
         Users user = userRepository.findByEmail(email);
-        System.out.println(user);
         if (user != null) {
             // Encode the OTP to make sure it cannot be used.
             String encodedOTP = encoder.encode(OTP);
@@ -45,8 +43,8 @@ public class OTPHandler {
         }
     }
 
-    public Users validateOTP(String username, String OTP) throws NotFoundException, AuthenticationException {
-        Users user = userRepository.findByUserName(username);
+    public Users validateOTP(String email, String OTP) throws NotFoundException, AuthenticationException {
+        Users user = userRepository.findByEmail(email);
 
         if (OTP.equals("-1")) {
             throw new AuthenticationException("Reset Password Request not made");
