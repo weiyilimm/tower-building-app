@@ -1,4 +1,4 @@
-package com.example.towerbuilderspring.service;
+package com.example.towerbuilderspring.service.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
