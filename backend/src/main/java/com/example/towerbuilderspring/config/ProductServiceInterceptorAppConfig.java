@@ -1,6 +1,6 @@
 package com.example.towerbuilderspring.config;
 
-import com.example.towerbuilderspring.service.ProductServiceInterceptor;
+import com.example.towerbuilderspring.service.handler.ProductServiceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

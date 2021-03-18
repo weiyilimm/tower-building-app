@@ -3,6 +3,9 @@ package com.example.towerbuilderspring.controller;
 import com.example.towerbuilderspring.model.Users;
 import com.example.towerbuilderspring.repository.UserModelRepository;
 import com.example.towerbuilderspring.repository.UserRepository;
+import com.example.towerbuilderspring.service.mail.EmailServiceImpl;
+import com.example.towerbuilderspring.service.security.OTPHandler;
+import javassist.NotFoundException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.naming.AuthenticationException;
+
 @RestController
 @RequestMapping("api/Auth/")
 public class UserLoginController {
@@ -25,6 +30,12 @@ public class UserLoginController {
 
     @Autowired
     UserModelRepository userModelRepository;
+
+    @Autowired
+    EmailServiceImpl emailService;
+
+    @Autowired
+    OTPHandler otpHandler;
 
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -37,6 +48,8 @@ public class UserLoginController {
            JSONObject json = (JSONObject) parser.parse(details);
            String password = (String) json.get("password");
            String username = (String) json.get("username");
+
+           System.out.println("Inside the method");
 
            Users user = userRepository.findByUserName(username);
 
@@ -90,5 +103,95 @@ public class UserLoginController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    // Testing email function
+    @PostMapping("Email/")
+    public ResponseEntity<String> emailOTP(@RequestBody String data) {
+
+        try {
+
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+            String email = (String) json.get("email");
+
+            // Generate the OTP
+            String OTP = otpHandler.generateOTP();
+            otpHandler.saveOTP(email, OTP);
+
+            // Store
+            String message = String.format("Enter this OTP: %s  to reset your password", OTP);
+            emailService.sendSimpleMessage(email, "This is from Tower Builder", message);
+            return new ResponseEntity<>(null , HttpStatus.OK);
+
+        } catch (ParseException p) {
+            System.out.println("The JSON was incorrectly formatted");
+            p.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
+    @PostMapping("validateOTP/")
+    public ResponseEntity<String> validateOTP(@RequestBody String data) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+
+            String email = (String) json.get("email");
+            String OTP = (String) json.get("OTP");
+
+            Users user = otpHandler.validateOTP(email, OTP);
+            return new ResponseEntity<>(null, HttpStatus.OK);
+
+        } catch (ParseException p) {
+            p.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        } catch (NotFoundException n) {
+            n.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+
+        } catch(AuthenticationException a) {
+            a.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("resetPassword/")
+    public ResponseEntity<Users> resetOTP(@RequestBody String data) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(data);
+
+            String email = (String) json.get("email");
+            String OTP = (String) json.get("OTP");
+            String password = (String) json.get("password");
+
+            Users user = otpHandler.validateOTP(email, OTP);
+            if (user != null) {
+                user.setPassword(encoder.encode(password));
+                // Make sure the OTP is now wiped
+                user.setOtp("-1");
+                userRepository.save(user);
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
