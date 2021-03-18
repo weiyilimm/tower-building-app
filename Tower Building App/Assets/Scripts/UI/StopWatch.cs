@@ -18,9 +18,17 @@ public class StopWatch : MonoBehaviour {
     public GameObject PauseButton;
     public GameObject PlayButton;
 
+    void Start(){
+        if (playing == true)
+        {
+            PauseButton.SetActive(true);
+            PlayButton.SetActive(false);
+        }
+    }
     void Update () {
         if (playing == true)
         {   
+            
             TimeCounted += Time.deltaTime;
             string hours = Mathf.Floor((TimeCounted % 216000) / 3600).ToString("00");
             string minutes = Mathf.Floor((TimeCounted % 3600) / 60).ToString("00");
