@@ -100,7 +100,7 @@ public class UserLoginController {
 
 
     // Testing email function
-    @PostMapping("Email")
+    @PostMapping("Email/")
     public ResponseEntity<Users> emailOTP(@RequestBody String data) {
 
         try {
@@ -131,7 +131,7 @@ public class UserLoginController {
     }
 
 
-    @PostMapping("validateOTP")
+    @PostMapping("validateOTP/")
     public ResponseEntity<String> validateOTP(@RequestBody String data) {
         try {
             JSONParser parser = new JSONParser();
@@ -161,7 +161,7 @@ public class UserLoginController {
         }
     }
 
-    @PostMapping("resetPassword")
+    @PostMapping("resetPassword/")
     public ResponseEntity<Users> resetOTP(@RequestBody String data) {
         try {
             JSONParser parser = new JSONParser();
