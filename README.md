@@ -42,7 +42,7 @@ The subjects users are interested in will be very clearly visible from the model
 ## Personal User Building
 This building will be made up of 4 towers and the user will be able to customise the wall and window colours for each as well as the height of each tower. The materials available will be the same as the subject specific buildings and will be unlocked at the same rate as the rest of the app. and the tower heights will be changeable by the user, as will the shape of the tower. This allows the user to establish something they want right at the beginning of the game. The heights of the tower will be limited based on their xp. The more xp someone has, the higher they can set their towers.
 
-*subject to change*  
+*Subject to change*  
 We may have a balancing scale, where the heights of the towers will need to be balanced out. If the user wants each of the 4 towers the same height, it would be smaller than putting all the height into 1 tower (and essentially having a skinnier building).
 
 ---
