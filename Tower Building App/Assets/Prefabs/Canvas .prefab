@@ -13128,7 +13128,6 @@ GameObject:
   - component: {fileID: 4188648046852285246}
   - component: {fileID: 4188648046852285247}
   - component: {fileID: 7669405797858183589}
-  - component: {fileID: 8157217230855466604}
   m_Layer: 5
   m_Name: 'Canvas '
   m_TagString: Untagged
@@ -13224,32 +13223,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4188648046852285244}
   m_CullTransparentMesh: 0
---- !u!114 &8157217230855466604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4188648046852285244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.8588236, g: 0.9921569, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1 &4188648046854174645
 GameObject:
   m_ObjectHideFlags: 0
