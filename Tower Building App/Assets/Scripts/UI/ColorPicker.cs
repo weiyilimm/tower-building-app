@@ -108,6 +108,7 @@ public class ColorPicker : MonoBehaviour
                         matteXP = 0;
                     }
                     else{
+                        colours = colours - 3;
                         matteXP = 15000;
                     }
                 }
