@@ -51,43 +51,17 @@ public class ColorPicker : MonoBehaviour
         
         //Initialize the temp variables with tha data stored for the chosen building before accesing the menu
         ApplyAtStart(currentSceneName);
-
+        localXP = Scoring.MainXP;
         //Assign the localXP to be specific building's XP
-        switch (currentSceneName)
+        if(currentSceneName == "Main")
         {   
-            case "Main":
-                MeshRenderer = new MeshRenderer[9];
-                localXP = Scoring.MainXP;
-                MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
-                MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
-                MainBuildings[2].onClick.AddListener(() => WhichBuildings(3));
-                MainBuildings[3].onClick.AddListener(() => WhichBuildings(4));
-                break;
-            case "Arts":
-                localXP = Scoring.ArtsXP;
-                break;
-            case "BioChe":
-                localXP = Scoring.BioCheXP;
-                break;
-            case "ComSci":
-                localXP = Scoring.ComSciXP;
-                break;
-            case "Eng":
-                localXP = Scoring.EngXP;
-                break;
-            case "Geo":
-                localXP = Scoring.GeoXP;
-                break;
-            case "Lan":
-                localXP = Scoring.LanXP;
-                break;
-            case "LawPol":
-                localXP = Scoring.LawPolXP;
-                break;
-            case "PhyMath":
-                localXP = Scoring.PhyMathXP;
-                break;
+            MeshRenderer = new MeshRenderer[9];
+            MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
+            MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
+            MainBuildings[2].onClick.AddListener(() => WhichBuildings(3));
+            MainBuildings[3].onClick.AddListener(() => WhichBuildings(4));
         }
+        
 
         for (int i = 0; i<Buttons.Length; i++){
             //get the current colour button
@@ -115,29 +89,30 @@ public class ColorPicker : MonoBehaviour
 
                 if (localXP >= colours * matteXP){
                     if (Buttons[i].name[0].ToString() == "0"){
+                        int colour = int.Parse(Buttons[i].name.Substring(1,2));
                         lockIcon.SetActive(false);
-                        Buttons[i].onClick.AddListener(() => MatteColor(x,colours,elements));
+                        Buttons[i].onClick.AddListener(() => MatteColor(x,colour,elements));
                     }
                 }
-                if (localXP >= ((colours * metallicXP) + 500)){
+                if (localXP >= ((colours * metallicXP) + 35000)){
                     if (Buttons[i].name[0].ToString() == "1"){
                         lockIcon.SetActive(false);
                         Buttons[i].onClick.AddListener(() => MetallicColor(x,colours,elements));
                     }
                 }
-                if (localXP >= ((colours * emissiveXP) + 500)){
+                if (localXP >= ((colours * emissiveXP) + 45000)){
                     if (Buttons[i].name[0].ToString() == "2"){
                         lockIcon.SetActive(false);
                         Buttons[i].onClick.AddListener(() => EmissiveColor(x,colours,elements));
                     }
                 }
-                if (localXP >= ((colours * gradientXP) + 500)){
+                if (localXP >= ((colours * gradientXP) + 60000)){
                     if (Buttons[i].name[0].ToString() == "3"){
                         lockIcon.SetActive(false);
                         Buttons[i].onClick.AddListener(() => GradientColor(x,colours,elements));
                     }
                 }
-                if (localXP >= ((colours * fancyXP) + 500)){
+                if (localXP >= ((colours * fancyXP) + 75000)){
                     if (Buttons[i].name[0].ToString() == "4"){
                         lockIcon.SetActive(false);
                         Buttons[i].onClick.AddListener(() => FancyColor(x,colours,elements));
