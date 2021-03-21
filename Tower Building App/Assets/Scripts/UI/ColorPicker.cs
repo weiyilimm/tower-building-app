@@ -94,7 +94,7 @@ public class ColorPicker : MonoBehaviour
                         Buttons[i].onClick.AddListener(() => MatteColor(x,colour,elements));
                     }
                 }
-                if (localXP >= ((colours * metallicXP) + 35000)){
+                if (localXP >= ((colours * metallicXP) + 30000)){
                     if (Buttons[i].name[0].ToString() == "1"){
                         lockIcon.SetActive(false);
                         Buttons[i].onClick.AddListener(() => MetallicColor(x,colours,elements));
