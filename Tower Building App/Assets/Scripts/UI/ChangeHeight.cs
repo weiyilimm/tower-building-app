@@ -61,6 +61,8 @@ public class ChangeHeight : MonoBehaviour
     void Start()
     {   
         ApplyAtStart();
+        buildingDecider = 1;
+        BuildingHeight.text = buildingTwoHeight.ToString();
         //When the user select a building, it triggger the SelectBuilding function
         MainBuildings[0].onClick.AddListener(() => SelectBuilding(0));
         MainBuildings[1].onClick.AddListener(() => SelectBuilding(1));
