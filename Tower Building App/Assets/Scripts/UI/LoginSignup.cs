@@ -20,6 +20,7 @@ public class LoginSignup : MonoBehaviour
     public TMP_InputField RegisterEmail;
     public TMP_InputField RegisterUsername;
     public TMP_InputField RegisterPassword;
+    public GameObject EmailOrPasswordWrongPopUp;
     // A pop up to indicate the username is taken
     public GameObject InvalidUsernamePopUP;
     // A pop up to indicate the email is in wrong syntax
@@ -165,11 +166,13 @@ public class LoginSignup : MonoBehaviour
                 //Status code 404 = not found
                 if (uwr.responseCode == 404){
                     Debug.Log("Either username or password is wrong");
+                    EmailOrPasswordWrongPopUp.SetActive(true);
                     isAuthenticated = false;
                 }
                 //Status code 201 = authenticated
                 if(uwr.responseCode == 200){
                     Debug.Log("Correct credentials");
+                    EmailOrPasswordWrongPopUp.SetActive(false);
                     isAuthenticated = true;
                     Initialise_UserData(raw);
                 }
