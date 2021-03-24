@@ -61,7 +61,7 @@ public class Scoring : MonoBehaviour
 
     public void earnXP(){
         //Get the value in StopWatch.cs
-        timeCounted = StopWatch.TimeCounted;
+        timeCounted = Clock.TimeCounted;
         //Local XP 1XP per second
         localEarnedXP = Math.Round(timeCounted) * multiplierXP;
         //Global XP is 10% of local XP
