@@ -56,6 +56,8 @@ public class ColorPicker : MonoBehaviour
         if(currentSceneName == "Main")
         {   
             MeshRenderer = new MeshRenderer[9];
+            MeshRenderer = MainBuilding2;
+            main_index = 1;
             MainBuildings[0].onClick.AddListener(() => WhichBuildings(1));
             MainBuildings[1].onClick.AddListener(() => WhichBuildings(2));
             MainBuildings[2].onClick.AddListener(() => WhichBuildings(3));
