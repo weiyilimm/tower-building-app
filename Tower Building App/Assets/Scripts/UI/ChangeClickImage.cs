@@ -46,8 +46,10 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
         else{
-            SceneManager.LoadScene(1);
-            icon.image.overrideSprite = clickedImage;
+            if(FailureInternet.isConnected == true){
+                SceneManager.LoadScene(1);
+                icon.image.overrideSprite = clickedImage;
+            }
         }
 
         //plays standard button click sound
@@ -64,8 +66,10 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
         else{
-            SceneManager.LoadScene(2);
-            icon.image.overrideSprite = clickedImage;
+            if(FailureInternet.isConnected == true){
+                SceneManager.LoadScene(2);
+                icon.image.overrideSprite = clickedImage;
+            }
         }
 
         //plays standard button click sound
@@ -82,8 +86,10 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
         else{
-            SceneManager.LoadScene(3);
-            icon.image.overrideSprite = clickedImage;
+            if(FailureInternet.isConnected == true){
+                SceneManager.LoadScene(3);
+                icon.image.overrideSprite = clickedImage;
+            }
         }
 
         //plays standard button click sound
@@ -99,8 +105,10 @@ public class ChangeClickImage : MonoBehaviour
             icon.image.overrideSprite = clickedImage;
         }
         else{
-            SceneManager.LoadScene(4);
-            icon.image.overrideSprite = clickedImage;
+            if(FailureInternet.isConnected == true){
+                SceneManager.LoadScene(4);
+                icon.image.overrideSprite = clickedImage;
+            }
         }
 
         //plays standard button click sound
