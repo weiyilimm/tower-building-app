@@ -85,7 +85,7 @@ public class User_Data : MonoBehaviour{
         if (RequestType == "CREATE_User") {
             // Create a new User
             apiString = string.Concat(apiString + "Users/");
-            Debug.Log(apiString);
+            
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data));
 
@@ -96,13 +96,13 @@ public class User_Data : MonoBehaviour{
             apiString = string.Concat(apiString, "Users/");
             apiString = string.Concat(apiString, requestedId);
             apiString = apiString + "Buildings/";
-            Debug.Log(apiString);
+            
             StartCoroutine(GetRequest(apiString, "Single"));
     
         } else if (RequestType == "GET_Friends") {
             // get the userid(hidden), username and xp of all users
             apiString = apiString + "Users/" + UserID + "/Friends/";
-            Debug.Log(apiString);
+            
             StartCoroutine(GetRequest(apiString, "Multiple"));
 
         } else if (RequestType == "GET_Leaderboard") {
@@ -113,7 +113,7 @@ public class User_Data : MonoBehaviour{
             // Change the Users personal details 
             // Call CreateUserJSON
             apiString = apiString + "Users/" + UserID;
-            Debug.Log(apiString);
+            
             data = CreateUserJSON();
             StartCoroutine(PostRequest(apiString, data, "PUT"));
 
@@ -123,7 +123,7 @@ public class User_Data : MonoBehaviour{
             string buildingCode = bc.ToString();
             string buildingGroup = subjectIndex.ToString();
             apiString = apiString + buildingCode + "/" + buildingGroup  + "/";
-            Debug.Log(apiString);
+            
             data = CreateBuildingJSON(subjectIndex);
             StartCoroutine(PostRequest(apiString, data, "POST"));
         }
@@ -168,7 +168,6 @@ public class User_Data : MonoBehaviour{
         UserID = userid;
         Username = username;
         Email = email;
-        Debug.Log("email after saving in Unity = " + Email);
         Password = password;
         global_xp = totalExp;
     }
@@ -277,25 +276,20 @@ public class User_Data : MonoBehaviour{
 
     IEnumerator GetRequest(string targetAPI, string translationType){
 
-        Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Got the data");
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
 
-            // TRANSLATION CODE HERE
             if (translationType == "Single") {
                 // If the translation type is Single then we know that the database is sending all of the Users data
                 // which we translate using two seperate functions - one to deal with User data (username, global_xp ect)
                 // and the other to deal with that users list/set of buildings (PhyMath, Arts, ComSci ect)
                 
-                //TranslateUserJSON(raw); //NOT TRANSALTING HERE ANYMORE WILL BE DONE IN LOGIN
                 TranslateBuildingJSON(raw);
             } else if (translationType == "Multiple") {
                 // If the translation type is multiple then we are getting the list of friends
@@ -313,15 +307,13 @@ public class User_Data : MonoBehaviour{
         UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
         uwr.method = type;
         uwr.SetRequestHeader("Content-Type", "application/json");
-        Debug.Log("Sending the data ");
-        Debug.Log("Data : " + data);
+        
         yield return uwr.SendWebRequest();
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             // The POST request also returns the object it entered into the database.
             string raw = uwr.downloadHandler.text;
-            Debug.Log("POST Received: " + raw);
         }   
     }
 
