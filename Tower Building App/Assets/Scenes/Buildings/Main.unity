@@ -4978,8 +4978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe5719679df4414987fc0f2deb1e400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelButton: {fileID: 0}
-  Panel: {fileID: 0}
+  PanelButton: {fileID: 1838386632}
+  Panel: {fileID: 1838386630}
   InfoButton: {fileID: 1166674258}
 --- !u!222 &1166674261
 CanvasRenderer:
@@ -13150,7 +13150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.46655, y: 0.0000019073}
+  m_AnchoredPosition: {x: -503.56592, y: 0.0000019073}
   m_SizeDelta: {x: 0, y: 304.9964}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &4188648046038413667
@@ -19333,7 +19333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.6099, y: 0.0000058562}
+  m_AnchoredPosition: {x: -503.70923, y: 0.0000058562}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &4188648046629590548
@@ -23392,7 +23392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -503.60992, y: -0.00000059605}
+  m_AnchoredPosition: {x: -503.70926, y: -0.00000059605}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &4188648046995881091

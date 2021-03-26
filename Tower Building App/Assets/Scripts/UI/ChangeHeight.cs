@@ -75,6 +75,15 @@ public class ChangeHeight : MonoBehaviour
         BuildingShapes[3].onClick.AddListener(() => SelectShape(3));
         IncreaseHeightButton.onClick.AddListener(() => IncreaseBuildingHeight());
         DecreaseHeightButton.onClick.AddListener(() => DecreseBuildingHeight());
+
+        int EXP = (int)Scoring.MainXP;
+        if (EXP >= 15000) {
+            maximumHeight = 15;
+        } else {
+            int divisor = 1000;
+            int currentMax = EXP / divisor;
+            maximumHeight = currentMax;
+        }
     }
 
     /*
