@@ -84,7 +84,7 @@ public class ReturnHome : MonoBehaviour {
 
     public void CreateRequest(int sceneID) {
         apiString = apiString + User_Data.data.UserID + "/Buildings/";
-        Debug.Log("Returning to home: " + apiString);
+        //Debug.Log("Returning to home: " + apiString);
         StartCoroutine(GetRequest(apiString, sceneID));
     }
 
@@ -98,7 +98,7 @@ public class ReturnHome : MonoBehaviour {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            //Debug.Log("Received: " + raw);
             User_Data.data.TranslateUserProfileJSON(raw);
             User_Data.data.TranslateBuildingJSON(raw);
             SceneManager.LoadScene(sceneID);

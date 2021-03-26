@@ -68,7 +68,7 @@ public class ViewOther : MonoBehaviour
         */
         if(friendID != ""){
             apiString = apiString + friendID + "/Buildings/";
-            Debug.Log(apiString);
+            //Debug.Log(apiString);
             StartCoroutine(GetRequest(apiString));
         }
     }
@@ -76,14 +76,14 @@ public class ViewOther : MonoBehaviour
     IEnumerator GetRequest(string targetAPI) {
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Sending request...");
+        //Debug.Log("Sending request...");
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError) {
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            //Debug.Log("Received: " + raw);
             User_Data.data.TranslateUserProfileJSON(raw);
             User_Data.data.TranslateBuildingJSON(raw);
             LoadingBarPanel.SetActive(true);
