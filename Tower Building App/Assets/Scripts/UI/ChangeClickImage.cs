@@ -49,6 +49,7 @@ public class ChangeClickImage : MonoBehaviour
             if(FailureInternet.isConnected == true){
                 SceneManager.LoadScene(1);
                 icon.image.overrideSprite = clickedImage;
+                FailureInternet.isConnected = false;
             }
         }
 
@@ -69,6 +70,7 @@ public class ChangeClickImage : MonoBehaviour
             if(FailureInternet.isConnected == true){
                 SceneManager.LoadScene(2);
                 icon.image.overrideSprite = clickedImage;
+                FailureInternet.isConnected = false;
             }
         }
 
@@ -89,6 +91,7 @@ public class ChangeClickImage : MonoBehaviour
             if(FailureInternet.isConnected == true){
                 SceneManager.LoadScene(3);
                 icon.image.overrideSprite = clickedImage;
+                FailureInternet.isConnected = false;
             }
         }
 
@@ -108,6 +111,7 @@ public class ChangeClickImage : MonoBehaviour
             if(FailureInternet.isConnected == true){
                 SceneManager.LoadScene(4);
                 icon.image.overrideSprite = clickedImage;
+                FailureInternet.isConnected = false;
             }
         }
 
