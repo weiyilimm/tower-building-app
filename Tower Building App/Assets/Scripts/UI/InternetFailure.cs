@@ -13,15 +13,12 @@ public class InternetFailure : MonoBehaviour
     public Button PopUpInternetButton;
     public GameObject PopUpInternetFailure;
     public GameObject LoginPanel;
-    private bool isConnected = true;
-    
     
     void Start()
     {
         StartButton.onClick.AddListener(() => StartCoroutine(checkInternet()));
-        if (!isConnected){
-            PopUpInternetButton.onClick.AddListener(() => StartCoroutine(checkInternet()));
-        }
+        PopUpInternetButton.onClick.AddListener(() => StartCoroutine(checkInternet()));
+
     }
     
     IEnumerator checkInternet(){
@@ -32,13 +29,11 @@ public class InternetFailure : MonoBehaviour
         if (request.error != null){
             PopUpInternetFailure.SetActive(true);
             LoginPanel.SetActive(false);
-            isConnected = false;
         }
         //Is connected
         else
         {   
             PopUpInternetFailure.SetActive(false);
-            isConnected = true;
             LoginPanel.SetActive(true);
         }
     }
