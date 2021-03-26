@@ -13,7 +13,7 @@ Students are able to earn xp by <!--sharing codes with friends and/or--> timing 
 The app is also designed to promote socialising. Students are able to follow each other as friends and view each others worlds. Something that will make each world especially unique will be the centerpiece of their university, a much more customisable building.
 
 # Methods of gaining xp
-Users will be able to gain xp through an in-app timer. <!--This timer will run for a maximum of 60 minutes.--> The longer the timer runs, the more xp will go towards their global xp and their subject specific xp. On the timer screen the user is able to select which subject they plan to study for in order to direct the subject specific xp accordingly.
+Users will be able to gain xp through an in-app timer. This timer will run for a maximum of 4 hours. The longer the timer runs, the more xp will go towards their global xp and their subject specific xp. On the timer screen the user is able to select which subject they plan to study for in order to direct the subject specific xp accordingly.
 
 As you earn xp, 10% of what you earn will be added to every subejct that is not the focus of the study session. For example: If you study for 100 seconds for mathematics, you will earn 100xp for maths. 100xp will also be added to your global xp count, *and* 10xp will also be added to every other subject. This allows for continious, cross-subject progression.
 
@@ -41,7 +41,7 @@ A good example of the variation is the Physics and Maths building.
 The subjects users are interested in will be very clearly visible from the models of their buildings and the materials that can be applied to them. If someone were to unlock the space shuttle, that would mean they spent approxamtley 75 hours on Physics and Mathematics. Don't foget you can set the timer whilst you are revising, attending classes or anything else that contributes to your learning.
 
 ## Personal User Building
-This building will be made up of 4 towers and the user will be able to customise the wall and window colours for each as well as the height of each tower. The materials available will be the same as the subject specific buildings and will be unlocked at the same rate as the rest of the app. The tower heights will be changeable by the user, as will the shape of the tower. This allows the user to establish their own style right at the beginning of the game. <!--The heights of the tower will be limited based on their xp. The more xp someone has, the higher they can set their towers.-->
+This building will be made up of 4 towers and the user will be able to customise the wall and window colours for each as well as the height of each tower. The materials available will be the same as the subject specific buildings and will be unlocked at the same rate as the rest of the app. The tower heights will be changeable by the user, as will the shape of the tower. This allows the user to establish their own style right at the beginning of the game. The heights of the tower will be limited based on their xp. The more xp someone has, the higher they can set their towers. The maximum height of the tower is 15 steps. Each step requires 1000xp. Therefore a user with 15,000xp can max out the height of their building
 
 ---
 
