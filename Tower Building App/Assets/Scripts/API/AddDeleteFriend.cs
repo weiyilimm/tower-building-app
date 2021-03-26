@@ -27,7 +27,7 @@ public class AddDeleteFriend : MonoBehaviour {
         //Friends_API.CreateRequest("CREATE_Friend", thisFriendID);
         apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
-        Debug.Log("POST Request at: " + apiString);
+        //Debug.Log("POST Request at: " + apiString);
 
         // Creates dummy data since the request requires some to be built
         FriendLink newFriend = new FriendLink(User_Data.data.UserID, otherID);
@@ -40,7 +40,7 @@ public class AddDeleteFriend : MonoBehaviour {
         //Friends_API.CreateRequest("DELETE_Friend", thisFriendID);
         apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
         apiString = apiString + User_Data.data.UserID + "/Friends/" + otherID;
-        Debug.Log("DELETE Request at: " + apiString);
+        //Debug.Log("DELETE Request at: " + apiString);
         StartCoroutine(DeleteRequest(apiString));
     }
 
@@ -50,7 +50,7 @@ public class AddDeleteFriend : MonoBehaviour {
         UnityWebRequest uwr = UnityWebRequest.Put(targetAPI, rawData);
         uwr.method = type;
         uwr.SetRequestHeader("Content-Type", "application/json");
-        Debug.Log("Sending the data ");
+        //Debug.Log("Sending the data ");
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError) {

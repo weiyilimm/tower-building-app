@@ -89,7 +89,7 @@ public class Friend_API_v2 : MonoBehaviour
     }
 
     IEnumerator GetRequest(string targetAPI) {
-        Debug.Log(targetAPI);
+        //Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
         yield return uwr.SendWebRequest();
@@ -99,7 +99,7 @@ public class Friend_API_v2 : MonoBehaviour
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            //Debug.Log("Received: " + raw);
 
             AddToFriendsList(raw);
         }

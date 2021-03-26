@@ -88,18 +88,18 @@ public class Leaderboard_API : MonoBehaviour {
     }
 
     IEnumerator GetRequest(string targetAPI) {
-        Debug.Log(targetAPI);
+        //Debug.Log(targetAPI);
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        Debug.Log("Sending Request");
+        //Debug.Log("Sending Request");
         yield return uwr.SendWebRequest();
-        Debug.Log("Reuqest returned");
+        //Debug.Log("Reuqest returned");
         if (uwr.isNetworkError) {
             PopUpInternetFailure.SetActive(true);
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log("Received: " + raw);
+            //Debug.Log("Received: " + raw);
 
             // TRANSLATION CODE HERE
             TranslateToLeaderboard(raw);
@@ -109,14 +109,6 @@ public class Leaderboard_API : MonoBehaviour {
     private void TranslateToLeaderboard(string rawJSON){ 
 
         JSONNode node;
-        //using (StreamReader r = new StreamReader(rawJSON)) {
-        //    //read in the json
-        //    Debug.Log("Passed the stream reader");
-        //    string json = r.ReadToEnd();
-        //    Debug.Log("Passed the readToEnd");
-        //    //reformat the json into dictionary style convention
-        //    node = JSON.Parse(json);
-        //}
 
         node = JSON.Parse(rawJSON);
         int NUM_USERS = node.Count;
@@ -203,7 +195,7 @@ public class Leaderboard_API : MonoBehaviour {
         //check if the data is in the friends list or not
         foreach (Friends friend_data in Friend_API_v2.friendslist) {
             if (friend_data.UserName == data.UserName) {
-                Debug.Log("Player was in your friends list");
+                //Debug.Log("Player was in your friends list");
                 GameObject plus = instance.Find("RawImage").gameObject;
                 GameObject tick = instance.Find("RawImage (1)").gameObject;
                 plus.SetActive(false);
