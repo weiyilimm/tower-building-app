@@ -196,7 +196,6 @@ MonoBehaviour:
   friendId: {fileID: 7582919400532591527}
   Slider: {fileID: 0}
   LoadingBarPanel: {fileID: 0}
-  PanelToBeHidden: {fileID: 0}
 --- !u!1 &5763389817367766194
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +208,7 @@ GameObject:
   - component: {fileID: 510268152837381566}
   - component: {fileID: 4910855610022993371}
   - component: {fileID: 51331363399801459}
+  - component: {fileID: 7966286549841884812}
   m_Layer: 5
   m_Name: NameText
   m_TagString: Untagged
@@ -374,6 +374,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7966286549841884812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5763389817367766194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3d97e686abf4147a9f30c157921490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5879475966464687543
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +399,7 @@ GameObject:
   - component: {fileID: 8726479866120531683}
   - component: {fileID: 615488885067954347}
   - component: {fileID: 6018756491473577307}
+  - component: {fileID: 3980297303213199036}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -542,6 +555,18 @@ MonoBehaviour:
   friendExp: {fileID: 8838953106653822262}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: ae078722-790a-4f5a-a2dc-ec2bbb2df560
+--- !u!114 &3980297303213199036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879475966464687543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1292cf656993f2944a1fb4d56c130851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6684599418669950584
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +580,7 @@ GameObject:
   - component: {fileID: 5356046980043273594}
   - component: {fileID: 4404509240903264016}
   - component: {fileID: 1897394063553182134}
+  - component: {fileID: 8684336297746444191}
   m_Layer: 5
   m_Name: RawImage (1)
   m_TagString: Untagged
@@ -710,6 +736,18 @@ MonoBehaviour:
   friendExp: {fileID: 8838953106653822262}
   apiString: https://uni-builder-database.herokuapp.com/api/Users/
   otherID: ae078722-790a-4f5a-a2dc-ec2bbb2df560
+--- !u!114 &8684336297746444191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684599418669950584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6904883873535698932
 GameObject:
   m_ObjectHideFlags: 0

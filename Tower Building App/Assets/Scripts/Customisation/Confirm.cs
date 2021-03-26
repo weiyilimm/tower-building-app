@@ -22,6 +22,13 @@ public class Confirm : MonoBehaviour{
         // Send a singular update request for the building that has just been customised
         User_Data.data.CreateRequest("UPDATE_User_Building", index);
 
+        //sound stuff
+        FindObjectOfType<SoundManager>().Play("standard button click");
+        //turning the filter off and setting its frequency
+        FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
+        FindObjectOfType<ListenerPersist>().setFilterFrequency(500);
+
+
         SceneManager.LoadScene(1);
     }
 }

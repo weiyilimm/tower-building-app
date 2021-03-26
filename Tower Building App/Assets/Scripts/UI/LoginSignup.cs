@@ -165,6 +165,7 @@ public class LoginSignup : MonoBehaviour
             if (type == "Login"){
                 //Status code 404 = not found
                 if (uwr.responseCode == 404){
+                    FindObjectOfType<SoundManager>().Play("standard button click");
                     Debug.Log("Either username or password is wrong");
                     EmailOrPasswordWrongPopUp.SetActive(true);
                     isAuthenticated = false;
@@ -175,6 +176,16 @@ public class LoginSignup : MonoBehaviour
                     EmailOrPasswordWrongPopUp.SetActive(false);
                     isAuthenticated = true;
                     Initialise_UserData(raw);
+
+                    
+                    //play button click noise
+                    FindObjectOfType<SoundManager>().Play("start button click");
+                    //stops intro music and starts main theme
+                    FindObjectOfType<SoundManager>().Stop("intro music");
+                    FindObjectOfType<SoundManager>().Play("theme music");
+                    //turning the filter off and setting its frequency
+                    FindObjectOfType<ListenerPersist>().toggleFilterOn(false);
+                    FindObjectOfType<ListenerPersist>().setFilterFrequency(500);
                 }
                 checkAuthentication();
             }

@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 324753677}
   - component: {fileID: 324753680}
   - component: {fileID: 324753678}
+  - component: {fileID: 324753679}
   m_Layer: 5
   m_Name: Building2
   m_TagString: Untagged
@@ -997,6 +998,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &324753679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324753676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &324753680
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3642,6 +3655,7 @@ GameObject:
   - component: {fileID: 856046159}
   - component: {fileID: 856046158}
   - component: {fileID: 856046157}
+  - component: {fileID: 856046160}
   m_Layer: 5
   m_Name: DecreaseHeightButton
   m_TagString: Untagged
@@ -3748,6 +3762,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856046155}
   m_CullTransparentMesh: 0
+--- !u!114 &856046160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856046155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &865198701
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,6 +3786,7 @@ GameObject:
   - component: {fileID: 865198706}
   - component: {fileID: 865198705}
   - component: {fileID: 865198704}
+  - component: {fileID: 865198703}
   m_Layer: 5
   m_Name: IncreaseHeightButton
   m_TagString: Untagged
@@ -3786,6 +3813,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &865198703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865198701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &865198704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4234,6 +4273,7 @@ GameObject:
   - component: {fileID: 1076435952}
   - component: {fileID: 1076435955}
   - component: {fileID: 1076435953}
+  - component: {fileID: 1076435954}
   m_Layer: 5
   m_Name: Building3
   m_TagString: Untagged
@@ -4393,6 +4433,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1076435954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076435951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1076435955
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4412,6 +4464,7 @@ GameObject:
   - component: {fileID: 1092233673}
   - component: {fileID: 1092233676}
   - component: {fileID: 1092233674}
+  - component: {fileID: 1092233675}
   m_Layer: 5
   m_Name: Building4
   m_TagString: Untagged
@@ -4571,6 +4624,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1092233675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092233672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1092233676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5105,6 +5170,7 @@ GameObject:
   - component: {fileID: 1202654330}
   - component: {fileID: 1202654333}
   - component: {fileID: 1202654331}
+  - component: {fileID: 1202654332}
   m_Layer: 5
   m_Name: Building1
   m_TagString: Untagged
@@ -5264,6 +5330,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1202654332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202654329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1202654333
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13072,7 +13150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414.00003, y: 0.0000019073}
+  m_AnchoredPosition: {x: -503.46655, y: 0.0000019073}
   m_SizeDelta: {x: 0, y: 304.9964}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &4188648046038413667
@@ -13142,6 +13220,7 @@ GameObject:
   - component: {fileID: 4188648046038766057}
   - component: {fileID: 4188648046038766062}
   - component: {fileID: 4188648046038766061}
+  - component: {fileID: 4188648046038766064}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -13234,6 +13313,18 @@ RectTransform:
   m_AnchoredPosition: {x: -85, y: -95}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4188648046038766064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188648046038766060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3001452d4552d7d4b87904f41bf67bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4188648046044253212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19242,7 +19333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414.14337, y: 0.0000058562}
+  m_AnchoredPosition: {x: -503.6099, y: 0.0000058562}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &4188648046629590548
@@ -23301,7 +23392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414.1431, y: -0.00000059605}
+  m_AnchoredPosition: {x: -503.60992, y: -0.00000059605}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &4188648046995881091
