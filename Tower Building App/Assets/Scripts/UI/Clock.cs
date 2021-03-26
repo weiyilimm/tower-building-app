@@ -40,7 +40,8 @@ public class Clock : MonoBehaviour {
     
     //Unity built-in method to detect when the user left the app
     void OnApplicationPause (bool isGamePause)
-    {   
+    {
+        Debug.Log("########## PAUSED #############");
         //Store the current time when the app is paused
         if (isGamePause) {
             gamePausedTime = DateTime.Now;
@@ -55,6 +56,10 @@ public class Clock : MonoBehaviour {
         if (isGameFocus && playing == true ) {
             BackgroundTimer();
         }
+        if (isGameFocus == false)
+        {
+            gamePausedTime = DateTime.Now;
+        }
     }
 
     /*
@@ -62,6 +67,8 @@ public class Clock : MonoBehaviour {
     time when user left and time when user come back
     */
     void BackgroundTimer(){
+        Debug.Log("############"+DateTime.Now);
+        Debug.Log("############" + gamePausedTime);
         TimeCounted += ((float)(DateTime.Now - gamePausedTime).TotalSeconds);
     }
 
