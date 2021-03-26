@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ *
+ *      Create a Composite key made of user and friend id.
+ */
+
 public class FriendId implements Serializable {
 
     private UUID userId;

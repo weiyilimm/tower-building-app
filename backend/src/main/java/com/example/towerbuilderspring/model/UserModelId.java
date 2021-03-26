@@ -8,12 +8,21 @@ import java.util.Objects;
 import java.util.UUID;
 
 
+/**
+ *      Here we create a composite Primary key. The @Embeddable annotation allows us to use this as a primary
+ *      key in USER_MODELS.
+ *
+ *      This allows to always have a unique id which also links the user table making sure that for a row to be
+ *      added to the USER_MODELS table, the respective user must exist in the USERS table first.
+ */
 
 @Embeddable
 public class UserModelId implements Serializable {
     private static final long serialVersionUID = 1l;
 
+    // A user can have many models.
     @ManyToOne
+    // This will map to the Primary key column of the user table (id).
     @MapsId
     private Users fk_user;
 
@@ -71,63 +80,3 @@ public class UserModelId implements Serializable {
 }
 
 
-//@Embeddable
-//public class UserModelId implements Serializable {
-//    private static final long serialVersionUID = 1l;
-//
-//    @ManyToOne
-//    @MapsId
-//    private Users fk_user;
-//
-//    @ManyToOne
-//    @MapsId("buildingCode")
-//    private BuildingModels fk;
-//
-//    public UserModelId() {};
-//
-//    public UserModelId(Users user, BuildingModels model) {
-//        this.fk_user = user;
-//        this.fk = model;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "UserModelId{" +
-//                "fk_user=" + fk_user +
-//                ", fk=" + fk +
-//                '}';
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof UserModelId)) return false;
-//        UserModelId that = (UserModelId) o;
-//        return fk_user.equals(that.fk_user) &&
-//                Objects.equals(fk, that.fk);
-//    }
-//
-//    public static long getSerialVersionUID() {
-//        return serialVersionUID;
-//
-//    }@Override
-//    public int hashCode() {
-//        return Objects.hash(fk_user, fk);
-//    }
-//
-//    public Users getFk_user() {
-//        return fk_user;
-//    }
-//
-//    public void setFk_user(Users fk_user) {
-//        this.fk_user = fk_user;
-//    }
-//
-//    public BuildingModels getFk_building() {
-//        return fk;
-//    }
-//
-//    public void setFk_building(BuildingModels fk) {
-//        this.fk = fk;
-//    }
-//}

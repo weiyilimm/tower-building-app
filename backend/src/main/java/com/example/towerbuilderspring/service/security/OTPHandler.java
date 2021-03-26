@@ -46,13 +46,16 @@ public class OTPHandler {
     public Users validateOTP(String email, String OTP) throws NotFoundException, AuthenticationException {
         Users user = userRepository.findByEmail(email);
 
+        // This is the default value of the OTP
         if (OTP.equals("-1")) {
             throw new AuthenticationException("Reset Password Request not made");
         }
 
+        // If the encrypted input and the (already encrypted) value from the database match.
         if (user != null && encoder.matches(OTP, user.getOtp())) {
             System.out.println(user.getOtp());
             System.out.println(OTP);
+            // return the user.
             return user;
         } else if (user != null) {
             throw new NotFoundException("Password was incorrect");

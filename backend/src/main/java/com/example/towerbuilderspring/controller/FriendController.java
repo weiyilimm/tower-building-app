@@ -18,27 +18,33 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class FriendController {
 
+    // Get access to the required tables.
     @Autowired
     FriendRepository friendRepository;
 
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Get all the friends the user has.
+     */
     @GetMapping("Users/{id}/Friends")
     public ResponseEntity<List<Users>> getFriends(@PathVariable("id") UUID id) {
         try {
+            // Get all the ids of the user's friends.
             List<Friend> friends = friendRepository.findByUserId(id);
             List<Users> users = new ArrayList<>();
 
             for (Friend friend : friends) {
+                // From each friends id, get the actual user detail and store it in a list.
                 Optional<Users> new_friend = userRepository.findById(friend.getFriendId());
+                // A check to make sure the requested user truly exists.
                 if (new_friend.isPresent()) {
                     users.add(new_friend.get());
                 }
             }
 
-            System.out.println(users);
-
+            // If the user had friends, return the list else return null with a HTTP NOT_FOUND message.
             if (!friends.isEmpty()) {
                 return new ResponseEntity<>(users, HttpStatus.OK);
             }
@@ -51,15 +57,20 @@ public class FriendController {
         }
     }
 
+    /**
+     *  Register a user as a friend.
+     */
     @PostMapping("Users/{userId}/Friends/{friendId}")
     public ResponseEntity<Friend> makeFriends(@PathVariable("userId") UUID userId,
                                               @PathVariable("friendId") UUID friendId) {
 
+        // Get the user and the requested friend from the Users table.
         Optional<Users> user = userRepository.findById(userId);
         Optional<Users> friend = userRepository.findById(friendId);
 
         // Check that both parties are existing users.
         if (user.isPresent() && friend.isPresent()) {
+            // Create a new instance of a Friend.
             Friend newFriend = new Friend();
             newFriend.setUserId(userId);
             newFriend.setFriendId(friendId);
@@ -69,6 +80,11 @@ public class FriendController {
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
+    /**
+     *    Unfriend a user.
+     *
+     *    (Follows the same idea as makeFriends but removes instead of creates)
+     */
     @DeleteMapping("Users/{userId}/Friends/{friendId}")
     public ResponseEntity deleteFriends(@PathVariable("userId") UUID userId,
                                         @PathVariable("friendId") UUID friendId) {
@@ -77,6 +93,7 @@ public class FriendController {
         Optional<Users> friend = userRepository.findById(friendId);
 
         if (user.isPresent() && friend.isPresent()) {
+            // To delete the friend we need to create a new instance to match against the existing one to delete in the database.
             Friend newFriend = new Friend();
             newFriend.setUserId(userId);
             newFriend.setFriendId(friendId);

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+// This class will be called for all calls.
+
 @Component
 public class ProductServiceInterceptor implements HandlerInterceptor {
     @Override
