@@ -25,7 +25,7 @@ public class Friend_API_v2 : MonoBehaviour
     private TextMeshProUGUI textName;
     private TextMeshProUGUI textId;
     private TextMeshProUGUI rankText;
-
+    public GameObject PopUpInternetFailure;
     /*  JSON formatting
         {[
             {"userId":"e6j8g6", "friendId":"c2j2f8"},
@@ -95,6 +95,7 @@ public class Friend_API_v2 : MonoBehaviour
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError) {
+            PopUpInternetFailure.SetActive(true);
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
