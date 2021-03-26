@@ -30,6 +30,10 @@ public class Clock : MonoBehaviour {
         if (playing == true)
         {   
             TimeCounted += Time.deltaTime;
+            // Time limit for 4 hours of study
+            if(TimeCounted >= 14400){
+                TimeCounted = 14400;
+            }
         }
     }
 
