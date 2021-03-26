@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
+// This class contains the algorithms used to encrypt the password and OTP.
 @Component
 public class Hashing {
     public Hashing() {};

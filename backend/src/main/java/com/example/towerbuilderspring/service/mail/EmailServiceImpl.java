@@ -13,9 +13,16 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 
+/**
+ *
+ *      EMAIL HANDLER
+ *
+ */
+
 @Component
 public class EmailServiceImpl {
 
+    // The service that actually has implements the email functionality (imported)
     @Autowired
     private JavaMailSender emailSender;
 
@@ -24,10 +31,14 @@ public class EmailServiceImpl {
     public void sendSimpleMessage(String to, String subject, String text) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
 
+        // The email account that the email is sent from.
         message.setFrom("pseudolabsrobota@gmail.com");
+        // The recipent
         message.setTo(to);
 
-        message.    setSubject(subject);
+        // The subject line.
+        message.setSubject(subject);
+        // The body (will contain the OTP).
         message.setText(text);
 
         System.out.println("Created email " + message.toString());
@@ -35,6 +46,7 @@ public class EmailServiceImpl {
         emailSender.send(message);
     }
 
+    // In the future if you want to send a MIME message with attachments and images, you can use this function.
     public void sendMessageWithAttachment(String to,
                                           String from,
                                           String subject,
