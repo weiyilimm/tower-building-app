@@ -2951,6 +2951,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Observatory
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 37dc2468fcf0e6344b83f99d098017c1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Observatory
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37dc2468fcf0e6344b83f99d098017c1, type: 3}
 --- !u!4 &775857461 stripped
@@ -6843,6 +6848,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 404
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0502a3205f3f949438a242aba72a32a2,
+        type: 3}
+      propertyPath: m_TagString
+      value: 404
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0502a3205f3f949438a242aba72a32a2, type: 3}
 --- !u!4 &1694854138 stripped
@@ -6951,6 +6961,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4974e550bbc83454f95db8c89cf8c7c7,
         type: 3}
       propertyPath: m_Name
+      value: WingMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4974e550bbc83454f95db8c89cf8c7c7,
+        type: 3}
+      propertyPath: m_TagString
       value: WingMan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7926,6 +7941,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 33b3a705d499f714eb11d68ec92fb394,
         type: 3}
       propertyPath: m_Name
+      value: eisle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33b3a705d499f714eb11d68ec92fb394,
+        type: 3}
+      propertyPath: m_TagString
       value: eisle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
