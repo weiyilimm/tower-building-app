@@ -39,7 +39,6 @@ public class Friend_API_v2 : MonoBehaviour
         // Translate the data retrieved from the GET request to a string list of friend ids
         // for each friend id - do a get request of that id to get the username
 
-        /* CreateRequest("Get_FriendIDs"); */
         Debug.Log("Finding the users friends...");
         CreateRequest("GET_FriendIDs");
         SearchInputField.onValueChanged.AddListener(delegate {FilterUser(); });
@@ -82,14 +81,14 @@ public class Friend_API_v2 : MonoBehaviour
     
     private void CreateRequest(string RequestType) {
         string apiString = "https://uni-builder-database.herokuapp.com/api/Users/";
-        // Needs refactoring
+        
         apiString = apiString + User_Data.data.UserID + "/Friends/";
 
         StartCoroutine(GetRequest(apiString));
     }
 
     IEnumerator GetRequest(string targetAPI) {
-        //Debug.Log(targetAPI);
+        
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
         yield return uwr.SendWebRequest();
@@ -99,8 +98,6 @@ public class Friend_API_v2 : MonoBehaviour
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            //Debug.Log("Received: " + raw);
-
             AddToFriendsList(raw);
         }
     }

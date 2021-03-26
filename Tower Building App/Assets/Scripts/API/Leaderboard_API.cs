@@ -88,20 +88,15 @@ public class Leaderboard_API : MonoBehaviour {
     }
 
     IEnumerator GetRequest(string targetAPI) {
-        //Debug.Log(targetAPI);
+        
         // Constructs and sends a GET request to the database to retreive a JSON file
         UnityWebRequest uwr = UnityWebRequest.Get(targetAPI);
-        //Debug.Log("Sending Request");
         yield return uwr.SendWebRequest();
-        //Debug.Log("Reuqest returned");
         if (uwr.isNetworkError) {
             PopUpInternetFailure.SetActive(true);
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;
-            //Debug.Log("Received: " + raw);
-
-            // TRANSLATION CODE HERE
             TranslateToLeaderboard(raw);
         }
     }
@@ -186,8 +181,7 @@ public class Leaderboard_API : MonoBehaviour {
             textXP.text = data.TotalExp.ToString();
 
             checkForFriend(instance, data);
-            // Debug.Log(LB_data.IndexOf(data));
-            // Debug.Log(data.UserName + " " + data.TotalExp);
+        
         }
     }
 
@@ -195,7 +189,6 @@ public class Leaderboard_API : MonoBehaviour {
         //check if the data is in the friends list or not
         foreach (Friends friend_data in Friend_API_v2.friendslist) {
             if (friend_data.UserName == data.UserName) {
-                //Debug.Log("Player was in your friends list");
                 GameObject plus = instance.Find("RawImage").gameObject;
                 GameObject tick = instance.Find("RawImage (1)").gameObject;
                 plus.SetActive(false);
