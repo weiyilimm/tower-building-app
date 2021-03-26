@@ -32,7 +32,7 @@ public class Leaderboard_API : MonoBehaviour {
     private TextMeshProUGUI textId;
     //User rank for each instances
     private TextMeshProUGUI rankText;
-    
+    public GameObject PopUpInternetFailure;
     void Start() {
         // GET Request - Top 50 users by totalExp then
         // Translate the data retrieved from the GET request
@@ -94,8 +94,8 @@ public class Leaderboard_API : MonoBehaviour {
         Debug.Log("Sending Request");
         yield return uwr.SendWebRequest();
         Debug.Log("Reuqest returned");
-
         if (uwr.isNetworkError) {
+            PopUpInternetFailure.SetActive(true);
             Debug.Log("An Internal Server Error Was Encountered");
         } else {
             string raw = uwr.downloadHandler.text;

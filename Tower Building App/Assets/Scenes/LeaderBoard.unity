@@ -240,6 +240,7 @@ MonoBehaviour:
     type: 3}
   SearchInputField: {fileID: 1106031862}
   LeaderBoardList: {fileID: 1954503365}
+  PopUpInternetFailure: {fileID: 868454641}
 --- !u!224 &501863667 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8910855736027016187, guid: e20d36ed0bda89745bae376cbbca6831,
