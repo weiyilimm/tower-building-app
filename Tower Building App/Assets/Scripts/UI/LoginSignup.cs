@@ -161,7 +161,7 @@ public class LoginSignup : MonoBehaviour
         } 
         else {
             string raw = uwr.downloadHandler.text;
-            Debug.Log(raw);
+            
             if (type == "Login"){
                 //Status code 404 = not found
                 if (uwr.responseCode == 404){
