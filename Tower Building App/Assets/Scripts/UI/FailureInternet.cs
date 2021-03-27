@@ -16,7 +16,7 @@ public class FailureInternet : MonoBehaviour
     
     public Button PopUpInternetButton;
     public GameObject PopUpInternetFailure;
-    public static bool isConnected = false;
+    public static bool isConnected = true;
     
     void Start()
     {
